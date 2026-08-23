@@ -1,0 +1,35 @@
+name: خبرخوان مجلس
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # هر ۱۵ دقیقه
+  workflow_dispatch:  # اجرای دستی
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: دریافت کد
+        uses: actions/checkout@v4
+
+      - name: نصب Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: بازیابی وضعیت قبلی
+        uses: actions/cache@v4
+        with:
+          path: telegram-news-bot/state.json
+          key: bot-state-${{ github.run_id }}
+          restore-keys: |
+            bot-state-
+
+      - name: اجرای ربات
+        run: node index.js
+        timeout-minutes: 5
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          DESTINATION_CHAT_ID: '@selectednewsmajlis'
+          SOURCE_CHANNEL_ID: news_parliament

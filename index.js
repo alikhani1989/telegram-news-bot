@@ -1,0 +1,505 @@
+const https = require("https");
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
+
+// ==========================================
+// بخش تنظیمات
+// ==========================================
+const CONFIG_FILE = path.join(__dirname, "config.json");
+const STATE_FILE = path.join(__dirname, "state.json");
+
+function loadConfig() {
+  // اول از متغیرهای محیطی (GitHub Actions)
+  const envConfig = {};
+  if (process.env.OPENROUTER_API_KEY) envConfig.OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+  if (process.env.BOT_TOKEN) envConfig.BOT_TOKEN = process.env.BOT_TOKEN;
+  if (process.env.DESTINATION_CHAT_ID) envConfig.DESTINATION_CHAT_ID = process.env.DESTINATION_CHAT_ID;
+  if (process.env.SOURCE_CHANNEL_ID) envConfig.SOURCE_CHANNEL_ID = process.env.SOURCE_CHANNEL_ID;
+  
+  // بعد از فایل config.json (محلی)
+  let fileConfig = {};
+  if (fs.existsSync(CONFIG_FILE)) {
+    fileConfig = JSON.parse(fs.readFileSync(CONFIG_FILE, "utf8"));
+  }
+  
+  // ترکیب: متغیرهای محیطی اولویت دارند
+  return { ...fileConfig, ...envConfig };
+}
+
+function saveConfig(config) {
+  fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2), "utf8");
+}
+
+function loadState() {
+  if (fs.existsSync(STATE_FILE)) {
+    return JSON.parse(fs.readFileSync(STATE_FILE, "utf8"));
+  }
+  return {};
+}
+
+function saveState(state) {
+  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), "utf8");
+}
+
+// ==========================================
+// ابزار HTTP (با پشتیبانی از ریدایرکت)
+// ==========================================
+function httpGet(url, maxRedirects) {
+  if (maxRedirects === undefined) maxRedirects = 5;
+  return new Promise((resolve, reject) => {
+    const client = url.startsWith("https") ? https : http;
+    client.get(url, { headers: { "User-Agent": "Mozilla/5.0" } }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && maxRedirects > 0) {
+        let redirectUrl = res.headers.location;
+        if (redirectUrl.startsWith("/")) {
+          const urlObj = new URL(url);
+          redirectUrl = urlObj.origin + redirectUrl;
+        }
+        return httpGet(redirectUrl, maxRedirects - 1).then(resolve).catch(reject);
+      }
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => resolve(data));
+    }).on("error", reject);
+  });
+}
+
+function httpPost(url, body, headers) {
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const client = url.startsWith("https") ? https : http;
+    const options = {
+      hostname: urlObj.hostname,
+      port: urlObj.port,
+      path: urlObj.pathname + (urlObj.search || ""),
+      method: "POST",
+      headers: { ...headers, "Content-Length": Buffer.byteLength(body) },
+    };
+    const req = client.request(options, (res) => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => resolve(data));
+    });
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+function httpGetBuffer(url, maxRedirects) {
+  if (maxRedirects === undefined) maxRedirects = 5;
+  return new Promise((resolve, reject) => {
+    const client = url.startsWith("https") ? https : http;
+    client.get(url, { headers: { "User-Agent": "Mozilla/5.0" } }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && maxRedirects > 0) {
+        let redirectUrl = res.headers.location;
+        if (redirectUrl.startsWith("/")) {
+          const urlObj = new URL(url);
+          redirectUrl = urlObj.origin + redirectUrl;
+        }
+        return httpGetBuffer(redirectUrl, maxRedirects - 1).then(resolve).catch(reject);
+      }
+      const chunks = [];
+      res.on("data", (chunk) => chunks.push(chunk));
+      res.on("end", () => resolve(Buffer.concat(chunks)));
+    }).on("error", reject);
+  });
+}
+
+function httpPostMultipart(url, boundary, body) {
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const client = url.startsWith("https") ? https : http;
+    const options = {
+      hostname: urlObj.hostname,
+      port: urlObj.port,
+      path: urlObj.pathname,
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data; boundary=" + boundary,
+        "Content-Length": body.length,
+      },
+    };
+    const req = client.request(options, (res) => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => resolve(data));
+    });
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+// ==========================================
+// خواندن پیام‌های تلگرام
+// ==========================================
+async function fetchTelegramMessages(channelId) {
+  const url = "https://t.me/s/" + channelId;
+  const response = await httpGet(url);
+
+  const messages = [];
+  const blocks = response.split(/<div class="tgme_widget_message\b/);
+
+  for (let i = 1; i < blocks.length; i++) {
+    const block = blocks[i];
+    const textMatch = block.match(/tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/);
+
+    if (textMatch) {
+      let htmlText = textMatch[1];
+      htmlText = htmlText.replace(/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, '$2 (لینک: $1)');
+      const text = htmlText.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]*>/gm, " ").trim();
+
+      // استخراج عکس از background-image
+      const bgMatch = block.match(/background-image:url\(['"]?([^'")\s]+)['"]?\)/);
+      let imgUrl = bgMatch ? bgMatch[1].replace(/&amp;/g, "&") : "";
+
+      // اگر background-image نبود، از تگ img استفاده کن
+      if (!imgUrl) {
+        const allImgTags = block.match(/<img[^>]+src="([^"]+)"/g);
+        if (allImgTags) {
+          for (const tag of allImgTags) {
+            const srcMatch = tag.match(/src="([^"]+)"/);
+            if (srcMatch && !srcMatch[1].includes("user_photo") && srcMatch[1].includes("cdn")) {
+              imgUrl = srcMatch[1].replace(/&amp;/g, "&");
+              break;
+            }
+          }
+        }
+      }
+
+      if (text.length > 10) {
+        messages.push({ text, imageUrl: imgUrl || "" });
+      }
+    }
+  }
+  return messages;
+}
+
+// ==========================================
+// استخراج عکس اصلی خبر از وب‌سایت منبع
+// ==========================================
+async function fetchOgImage(url) {
+  try {
+    const html = await httpGet(url);
+
+    // Method 1: og:image
+    const ogMatch = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i);
+    if (ogMatch) return ogMatch[1];
+
+    // Method 2: twitter:image
+    const twitterMatch = html.match(/<meta[^>]+name="twitter:image"[^>]+content="([^"]+)"/i);
+    if (twitterMatch) return twitterMatch[1];
+
+    return null;
+  } catch (err) {
+    return null;
+  }
+}
+
+// ==========================================
+// OpenRouter API
+// ==========================================
+async function callOpenRouter(prompt, apiKey) {
+  const url = "https://openrouter.ai/api/v1/chat/completions";
+
+  const payload = JSON.stringify({
+    model: "poolside/laguna-s-2.1:free",
+    messages: [
+      {
+        role: "system",
+        content: "You are a Persian news editor. Return ONLY valid JSON, no markdown."
+      },
+      {
+        role: "user",
+        content: prompt
+      }
+    ],
+    temperature: 0.3,
+    max_tokens: 4000,
+  });
+
+  const response = await Promise.race([
+    httpPost(url, payload, {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + apiKey,
+    }),
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout: OpenRouter پاسخ نداد (120 ثانیه)")), 120000))
+  ]);
+
+  const data = JSON.parse(response);
+  if (data.error) {
+    throw new Error("OpenRouter API Error: " + JSON.stringify(data.error));
+  }
+  return data.choices[0].message.content;
+}
+
+// ==========================================
+// پرامپت کوتاه و مؤثر
+// ==========================================
+function buildPrompt(recentMessages, recentTitlesPrompt) {
+  let p = "این اخبار تلگرام را خلاصه کن. قوانین:\n";
+  p += "- تیتر: کوتاه، رویدادمحور، بدون نقل قول، با ✴️\n";
+  p += "- متن: با 🔸، نام+سمت+منبع inline، بدون اظهار کرد/وی افزود\n";
+  p += "- فقط: گفت، نوشته، تاکید کرد، اعلام کرد\n";
+  p += "- سمّت دقیق باشد\n";
+  p += "- اگر [تصویر: URL] هست، image_url را همان قرار بده\n";
+  p += "- لینک منبع را از لینک: در متن استخراج کن\n\n";
+  p += 'خروجی JSON: {"news":[{"title":"✴️...","body":"🔸...","source_link":"...","image_url":"..."}]}\n';
+  if (recentTitlesPrompt) p += recentTitlesPrompt + "\n";
+  p += "\n---\n" + recentMessages;
+  return p;
+}
+
+// ==========================================
+// ارسال به تلگرام
+// ==========================================
+async function sendToTelegram(message, imageUrl, botToken, chatId) {
+  const baseUrl = "https://api.telegram.org/bot" + botToken + "/";
+
+  // تلاش برای ارسال با عکس
+  if (imageUrl && imageUrl.startsWith("http") && imageUrl.length > 20) {
+    try {
+      const imageBuffer = await httpGetBuffer(imageUrl);
+      if (imageBuffer && imageBuffer.length > 1000) {
+        const boundary = "----FormBoundary" + Date.now();
+        const parts = [];
+
+        parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"chat_id\"\r\n\r\n" + chatId + "\r\n"));
+        parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n" + message + "\r\n"));
+        parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"parse_mode\"\r\n\r\nHTML\r\n"));
+        parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"photo\"; filename=\"photo.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n"));
+        parts.push(imageBuffer);
+        parts.push(Buffer.from("\r\n--" + boundary + "--\r\n"));
+
+        const fullBody = Buffer.concat(parts);
+        const response = await httpPostMultipart(baseUrl + "sendPhoto", boundary, fullBody);
+        const result = JSON.parse(response);
+        if (result.ok) return result;
+        console.log("  ⚠️ عکس ارسال نشد:", result.description || "unknown");
+      }
+    } catch (err) {
+      console.log("  ⚠️ خطا در عکس:", err.message);
+    }
+  }
+
+  // ارسال متن
+  const payload = JSON.stringify({
+    chat_id: chatId,
+    text: message,
+    parse_mode: "HTML",
+    disable_web_page_preview: true,
+  });
+  const response = await httpPost(baseUrl + "sendMessage", payload, {
+    "Content-Type": "application/json",
+  });
+  return JSON.parse(response);
+}
+
+// ==========================================
+// تابع اصلی
+// ==========================================
+async function main() {
+  try {
+    const config = loadConfig();
+
+    const SOURCE_CHANNEL_ID = config.SOURCE_CHANNEL_ID || "news_parliament";
+    const OPENROUTER_API_KEY = config.OPENROUTER_API_KEY || "";
+    const BOT_TOKEN = config.BOT_TOKEN || "";
+    const DESTINATION_CHAT_ID = config.DESTINATION_CHAT_ID || "";
+
+    if (!OPENROUTER_API_KEY) {
+      console.log("❌ OPENROUTER_API_KEY تنظیم نشده.");
+      return;
+    }
+    if (!BOT_TOKEN || !DESTINATION_CHAT_ID) {
+      console.log("❌ BOT_TOKEN یا DESTINATION_CHAT_ID تنظیم نشده.");
+      return;
+    }
+
+    console.log("📡 خواندن اخبار از کانال...");
+    const messages = await fetchTelegramMessages(SOURCE_CHANNEL_ID);
+    console.log("✅ " + messages.length + " پیام پیدا شد.");
+
+    const state = loadState();
+    const lastProcessed = state.LAST_PROCESSED_SNIPPET || "";
+    let recentTitles = state.RECENT_TITLES || [];
+
+    let newMessages = [];
+    let foundLast = false;
+
+    if (lastProcessed) {
+      for (let i = 0; i < messages.length; i++) {
+        const cleanMsg = messages[i].text.trim();
+        if (foundLast) {
+          newMessages.push(messages[i]);
+        } else if (cleanMsg.indexOf(lastProcessed) !== -1 || lastProcessed.indexOf(cleanMsg.substring(0, 30)) !== -1) {
+          foundLast = true;
+        }
+      }
+    }
+
+    if (!foundLast || newMessages.length === 0) {
+      newMessages = messages.slice(-3); // حداکثر ۳ خبر
+    } else if (newMessages.length > 3) {
+      newMessages = newMessages.slice(0, 3);
+    }
+
+    if (newMessages.length === 0) {
+      console.log("📭 پیام جدیدی نیست.");
+      return;
+    }
+
+    console.log("📝 " + newMessages.length + " خبر جدید.");
+
+    // ساخت متن خام
+    let recentMessages = "";
+    for (let i = 0; i < newMessages.length; i++) {
+      recentMessages += "\n\n===== NEWS " + (i + 1) + " =====\n";
+      if (newMessages[i].imageUrl) {
+        recentMessages += "[تصویر: " + newMessages[i].imageUrl + "]\n";
+      }
+      recentMessages += newMessages[i].text;
+    }
+
+    const recentTitlesPrompt =
+      recentTitles.length > 0
+        ? "\nعناوین اخیر (تکرار نکن): " + recentTitles.join(" | ")
+        : "";
+
+    const prompt = buildPrompt(recentMessages, recentTitlesPrompt);
+
+    console.log("🤖 ارسال به هوش مصنوعی...");
+    const startTime = Date.now();
+    const aiText = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+    console.log("⏱️ پاسخ در " + ((Date.now() - startTime) / 1000).toFixed(1) + " ثانیه دریافت شد.");
+
+    // پارس JSON
+    let newsArray = [];
+    try {
+      let cleaned = aiText.replace(/```json/gi, "").replace(/```/g, "").trim();
+      const firstOpenArray = cleaned.indexOf("[");
+      const firstOpenObject = cleaned.indexOf("{");
+
+      let parsedObj;
+      if (firstOpenArray !== -1 && (firstOpenObject === -1 || firstOpenArray < firstOpenObject)) {
+        const lastCloseArray = cleaned.lastIndexOf("]");
+        let jsonStr = cleaned.substring(firstOpenArray, lastCloseArray + 1);
+        // تلاش برای تعمیر JSON ناقص
+        try {
+          parsedObj = JSON.parse(jsonStr);
+        } catch(e) {
+          // اگر ناقص بود، آخرین آبجکت ناتمام را حذف کن
+          const lastCompleteObj = jsonStr.lastIndexOf('},');
+          if (lastCompleteObj > 0) {
+            jsonStr = jsonStr.substring(0, lastCompleteObj + 1) + ']';
+            parsedObj = JSON.parse(jsonStr);
+          } else {
+            throw e;
+          }
+        }
+      } else if (firstOpenObject !== -1) {
+        const lastCloseObject = cleaned.lastIndexOf("}");
+        let jsonStr = cleaned.substring(firstOpenObject, lastCloseObject + 1);
+        try {
+          parsedObj = JSON.parse(jsonStr);
+        } catch(e) {
+          throw e;
+        }
+      } else {
+        parsedObj = JSON.parse(cleaned);
+      }
+
+      if (Array.isArray(parsedObj)) {
+        newsArray = parsedObj;
+      } else if (parsedObj && Array.isArray(parsedObj.news)) {
+        newsArray = parsedObj.news;
+      }
+    } catch (e) {
+      console.log("❌ خطا در پارس JSON:", e.message);
+      console.log("متن:", aiText.substring(0, 300));
+      return;
+    }
+
+    if (newsArray.length === 0) {
+      console.log("📭 خبری تولید نشد.");
+      return;
+    }
+
+    // بازیابی عکس اصلی از منبع
+    for (let i = 0; i < newsArray.length; i++) {
+      const item = newsArray[i];
+
+      // اگر مدل image_url نداده یا عکس کانال است، از منبع بگیر
+      if (!item.image_url || !item.image_url.startsWith("http") || item.image_url.includes("telesco.pe")) {
+        if (item.source_link && item.source_link.startsWith("http")) {
+          console.log("  🔍 دریافت عکس از:", item.source_link.substring(0, 50));
+          const ogImage = await fetchOgImage(item.source_link);
+          if (ogImage && ogImage.startsWith("http")) {
+            item.image_url = ogImage;
+            console.log("  📷 عکس اصلی پیدا شد");
+          }
+        }
+      }
+    }
+
+    // ارسال به تلگرام
+    console.log("📤 ارسال " + newsArray.length + " خبر...");
+    for (let i = 0; i < newsArray.length; i++) {
+      const item = newsArray[i];
+      if (!item.title || !item.body) continue;
+
+      let finalMessage = "<b>" + item.title + "</b>\n\n" + item.body + "\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net";
+
+      if (item.source_link && item.source_link.length > 5) {
+        finalMessage += '\n\n🔗 <a href="' + item.source_link + '">منبع خبر</a>';
+      }
+
+      const imageUrl = item.image_url && item.image_url.startsWith("http") && item.image_url.length > 20 ? item.image_url : null;
+
+      const result = await sendToTelegram(finalMessage, imageUrl, BOT_TOKEN, DESTINATION_CHAT_ID);
+
+      if (result.ok) {
+        console.log("  ✅ " + item.title.replace("✴️ ", ""));
+        recentTitles.push(item.title.replace(/<[^>]*>/gm, "").replace("✴️ ", ""));
+      } else {
+        console.log("  ❌ خطا:", result.description || JSON.stringify(result));
+      }
+    }
+
+    // ذخیره تنظیمات
+    if (recentTitles.length > 15) {
+      recentTitles = recentTitles.slice(-15);
+    }
+
+    const lastMsg = newMessages[newMessages.length - 1];
+    state.RECENT_TITLES = recentTitles;
+    state.LAST_PROCESSED_SNIPPET = lastMsg.text.trim().substring(0, 50);
+    saveState(state);
+
+    console.log("🎉 تمام شد!");
+  } catch (error) {
+    console.log("❌ خطا:", error.message);
+  }
+}
+
+// ==========================================// حلقه خودکار (هر ۱۵ دقیقه)
+// ==========================================
+const INTERVAL_MINUTES = 15;
+
+async function runOnce() {
+  const now = new Date();
+  const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+  console.log('\n🕐 [' + time + '] شروع اجرا...');
+  await main();
+  console.log('⏰ اجرای بعدی: ' + INTERVAL_MINUTES + ' دقیقه دیگر');
+}
+
+// اجرای اولیه فوراً
+runOnce().then(() => {
+  // حلقه خودکار
+  setInterval(() => {
+    runOnce();
+  }, INTERVAL_MINUTES * 60 * 1000);
+});

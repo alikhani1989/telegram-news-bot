@@ -1,0 +1,8 @@
+node_modules/
+config.json
+state.json
+debug*.js
+check_*.js
+test_*.js
+*.log
+start.bat
