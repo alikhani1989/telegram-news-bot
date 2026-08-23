@@ -27,7 +27,7 @@ jobs:
 
       - name: اجرای ربات
         run: node index.js
-        timeout-minutes: 5
+        timeout-minutes: 15
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
