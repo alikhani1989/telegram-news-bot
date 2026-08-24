@@ -345,7 +345,7 @@ async function callOpenRouter(prompt, apiKey) {
     messages: [
       {
         role: "system",
-        content: "You are a Persian news editor. CRITICAL RULE: Copy person names and titles EXACTLY from the source text. Never guess or invent names. If the source says 'احمد بخشایش اردستانی', write exactly that - never write a different name. Return ONLY valid JSON, no markdown."
+        content: "You are a Persian news editor. CRITICAL RULES: 1) Copy person names and titles EXACTLY from the source text. Never guess or invent names. 2) In Persian text, ALWAYS write مجلس (not مجلس شورای اسلامی). Only use مجلس شورای اسلامی at the very first mention, then just مجلس. Return ONLY valid JSON, no markdown."
       },
       {
         role: "user",
@@ -378,6 +378,10 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   let p = [];
   
   p.push("شما سردبیر اخبار تلگرامی هستید. اخبار خام زیر را به خلاصه‌های حرفه‌ای تبدیل کنید.");
+  p.push("");
+  p.push("⚠️ قوانین مهم که حتماً رعایت کنید:");
+  p.push("- مجلس شورای اسلامی → فقط مجلس");
+  p.push("- نام افراد را عیناً از متن کپی کنید");
   p.push("");
   
   // قوانین تیتر
