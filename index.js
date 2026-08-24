@@ -148,8 +148,20 @@ async function fetchTelegramMessages(channelId) {
 
     if (textMatch) {
       let htmlText = textMatch[1];
-      htmlText = htmlText.replace(/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, '$2 (لینک: $1)');
       const text = htmlText.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]*>/gm, " ").trim();
+
+      // استخراج لینک خبر اصلی (غیر از t.me)
+      let newsLink = "";
+      const allLinks = htmlText.match(/href="(https?:\/\/[^"]+)"/g);
+      if (allLinks) {
+        for (const linkTag of allLinks) {
+          const href = linkTag.match(/href="([^"]+)"/)[1];
+          if (!href.includes("t.me") && href.includes("http")) {
+            newsLink = href.replace(/&amp;/g, "&");
+            break;
+          }
+        }
+      }
 
       // استخراج عکس از background-image
       const bgMatch = block.match(/background-image:url\(['"]?([^'")\s]+)['"]?\)/);
@@ -170,7 +182,7 @@ async function fetchTelegramMessages(channelId) {
       }
 
       if (text.length > 10) {
-        messages.push({ text, imageUrl: imgUrl || "" });
+        messages.push({ text, imageUrl: imgUrl || "", newsLink });
       }
     }
   }
@@ -191,6 +203,52 @@ async function fetchOgImage(url) {
     // Method 2: twitter:image
     const twitterMatch = html.match(/<meta[^>]+name="twitter:image"[^>]+content="([^"]+)"/i);
     if (twitterMatch) return twitterMatch[1];
+
+    return null;
+  } catch (err) {
+    return null;
+  }
+}
+
+// ==========================================
+// خواندن متن کامل خبر از وب‌سایت منبع
+// ==========================================
+async function fetchArticleText(url) {
+  try {
+    const html = await httpGet(url);
+
+    // روش ۱: articleBody (استاندارد Schema.org)
+    let m = html.match(/itemprop="articleBody"[^>]*>([\s\S]*?)<\/div>/i);
+    if (m) {
+      const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+      if (text.length > 50) return text;
+    }
+
+    // روش ۲: تگ article
+    m = html.match(/<article[^>]*>([\s\S]*?)<\/article>/i);
+    if (m) {
+      const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+      if (text.length > 50) return text;
+    }
+
+    // روش ۳: class های رایج محتوا
+    const contentPatterns = [
+      /class="[^"]*news[_-]?content[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
+      /class="[^"]*story[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
+      /class="[^"]*body[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
+      /class="[^"]*text[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
+    ];
+    for (const pat of contentPatterns) {
+      m = html.match(pat);
+      if (m) {
+        const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+        if (text.length > 100) return text;
+      }
+    }
+
+    // روش ۴: description متا تگ (به عنوان آخرین تلاش)
+    m = html.match(/<meta[^>]+name="description"[^>]+content="([^"]+)"/i);
+    if (m) return m[1].trim();
 
     return null;
   } catch (err) {
@@ -431,6 +489,22 @@ async function main() {
 
     console.log("📝 " + newMessages.length + " خبر جدید.");
 
+    // خواندن متن کامل خبر از وب‌سایت منبع
+    console.log("📖 خواندن متن کامل خبرها...");
+    for (let i = 0; i < newMessages.length; i++) {
+      const msg = newMessages[i];
+      if (msg.newsLink) {
+        console.log("  🔗 " + msg.newsLink.substring(0, 60) + "...");
+        const fullText = await fetchArticleText(msg.newsLink);
+        if (fullText && fullText.length > 50) {
+          msg.fullText = fullText;
+          console.log("  ✅ متن کامل پیدا شد (" + fullText.length + " کاراکتر)");
+        } else {
+          console.log("  ⚠️ متن کامل پیدا نشد، از تیتر استفاده می‌شود");
+        }
+      }
+    }
+
     // ساخت متن خام
     let recentMessages = "";
     for (let i = 0; i < newMessages.length; i++) {
@@ -438,7 +512,12 @@ async function main() {
       if (newMessages[i].imageUrl) {
         recentMessages += "[تصویر: " + newMessages[i].imageUrl + "]\n";
       }
-      recentMessages += newMessages[i].text;
+      if (newMessages[i].newsLink) {
+        recentMessages += "[لینک منبع: " + newMessages[i].newsLink + "]\n";
+      }
+      // اگر متن کامل هست، آن را بفرست (حداکثر ۲۰۰۰ کاراکتر). وگرنه تیتر را بفرست.
+      const content = newMessages[i].fullText || newMessages[i].text;
+      recentMessages += content.length > 2000 ? content.substring(0, 2000) + "..." : content;
     }
 
     const recentTitlesPrompt =
@@ -462,29 +541,29 @@ async function main() {
 
       let parsedObj;
       if (firstOpenArray !== -1 && (firstOpenObject === -1 || firstOpenArray < firstOpenObject)) {
-        const lastCloseArray = cleaned.lastIndexOf("]");
-        let jsonStr = cleaned.substring(firstOpenArray, lastCloseArray + 1);
-        // تلاش برای تعمیر JSON ناقص
-        try {
-          parsedObj = JSON.parse(jsonStr);
-        } catch(e) {
-          // اگر ناقص بود، آخرین آبجکت ناتمام را حذف کن
-          const lastCompleteObj = jsonStr.lastIndexOf('},');
-          if (lastCompleteObj > 0) {
-            jsonStr = jsonStr.substring(0, lastCompleteObj + 1) + ']';
-            parsedObj = JSON.parse(jsonStr);
+        let jsonStr = cleaned.substring(firstOpenArray);
+        // بستن آرایه ناقص
+        if (!jsonStr.endsWith(']')) {
+          // آخرین آبجکت ناتمام را حذف کن
+          const lastComplete = jsonStr.lastIndexOf('},');
+          if (lastComplete > 0) {
+            jsonStr = jsonStr.substring(0, lastComplete + 1) + ']';
           } else {
-            throw e;
+            jsonStr += ']';
           }
         }
+        parsedObj = JSON.parse(jsonStr);
       } else if (firstOpenObject !== -1) {
-        const lastCloseObject = cleaned.lastIndexOf("}");
-        let jsonStr = cleaned.substring(firstOpenObject, lastCloseObject + 1);
-        try {
-          parsedObj = JSON.parse(jsonStr);
-        } catch(e) {
-          throw e;
+        let jsonStr = cleaned.substring(firstOpenObject);
+        if (!jsonStr.endsWith('}')) {
+          const lastComplete = jsonStr.lastIndexOf('},');
+          if (lastComplete > 0) {
+            jsonStr = jsonStr.substring(0, lastComplete + 1) + '}';
+          } else {
+            jsonStr += '}';
+          }
         }
+        parsedObj = JSON.parse(jsonStr);
       } else {
         parsedObj = JSON.parse(cleaned);
       }
