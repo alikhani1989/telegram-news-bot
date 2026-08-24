@@ -398,6 +398,7 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   
   // قوانین متن
   p.push("=== قوانین متن ===");
+  p.push("- حداکثر ۳ تا ۴ جمله کوتاه (نه بیشتر)");
   p.push("- ۱ یا ۲ بند کوتاه (بستگی به محتوا دارد)");
   p.push("- هر بند با 🔸 و یک فاصله شروع شود");
   p.push("  مثال:\n🔸 نکته اول خبر\n\n🔸 نکته دوم خبر");
@@ -761,6 +762,10 @@ async function main() {
     for (let i = 0; i < uniqueNews.length; i++) {
       const item = uniqueNews[i];
       if (!item.title || !item.body) continue;
+
+      // پاکسازی مجلس شورای اسلامی → مجلس
+      item.body = item.body.replace(/مجلس شورای اسلامی/g, 'مجلس');
+      item.title = item.title.replace(/مجلس شورای اسلامی/g, 'مجلس');
 
       let finalMessage = "<b>" + item.title + "</b>\n\n" + item.body + "\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net";
 
