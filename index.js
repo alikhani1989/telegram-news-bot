@@ -249,9 +249,16 @@ async function fetchTelegramMessages(channelId) {
 // خواندن اخبار از RSS
 // ==========================================
 const RSS_FEEDS = [
+  { name: 'ICANA', url: 'https://www.icana.ir/rss' },
   { name: 'IRNA', url: 'https://www.irna.ir/rss' },
   { name: 'ISNA', url: 'https://www.isna.ir/rss' },
   { name: 'Mehr', url: 'https://www.mehrnews.com/rss' },
+  { name: 'Khabaronline', url: 'https://www.khabaronline.ir/rss' },
+  { name: 'Mashregh', url: 'https://www.mashreghnews.ir/rss' },
+  { name: 'IMNA', url: 'https://www.imna.ir/rss' },
+  { name: 'Shana', url: 'https://www.shana.ir/rss' },
+  { name: 'Ettelaat', url: 'https://www.ettelaat.com/rss' },
+  { name: 'Hamshahri', url: 'https://www.hamshahrionline.ir/rss' },
 ];
 
 // کلمات کلیدی مجلس برای فیلتر
