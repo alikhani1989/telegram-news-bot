@@ -806,6 +806,11 @@ async function main() {
       // جایگزینی newline های داخل رشته‌های JSON با \n واقعی
       // ابتدا \r را حذف کن
       cleaned = cleaned.replace(/\r/g, '');
+      // جایگزینی کاراکترهای مشکل‌ساز در متن فارسی
+      cleaned = cleaned.replace(/\u200C/g, ' '); // zero-width non-joiner
+      cleaned = cleaned.replace(/\u200D/g, ' '); // zero-width joiner
+      cleaned = cleaned.replace(/\u200E/g, ' '); // LTR mark
+      cleaned = cleaned.replace(/\u200F/g, ' '); // RTL mark
       // newline های بین خطوط JSON را با فاصله جایگزین کن
       // ولی newline های داخل "..." را با \n جایگزین کن
       let result = '';
@@ -867,8 +872,33 @@ async function main() {
       }
     } catch (e) {
       console.log("❌ خطا در پارس JSON:", e.message);
-      console.log("متن:", aiText.substring(0, 300));
-      return;
+      // تلاش برای تعمیر JSON با حذف کاراکترهای مشکل‌ساز
+      try {
+        let repaired = cleaned.replace(/[ -]/g, ' ');
+        repaired = repaired.replace(/\s+/g, ' ');
+        const firstArr = repaired.indexOf('[');
+        const firstObj = repaired.indexOf('{');
+        const start = (firstArr !== -1 && (firstObj === -1 || firstArr < firstObj)) ? firstArr : firstObj;
+        if (start !== -1) {
+          repaired = repaired.substring(start);
+          // حذف آخرین آبجکت ناتمام
+          const lastComplete = repaired.lastIndexOf('},');
+          if (lastComplete > 0) {
+            repaired = repaired.substring(0, lastComplete + 1) + (firstArr !== -1 ? ']' : '}');
+          }
+          parsedObj = JSON.parse(repaired);
+          if (Array.isArray(parsedObj)) {
+            newsArray = parsedObj;
+          } else if (parsedObj && Array.isArray(parsedObj.news)) {
+            newsArray = parsedObj.news;
+          }
+          console.log("  ✅ JSON با موفقیت تعمیر شد!");
+        }
+      } catch (e2) {
+        console.log("  ❌ تعمیر JSON هم ناموفق بود:", e2.message);
+        console.log("متن:", aiText.substring(0, 300));
+        return;
+      }
     }
 
     if (newsArray.length === 0) {
