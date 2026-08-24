@@ -273,8 +273,29 @@ async function fetchArticleText(url) {
   try {
     const html = await httpGet(url);
 
-    // روش ۱: articleBody (استاندارد Schema.org)
-    let m = html.match(/itemprop="articleBody"[^>]*>([\s\S]*?)<\/div>/i);
+    // روش ۰: JSON-LD (بهترین روش - متن کامل در structured data)
+    const jsonLdMatches = html.match(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
+    if (jsonLdMatches) {
+      for (const match of jsonLdMatches) {
+        const content = match.replace(/<script[^>]*>/i, '').replace(/<\/script>/i, '');
+        try {
+          const data = JSON.parse(content);
+          if (data.articleBody && data.articleBody.length > 50) {
+            return data.articleBody.trim();
+          }
+        } catch (e) {}
+      }
+    }
+
+    // روش ۱: articleBody (استاندارد Schema.org) - با regex انعطاف‌پذیرتر
+    let m = html.match(/itemprop=["']articleBody["'][^>]*>([\s\S]*?)(?:<\/div>|<\/section>)/i);
+    if (m) {
+      const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+      if (text.length > 50) return text;
+    }
+
+    // روش ۱ب: articleBody بدون بسته شدن div
+    m = html.match(/itemprop=["']articleBody["'][^>]*>([\s\S]{50,2000}?)(?:<div|<footer|<aside|<section)/i);
     if (m) {
       const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
       if (text.length > 50) return text;
@@ -289,10 +310,11 @@ async function fetchArticleText(url) {
 
     // روش ۳: class های رایج محتوا
     const contentPatterns = [
-      /class="[^"]*news[_-]?content[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
-      /class="[^"]*story[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
-      /class="[^"]*body[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
-      /class="[^"]*text[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
+      /class=["'][^"]*news[_-]?content[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+      /class=["'][^"]*story[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+      /class=["'][^"]*article[_-]?body[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+      /class=["'][^"]*body[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+      /class=["'][^"]*text[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
     ];
     for (const pat of contentPatterns) {
       m = html.match(pat);
@@ -303,7 +325,7 @@ async function fetchArticleText(url) {
     }
 
     // روش ۴: description متا تگ (به عنوان آخرین تلاش)
-    m = html.match(/<meta[^>]+name="description"[^>]+content="([^"]+)"/i);
+    m = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i);
     if (m) return m[1].trim();
 
     return null;
@@ -323,7 +345,7 @@ async function callOpenRouter(prompt, apiKey) {
     messages: [
       {
         role: "system",
-        content: "You are a Persian news editor. Return ONLY valid JSON, no markdown."
+        content: "You are a Persian news editor. CRITICAL RULE: Copy person names and titles EXACTLY from the source text. Never guess or invent names. If the source says 'احمد بخشایش اردستانی', write exactly that - never write a different name. Return ONLY valid JSON, no markdown."
       },
       {
         role: "user",
@@ -377,9 +399,16 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("  مثال:\n🔸 نکته اول خبر\n\n🔸 نکته دوم خبر");
   p.push("- حتماً نام + سمّت دقیق شخص در خط اول متن باشد");
   p.push("");
-  p.push("⚠️ خیلی مهم: نام و سمّت شخص باید دقیقاً از متن اصلی کپی شود.");
-  p.push("هرگز نام یا سمّت را حدس نزنید. اگر در متن نوشته «حاکم ممکان عضو کمیسیون اقتصادی»،");
-  p.push("دقیقاً همان را بنویسید. ننویسید «سخنگوی دولت» یا «وزیر» یا هر چیز دیگر.");
+  p.push("⚠️⚠️⚠️ قانون طلایی: نام شخص را عیناً از متن کپی کنید. هرگز حدس نزنید. ⚠️⚠️⚠️");
+  p.push("اگر در متن خام نوشته «احمد بخشایش اردستانی»، دقیقاً همان را بنویسید.");
+  p.push("اگر نوشته «علی نیکزاد»، دقیقاً همان را بنویسید.");
+  p.push("ننویسید «فداحسین مالکی» وقتی اسم واقعی بخشایش است.");
+  p.push("ننویسید «سخنگوی دولت» یا «وزیر» وقتی نماینده مجلس است.");
+  p.push("نام و سمّت باید عیناً از متن خام کپی شود، نه از حافظه یا حدس.");
+  p.push("");
+  p.push("- در خبرها فقط بنویسيد مجلس نه مجلس شوراي اسلامي");
+  p.push("- فقط در اولين باري كه مجلس ذكر مي‌شود بنويسيد مجلس شوراي اسلامي و بعدش فقط مجلس");
+  p.push("  مثال: روح‌الله موسوي عضو كميسيون مجلس گفت... (نه مجلس شوراي اسلامي)");
   p.push("");
   p.push("- نکته اصلی خبر را با جزئیات بیان کنید (اعداد، شروط، ارقام مهم)");
   p.push("  مثال: اگر خبر درباره لغو ممنوعیت واردات است، بنویسید چه شرطی دارد و چه ارقامی مطرح است");
