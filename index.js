@@ -246,6 +246,58 @@ async function fetchTelegramMessages(channelId) {
 }
 
 // ==========================================
+// خواندن اخبار از RSS
+// ==========================================
+const RSS_FEEDS = [
+  { name: 'IRNA', url: 'https://www.irna.ir/rss' },
+  { name: 'ISNA', url: 'https://www.isna.ir/rss' },
+  { name: 'Mehr', url: 'https://www.mehrnews.com/rss' },
+];
+
+// کلمات کلیدی مجلس برای فیلتر
+const PARLIAMENT_KEYWORDS = ['مجلس', 'نماینده', 'کمیسیون', 'شورای نگهبان', 'طرح', 'قانون', 'بودجه', 'فراکسیون', 'استیضاح'];
+
+async function fetchRSSNews() {
+  const allNews = [];
+  
+  for (const feed of RSS_FEEDS) {
+    try {
+      const xml = await httpGet(feed.url);
+      const items = xml.match(/<item>([\s\S]*?)<\/item>/gi) || [];
+      
+      for (const item of items) {
+        const titleMatch = item.match(/<title>([\s\S]*?)<\/title>/i);
+        const descMatch = item.match(/<description>([\s\S]*?)<\/description>/i);
+        const linkMatch = item.match(/<link>([\s\S]*?)<\/link>/i);
+        
+        if (titleMatch && linkMatch) {
+          const title = titleMatch[1].trim();
+          const description = descMatch ? descMatch[1].trim() : '';
+          const link = linkMatch[1].trim();
+          
+          // فیلتر: آیا مرتبط با مجلس است؟
+          const fullText = title + ' ' + description;
+          const isRelevant = PARLIAMENT_KEYWORDS.some(kw => fullText.includes(kw));
+          
+          if (isRelevant && description.length > 50) {
+            allNews.push({
+              title,
+              description: description.replace(/<[^>]*>/gm, ' ').replace(/\s+/g, ' ').trim(),
+              link,
+              source: feed.name
+            });
+          }
+        }
+      }
+    } catch (e) {
+      console.log('  ⚠️ خطا در خواندن RSS ' + feed.name + ': ' + e.message);
+    }
+  }
+  
+  return allNews;
+}
+
+// ==========================================
 // استخراج عکس اصلی خبر از وب‌سایت منبع
 // ==========================================
 async function fetchOgImage(url) {
@@ -335,17 +387,19 @@ async function fetchArticleText(url) {
 }
 
 // ==========================================
-// OpenRouter API
+// Groq API (سریع و رایگان)
 // ==========================================
-async function callOpenRouter(prompt, apiKey) {
-  const url = "https://openrouter.ai/api/v1/chat/completions";
-
+async function callGroq(prompt) {
+  const GROQ_API_KEY = process.env.GROQ_API_KEY || '';
+  if (!GROQ_API_KEY) return null;
+  
+  const url = "https://api.groq.com/openai/v1/chat/completions";
   const payload = JSON.stringify({
-    model: "poolside/laguna-s-2.1:free",
+    model: "llama-3.1-8b-instant",
     messages: [
       {
         role: "system",
-        content: "You are a Persian news editor. CRITICAL RULES: 1) Copy person names and titles EXACTLY from the source text. Never guess or invent names. 2) In Persian text, ALWAYS write مجلس (not مجلس شورای اسلامی). Only use مجلس شورای اسلامی at the very first mention, then just مجلس. Return ONLY valid JSON, no markdown."
+        content: "You are a Persian news editor. CRITICAL: 1) Copy person names EXACTLY from source. 2) Use مجلس not مجلس شورای اسلامی. OUTPUT ONLY VALID JSON, no explanation."
       },
       {
         role: "user",
@@ -359,23 +413,83 @@ async function callOpenRouter(prompt, apiKey) {
   const response = await Promise.race([
     httpPost(url, payload, {
       "Content-Type": "application/json",
-      "Authorization": "Bearer " + apiKey,
+      "Authorization": "Bearer " + GROQ_API_KEY,
     }),
-    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout: OpenRouter پاسخ نداد (120 ثانیه)")), 120000))
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 60000))
   ]);
 
   const data = JSON.parse(response);
   if (data.error) {
-    throw new Error("OpenRouter API Error: " + JSON.stringify(data.error));
-  }
-  if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-    throw new Error("OpenRouter پاسخ نامعتبر: " + JSON.stringify(data).substring(0, 200));
+    throw new Error("Groq Error: " + JSON.stringify(data.error));
   }
   const content = data.choices[0].message.content;
   if (!content || content.trim().length === 0) {
-    throw new Error("OpenRouter پاسخ خالی برگرداند.");
+    throw new Error("Groq پاسخ خالی");
   }
   return content;
+}
+
+// ==========================================
+// OpenRouter API
+// ==========================================
+async function callOpenRouter(prompt, apiKey) {
+  const url = "https://openrouter.ai/api/v1/chat/completions";
+  const payload = JSON.stringify({
+    model: "poolside/laguna-s-2.1:free",
+    messages: [
+      {
+        role: "system",
+        content: "IMPORTANT: Do NOT think out loud. Do NOT write analysis. ONLY output the final JSON object. No explanation, no thinking, no analysis. Just the JSON. You are a Persian news editor. CRITICAL RULES: 1) Copy person names and titles EXACTLY from the source text. Never guess or invent names. 2) In Persian text, ALWAYS write مجلس (not مجلس شورای اسلامی). Only use مجلس شورای اسلامی at the very first mention, then just مجلس. OUTPUT ONLY VALID JSON."
+      },
+      {
+        role: "user",
+        content: prompt
+      }
+    ],
+    temperature: 0.3,
+    max_tokens: 4000,
+  });
+
+  let lastError = null;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const response = await Promise.race([
+        httpPost(url, payload, {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + apiKey,
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 120000))
+      ]);
+
+      const data = JSON.parse(response);
+      if (data.error) {
+        lastError = new Error("OpenRouter API Error: " + JSON.stringify(data.error));
+        if (attempt < 3) {
+          console.log("  ⏳ تلاش " + attempt + " ناموفق، 30 ثانیه صبر...");
+          await new Promise(r => setTimeout(r, 60000));
+          continue;
+        }
+        throw lastError;
+      }
+      const content = data.choices[0].message.content;
+      if (!content || content.trim().length === 0) {
+        console.log("  ⚠️ پاسخ خالی از مدل (تلاش " + attempt + ")");
+        if (attempt < 3) {
+          await new Promise(r => setTimeout(r, 60000));
+          continue;
+        }
+        throw new Error("مدل پاسخ خالی برگرداند.");
+      }
+      return content;
+    } catch (e) {
+      lastError = e;
+      if (attempt < 3) {
+        console.log("  ⏳ تلاش " + attempt + " ناموفق، 60 ثانیه صبر...");
+        await new Promise(r => setTimeout(r, 60000));
+      }
+    }
+  }
+  throw lastError;
 }
 
 // ==========================================
@@ -557,9 +671,12 @@ async function main() {
       return;
     }
 
-    console.log("📡 خواندن اخبار از کانال...");
-    const messages = await fetchTelegramMessages(SOURCE_CHANNEL_ID);
-    console.log("✅ " + messages.length + " پیام پیدا شد.");
+    console.log("📡 خواندن اخبار از کانال و RSS...");
+    const [messages, rssNews] = await Promise.all([
+      fetchTelegramMessages(SOURCE_CHANNEL_ID),
+      fetchRSSNews()
+    ]);
+    console.log("✅ " + messages.length + " پیام تلگرام + " + rssNews.length + " خبر RSS.");
 
     const state = loadState();
     const lastProcessed = state.LAST_PROCESSED_SNIPPET || "";
@@ -594,19 +711,26 @@ async function main() {
 
     // خواندن متن کامل خبر از وب‌سایت منبع
     console.log("📖 خواندن متن کامل خبرها...");
+    const qualityMessages = [];
     for (let i = 0; i < newMessages.length; i++) {
       const msg = newMessages[i];
       if (msg.newsLink) {
         console.log("  🔗 " + msg.newsLink.substring(0, 60) + "...");
         const fullText = await fetchArticleText(msg.newsLink);
-        if (fullText && fullText.length > 50) {
+        if (fullText && fullText.length > 100) {
           msg.fullText = fullText;
+          qualityMessages.push(msg);
           console.log("  ✅ متن کامل پیدا شد (" + fullText.length + " کاراکتر)");
         } else {
-          console.log("  ⚠️ متن کامل پیدا نشد، از تیتر استفاده می‌شود");
+          console.log("  ⛔ رد شد: متن کامل پیدا نشد (کیفیت پایین)");
         }
+      } else {
+        // اگر لینک ندارد، از تیتر استفاده کن
+        qualityMessages.push(msg);
       }
     }
+    newMessages = qualityMessages;
+    console.log("📊 " + newMessages.length + " خبر با کیفیت از " + newMessages.length + " خبر.");
 
     // ساخت متن خام
     let recentMessages = "";
@@ -622,6 +746,19 @@ async function main() {
       const content = newMessages[i].fullText || newMessages[i].text;
       recentMessages += content.length > 2000 ? content.substring(0, 2000) + "..." : content;
     }
+    
+    // اضافه کردن اخبار RSS (حداکثر ۳ خبر)
+    let rssIndex = 0;
+    for (const rss of rssNews) {
+      if (rss.description && rss.description.length > 100 && rssIndex < 3) {
+        recentMessages += "\n\n===== NEWS RSS " + (rssIndex + 1) + " =====\n";
+        recentMessages += "[لینک منبع: " + rss.link + "]\n";
+        recentMessages += "[منبع: " + rss.source + "]\n";
+        recentMessages += rss.description.length > 2000 ? rss.description.substring(0, 2000) + "..." : rss.description;
+        rssIndex++;
+      }
+    }
+    console.log("📰 " + rssIndex + " خبر RSS اضافه شد.");
 
     // اخبار منتشر شده در ۱ ساعت اخیر (برای جلوگیری از تکرار)
     let publishedNews = cleanOldPublished(state.PUBLISHED_NEWS || []);
@@ -651,8 +788,17 @@ async function main() {
       console.log("❌ پاسخ هوش مصنوعی خالی بود.");
       return;
     }
+    console.log("📝 پاسخ هوش مصنوعی (" + aiText.length + " کاراکتر)");
     try {
+      // حذف متن فکر کردن قبل از JSON
       let cleaned = aiText.replace(/```json/gi, "").replace(/```/g, "").trim();
+      // اگر با متن انگلیسی شروع شده، JSON را پیدا کن
+      const jsonStart = cleaned.indexOf('{');
+      const arrayStart = cleaned.indexOf('[');
+      const firstJson = (jsonStart !== -1 && (arrayStart === -1 || jsonStart < arrayStart)) ? jsonStart : arrayStart;
+      if (firstJson > 0) {
+        cleaned = cleaned.substring(firstJson);
+      }
       // جایگزینی newline های داخل رشته‌های JSON با \n واقعی
       // ابتدا \r را حذف کن
       cleaned = cleaned.replace(/\r/g, '');
@@ -682,11 +828,13 @@ async function main() {
         let jsonStr = cleaned.substring(firstOpenArray);
         // بستن آرایه ناقص
         if (!jsonStr.endsWith(']')) {
-          // آخرین آبجکت ناتمام را حذف کن
+          // آخرین آبجکت کامل را پیدا کن
           const lastComplete = jsonStr.lastIndexOf('},');
           if (lastComplete > 0) {
             jsonStr = jsonStr.substring(0, lastComplete + 1) + ']';
           } else {
+            // اگر آبجکت کاملی نیست، سعی کن رشته ناقص را ببندی
+            jsonStr = jsonStr.replace(/,"[^"]*$/, '').replace(/"[^"]*$/, '');
             jsonStr += ']';
           }
         }
@@ -698,6 +846,8 @@ async function main() {
           if (lastComplete > 0) {
             jsonStr = jsonStr.substring(0, lastComplete + 1) + '}';
           } else {
+            // سعی کن رشته ناقص را ببندی
+            jsonStr = jsonStr.replace(/:"[^"]*$/, '').replace(/,"[^"]*$/, '');
             jsonStr += '}';
           }
         }
