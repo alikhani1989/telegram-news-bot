@@ -455,6 +455,7 @@ async function callOpenRouter(prompt, apiKey) {
     ],
     temperature: 0.3,
     max_tokens: 4000,
+    response_format: { type: "json_object" },
   });
 
   let lastError = null;
@@ -860,7 +861,8 @@ async function main() {
       console.log("❌ خطا در پارس JSON:", e.message);
       // تلاش برای تعمیر JSON با حذف کاراکترهای مشکل‌ساز
       try {
-        let repaired = cleaned.replace(/[ -]/g, ' ');
+        let repaired = aiText.replace(/```json/gi, '').replace(/```/g, '').trim();
+        repaired = repaired.replace(/[ -]/g, ' ');
         repaired = repaired.replace(/\s+/g, ' ');
         const firstArr = repaired.indexOf('[');
         const firstObj = repaired.indexOf('{');
