@@ -43,6 +43,62 @@ function saveState(state) {
 }
 
 // ==========================================
+// جلوگیری از تکرار خبر
+// ==========================================
+const DUPLICATE_WINDOW_MS = 60 * 60 * 1000; // ۱ ساعت
+
+// پاکسازی اخبار قدیمی‌تر از ۱ ساعت
+function cleanOldPublished(publishedNews) {
+  const now = Date.now();
+  return publishedNews.filter(item => (now - item.timestamp) < DUPLICATE_WINDOW_MS);
+}
+
+// استخراج نام دامنه از لینک
+function extractDomain(url) {
+  try {
+    const m = url.match(/https?:\/\/([^/]+)/);
+    return m ? m[1].replace(/^www\./, '') : '';
+  } catch (e) {
+    return '';
+  }
+}
+
+// بررسی تکرار بودن خبر
+function isDuplicate(newsItem, publishedNews) {
+  const now = Date.now();
+  
+  for (const pub of publishedNews) {
+    // بررسی ۱: لینک منبع یکسان
+    if (newsItem.source_link && pub.source_link && 
+        newsItem.source_link === pub.source_link) {
+      return true;
+    }
+    
+    // بررسی ۲: لینک منبع بدون query string و hash
+    if (newsItem.source_link && pub.source_link) {
+      try {
+        const cleanA = newsItem.source_link.split('?')[0].split('#')[0].replace(/\/$/, '');
+        const cleanB = pub.source_link.split('?')[0].split('#')[0].replace(/\/$/, '');
+        if (cleanA && cleanB && cleanA === cleanB) return true;
+      } catch (e) {}
+    }
+    
+    // بررسی ۳: عنوان بسیار مشابه (بیش از ۶۰٪ کلمات مشترک)
+    if (newsItem.title && pub.title) {
+      const cleanTitle = (s) => s.replace(/[✴️🔸🔗]/g, '').trim().toLowerCase();
+      const wordsA = cleanTitle(newsItem.title).split(/\s+/).filter(w => w.length > 2);
+      const wordsB = cleanTitle(pub.title).split(/\s+/).filter(w => w.length > 2);
+      if (wordsA.length > 0 && wordsB.length > 0) {
+        const common = wordsA.filter(w => wordsB.includes(w)).length;
+        const similarity = common / Math.min(wordsA.length, wordsB.length);
+        if (similarity > 0.6) return true;
+      }
+    }
+  }
+  return false;
+}
+
+// ==========================================
 // ابزار HTTP (با پشتیبانی از ریدایرکت)
 // ==========================================
 function httpGet(url, maxRedirects) {
@@ -526,12 +582,22 @@ async function main() {
       recentMessages += content.length > 2000 ? content.substring(0, 2000) + "..." : content;
     }
 
+    // اخبار منتشر شده در ۱ ساعت اخیر (برای جلوگیری از تکرار)
+    let publishedNews = cleanOldPublished(state.PUBLISHED_NEWS || []);
+    let publishedTitlesPrompt = "";
+    if (publishedNews.length > 0) {
+      publishedTitlesPrompt = "\n\n=== اخبار منتشر شده در ساعت اخیر (تکرار نکنید) ===\n";
+      for (const pub of publishedNews) {
+        publishedTitlesPrompt += "- " + pub.title.replace(/<[^>]*>/gm, "").replace("✴️ ", "") + "\n";
+      }
+    }
+    
     const recentTitlesPrompt =
       recentTitles.length > 0
         ? "\nعناوین اخیر (تکرار نکن): " + recentTitles.join(" | ")
         : "";
 
-    const prompt = buildPrompt(recentMessages, recentTitlesPrompt);
+    const prompt = buildPrompt(recentMessages, recentTitlesPrompt + publishedTitlesPrompt);
 
     console.log("🤖 ارسال به هوش مصنوعی...");
     const startTime = Date.now();
@@ -635,10 +701,32 @@ async function main() {
       }
     }
 
+    // ========== بررسی تکرار قبل از ارسال ==========
+    const uniqueNews = [];
+    for (const item of newsArray) {
+      if (!item.title || !item.body) continue;
+      if (isDuplicate(item, publishedNews)) {
+        console.log("  ⛔ تکرار رد شد: " + (item.title || '').replace("✴️ ", ""));
+        continue;
+      }
+      uniqueNews.push(item);
+    }
+    
+    if (uniqueNews.length === 0) {
+      console.log("📭 همه اخبار تکراری بودند.");
+      state.PUBLISHED_NEWS = publishedNews;
+      state.RECENT_TITLES = recentTitles;
+      const lastMsg = newMessages[newMessages.length - 1];
+      state.LAST_PROCESSED_SNIPPET = lastMsg.text.trim().substring(0, 50);
+      saveState(state);
+      return;
+    }
+    console.log("✅ " + uniqueNews.length + " خبر غیرتکراری از " + newsArray.length + " خبر.");
+
     // ارسال به تلگرام
-    console.log("📤 ارسال " + newsArray.length + " خبر...");
-    for (let i = 0; i < newsArray.length; i++) {
-      const item = newsArray[i];
+    console.log("📤 ارسال " + uniqueNews.length + " خبر...");
+    for (let i = 0; i < uniqueNews.length; i++) {
+      const item = uniqueNews[i];
       if (!item.title || !item.body) continue;
 
       let finalMessage = "<b>" + item.title + "</b>\n\n" + item.body + "\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net";
@@ -654,6 +742,12 @@ async function main() {
       if (result.ok) {
         console.log("  ✅ " + item.title.replace("✴️ ", ""));
         recentTitles.push(item.title.replace(/<[^>]*>/gm, "").replace("✴️ ", ""));
+        // ذخیره خبر منتشر شده برای جلوگیری از تکرار
+        publishedNews.push({
+          title: item.title.replace(/<[^>]*>/gm, ""),
+          source_link: item.source_link || "",
+          timestamp: Date.now()
+        });
       } else {
         console.log("  ❌ خطا:", result.description || JSON.stringify(result));
       }
@@ -663,9 +757,13 @@ async function main() {
     if (recentTitles.length > 15) {
       recentTitles = recentTitles.slice(-15);
     }
+    if (publishedNews.length > 100) {
+      publishedNews = publishedNews.slice(-100);
+    }
 
     const lastMsg = newMessages[newMessages.length - 1];
     state.RECENT_TITLES = recentTitles;
+    state.PUBLISHED_NEWS = publishedNews;
     state.LAST_PROCESSED_SNIPPET = lastMsg.text.trim().substring(0, 50);
     saveState(state);
 
