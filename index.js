@@ -568,9 +568,9 @@ async function main() {
     }
 
     if (!foundLast || newMessages.length === 0) {
-      newMessages = messages.slice(-3); // حداکثر ۳ خبر
-    } else if (newMessages.length > 3) {
-      newMessages = newMessages.slice(0, 3);
+      newMessages = messages.slice(-5); // حداکثر ۵ خبر
+    } else if (newMessages.length > 5) {
+      newMessages = newMessages.slice(0, 5);
     }
 
     if (newMessages.length === 0) {
