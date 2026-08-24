@@ -2,12 +2,13 @@ name: خبرخوان مجلس
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # هر ۱۵ دقیقه
-  workflow_dispatch:  # اجرای دستی
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: دریافت کد
         uses: actions/checkout@v4
@@ -26,8 +27,7 @@ jobs:
             bot-state-
 
       - name: اجرای ربات
-        run: node index.js
-        timeout-minutes: 15
+        run: timeout 600 node index.js || true
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
