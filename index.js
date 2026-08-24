@@ -368,7 +368,14 @@ async function callOpenRouter(prompt, apiKey) {
   if (data.error) {
     throw new Error("OpenRouter API Error: " + JSON.stringify(data.error));
   }
-  return data.choices[0].message.content;
+  if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+    throw new Error("OpenRouter پاسخ نامعتبر: " + JSON.stringify(data).substring(0, 200));
+  }
+  const content = data.choices[0].message.content;
+  if (!content || content.trim().length === 0) {
+    throw new Error("OpenRouter پاسخ خالی برگرداند.");
+  }
+  return content;
 }
 
 // ==========================================
@@ -640,6 +647,10 @@ async function main() {
 
     // پارس JSON
     let newsArray = [];
+    if (!aiText || aiText.trim().length === 0) {
+      console.log("❌ پاسخ هوش مصنوعی خالی بود.");
+      return;
+    }
     try {
       let cleaned = aiText.replace(/```json/gi, "").replace(/```/g, "").trim();
       // جایگزینی newline های داخل رشته‌های JSON با \n واقعی
