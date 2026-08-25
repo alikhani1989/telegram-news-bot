@@ -2,6 +2,7 @@ const https = require("https");
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 
 // ==========================================
 // تنظیمات
@@ -284,67 +285,100 @@ async function fetchOgImage(url) {
 // ==========================================
 // خواندن متن کامل خبر
 // ==========================================
+// استخراج متن از HTML
+function extractTextFromHtml(html) {
+  // روش ۰: JSON-LD
+  const jsonLdMatches = html.match(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
+  if (jsonLdMatches) {
+    for (const match of jsonLdMatches) {
+      const content = match.replace(/<script[^>]*>/i, '').replace(/<\/script>/i, '');
+      try {
+        const data = JSON.parse(content);
+        if (data.articleBody && data.articleBody.length > 50) {
+          return data.articleBody.trim();
+        }
+      } catch (e) {}
+    }
+  }
+  // روش ۱: articleBody
+  let m = html.match(/itemprop=["']articleBody["'][^>]*>([\s\S]*?)(?:<\/div>|<\/section>)/i);
+  if (m) {
+    const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+    if (text.length > 50) return text;
+  }
+  m = html.match(/itemprop=["']articleBody["'][^>]*>([\s\S]{50,2000}?)(?:<div|<footer|<aside|<section)/i);
+  if (m) {
+    const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+    if (text.length > 50) return text;
+  }
+  // روش ۲: تگ article
+  m = html.match(/<article[^>]*>([\s\S]*?)<\/article>/i);
+  if (m) {
+    const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+    if (text.length > 50) return text;
+  }
+  // روش ۳: class های رایج
+  const contentPatterns = [
+    /class=["'][^"]*news[_-]?content[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+    /class=["'][^"]*story[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+    /class=["'][^"]*article[_-]?body[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+    /class=["'][^"]*body[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+    /class=["'][^"]*text[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
+  ];
+  for (const pat of contentPatterns) {
+    m = html.match(pat);
+    if (m) {
+      const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
+      if (text.length > 100) return text;
+    }
+  }
+  // روش ۴: meta description
+  m = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i);
+  if (m) return m[1].trim();
+  return null;
+}
+
+// خواندن HTML با curl (برای سایت‌هایی که با Node.js timeout می‌دهند)
+function fetchHtmlWithCurl(url) {
+  try {
+    const result = execSync('curl -s -L --max-time 15 "' + url.replace(/"/g, '\\"') + '"', { 
+      encoding: 'utf8', 
+      maxBuffer: 5 * 1024 * 1024,
+      timeout: 20000
+    });
+    return result;
+  } catch (e) {
+    return null;
+  }
+}
+
 async function fetchArticleText(url) {
   try {
+    // اول با Node.js تلاش کن
     const html = await httpGet(url);
-
-    // روش ۰: JSON-LD
-    const jsonLdMatches = html.match(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
-    if (jsonLdMatches) {
-      for (const match of jsonLdMatches) {
-        const content = match.replace(/<script[^>]*>/i, '').replace(/<\/script>/i, '');
-        try {
-          const data = JSON.parse(content);
-          if (data.articleBody && data.articleBody.length > 50) {
-            return data.articleBody.trim();
-          }
-        } catch (e) {}
-      }
+    if (html && html.length > 1000) {
+      const text = extractTextFromHtml(html);
+      if (text && text.length > 100) return text;
     }
-
-    // روش ۱: articleBody
-    let m = html.match(/itemprop=["']articleBody["'][^>]*>([\s\S]*?)(?:<\/div>|<\/section>)/i);
-    if (m) {
-      const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
-      if (text.length > 50) return text;
+    
+    // اگر متن کافی نبود، با curl تلاش کن
+    console.log("    🔄 تلاش با curl...");
+    const curlHtml = fetchHtmlWithCurl(url);
+    if (curlHtml && curlHtml.length > 1000) {
+      const text = extractTextFromHtml(curlHtml);
+      if (text && text.length > 100) return text;
     }
-
-    // روش ۱ب: articleBody بدون بسته شدن div
-    m = html.match(/itemprop=["']articleBody["'][^>]*>([\s\S]{50,2000}?)(?:<div|<footer|<aside|<section)/i);
-    if (m) {
-      const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
-      if (text.length > 50) return text;
-    }
-
-    // روش ۲: تگ article
-    m = html.match(/<article[^>]*>([\s\S]*?)<\/article>/i);
-    if (m) {
-      const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
-      if (text.length > 50) return text;
-    }
-
-    // روش ۳: class های رایج
-    const contentPatterns = [
-      /class=["'][^"]*news[_-]?content[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
-      /class=["'][^"]*story[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
-      /class=["'][^"]*article[_-]?body[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
-      /class=["'][^"]*body[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
-      /class=["'][^"]*text[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
-    ];
-    for (const pat of contentPatterns) {
-      m = html.match(pat);
-      if (m) {
-        const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
-        if (text.length > 100) return text;
-      }
-    }
-
-    // روش ۴: meta description
-    m = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i);
-    if (m) return m[1].trim();
-
+    
     return null;
   } catch (err) {
+    // اگر Node.js خطا داد، با curl تلاش کن
+    try {
+      const curlHtml = fetchHtmlWithCurl(url);
+      if (curlHtml && curlHtml.length > 1000) {
+        const text = extractTextFromHtml(curlHtml);
+        if (text && text.length > 100) return text;
+      }
+    } catch (e2) {}
     return null;
   }
 }
@@ -391,7 +425,7 @@ async function callOpenRouter(prompt, apiKey) {
       { role: "user", content: prompt }
     ],
     temperature: 0.3,
-    max_tokens: 4000,
+    max_tokens: 6000,
     response_format: { type: "json_object" },
   });
 
@@ -730,14 +764,30 @@ async function main() {
       recentMessages += content.length > 2000 ? content.substring(0, 2000) + "..." : content;
     }
 
-    // اخبار RSS
+    // اخبار RSS (با خواندن متن کامل از وب‌سایت)
     let rssIndex = 0;
     for (const rss of rssNews) {
-      if (rss.description && rss.description.length > 100 && rssIndex < 3) {
+      if (rss.description && rss.description.length > 50 && rssIndex < 3) {
+        // اگر لینک دارد، متن کامل را از وب‌سایت بخوان
+        let fullText = rss.description;
+        if (rss.link && rss.link.startsWith('http')) {
+          console.log("  🔗 RSS " + rss.source + ": " + rss.link.substring(0, 60) + "...");
+          try {
+            const fetched = await fetchArticleText(rss.link);
+            if (fetched && fetched.length > rss.description.length) {
+              fullText = fetched;
+              console.log("  ✅ متن کامل RSS (" + fetched.length + " کاراکتر)");
+            } else {
+              console.log("  ⚠️ متن کامل RSS پیدا نشد، از description استفاده شد");
+            }
+          } catch (e) {
+            console.log("  ⚠️ خطا در خواندن RSS:", e.message);
+          }
+        }
         recentMessages += "\n\n===== NEWS RSS " + (rssIndex + 1) + " =====\n";
         recentMessages += "[لینک منبع: " + rss.link + "]\n";
         recentMessages += "[منبع: " + rss.source + "]\n";
-        recentMessages += rss.description.length > 2000 ? rss.description.substring(0, 2000) + "..." : rss.description;
+        recentMessages += fullText.length > 2000 ? fullText.substring(0, 2000) + "..." : fullText;
         rssIndex++;
       }
     }
