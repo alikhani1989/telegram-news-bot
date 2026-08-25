@@ -4,31 +4,22 @@ const fs = require("fs");
 const path = require("path");
 
 // ==========================================
-// بخش تنظیمات
+// تنظیمات
 // ==========================================
 const CONFIG_FILE = path.join(__dirname, "config.json");
 const STATE_FILE = path.join(__dirname, "state.json");
 
 function loadConfig() {
-  // اول از متغیرهای محیطی (GitHub Actions)
   const envConfig = {};
   if (process.env.OPENROUTER_API_KEY) envConfig.OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
   if (process.env.BOT_TOKEN) envConfig.BOT_TOKEN = process.env.BOT_TOKEN;
   if (process.env.DESTINATION_CHAT_ID) envConfig.DESTINATION_CHAT_ID = process.env.DESTINATION_CHAT_ID;
   if (process.env.SOURCE_CHANNEL_ID) envConfig.SOURCE_CHANNEL_ID = process.env.SOURCE_CHANNEL_ID;
-  
-  // بعد از فایل config.json (محلی)
   let fileConfig = {};
   if (fs.existsSync(CONFIG_FILE)) {
     fileConfig = JSON.parse(fs.readFileSync(CONFIG_FILE, "utf8"));
   }
-  
-  // ترکیب: متغیرهای محیطی اولویت دارند
   return { ...fileConfig, ...envConfig };
-}
-
-function saveConfig(config) {
-  fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2), "utf8");
 }
 
 function loadState() {
@@ -43,17 +34,15 @@ function saveState(state) {
 }
 
 // ==========================================
-// جلوگیری از تکرار خبر
+// جلوگیری از تکرار
 // ==========================================
-const DUPLICATE_WINDOW_MS = 60 * 60 * 1000; // ۱ ساعت
+const DUPLICATE_WINDOW_MS = 60 * 60 * 1000;
 
-// پاکسازی اخبار قدیمی‌تر از ۱ ساعت
 function cleanOldPublished(publishedNews) {
   const now = Date.now();
   return publishedNews.filter(item => (now - item.timestamp) < DUPLICATE_WINDOW_MS);
 }
 
-// استخراج نام دامنه از لینک
 function extractDomain(url) {
   try {
     const m = url.match(/https?:\/\/([^/]+)/);
@@ -63,18 +52,9 @@ function extractDomain(url) {
   }
 }
 
-// بررسی تکرار بودن خبر
 function isDuplicate(newsItem, publishedNews) {
-  const now = Date.now();
-  
   for (const pub of publishedNews) {
-    // بررسی ۱: لینک منبع یکسان
-    if (newsItem.source_link && pub.source_link && 
-        newsItem.source_link === pub.source_link) {
-      return true;
-    }
-    
-    // بررسی ۲: لینک منبع بدون query string و hash
+    if (newsItem.source_link && pub.source_link && newsItem.source_link === pub.source_link) return true;
     if (newsItem.source_link && pub.source_link) {
       try {
         const cleanA = newsItem.source_link.split('?')[0].split('#')[0].replace(/\/$/, '');
@@ -82,8 +62,6 @@ function isDuplicate(newsItem, publishedNews) {
         if (cleanA && cleanB && cleanA === cleanB) return true;
       } catch (e) {}
     }
-    
-    // بررسی ۳: عنوان بسیار مشابه (بیش از ۶۰٪ کلمات مشترک)
     if (newsItem.title && pub.title) {
       const cleanTitle = (s) => s.replace(/[✴️🔸🔗]/g, '').trim().toLowerCase();
       const wordsA = cleanTitle(newsItem.title).split(/\s+/).filter(w => w.length > 2);
@@ -99,7 +77,7 @@ function isDuplicate(newsItem, publishedNews) {
 }
 
 // ==========================================
-// ابزار HTTP (با پشتیبانی از ریدایرکت)
+// ابزار HTTP
 // ==========================================
 function httpGet(url, maxRedirects) {
   if (maxRedirects === undefined) maxRedirects = 5;
@@ -194,19 +172,15 @@ function httpPostMultipart(url, boundary, body) {
 async function fetchTelegramMessages(channelId) {
   const url = "https://t.me/s/" + channelId;
   const response = await httpGet(url);
-
   const messages = [];
   const blocks = response.split(/<div class="tgme_widget_message\b/);
 
   for (let i = 1; i < blocks.length; i++) {
     const block = blocks[i];
     const textMatch = block.match(/tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/);
-
     if (textMatch) {
       let htmlText = textMatch[1];
       const text = htmlText.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]*>/gm, " ").trim();
-
-      // استخراج لینک خبر اصلی (غیر از t.me)
       let newsLink = "";
       const allLinks = htmlText.match(/href="(https?:\/\/[^"]+)"/g);
       if (allLinks) {
@@ -218,12 +192,8 @@ async function fetchTelegramMessages(channelId) {
           }
         }
       }
-
-      // استخراج عکس از background-image
       const bgMatch = block.match(/background-image:url\(['"]?([^'")\s]+)['"]?\)/);
       let imgUrl = bgMatch ? bgMatch[1].replace(/&amp;/g, "&") : "";
-
-      // اگر background-image نبود، از تگ img استفاده کن
       if (!imgUrl) {
         const allImgTags = block.match(/<img[^>]+src="([^"]+)"/g);
         if (allImgTags) {
@@ -236,7 +206,6 @@ async function fetchTelegramMessages(channelId) {
           }
         }
       }
-
       if (text.length > 10) {
         messages.push({ text, imageUrl: imgUrl || "", newsLink });
       }
@@ -246,7 +215,7 @@ async function fetchTelegramMessages(channelId) {
 }
 
 // ==========================================
-// خواندن اخبار از RSS
+// RSS
 // ==========================================
 const RSS_FEEDS = [
   { name: 'ICANA', url: 'https://www.icana.ir/rss' },
@@ -261,31 +230,24 @@ const RSS_FEEDS = [
   { name: 'Hamshahri', url: 'https://www.hamshahrionline.ir/rss' },
 ];
 
-// کلمات کلیدی مجلس برای فیلتر
 const PARLIAMENT_KEYWORDS = ['مجلس', 'نماینده', 'کمیسیون', 'شورای نگهبان', 'طرح', 'قانون', 'بودجه', 'فراکسیون', 'استیضاح'];
 
 async function fetchRSSNews() {
   const allNews = [];
-  
   for (const feed of RSS_FEEDS) {
     try {
       const xml = await httpGet(feed.url);
       const items = xml.match(/<item>([\s\S]*?)<\/item>/gi) || [];
-      
       for (const item of items) {
         const titleMatch = item.match(/<title>([\s\S]*?)<\/title>/i);
         const descMatch = item.match(/<description>([\s\S]*?)<\/description>/i);
         const linkMatch = item.match(/<link>([\s\S]*?)<\/link>/i);
-        
         if (titleMatch && linkMatch) {
           const title = titleMatch[1].trim();
           const description = descMatch ? descMatch[1].trim() : '';
           const link = linkMatch[1].trim();
-          
-          // فیلتر: آیا مرتبط با مجلس است؟
           const fullText = title + ' ' + description;
           const isRelevant = PARLIAMENT_KEYWORDS.some(kw => fullText.includes(kw));
-          
           if (isRelevant && description.length > 50) {
             allNews.push({
               title,
@@ -300,25 +262,19 @@ async function fetchRSSNews() {
       console.log('  ⚠️ خطا در خواندن RSS ' + feed.name + ': ' + e.message);
     }
   }
-  
   return allNews;
 }
 
 // ==========================================
-// استخراج عکس اصلی خبر از وب‌سایت منبع
+// استخراج عکس اصلی
 // ==========================================
 async function fetchOgImage(url) {
   try {
     const html = await httpGet(url);
-
-    // Method 1: og:image
     const ogMatch = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i);
     if (ogMatch) return ogMatch[1];
-
-    // Method 2: twitter:image
     const twitterMatch = html.match(/<meta[^>]+name="twitter:image"[^>]+content="([^"]+)"/i);
     if (twitterMatch) return twitterMatch[1];
-
     return null;
   } catch (err) {
     return null;
@@ -326,13 +282,13 @@ async function fetchOgImage(url) {
 }
 
 // ==========================================
-// خواندن متن کامل خبر از وب‌سایت منبع
+// خواندن متن کامل خبر
 // ==========================================
 async function fetchArticleText(url) {
   try {
     const html = await httpGet(url);
 
-    // روش ۰: JSON-LD (بهترین روش - متن کامل در structured data)
+    // روش ۰: JSON-LD
     const jsonLdMatches = html.match(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
     if (jsonLdMatches) {
       for (const match of jsonLdMatches) {
@@ -346,7 +302,7 @@ async function fetchArticleText(url) {
       }
     }
 
-    // روش ۱: articleBody (استاندارد Schema.org) - با regex انعطاف‌پذیرتر
+    // روش ۱: articleBody
     let m = html.match(/itemprop=["']articleBody["'][^>]*>([\s\S]*?)(?:<\/div>|<\/section>)/i);
     if (m) {
       const text = m[1].replace(/<[^>]*>/gm, " ").replace(/\s+/g, " ").trim();
@@ -367,7 +323,7 @@ async function fetchArticleText(url) {
       if (text.length > 50) return text;
     }
 
-    // روش ۳: class های رایج محتوا
+    // روش ۳: class های رایج
     const contentPatterns = [
       /class=["'][^"]*news[_-]?content[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
       /class=["'][^"]*story[^"]*["'][^>]*>([\s\S]*?)<\/div>/i,
@@ -383,7 +339,7 @@ async function fetchArticleText(url) {
       }
     }
 
-    // روش ۴: description متا تگ (به عنوان آخرین تلاش)
+    // روش ۴: meta description
     m = html.match(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i);
     if (m) return m[1].trim();
 
@@ -394,45 +350,29 @@ async function fetchArticleText(url) {
 }
 
 // ==========================================
-// Groq API (سریع و رایگان)
+// Groq API
 // ==========================================
 async function callGroq(prompt) {
   const GROQ_API_KEY = process.env.GROQ_API_KEY || '';
   if (!GROQ_API_KEY) return null;
-  
   const url = "https://api.groq.com/openai/v1/chat/completions";
   const payload = JSON.stringify({
     model: "llama-3.1-8b-instant",
     messages: [
-      {
-        role: "system",
-        content: "You are a Persian news editor. CRITICAL: 1) Copy person names EXACTLY from source. 2) Use مجلس not مجلس شورای اسلامی. OUTPUT ONLY VALID JSON, no explanation."
-      },
-      {
-        role: "user",
-        content: prompt
-      }
+      { role: "system", content: "You are a Persian news editor. CRITICAL: 1) Copy person names EXACTLY from source. 2) Use مجلس not مجلس شورای اسلامی. OUTPUT ONLY VALID JSON, no explanation." },
+      { role: "user", content: prompt }
     ],
     temperature: 0.3,
     max_tokens: 4000,
   });
-
   const response = await Promise.race([
-    httpPost(url, payload, {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + GROQ_API_KEY,
-    }),
+    httpPost(url, payload, { "Content-Type": "application/json", "Authorization": "Bearer " + GROQ_API_KEY }),
     new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 60000))
   ]);
-
   const data = JSON.parse(response);
-  if (data.error) {
-    throw new Error("Groq Error: " + JSON.stringify(data.error));
-  }
+  if (data.error) throw new Error("Groq Error: " + JSON.stringify(data.error));
   const content = data.choices[0].message.content;
-  if (!content || content.trim().length === 0) {
-    throw new Error("Groq پاسخ خالی");
-  }
+  if (!content || content.trim().length === 0) throw new Error("Groq پاسخ خالی");
   return content;
 }
 
@@ -448,10 +388,7 @@ async function callOpenRouter(prompt, apiKey) {
         role: "system",
         content: "IMPORTANT: Do NOT think out loud. Do NOT write analysis. ONLY output the final JSON object. No explanation, no thinking, no analysis. Just the JSON. You are a Persian news editor. CRITICAL RULES: 1) Copy person names and titles EXACTLY from the source text. Never guess or invent names. 2) In Persian text, ALWAYS write مجلس (not مجلس شورای اسلامی). Only use مجلس شورای اسلامی at the very first mention, then just مجلس. OUTPUT ONLY VALID JSON."
       },
-      {
-        role: "user",
-        content: prompt
-      }
+      { role: "user", content: prompt }
     ],
     temperature: 0.3,
     max_tokens: 4000,
@@ -468,12 +405,11 @@ async function callOpenRouter(prompt, apiKey) {
         }),
         new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 120000))
       ]);
-
       const data = JSON.parse(response);
       if (data.error) {
         lastError = new Error("OpenRouter API Error: " + JSON.stringify(data.error));
         if (attempt < 3) {
-          console.log("  ⏳ تلاش " + attempt + " ناموفق، 30 ثانیه صبر...");
+          console.log("  ⏳ تلاش " + attempt + " ناموفق، 60 ثانیه صبر...");
           await new Promise(r => setTimeout(r, 60000));
           continue;
         }
@@ -501,93 +437,80 @@ async function callOpenRouter(prompt, apiKey) {
 }
 
 // ==========================================
-// پرامپت بهبود یافته
+// پرامپت
 // ==========================================
 function buildPrompt(recentMessages, recentTitlesPrompt) {
   let p = [];
-  
+
   p.push("شما سردبیر اخبار تلگرامی هستید. اخبار خام زیر را به خلاصه‌های حرفه‌ای تبدیل کنید.");
   p.push("");
-  p.push("⚠️ قوانین مهم که حتماً رعایت کنید:");
+  p.push("=== قوانین کلی ===");
   p.push("- مجلس شورای اسلامی → فقط مجلس");
-  p.push("- نام افراد را عیناً از متن کپی کنید");
+  p.push("- نام افراد را عیناً از متن کپی کنید. هرگز حدس نزنید.");
+  p.push("- سمّت افراد را دقیقاً از متن استخراج کنید (عضو کمیسیون، نماینده مجلس، نایب رئیس و...)");
   p.push("");
-  
-  // قوانین تیتر
+
   p.push("=== قوانین تیتر ===");
   p.push("- کوتاه، جذاب، رویدادمحور باشد");
   p.push("- با ✴️ شروع شود");
-  p.push("- بدون نقل قول");
+  p.push("- بدون نقل قول (قالیباف: ... ننویسید)");
   p.push("- بدون نام شخص در تیتر");
   p.push("- تیتر باید مفهوم درست خبر را برساند");
   p.push("");
-  
-  // قوانین متن
+
   p.push("=== قوانین متن ===");
-  p.push("- حداکثر ۲ بند کوتاه");
+  p.push("- ۱ یا ۲ بند کوتاه (بستگی به محتوا دارد)");
   p.push("- هر بند با 🔸 و یک فاصله شروع شود");
   p.push("  مثال:\n🔸 نکته اول خبر\n\n🔸 نکته دوم خبر");
-  p.push("- نام + سمّت دقیق شخص حتماً در خط اول باشد");
+  p.push("- حتماً نام + سمّت دقیق شخص در خط اول متن باشد");
+  p.push("- نکته اصلی خبر را با جزئیات بیان کنید (اعداد، شروط، ارقام مهم)");
   p.push("");
-  p.push("⚠️ قانون طلایی: نام شخص را عیناً از متن کپی کنید.");
-  p.push("");
-  p.push("- فقط بنویسید مجلس نه مجلس شورای اسلامی");
-  p.push("");
-  p.push("- بدون عبارات خشک: اظهار کرد، وی افزود، خاطرنشان کرد");
-  p.push("- فقط: گفت، نوشته، گفته، تاکید کرد، اعلام کرد");
-  p.push("- بدون «وی»؛ از نام خانوادگی استفاده کنید");
-  p.push("");
-  
-  // قوانین ذکر منبع
+
   p.push("=== قوانین ذکر منبع ===");
+  p.push("⚠️ خیلی مهم: فقط وقتی اسم رسانه را بیاورید که مصاحبه اختصاصی باشد.");
   p.push("- اگر در متن خام نوشته «فلانی در مصاحبه با خبرگزاری X گفت»: منبع را بیاورید");
-  p.push("- اگر رسانه فقط نقل قول کرده: اسم رسانه را نیاورید");
+  p.push("- اگر عبارت «به گزارش» یا «نقل از» آمده یا رسانه صرفاً نقل قول کرده: اسم رسانه را نیاورید");
+  p.push("  مثال صحیح: سمیه رفیعی نماینده تهران در مجلس گفت که...");
+  p.push("  مثال غلط: سمیه رفیعی در مصاحبه با تهران پرس گفت که...");
   p.push("");
-  
-  // جلوگیری از تکرار
+
   p.push("=== جلوگیری از تکرار ===");
   p.push("- عناوین اخیر در انتهای ورودی فقط برای تشخیص اخبار تکراری هستند");
-  p.push("- اگر خبر جدید محتوایاً تکراری با یک خبر اخیر است، آن را تولید نکنید");
   p.push("");
-  
-  // فرمت خروجی
+
   p.push("=== فرمت خروجی ===");
   p.push("فقط یک JSON Object معتبر برگردانید. هیچ متن خارج از JSON تولید نکنید.");
-  p.push('خروجی: {"news":[{"title":"✴️ تیتر","body":"🔸 بند اول\n\n🔸 بند دوم","source_link":"لینک منبع","image_url":"لینک تصویر یا خالی"}]}');
+  p.push('خروجی: {"news":[{"title":"✴️ تیتر","body":"🔸 بند اول\\n\\n🔸 بند دوم","source_link":"لینک منبع","image_url":"لینک تصویر یا خالی"}]}');
   p.push("");
-  
-  // نمونه‌ها
-  p.push("=== نمونه‌های مطلوب ===");
-  p.push("");  p.push("نمونه ۱:");
+
+  p.push("=== نمونه‌ها ===");
+  p.push("");
+  p.push("نمونه ۱ (با ذکر منبع - مصاحبه اختصاصی):");
   p.push('تیتر: ✴️ در آستانه توافق');
-  p.push('بدن:');
-  p.push('🔸 فداحسین مالکی عضو کمیسیون امنیت ملی و سیاست خارجی مجلس در مصاحبه با خبرگزاری دانشجو گفت که در حال حاضر ایران و عمان بر روی مسیر پیشنهادی ایران تمرکز کرده‌اند و مذاکرات در این زمینه در آستانه نهایی‌شدن قرار دارد.');
+  p.push('🔸 فداحسین مالکی عضو کمیسیون امنیت ملی و سیاست خارجی مجلس در مصاحبه با خبرگزاری دانشجو گفت که ایران و عمان بر روی مسیر پیشنهادی ایران تمرکز کرده‌اند و مذاکرات در آستانه نهایی‌شدن قرار دارد.');
   p.push("");
   p.push('🔸 مالکی گفته که اگر این توافق تحقق پیدا کند، کنترل تنگه هرمز کماکان در اختیار ایران خواهد بود.');
   p.push("");
-  
-  p.push("نمونه ۲:");
+
+  p.push("نمونه ۲ (بدون ذکر منبع - نقل قول):");
   p.push('تیتر: ✴️ بنزین گران نخواهد شد');
-  p.push('بدن:');
   p.push('🔸 علی نیکزاد نایب‌رئیس مجلس در پاسخ به تذکری درباره افزایش قیمت بنزین گفت که روز گذشته جلسه‌ای با پورمحمدی، رئیس سازمان برنامه و بودجه، داشتیم.');
   p.push("");
   p.push('🔸 طبق توضیحات رئیس سازمان برنامه و بودجه، افزایش قیمت بنزین منتفی است و جابه‌جایی سهمیه انجام خواهد شد.');
   p.push("");
-  
-  p.push("نمونه ۳ (بدون ذکر منبع چون مصاحبه نیست): ");
+
+  p.push("نمونه ۳ (بدون ذکر منبع - پست شخصی):");
   p.push('تیتر: ✴️ ترتیبات ایرانی؛ تنها راه عبور از تنگه هرمز');
-  p.push('بدن:');
   p.push('🔸 حسن قشقاوی سخنگوی کمیسیون امنیت ملی و سیاست خارجی مجلس در صفحه شخصی خود نوشته که در رسانه‌ها از تشدید تنش سخن می‌گویند، در حالیکه از طریق کانال‌های موجود، خواهان مذاکره هستند.');
   p.push("");
   p.push('🔸 آن‌ها نمی‌توانند جمهوری اسلامی ایران را فریب دهند. ترتیبات ایرانی برای عبور از تنگه هرمز تنها گزینه روی میز است.');
   p.push("");
-  
-  p.push("نمونه ۴ (محتوای کوتاه - ۱ بند): ");
+
+  p.push("نمونه ۴ (محتوای کوتاه - ۱ بند):");
   p.push('تیتر: ✴️ ممنوعیت واردات لوازم خانگی در آستانه لغو');
-  p.push('بدن:');
-  p.push('🔸 حاکم ممکان، عضو کمیسیون اقتصادی در مصاحبه با ایسنا گفت که اگر مشخص شود واردات قطعات از مسیرهای غیررسمی انجام نمی‌شود، احتمال لغو ممنوعیت واردات چهار قلم لوازم خانگی تا سقف ۵۰۰ تا ۶۰۰ میلیون دلار وجود دارد.');
+  p.push('🔸 حاکم ممکان، عضو کمیسیون اقتصادی در مصاحبه با ایسنا گفت که اگر مشخص شود واردات قطعات از مسیرهای غیررسمی انجام نمی‌شود، احتمال لغو ممنوعیت واردات وجود دارد.');
   p.push("");
-  
+
   p.push("========================");
   p.push("اخبار خام");
   p.push("========================");
@@ -602,21 +525,18 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
 async function sendToTelegram(message, imageUrl, botToken, chatId) {
   const baseUrl = "https://api.telegram.org/bot" + botToken + "/";
 
-  // تلاش برای ارسال با عکس
   if (imageUrl && imageUrl.startsWith("http") && imageUrl.length > 20) {
     try {
       const imageBuffer = await httpGetBuffer(imageUrl);
       if (imageBuffer && imageBuffer.length > 1000) {
         const boundary = "----FormBoundary" + Date.now();
         const parts = [];
-
         parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"chat_id\"\r\n\r\n" + chatId + "\r\n"));
         parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n" + message + "\r\n"));
         parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"parse_mode\"\r\n\r\nHTML\r\n"));
         parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"photo\"; filename=\"photo.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n"));
         parts.push(imageBuffer);
         parts.push(Buffer.from("\r\n--" + boundary + "--\r\n"));
-
         const fullBody = Buffer.concat(parts);
         const response = await httpPostMultipart(baseUrl + "sendPhoto", boundary, fullBody);
         const result = JSON.parse(response);
@@ -628,7 +548,6 @@ async function sendToTelegram(message, imageUrl, botToken, chatId) {
     }
   }
 
-  // ارسال متن
   const payload = JSON.stringify({
     chat_id: chatId,
     text: message,
@@ -642,25 +561,108 @@ async function sendToTelegram(message, imageUrl, botToken, chatId) {
 }
 
 // ==========================================
+// پارس JSON ایمن
+// ==========================================
+function safeParseJson(aiText) {
+  // حذف متن فکر کردن
+  let t = aiText;
+  const thinkStart = t.indexOf("\u003Cthink\u003E");
+  const thinkEnd = t.indexOf("\u003C/think\u003E");
+  if (thinkStart !== -1 && thinkEnd !== -1) {
+    t = t.substring(0, thinkStart) + t.substring(thinkEnd + 8);
+  }
+  t = t.trim();
+
+  // حذف markdown code block
+  t = t.replace(/```json/gi, "").replace(/```/g, "").trim();
+
+  // حذف کاراکترهای مشکل‌ساز
+  t = t.replace(/\r/g, "");
+  t = t.replace(/\u200C/g, " ").replace(/\u200D/g, " ");
+  t = t.replace(/\u200E/g, " ").replace(/\u200F/g, " ");
+
+  // پیدا کردن اولین { یا [
+  const jsonStart = t.indexOf("{");
+  const arrayStart = t.indexOf("[");
+  const firstJson = (jsonStart !== -1 && (arrayStart === -1 || jsonStart < arrayStart)) ? jsonStart : arrayStart;
+  if (firstJson > 0) t = t.substring(firstJson);
+
+  // جایگزینی newline داخل رشته‌ها
+  let result = "";
+  let inStr = false;
+  for (let ci = 0; ci < t.length; ci++) {
+    const ch = t[ci];
+    if (ch === '"' && (ci === 0 || t[ci - 1] !== "\\")) {
+      inStr = !inStr;
+      result += ch;
+    } else if (inStr && ch === "\n") {
+      result += "\\n";
+    } else if (inStr && ch === "\t") {
+      result += "\\t";
+    } else {
+      result += ch;
+    }
+  }
+  t = result;
+
+  // تلاش اول
+  try {
+    let parsedObj;
+    const firstArr = t.indexOf("[");
+    const firstObj = t.indexOf("{");
+    const isArray = firstArr !== -1 && (firstObj === -1 || firstArr < firstObj);
+    let jsonStr = isArray ? t.substring(firstArr) : t.substring(firstObj);
+    const closer = isArray ? "]" : "}";
+    if (!jsonStr.endsWith(closer)) {
+      const lastComplete = jsonStr.lastIndexOf("},");
+      if (lastComplete > 0) {
+        jsonStr = jsonStr.substring(0, lastComplete + 1) + closer;
+      } else {
+        jsonStr = jsonStr.replace(/:[ ]*"[^"]*$/, "").replace(/,[ ]*"[^"]*$/, "");
+        jsonStr += closer;
+      }
+    }
+    parsedObj = JSON.parse(jsonStr);
+    if (Array.isArray(parsedObj)) return parsedObj;
+    if (parsedObj && Array.isArray(parsedObj.news)) return parsedObj.news;
+    return [];
+  } catch (e1) {
+    // تلاش دوم
+    try {
+      let repaired = t.replace(/[\u0000-\u001f]/g, " ").replace(/\s+/g, " ");
+      const firstArr2 = repaired.indexOf("[");
+      const firstObj2 = repaired.indexOf("{");
+      const isArray2 = firstArr2 !== -1 && (firstObj2 === -1 || firstArr2 < firstObj2);
+      let jsonStr2 = isArray2 ? repaired.substring(firstArr2) : repaired.substring(firstObj2);
+      const lastComplete2 = jsonStr2.lastIndexOf("},");
+      if (lastComplete2 > 0) {
+        jsonStr2 = jsonStr2.substring(0, lastComplete2 + 1) + (isArray2 ? "]" : "}");
+      }
+      const parsed2 = JSON.parse(jsonStr2);
+      if (Array.isArray(parsed2)) return parsed2;
+      if (parsed2 && Array.isArray(parsed2.news)) return parsed2.news;
+      return [];
+    } catch (e2) {
+      console.log("  ❌ تعمیر JSON ناموفق:", e2.message);
+      console.log("  متن:", aiText.substring(0, 200));
+      return null;
+    }
+  }
+}
+
+// ==========================================
 // تابع اصلی
 // ==========================================
 async function main() {
   try {
     const config = loadConfig();
-
     const SOURCE_CHANNEL_ID = config.SOURCE_CHANNEL_ID || "news_parliament";
     const OPENROUTER_API_KEY = config.OPENROUTER_API_KEY || "";
     const BOT_TOKEN = config.BOT_TOKEN || "";
     const DESTINATION_CHAT_ID = config.DESTINATION_CHAT_ID || "";
 
-    if (!OPENROUTER_API_KEY) {
-      console.log("❌ OPENROUTER_API_KEY تنظیم نشده.");
-      return;
-    }
-    if (!BOT_TOKEN || !DESTINATION_CHAT_ID) {
-      console.log("❌ BOT_TOKEN یا DESTINATION_CHAT_ID تنظیم نشده.");
-      return;
-    }
+    if (!OPENROUTER_API_KEY) { console.log("❌ OPENROUTER_API_KEY تنظیم نشده."); return; }
+    if (!BOT_TOKEN || !DESTINATION_CHAT_ID) { console.log("❌ BOT_TOKEN یا DESTINATION_CHAT_ID تنظیم نشده."); return; }
 
     console.log("📡 خواندن اخبار از کانال و RSS...");
     const [messages, rssNews] = await Promise.all([
@@ -688,19 +690,15 @@ async function main() {
     }
 
     if (!foundLast || newMessages.length === 0) {
-      newMessages = messages.slice(-5); // حداکثر ۵ خبر
+      newMessages = messages.slice(-5);
     } else if (newMessages.length > 5) {
       newMessages = newMessages.slice(0, 5);
     }
 
-    if (newMessages.length === 0) {
-      console.log("📭 پیام جدیدی نیست.");
-      return;
-    }
-
+    if (newMessages.length === 0) { console.log("📭 پیام جدیدی نیست."); return; }
     console.log("📝 " + newMessages.length + " خبر جدید.");
 
-    // خواندن متن کامل خبر از وب‌سایت منبع
+    // خواندن متن کامل
     console.log("📖 خواندن متن کامل خبرها...");
     const qualityMessages = [];
     for (let i = 0; i < newMessages.length; i++) {
@@ -711,34 +709,28 @@ async function main() {
         if (fullText && fullText.length > 100) {
           msg.fullText = fullText;
           qualityMessages.push(msg);
-          console.log("  ✅ متن کامل پیدا شد (" + fullText.length + " کاراکتر)");
+          console.log("  ✅ متن کامل (" + fullText.length + " کاراکتر)");
         } else {
-          console.log("  ⛔ رد شد: متن کامل پیدا نشد (کیفیت پایین)");
+          console.log("  ⛔ رد شد: متن کامل پیدا نشد");
         }
       } else {
-        // اگر لینک ندارد، از تیتر استفاده کن
         qualityMessages.push(msg);
       }
     }
     newMessages = qualityMessages;
-    console.log("📊 " + newMessages.length + " خبر با کیفیت از " + newMessages.length + " خبر.");
+    console.log("📊 " + newMessages.length + " خبر با کیفیت.");
 
     // ساخت متن خام
     let recentMessages = "";
     for (let i = 0; i < newMessages.length; i++) {
       recentMessages += "\n\n===== NEWS " + (i + 1) + " =====\n";
-      if (newMessages[i].imageUrl) {
-        recentMessages += "[تصویر: " + newMessages[i].imageUrl + "]\n";
-      }
-      if (newMessages[i].newsLink) {
-        recentMessages += "[لینک منبع: " + newMessages[i].newsLink + "]\n";
-      }
-      // اگر متن کامل هست، آن را بفرست (حداکثر ۲۰۰۰ کاراکتر). وگرنه تیتر را بفرست.
+      if (newMessages[i].imageUrl) recentMessages += "[تصویر: " + newMessages[i].imageUrl + "]\n";
+      if (newMessages[i].newsLink) recentMessages += "[لینک منبع: " + newMessages[i].newsLink + "]\n";
       const content = newMessages[i].fullText || newMessages[i].text;
       recentMessages += content.length > 2000 ? content.substring(0, 2000) + "..." : content;
     }
-    
-    // اضافه کردن اخبار RSS (حداکثر ۳ خبر)
+
+    // اخبار RSS
     let rssIndex = 0;
     for (const rss of rssNews) {
       if (rss.description && rss.description.length > 100 && rssIndex < 3) {
@@ -751,7 +743,7 @@ async function main() {
     }
     console.log("📰 " + rssIndex + " خبر RSS اضافه شد.");
 
-    // اخبار منتشر شده در ۱ ساعت اخیر (برای جلوگیری از تکرار)
+    // اخبار منتشر شده
     let publishedNews = cleanOldPublished(state.PUBLISHED_NEWS || []);
     let publishedTitlesPrompt = "";
     if (publishedNews.length > 0) {
@@ -760,146 +752,29 @@ async function main() {
         publishedTitlesPrompt += "- " + pub.title.replace(/<[^>]*>/gm, "").replace("✴️ ", "") + "\n";
       }
     }
-    
-    const recentTitlesPrompt =
-      recentTitles.length > 0
-        ? "\nعناوین اخیر (تکرار نکن): " + recentTitles.join(" | ")
-        : "";
+
+    const recentTitlesPrompt = recentTitles.length > 0
+      ? "\nعناوین اخیر (تکرار نکن): " + recentTitles.join(" | ")
+      : "";
 
     const prompt = buildPrompt(recentMessages, recentTitlesPrompt + publishedTitlesPrompt);
 
     console.log("🤖 ارسال به هوش مصنوعی...");
     const startTime = Date.now();
     const aiText = await callOpenRouter(prompt, OPENROUTER_API_KEY);
-    console.log("⏱️ پاسخ در " + ((Date.now() - startTime) / 1000).toFixed(1) + " ثانیه دریافت شد.");
+    console.log("⏱️ پاسخ در " + ((Date.now() - startTime) / 1000).toFixed(1) + " ثانیه.");
 
-    // پارس JSON
-    let newsArray = [];
-    if (!aiText || aiText.trim().length === 0) {
-      console.log("❌ پاسخ هوش مصنوعی خالی بود.");
-      return;
-    }
-    console.log("📝 پاسخ هوش مصنوعی (" + aiText.length + " کاراکتر)");
-    try {
-      // حذف متن فکر کردن قبل از JSON
-      let cleaned = aiText.replace(/```json/gi, "").replace(/```/g, "").trim();
-      // اگر با متن انگلیسی شروع شده، JSON را پیدا کن
-      const jsonStart = cleaned.indexOf('{');
-      const arrayStart = cleaned.indexOf('[');
-      const firstJson = (jsonStart !== -1 && (arrayStart === -1 || jsonStart < arrayStart)) ? jsonStart : arrayStart;
-      if (firstJson > 0) {
-        cleaned = cleaned.substring(firstJson);
-      }
-      // جایگزینی newline های داخل رشته‌های JSON با \n واقعی
-      // ابتدا \r را حذف کن
-      cleaned = cleaned.replace(/\r/g, '');
-      // جایگزینی کاراکترهای مشکل‌ساز در متن فارسی
-      cleaned = cleaned.replace(/\u200C/g, ' '); // zero-width non-joiner
-      cleaned = cleaned.replace(/\u200D/g, ' '); // zero-width joiner
-      cleaned = cleaned.replace(/\u200E/g, ' '); // LTR mark
-      cleaned = cleaned.replace(/\u200F/g, ' '); // RTL mark
-      // newline های بین خطوط JSON را با فاصله جایگزین کن
-      // ولی newline های داخل "..." را با \n جایگزین کن
-      let result = '';
-      let inString = false;
-      for (let ci = 0; ci < cleaned.length; ci++) {
-        const ch = cleaned[ci];
-        if (ch === '"' && (ci === 0 || cleaned[ci-1] !== '\\')) {
-          inString = !inString;
-          result += ch;
-        } else if (inString && ch === '\n') {
-          result += '\\n';
-        } else if (inString && ch === '\t') {
-          result += '\\t';
-        } else {
-          result += ch;
-        }
-      }
-      cleaned = result;
-      const firstOpenArray = cleaned.indexOf("[");
-      const firstOpenObject = cleaned.indexOf("{");
+    if (!aiText || aiText.trim().length === 0) { console.log("❌ پاسخ خالی."); return; }
+    console.log("📝 پاسخ (" + aiText.length + " کاراکتر)");
 
-      let parsedObj;
-      if (firstOpenArray !== -1 && (firstOpenObject === -1 || firstOpenArray < firstOpenObject)) {
-        let jsonStr = cleaned.substring(firstOpenArray);
-        // بستن آرایه ناقص
-        if (!jsonStr.endsWith(']')) {
-          // آخرین آبجکت کامل را پیدا کن
-          const lastComplete = jsonStr.lastIndexOf('},');
-          if (lastComplete > 0) {
-            jsonStr = jsonStr.substring(0, lastComplete + 1) + ']';
-          } else {
-            // اگر آبجکت کاملی نیست، سعی کن رشته ناقص را ببندی
-            jsonStr = jsonStr.replace(/,"[^"]*$/, '').replace(/"[^"]*$/, '');
-            jsonStr += ']';
-          }
-        }
-        parsedObj = JSON.parse(jsonStr);
-      } else if (firstOpenObject !== -1) {
-        let jsonStr = cleaned.substring(firstOpenObject);
-        if (!jsonStr.endsWith('}')) {
-          const lastComplete = jsonStr.lastIndexOf('},');
-          if (lastComplete > 0) {
-            jsonStr = jsonStr.substring(0, lastComplete + 1) + '}';
-          } else {
-            // سعی کن رشته ناقص را ببندی
-            jsonStr = jsonStr.replace(/:"[^"]*$/, '').replace(/,"[^"]*$/, '');
-            jsonStr += '}';
-          }
-        }
-        parsedObj = JSON.parse(jsonStr);
-      } else {
-        parsedObj = JSON.parse(cleaned);
-      }
+    const newsArray = safeParseJson(aiText);
+    if (newsArray === null) { console.log("❌ خطا در پارس JSON"); return; }
+    if (newsArray.length === 0) { console.log("📭 خبری تولید نشد."); return; }
 
-      if (Array.isArray(parsedObj)) {
-        newsArray = parsedObj;
-      } else if (parsedObj && Array.isArray(parsedObj.news)) {
-        newsArray = parsedObj.news;
-      }
-    } catch (e) {
-      console.log("❌ خطا در پارس JSON:", e.message);
-      // تلاش برای تعمیر JSON با حذف کاراکترهای مشکل‌ساز
-      try {
-        let repaired = aiText.replace(/```json/gi, '').replace(/```/g, '').trim();
-        repaired = repaired.replace(/[ -]/g, ' ');
-        repaired = repaired.replace(/\s+/g, ' ');
-        const firstArr = repaired.indexOf('[');
-        const firstObj = repaired.indexOf('{');
-        const start = (firstArr !== -1 && (firstObj === -1 || firstArr < firstObj)) ? firstArr : firstObj;
-        if (start !== -1) {
-          repaired = repaired.substring(start);
-          // حذف آخرین آبجکت ناتمام
-          const lastComplete = repaired.lastIndexOf('},');
-          if (lastComplete > 0) {
-            repaired = repaired.substring(0, lastComplete + 1) + (firstArr !== -1 ? ']' : '}');
-          }
-          parsedObj = JSON.parse(repaired);
-          if (Array.isArray(parsedObj)) {
-            newsArray = parsedObj;
-          } else if (parsedObj && Array.isArray(parsedObj.news)) {
-            newsArray = parsedObj.news;
-          }
-          console.log("  ✅ JSON با موفقیت تعمیر شد!");
-        }
-      } catch (e2) {
-        console.log("  ❌ تعمیر JSON هم ناموفق بود:", e2.message);
-        console.log("متن:", aiText.substring(0, 300));
-        return;
-      }
-    }
-
-    if (newsArray.length === 0) {
-      console.log("📭 خبری تولید نشد.");
-      return;
-    }
-
-    // بازیابی عکس اصلی از منبع
+    // بازیابی عکس
     for (let i = 0; i < newsArray.length; i++) {
       const item = newsArray[i];
       const originalMsg = newMessages[i];
-
-      // اول عکس از وب‌سایت منبع
       if (!item.image_url || !item.image_url.startsWith("http") || item.image_url.includes("telesco.pe")) {
         if (item.source_link && item.source_link.startsWith("http")) {
           console.log("  🔍 دریافت عکس از:", item.source_link.substring(0, 50));
@@ -910,27 +785,25 @@ async function main() {
           }
         }
       }
-
-      // اگر هنوز عکس نیست، از تلگرام بگیر
       if ((!item.image_url || !item.image_url.startsWith("http")) && originalMsg && originalMsg.imageUrl) {
         item.image_url = originalMsg.imageUrl;
-        console.log("  📷 عکس از تلگرام استفاده شد");
+        console.log("  📷 عکس از تلگرام");
       }
     }
 
-    // ========== بررسی تکرار قبل از ارسال ==========
+    // بررسی تکرار
     const uniqueNews = [];
     for (const item of newsArray) {
       if (!item.title || !item.body) continue;
       if (isDuplicate(item, publishedNews)) {
-        console.log("  ⛔ تکرار رد شد: " + (item.title || '').replace("✴️ ", ""));
+        console.log("  ⛔ تکرار:", (item.title || "").replace("✴️ ", ""));
         continue;
       }
       uniqueNews.push(item);
     }
-    
+
     if (uniqueNews.length === 0) {
-      console.log("📭 همه اخبار تکراری بودند.");
+      console.log("📭 همه تکراری بودند.");
       state.PUBLISHED_NEWS = publishedNews;
       state.RECENT_TITLES = recentTitles;
       const lastMsg = newMessages[newMessages.length - 1];
@@ -938,36 +811,29 @@ async function main() {
       saveState(state);
       return;
     }
-    console.log("✅ " + uniqueNews.length + " خبر غیرتکراری از " + newsArray.length + " خبر.");
+    console.log("✅ " + uniqueNews.length + " خبر غیرتکراری.");
 
-    // ارسال به تلگرام
+    // ارسال
     console.log("📤 ارسال " + uniqueNews.length + " خبر...");
     for (let i = 0; i < uniqueNews.length; i++) {
       const item = uniqueNews[i];
       if (!item.title || !item.body) continue;
 
-      // پاکسازی مجلس شورای اسلامی → مجلس
-      item.body = item.body.replace(/مجلس شورای اسلامی/g, 'مجلس');
-      item.title = item.title.replace(/مجلس شورای اسلامی/g, 'مجلس');
-      
-      // رفع غلط املایی رایج
-      item.body = item.body.replace(/صفطولانی/g, 'صف طولانی');
-      item.body = item.body.replace(/ STD /g, ' ');
+      item.body = item.body.replace(/مجلس شورای اسلامی/g, "مجلس");
+      item.title = item.title.replace(/مجلس شورای اسلامی/g, "مجلس");
+      item.body = item.body.replace(/صفطولانی/g, "صف طولانی");
 
       let finalMessage = "<b>" + item.title + "</b>\n\n" + item.body + "\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net";
-
       if (item.source_link && item.source_link.length > 5) {
         finalMessage += '\n\n🔗 <a href="' + item.source_link + '">منبع خبر</a>';
       }
 
       const imageUrl = item.image_url && item.image_url.startsWith("http") && item.image_url.length > 20 ? item.image_url : null;
-
       const result = await sendToTelegram(finalMessage, imageUrl, BOT_TOKEN, DESTINATION_CHAT_ID);
 
       if (result.ok) {
         console.log("  ✅ " + item.title.replace("✴️ ", ""));
         recentTitles.push(item.title.replace(/<[^>]*>/gm, "").replace("✴️ ", ""));
-        // ذخیره خبر منتشر شده برای جلوگیری از تکرار
         publishedNews.push({
           title: item.title.replace(/<[^>]*>/gm, ""),
           source_link: item.source_link || "",
@@ -978,13 +844,8 @@ async function main() {
       }
     }
 
-    // ذخیره تنظیمات
-    if (recentTitles.length > 15) {
-      recentTitles = recentTitles.slice(-15);
-    }
-    if (publishedNews.length > 100) {
-      publishedNews = publishedNews.slice(-100);
-    }
+    if (recentTitles.length > 15) recentTitles = recentTitles.slice(-15);
+    if (publishedNews.length > 100) publishedNews = publishedNews.slice(-100);
 
     const lastMsg = newMessages[newMessages.length - 1];
     state.RECENT_TITLES = recentTitles;
@@ -998,7 +859,8 @@ async function main() {
   }
 }
 
-// ==========================================// حلقه خودکار (هر ۱۵ دقیقه)
+// ==========================================
+// حلقه خودکار (هر ۱۵ دقیقه)
 // ==========================================
 const INTERVAL_MINUTES = 15;
 
@@ -1010,10 +872,6 @@ async function runOnce() {
   console.log('⏰ اجرای بعدی: ' + INTERVAL_MINUTES + ' دقیقه دیگر');
 }
 
-// اجرای اولیه فوراً
 runOnce().then(() => {
-  // حلقه خودکار
-  setInterval(() => {
-    runOnce();
-  }, INTERVAL_MINUTES * 60 * 1000);
+  setInterval(() => { runOnce(); }, INTERVAL_MINUTES * 60 * 1000);
 });
