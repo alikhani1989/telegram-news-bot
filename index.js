@@ -484,6 +484,17 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("- سمّت افراد را دقیقاً از متن استخراج کنید (عضو کمیسیون، نماینده مجلس، نایب رئیس و...)");
   p.push("");
 
+  p.push("=== اهمیت اخبار ===");
+  p.push("⚠️ اخبار مهم مجلس عبارتند از:");
+  p.push("- تکذیب یا تایید اخبار مهم توسط مقامات مجلس");
+  p.push("- موضع‌گیری رئیس مجلس، نایب رئیس، سخنگو درباره مسائل مهم");
+  p.push("- تصمیمات کلیدی کمیسیون‌ها درباره طرح‌ها و لوایح");
+  p.push("- انتقاد یا حمایت نمایندگان از سیاست‌های دولت");
+  p.push("- اخبار مربوط به استیضاح، تحقیق و تفحص، نظارت");
+  p.push("- اخبار بودجه، برنامه هفتم، و طرح‌های مهم");
+  p.push(" اخبار مهم را حتماً منتشر کنید حتی اگر کوتاه باشند.");
+  p.push("");
+
   p.push("=== قوانین تیتر ===");
   p.push("- کوتاه، جذاب، رویدادمحور باشد");
   p.push("- با ✴️ شروع شود");
@@ -769,9 +780,16 @@ async function main() {
     }
 
     // اخبار RSS (با خواندن متن کامل از وب‌سایت)
+    // اولویت با ICANA (خبرگزاری رسمی مجلس) است
+    const sortedRss = rssNews.sort((a, b) => {
+      if (a.source === 'ICANA' && b.source !== 'ICANA') return -1;
+      if (a.source !== 'ICANA' && b.source === 'ICANA') return 1;
+      return 0;
+    });
     let rssIndex = 0;
-    for (const rss of rssNews) {
-      if (rss.description && rss.description.length > 50 && rssIndex < 3) {
+    const MAX_RSS = 6; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
+    for (const rss of sortedRss) {
+      if (rss.description && rss.description.length > 50 && rssIndex < MAX_RSS) {
         // اگر لینک دارد، متن کامل را از وب‌سایت بخوان
         let fullText = rss.description;
         if (rss.link && rss.link.startsWith('http')) {
