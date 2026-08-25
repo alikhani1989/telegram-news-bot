@@ -874,6 +874,10 @@ async function main() {
       item.body = item.body.replace(/مجلس شورای اسلامی/g, "مجلس");
       item.title = item.title.replace(/مجلس شورای اسلامی/g, "مجلس");
       item.body = item.body.replace(/صفطولانی/g, "صف طولانی");
+      // حذف حوزه انتخابیه: نماینده مردم X، Y و Z در مجلس → نماینده مجلس
+      item.body = item.body.replace(/نماینده مردم [^،,]+ در مجلس/g, 'نماینده مجلس');
+      // حذف تکرار مجلس: عضو کمیسیون X مجلس → عضو کمیسیون X
+      item.body = item.body.replace(/مجلس مجلس/g, 'مجلس');
 
       let finalMessage = "<b>" + item.title + "</b>\n\n" + item.body + "\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net";
       if (item.source_link && item.source_link.length > 5) {
