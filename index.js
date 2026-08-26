@@ -396,7 +396,7 @@ async function callGroq(prompt) {
       { role: "system", content: "You are a Persian news editor. CRITICAL: 1) Copy person names EXACTLY from source. 2) Use مجلس not مجلس شورای اسلامی. OUTPUT ONLY VALID JSON, no explanation." },
       { role: "user", content: prompt }
     ],
-    temperature: 0.3,
+    temperature: 0.1,
     max_tokens: 4000,
   });
   const response = await Promise.race([
@@ -420,7 +420,7 @@ const AI_MODELS = [
 
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  const systemMsg = "IMPORTANT: Do NOT think out loud. Do NOT write analysis. ONLY output the final JSON object. No explanation, no thinking, no analysis. Just the JSON. You are a Persian news editor. CRITICAL RULES: 1) Copy person names and titles EXACTLY from the source text. Never guess or invent names. 2) In Persian text, ALWAYS write مجلس (not مجلس شورای اسلامی). Only use مجلس شورای اسلامی at the very first mention, then just مجلس. OUTPUT ONLY VALID JSON.";
+  const systemMsg = "You are a JSON-only bot. NEVER write analysis, thinking, or reasoning. NEVER explain your work. ONLY output a raw JSON object. Zero text before or after. Just { \"news\": [...] }. Copy names EXACTLY from source. Use مجلس not مجلس شورای اسلامی. Start titles with ✴, body paragraphs with 🔸. One or two paragraphs per news item. Short and concise. Important: the news source is mentioned in the raw text - only include it if the source says interview/conversation. If the source is just reporting news, do not mention the source name.";
 
   for (let modelIndex = 0; modelIndex < AI_MODELS.length; modelIndex++) {
     const model = AI_MODELS[modelIndex];
@@ -431,8 +431,8 @@ async function callOpenRouter(prompt, apiKey) {
         { role: "system", content: systemMsg },
         { role: "user", content: prompt }
       ],
-      temperature: 0.3,
-      max_tokens: 6000,
+      temperature: 0.1,
+      max_tokens: 12000,
       response_format: { type: "json_object" },
     });
 
@@ -608,69 +608,303 @@ async function sendToTelegram(message, imageUrl, botToken, chatId) {
 // ==========================================
 // پارس JSON ایمن
 // ==========================================
-function safeParseJson(aiText) {
-  // حذف متن فکر کردن (think tags)
-  let t = aiText;
-  t = t.replace(/<think>[\s\S]*?<\/think>/gi, "");
-  t = t.replace(/```json/gi, "").replace(/```/g, "").trim();
+// ==========================================
+// JSON parser (improved)
+// ==========================================
+function safeParseJson(rawText) {
+  if (!rawText || rawText.trim().length === 0) return [];
+
+  var t = rawText;
+  // Remove think tags and code fences
+  t = t.replace(/<think>[\\s\\S]*?<\/think>/gi, "");
+  t = t.replace(/```json/gi, "").replace(/```/g, "");
+  // Remove common thinking patterns from Nemotron
+  t = t.replace(/We need to[\s\S]*?(?=\{)/gi, "");
+  t = t.replace(/Let me[\s\S]*?(?=\{)/gi, "");
+  t = t.replace(/I need to[\s\S]*?(?=\{)/gi, "");
+  t = t.replace(/We must[\s\S]*?(?=\{)/gi, "");
+  t = t.replace(/The rules[\s\S]*?(?=\{)/gi, "");
+  t = t.replace(/First,[\s\S]*?(?=\{)/gi, "");
+  // Remove carriage returns and control chars
   t = t.replace(/\r/g, "");
 
-  // پیدا کردن آخرین JSON معتبر
-  // اول {news: [...]} را جستجو کن
-  let match = t.match(/\{\s*"news"\s*:\s*\[[\s\S]*?\]\s*\}/);
-  if (match) {
-    try {
-      const parsed = JSON.parse(match[0]);
-      if (parsed && Array.isArray(parsed.news)) return parsed.news;
-    } catch (e) {}
-  }
-
-  // اگر پیدا نشد، از اولین { تا آخرین } را امتحان کن
-  const firstBrace = t.indexOf("{");
-  const lastBrace = t.lastIndexOf("}");
-  if (firstBrace !== -1 && lastBrace > firstBrace) {
-    let jsonStr = t.substring(firstBrace, lastBrace + 1);
-    // حذف کاراکترهای غیر JSON
-    jsonStr = jsonStr.replace(/[\u0000-\u001f]/g, " ");
-    // جایگزینی newline داخل رشته‌ها
-    let result = "";
-    let inStr = false;
-    for (let ci = 0; ci < jsonStr.length; ci++) {
-      const ch = jsonStr[ci];
-      if (ch === '"' && (ci === 0 || jsonStr[ci - 1] !== "\\")) {
-        inStr = !inStr;
-      }
-      result += ch;
+  // Strategy 1: Find {"news":[...]} using bracket counting
+  var newsIdx = t.indexOf("\"news\"" );
+  if (newsIdx === -1) newsIdx = t.indexOf("\"news\":");
+  if (newsIdx === -1) newsIdx = t.indexOf("\"news\":");
+  if (newsIdx === -1) {
+    // Try without escaped quotes
+    var alt = t.indexOf("news");
+    if (alt !== -1) {
+      var before = t.substring(Math.max(0, alt - 5), alt);
+      if (before.indexOf("{") !== -1) newsIdx = alt;
     }
+  }
+
+  if (newsIdx !== -1) {
+    var bracketStart = t.indexOf("[", newsIdx);
+    if (bracketStart !== -1) {
+      var depth2 = 0;
+      var bracketEnd = -1;
+      var inStr2 = false;
+      var esc2 = false;
+      for (var ii = bracketStart; ii < t.length; ii++) {
+        var cc = t[ii];
+        if (esc2) { esc2 = false; continue; }
+        if (cc === "\\") { esc2 = true; continue; }
+        if (cc === "\"") { inStr2 = !inStr2; continue; }
+        if (inStr2) continue;
+        if (cc === "[") depth2++;
+        if (cc === "]") { depth2--; if (depth2 === 0) { bracketEnd = ii; break; } }
+      }
+      if (bracketEnd !== -1) {
+        var braceBefore = t.lastIndexOf("{", newsIdx);
+        if (braceBefore !== -1) {
+          var candidate = t.substring(braceBefore, bracketEnd + 1);
+          try {
+            var obj = JSON.parse(candidate);
+            if (obj && Array.isArray(obj.news)) {
+              console.log("  \u2705 news array parsed");
+              return obj.news;
+            }
+          } catch (e) { /* try next */ }
+        }
+      }
+    }
+  }
+
+  // Strategy 2: Find all { and }, try matching pairs from the end
+  var openList = [];
+  var closeList = [];
+  var inS3 = false;
+  var esc3 = false;
+  for (var p = 0; p < t.length; p++) {
+    var ch2 = t[p];
+    if (esc3) { esc3 = false; continue; }
+    if (ch2 === "\\") { esc3 = true; continue; }
+    if (ch2 === "\"") { inS3 = !inS3; continue; }
+    if (inS3) continue;
+    if (ch2 === "{") openList.push(p);
+    if (ch2 === "}") closeList.push(p);
+  }
+  for (var q = openList.length - 1; q >= 0; q--) {
+    var oPos = openList[q];
+    var cPos = -1;
+    for (var r = 0; r < closeList.length; r++) {
+      if (closeList[r] > oPos) { cPos = closeList[r]; break; }
+    }
+    if (cPos === -1) continue;
     try {
-      const parsed = JSON.parse(result);
-      if (parsed && Array.isArray(parsed.news)) return parsed.news;
-      if (Array.isArray(parsed)) return parsed;
+      var obj2 = JSON.parse(t.substring(oPos, cPos + 1));
+      if (obj2 && Array.isArray(obj2.news)) {
+        console.log("  \u2705 news from matched braces");
+        return obj2.news;
+      }
+      if (Array.isArray(obj2)) return obj2;
+    } catch (e) { /* next */ }
+  }
+
+  // Strategy 3: first { to last }
+  var fi = t.indexOf("{");
+  var li = t.lastIndexOf("}");
+  if (fi !== -1 && li > fi) {
+    try {
+      var obj3 = JSON.parse(t.substring(fi, li + 1));
+      if (obj3 && Array.isArray(obj3.news)) return obj3.news;
+      if (Array.isArray(obj3)) return obj3;
     } catch (e) {}
   }
 
-  // تلاش آخر: پیدا کردن اولین آرایه
-  const firstArr = t.indexOf("[");
-  if (firstArr !== -1) {
-    let arrStr = t.substring(firstArr);
-    // پیدا کردن آخرین ]
-    const lastBracket = arrStr.lastIndexOf("]");
-    if (lastBracket > 0) {
-      arrStr = arrStr.substring(0, lastBracket + 1);
+  // Strategy 4: first [ to last ]
+  var fArr = t.indexOf("[");
+  if (fArr !== -1) {
+    var sub = t.substring(fArr);
+    var lb = sub.lastIndexOf("]");
+    if (lb > 0) {
       try {
-        const parsed = JSON.parse(arrStr);
-        if (Array.isArray(parsed)) return parsed;
+        var arr = JSON.parse(sub.substring(0, lb + 1));
+        if (Array.isArray(arr)) return arr;
       } catch (e) {}
     }
   }
 
-  console.log("  ❌ توانایی پارس JSON وجود ندارد");
-  console.log("  متن دریافتی:", aiText.substring(0, 300));
+  console.log("  \u274c Could not parse JSON");
+  console.log("  raw:", rawText.substring(0, 500));
   return [];
 }
 
+
 // ==========================================
-// تابع اصلی
+// JSON parser (v3)
+// ==========================================
+function safeParseJson(rawText) {
+  if (!rawText || rawText.trim().length === 0) return [];
+  var raw = rawText;
+
+  // Remove think tags
+  var t = raw.replace(/<think>[\s\S]*?<\/think>/gi, "");
+  t = t.replace(/```json/gi, "").replace(/```/g, "");
+
+  // Find all { and } positions (outside strings)
+  var opens = [];
+  var closes = [];
+  var inStr = false;
+  var esc = false;
+  for (var i = 0; i < t.length; i++) {
+    var ch = t.charAt(i);
+    if (esc) { esc = false; continue; }
+    if (ch === "\\") { esc = true; continue; }
+    if (ch === "\"") { inStr = !inStr; continue; }
+    if (inStr) continue;
+    if (ch === "{") opens.push(i);
+    if (ch === "}") closes.push(i);
+  }
+
+  // Try each pair from the end
+  for (var idx = opens.length - 1; idx >= 0; idx--) {
+    var o = opens[idx];
+    var matchingC = -1;
+    for (var c2 = 0; c2 < closes.length; c2++) {
+      if (closes[c2] > o) { matchingC = closes[c2]; break; }
+    }
+    if (matchingC === -1) continue;
+    var candidate = t.substring(o, matchingC + 1);
+    try {
+      var obj = JSON.parse(candidate);
+      if (obj && Array.isArray(obj.news)) {
+        console.log("  \u2705 JSON parsed OK (news array, pos " + o + ")");
+        return obj.news;
+      }
+    } catch (e) {
+      // Try cleaning control chars
+      var cleaned = candidate.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, " ");
+      try {
+        var obj2 = JSON.parse(cleaned);
+        if (obj2 && Array.isArray(obj2.news)) {
+          console.log("  \u2705 JSON parsed OK (cleaned, pos " + o + ")");
+          return obj2.news;
+        }
+      } catch (e2) {}
+    }
+  }
+
+  console.log("  \u274c Could not parse JSON from " + raw.length + " chars");
+  console.log("  First 300:", raw.substring(0, 300));
+  console.log("  Last 300:", raw.substring(Math.max(0, raw.length - 300)));
+  return [];
+}
+
+
+// ==========================================
+// JSON parser (v3 - handles thinking text)
+// ==========================================
+function safeParseJson(rawText) {
+  if (!rawText || rawText.trim().length === 0) return [];
+  var raw = rawText;
+
+  // Step 1: Strip thinking text. The model often writes analysis before JSON.
+  // Find the ACTUAL JSON start: first {"news" or first { before "news"
+  var t = raw;
+  t = t.replace(/<think>[\s\S]*?<\/think>/gi, "");
+  t = t.replace(/```json/gi, "").replace(/```/g, "");
+
+  // Find where the real JSON object starts
+  var newsPattern = t.indexOf("\"news\"");
+  if (newsPattern === -1) newsPattern = t.indexOf("news");
+  if (newsPattern !== -1) {
+    // Find the { that opens the object containing "news"
+    var jsonStart = t.lastIndexOf("{", newsPattern);
+    if (jsonStart !== -1 && jsonStart < newsPattern) {
+      // Strip everything before this {
+      t = t.substring(jsonStart);
+    }
+  }
+
+  // Step 2: Now parse the JSON using bracket counting
+  var opens = [];
+  var closes = [];
+  var inStr = false;
+  var esc = false;
+  for (var i = 0; i < t.length; i++) {
+    var ch = t.charAt(i);
+    if (esc) { esc = false; continue; }
+    if (ch === "\\") { esc = true; continue; }
+    if (ch === "\"") { inStr = !inStr; continue; }
+    if (inStr) continue;
+    if (ch === "{") opens.push(i);
+    if (ch === "}") closes.push(i);
+  }
+
+  // Try from the first { (should be the root object now)
+  if (opens.length > 0) {
+    var rootOpen = opens[0];
+    var rootClose = -1;
+    for (var j = 0; j < closes.length; j++) {
+      if (closes[j] > rootOpen) {
+        // Check if this closes the root by counting
+        var depth = 0;
+        var inS = false;
+        var es = false;
+        for (var k = rootOpen; k <= closes[j]; k++) {
+          var c2 = t.charAt(k);
+          if (es) { es = false; continue; }
+          if (c2 === "\\") { es = true; continue; }
+          if (c2 === "\"") { inS = !inS; continue; }
+          if (inS) continue;
+          if (c2 === "{") depth++;
+          if (c2 === "}") depth--;
+        }
+        if (depth === 0) { rootClose = closes[j]; break; }
+      }
+    }
+    if (rootClose !== -1) {
+      var candidate = t.substring(rootOpen, rootClose + 1);
+      try {
+        var obj = JSON.parse(candidate);
+        if (obj && Array.isArray(obj.news)) {
+          console.log("  \u2705 JSON OK (" + obj.news.length + " news, " + candidate.length + " chars)");
+          return obj.news;
+        }
+      } catch (e) {
+        // Try cleaning control chars
+        var cleaned = candidate.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, " ");
+        try {
+          var obj2 = JSON.parse(cleaned);
+          if (obj2 && Array.isArray(obj2.news)) {
+            console.log("  \u2705 JSON OK (cleaned, " + obj2.news.length + " news)");
+            return obj2.news;
+          }
+        } catch (e2) {}
+      }
+    }
+  }
+
+  // Fallback: try each { from the end
+  for (var m = opens.length - 1; m >= 0; m--) {
+    var o2 = opens[m];
+    var mc = -1;
+    for (var n = 0; n < closes.length; n++) {
+      if (closes[n] > o2) { mc = closes[n]; break; }
+    }
+    if (mc === -1) continue;
+    try {
+      var obj3 = JSON.parse(t.substring(o2, mc + 1));
+      if (obj3 && Array.isArray(obj3.news)) {
+        console.log("  \u2705 JSON from fallback (pos " + o2 + ")");
+        return obj3.news;
+      }
+      if (Array.isArray(obj3)) return obj3;
+    } catch (e) {}
+  }
+
+  console.log("  \u274c JSON parse failed (" + raw.length + " chars)");
+  console.log("  First 300:", raw.substring(0, 300));
+  console.log("  Last 300:", raw.substring(Math.max(0, raw.length - 300)));
+  return [];
+}
+
+
+// ==========================================// تابع اصلی
 // ==========================================
 async function main() {
   try {
@@ -757,7 +991,7 @@ async function main() {
       return 0;
     });
     let rssIndex = 0;
-    const MAX_RSS = 6; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
+    const MAX_RSS = 5; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
     for (const rss of sortedRss) {
       if (rss.description && rss.description.length > 50 && rssIndex < MAX_RSS) {
         // اگر لینک دارد، متن کامل را از وب‌سایت بخوان
