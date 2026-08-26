@@ -443,7 +443,7 @@ async function callOpenRouter(prompt, apiKey) {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + apiKey,
           }),
-          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 120000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 60000))
         ]);
         const data = JSON.parse(response);
         if (data.error) {

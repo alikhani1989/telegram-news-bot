@@ -8,7 +8,7 @@ on:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 8
     steps:
       - name: دریافت کد
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
             bot-state-
 
       - name: اجرای ربات
-        run: timeout 600 node index.js || true
+        run: timeout 420 node index.js || true
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
