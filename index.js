@@ -415,7 +415,7 @@ async function callGroq(prompt) {
 // ==========================================
 const AI_MODELS = [
   'nvidia/nemotron-3-super-120b-a12b:free',
-  'nvidia/nemotron-3.5-lightning:free',
+  'poolside/laguna-s-2.1:free',
 ];
 
 async function callOpenRouter(prompt, apiKey) {
