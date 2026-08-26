@@ -401,7 +401,7 @@ async function callGroq(prompt) {
   });
   const response = await Promise.race([
     httpPost(url, payload, { "Content-Type": "application/json", "Authorization": "Bearer " + GROQ_API_KEY }),
-    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 180000))
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 240000))
   ]);
   const data = JSON.parse(response);
   if (data.error) throw new Error("Groq Error: " + JSON.stringify(data.error));
@@ -414,8 +414,14 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
+  // اولویت اول: poolside (کار می‌کنه)
   'poolside/laguna-s-2.1:free',
+  // اولویت دوم: مدل‌های NVIDIA (اگر poolside خطا داد)
   'nvidia/nemotron-3-super-120b-a12b:free',
+  'nvidia/nemotron-3.5-lightning:free',
+  // اولویت سوم: مدل‌های دیگر
+  'google/gemma-4-31b-it:free',
+  'minimax/minimax-m3:free',
 ];
 
 async function callOpenRouter(prompt, apiKey) {
@@ -436,7 +442,7 @@ async function callOpenRouter(prompt, apiKey) {
       response_format: { type: "json_object" },
     });
 
-    for (let attempt = 1; attempt <= 2; attempt++) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
       try {
         const response = await Promise.race([
           httpPost(url, payload, {
