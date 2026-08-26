@@ -413,61 +413,59 @@ async function callGroq(prompt) {
 // ==========================================
 // OpenRouter API
 // ==========================================
+const AI_MODELS = [
+  'z-ai/glm-5.2:free',
+  'minimax/minimax-m3:free',
+  'google/gemma-4-31b-it:free',
+  'nvidia/nemotron-3.5-lightning:free',
+];
+
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  const payload = JSON.stringify({
-    model: "poolside/laguna-s-2.1:free",
-    messages: [
-      {
-        role: "system",
-        content: "IMPORTANT: Do NOT think out loud. Do NOT write analysis. ONLY output the final JSON object. No explanation, no thinking, no analysis. Just the JSON. You are a Persian news editor. CRITICAL RULES: 1) Copy person names and titles EXACTLY from the source text. Never guess or invent names. 2) In Persian text, ALWAYS write مجلس (not مجلس شورای اسلامی). Only use مجلس شورای اسلامی at the very first mention, then just مجلس. OUTPUT ONLY VALID JSON."
-      },
-      { role: "user", content: prompt }
-    ],
-    temperature: 0.3,
-    max_tokens: 6000,
-    response_format: { type: "json_object" },
-  });
+  const systemMsg = "IMPORTANT: Do NOT think out loud. Do NOT write analysis. ONLY output the final JSON object. No explanation, no thinking, no analysis. Just the JSON. You are a Persian news editor. CRITICAL RULES: 1) Copy person names and titles EXACTLY from the source text. Never guess or invent names. 2) In Persian text, ALWAYS write مجلس (not مجلس شورای اسلامی). Only use مجلس شورای اسلامی at the very first mention, then just مجلس. OUTPUT ONLY VALID JSON.";
 
-  let lastError = null;
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const response = await Promise.race([
-        httpPost(url, payload, {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + apiKey,
-        }),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 120000))
-      ]);
-      const data = JSON.parse(response);
-      if (data.error) {
-        lastError = new Error("OpenRouter API Error: " + JSON.stringify(data.error));
-        if (attempt < 3) {
-          console.log("  ⏳ تلاش " + attempt + " ناموفق، 60 ثانیه صبر...");
-          await new Promise(r => setTimeout(r, 60000));
-          continue;
+  for (let modelIndex = 0; modelIndex < AI_MODELS.length; modelIndex++) {
+    const model = AI_MODELS[modelIndex];
+    console.log("  🤖 تلاش با مدل: " + model);
+    const payload = JSON.stringify({
+      model: model,
+      messages: [
+        { role: "system", content: systemMsg },
+        { role: "user", content: prompt }
+      ],
+      temperature: 0.3,
+      max_tokens: 6000,
+      response_format: { type: "json_object" },
+    });
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const response = await Promise.race([
+          httpPost(url, payload, {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + apiKey,
+          }),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 120000))
+        ]);
+        const data = JSON.parse(response);
+        if (data.error) {
+          console.log("  ⚠️ خطا از " + model + ": " + (data.error.message || JSON.stringify(data.error)));
+          break;
         }
-        throw lastError;
-      }
-      const content = data.choices[0].message.content;
-      if (!content || content.trim().length === 0) {
-        console.log("  ⚠️ پاسخ خالی از مدل (تلاش " + attempt + ")");
-        if (attempt < 3) {
-          await new Promise(r => setTimeout(r, 60000));
-          continue;
+        const content = data.choices[0].message.content;
+        if (!content || content.trim().length === 0) {
+          console.log("  ⚠️ پاسخ خالی از " + model);
+          break;
         }
-        throw new Error("مدل پاسخ خالی برگرداند.");
-      }
-      return content;
-    } catch (e) {
-      lastError = e;
-      if (attempt < 3) {
-        console.log("  ⏳ تلاش " + attempt + " ناموفق، 60 ثانیه صبر...");
-        await new Promise(r => setTimeout(r, 60000));
+        console.log("  ✅ مدل " + model + " پاسخ داد");
+        return content;
+      } catch (e) {
+        console.log("  ⚠️ خطا: " + e.message);
+        if (attempt < 2) await new Promise(r => setTimeout(r, 5000));
       }
     }
   }
-  throw lastError;
+  throw new Error("همه مدل‌ها ناموفق بودند.");
 }
 
 // ==========================================
