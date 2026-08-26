@@ -420,7 +420,7 @@ const AI_MODELS = [
 
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  const systemMsg = "You are a JSON-only bot. NEVER write analysis, thinking, or reasoning. NEVER explain your work. ONLY output a raw JSON object. Zero text before or after. Just { \"news\": [...] }. Copy names EXACTLY from source. Use مجلس not مجلس شورای اسلامی. Start titles with ✴, body paragraphs with 🔸. One or two paragraphs per news item. Short and concise. Important: the news source is mentioned in the raw text - only include it if the source says interview/conversation. If the source is just reporting news, do not mention the source name.";
+  const systemMsg = "CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Body of each news MUST be SHORT - maximum 2 short sentences, max 150 characters per paragraph. 5) Copy names EXACTLY from source. 6) Use مجلس not مجلس شورای اسلامی. 7) Only mention source if text says interview/conversation. If text says report/visit/visit, do NOT mention source name. 8) Start titles with ✴, body paragraphs with 🔸. Just output { \"news\": [...] }";
 
   for (let modelIndex = 0; modelIndex < AI_MODELS.length; modelIndex++) {
     const model = AI_MODELS[modelIndex];
@@ -472,90 +472,51 @@ async function callOpenRouter(prompt, apiKey) {
 function buildPrompt(recentMessages, recentTitlesPrompt) {
   let p = [];
 
-  p.push("شما سردبیر اخبار تلگرامی هستید. اخبار خام زیر را به خلاصه‌های حرفه‌ای تبدیل کنید.");
+  p.push("شما سردبیر اخبار تلگرامی هستید. خبر خام را به خلاصه‌ای کوتاه و حرفه‌ای تبدیل کنید.");
   p.push("");
   p.push("=== قوانین کلی ===");
   p.push("- مجلس شورای اسلامی → فقط مجلس");
   p.push("- نام افراد را عیناً از متن کپی کنید. هرگز حدس نزنید.");
-  p.push("- سمّت افراد را دقیقاً از متن استخراج کنید (عضو کمیسیون، نماینده مجلس، نایب رئیس و...)");
+  p.push("- سمّت افراد را دقیقاً از متن استخراج کنید");
   p.push("");
-
   p.push("=== اهمیت اخبار ===");
-  p.push("⚠️ اخبار مهم مجلس عبارتند از:");
-  p.push("- تکذیب یا تایید اخبار مهم توسط مقامات مجلس");
-  p.push("- موضع‌گیری رئیس مجلس، نایب رئیس، سخنگو درباره مسائل مهم");
-  p.push("- تصمیمات کلیدی کمیسیون‌ها درباره طرح‌ها و لوایح");
-  p.push("- انتقاد یا حمایت نمایندگان از سیاست‌های دولت");
-  p.push("- اخبار مربوط به استیضاح، تحقیق و تفحص، نظارت");
-  p.push("- اخبار بودجه، برنامه هفتم، و طرح‌های مهم");
-  p.push(" اخبار مهم را حتماً منتشر کنید حتی اگر کوتاه باشند.");
+  p.push("اخبار مهم: تکذیب، موضع‌گیری مقامات ارشد، تصمیمات کلیدی کمیسیون‌ها، انتقاد/حمایت از دولت، استیضاح، بودجه.");
+  p.push("اخبار مهم را حتماً منتشر کنید.");
   p.push("");
-
   p.push("=== قوانین تیتر ===");
-  p.push("- کوتاه، جذاب، رویدادمحور باشد");
-  p.push("- با ✴️ شروع شود");
-  p.push("- بدون نقل قول (قالیباف: ... ننویسید)");
-  p.push("- بدون نام شخص در تیتر");
+  p.push("- کوتاه، رویدادمحور، با ✴️ شروع شود");
+  p.push("- بدون نقل قول و بدون نام شخص");
   p.push("- تیتر باید مفهوم درست خبر را برساند");
   p.push("");
-
   p.push("=== قوانین متن ===");
-  p.push("- ۱ یا ۲ بند کوتاه (بستگی به محتوا دارد)");
+  p.push("- حداکثر ۲ جمله کوتاه. هر بند حداکثر ۱۵۰ کاراکتر.");
   p.push("- هر بند با 🔸 و یک فاصله شروع شود");
-  p.push("  مثال:\n🔸 نکته اول خبر\n\n🔸 نکته دوم خبر");
-  p.push("- حتماً نام + سمّت دقیق شخص در خط اول متن باشد");
-  p.push("- حوزه انتخابیه نیاید. فقط بنویسید «نماینده مجلس» نه «نماینده مردم بوشهر و...»");
-  p.push("- سمّت: کمیسیون، هیأت رئیسه و... بیاید ولی تکرار نشود (عضو کمیسیون X مجلس → عضو کمیسیون X)");
-  p.push("- نکته اصلی خبر را با جزئیات بیان کنید (اعداد، شروط، ارقام مهم)");
+  p.push("- خط اول: نام + سمّت دقیق شخص");
+  p.push("- حوزه انتخابیه نیاید (فقط «نماینده مجلس»)");
+  p.push("- سمّت تکرار نشود (عضو کمیسیون X مجلس → عضو کمیسیون X)");
+  p.push("- فقط نکته اصلی خبر. از جزئیات غیرضروری صرف‌نظر کنید.");
   p.push("");
-
   p.push("=== قوانین ذکر منبع ===");
-  p.push("⚠️ خیلی مهم: فقط وقتی کلمه «مصاحبه» یا «گفتگو» را استفاده کنید که در متن اصلی دقیقاً همین کلمات آمده باشد.");
-  p.push("- اگر متن اصلی نوشته «فلانی در مصاحبه با خبرگزاری X گفت»: بنویسید «فلانی در مصاحبه با خبرگزاری X گفت»");
-  p.push("- اگر متن اصلی نوشته «فلانی در گفتگو با خبرنگار X گفت»: بنویسید «فلانی در گفتگو با خبرنگار X گفت»");
-  p.push("- اگر خبر فقط گزارش فعالیت است (بازدید، نشست، ارائه گزارش): اصلاً کلمه مصاحبه نیاورید");
-  p.push("  مثال صحیح: جعفر پورکبگانی عضو کمیسیون قضایی در گفتگو با خبرنگار خانه ملت گفت که...");
-  p.push("  مثال غلط: جعفر پورکبگانی در مصاحبه با خانه ملت گفت که...");
-  p.push("  مثال غلط‌تر: جعفر پورکبگانی در مصاحبه با خانه ملت از پروژه‌ها بازدید کرد... (این مصاحبه نیست!)");
+  p.push("- فقط وقتی «مصاحبه» یا «گفتگو» بیاید که متن اصلی دقیقاً همین را نوشته باشد.");
+  p.push("- اگر رسانه فقط خبر را نقل کرده (گزارش، بازدید، نشست)، منبع نیاورید.");
   p.push("");
-
   p.push("=== جلوگیری از تکرار ===");
-  p.push("- عناوین اخیر در انتهای ورودی فقط برای تشخیص اخبار تکراری هستند");
+  p.push("- عناوین اخیر فقط برای تشخیص تکراری هستند.");
   p.push("");
-
   p.push("=== فرمت خروجی ===");
-  p.push("فقط یک JSON Object معتبر برگردانید. هیچ متن خارج از JSON تولید نکنید.");
-  p.push('خروجی: {"news":[{"title":"✴️ تیتر","body":"🔸 بند اول\\n\\n🔸 بند دوم","source_link":"لینک منبع","image_url":"لینک تصویر یا خالی"}]}');
+  p.push('فقط JSON Object. هیچ متن خارج از JSON تولید نکنید.');
+  p.push('{"news":[{"title":"✴️ تیتر","body":"🔸 جمله اول.\\n\\n🔸 جمله دوم.","source_link":"لینک","image_url":"لینک یا خالی"]}');
   p.push("");
-
-  p.push("=== نمونه‌ها ===");
+  p.push("=== نمونه ===");
   p.push("");
-  p.push("نمونه ۱ (با ذکر منبع - مصاحبه اختصاصی):");
-  p.push('تیتر: ✴️ در آستانه توافق');
-  p.push('🔸 فداحسین مالکی عضو کمیسیون امنیت ملی و سیاست خارجی مجلس در مصاحبه با خبرگزاری دانشجو گفت که ایران و عمان بر روی مسیر پیشنهادی ایران تمرکز کرده‌اند و مذاکرات در آستانه نهایی‌شدن قرار دارد.');
+  p.push("تیتر: ✴️ در آستانه توافق");
+  p.push("🔸 فداحسین مالکی عضو کمیسیون امنیت ملی مجلس در مصاحبه با خبرگزاری دانشجو گفت ایران و عمان بر مسیر پیشنهادی ایران تمرکز کرده‌اند.");
   p.push("");
-  p.push('🔸 مالکی گفته که اگر این توافق تحقق پیدا کند، کنترل تنگه هرمز کماکان در اختیار ایران خواهد بود.');
+  p.push("🔸 مالکی گفته در صورت تحقق توافق، کنترل تنگه هرمز کماکان در اختیار ایران خواهد بود.");
   p.push("");
-
-  p.push("نمونه ۲ (بدون ذکر منبع - نقل قول):");
-  p.push('تیتر: ✴️ بنزین گران نخواهد شد');
-  p.push('🔸 علی نیکزاد نایب‌رئیس مجلس در پاسخ به تذکری درباره افزایش قیمت بنزین گفت که روز گذشته جلسه‌ای با پورمحمدی، رئیس سازمان برنامه و بودجه، داشتیم.');
+  p.push("تیتر: ✴️ بنزین گران نخواهد شد");
+  p.push("🔸 علی نیکزاد نایب‌رئیس مجلس گفت افزایش قیمت بنزین منتفی است و جابه‌جایی سهمیه انجام می‌شود.");
   p.push("");
-  p.push('🔸 طبق توضیحات رئیس سازمان برنامه و بودجه، افزایش قیمت بنزین منتفی است و جابه‌جایی سهمیه انجام خواهد شد.');
-  p.push("");
-
-  p.push("نمونه ۳ (بدون ذکر منبع - پست شخصی):");
-  p.push('تیتر: ✴️ ترتیبات ایرانی؛ تنها راه عبور از تنگه هرمز');
-  p.push('🔸 حسن قشقاوی سخنگوی کمیسیون امنیت ملی و سیاست خارجی مجلس در صفحه شخصی خود نوشته که در رسانه‌ها از تشدید تنش سخن می‌گویند، در حالیکه از طریق کانال‌های موجود، خواهان مذاکره هستند.');
-  p.push("");
-  p.push('🔸 آن‌ها نمی‌توانند جمهوری اسلامی ایران را فریب دهند. ترتیبات ایرانی برای عبور از تنگه هرمز تنها گزینه روی میز است.');
-  p.push("");
-
-  p.push("نمونه ۴ (محتوای کوتاه - ۱ بند):");
-  p.push('تیتر: ✴️ ممنوعیت واردات لوازم خانگی در آستانه لغو');
-  p.push('🔸 حاکم ممکان، عضو کمیسیون اقتصادی در مصاحبه با ایسنا گفت که اگر مشخص شود واردات قطعات از مسیرهای غیررسمی انجام نمی‌شود، احتمال لغو ممنوعیت واردات وجود دارد.');
-  p.push("");
-
   p.push("========================");
   p.push("اخبار خام");
   p.push("========================");
@@ -610,193 +571,6 @@ async function sendToTelegram(message, imageUrl, botToken, chatId) {
 // ==========================================
 // ==========================================
 // JSON parser (improved)
-// ==========================================
-function safeParseJson(rawText) {
-  if (!rawText || rawText.trim().length === 0) return [];
-
-  var t = rawText;
-  // Remove think tags and code fences
-  t = t.replace(/<think>[\\s\\S]*?<\/think>/gi, "");
-  t = t.replace(/```json/gi, "").replace(/```/g, "");
-  // Remove common thinking patterns from Nemotron
-  t = t.replace(/We need to[\s\S]*?(?=\{)/gi, "");
-  t = t.replace(/Let me[\s\S]*?(?=\{)/gi, "");
-  t = t.replace(/I need to[\s\S]*?(?=\{)/gi, "");
-  t = t.replace(/We must[\s\S]*?(?=\{)/gi, "");
-  t = t.replace(/The rules[\s\S]*?(?=\{)/gi, "");
-  t = t.replace(/First,[\s\S]*?(?=\{)/gi, "");
-  // Remove carriage returns and control chars
-  t = t.replace(/\r/g, "");
-
-  // Strategy 1: Find {"news":[...]} using bracket counting
-  var newsIdx = t.indexOf("\"news\"" );
-  if (newsIdx === -1) newsIdx = t.indexOf("\"news\":");
-  if (newsIdx === -1) newsIdx = t.indexOf("\"news\":");
-  if (newsIdx === -1) {
-    // Try without escaped quotes
-    var alt = t.indexOf("news");
-    if (alt !== -1) {
-      var before = t.substring(Math.max(0, alt - 5), alt);
-      if (before.indexOf("{") !== -1) newsIdx = alt;
-    }
-  }
-
-  if (newsIdx !== -1) {
-    var bracketStart = t.indexOf("[", newsIdx);
-    if (bracketStart !== -1) {
-      var depth2 = 0;
-      var bracketEnd = -1;
-      var inStr2 = false;
-      var esc2 = false;
-      for (var ii = bracketStart; ii < t.length; ii++) {
-        var cc = t[ii];
-        if (esc2) { esc2 = false; continue; }
-        if (cc === "\\") { esc2 = true; continue; }
-        if (cc === "\"") { inStr2 = !inStr2; continue; }
-        if (inStr2) continue;
-        if (cc === "[") depth2++;
-        if (cc === "]") { depth2--; if (depth2 === 0) { bracketEnd = ii; break; } }
-      }
-      if (bracketEnd !== -1) {
-        var braceBefore = t.lastIndexOf("{", newsIdx);
-        if (braceBefore !== -1) {
-          var candidate = t.substring(braceBefore, bracketEnd + 1);
-          try {
-            var obj = JSON.parse(candidate);
-            if (obj && Array.isArray(obj.news)) {
-              console.log("  \u2705 news array parsed");
-              return obj.news;
-            }
-          } catch (e) { /* try next */ }
-        }
-      }
-    }
-  }
-
-  // Strategy 2: Find all { and }, try matching pairs from the end
-  var openList = [];
-  var closeList = [];
-  var inS3 = false;
-  var esc3 = false;
-  for (var p = 0; p < t.length; p++) {
-    var ch2 = t[p];
-    if (esc3) { esc3 = false; continue; }
-    if (ch2 === "\\") { esc3 = true; continue; }
-    if (ch2 === "\"") { inS3 = !inS3; continue; }
-    if (inS3) continue;
-    if (ch2 === "{") openList.push(p);
-    if (ch2 === "}") closeList.push(p);
-  }
-  for (var q = openList.length - 1; q >= 0; q--) {
-    var oPos = openList[q];
-    var cPos = -1;
-    for (var r = 0; r < closeList.length; r++) {
-      if (closeList[r] > oPos) { cPos = closeList[r]; break; }
-    }
-    if (cPos === -1) continue;
-    try {
-      var obj2 = JSON.parse(t.substring(oPos, cPos + 1));
-      if (obj2 && Array.isArray(obj2.news)) {
-        console.log("  \u2705 news from matched braces");
-        return obj2.news;
-      }
-      if (Array.isArray(obj2)) return obj2;
-    } catch (e) { /* next */ }
-  }
-
-  // Strategy 3: first { to last }
-  var fi = t.indexOf("{");
-  var li = t.lastIndexOf("}");
-  if (fi !== -1 && li > fi) {
-    try {
-      var obj3 = JSON.parse(t.substring(fi, li + 1));
-      if (obj3 && Array.isArray(obj3.news)) return obj3.news;
-      if (Array.isArray(obj3)) return obj3;
-    } catch (e) {}
-  }
-
-  // Strategy 4: first [ to last ]
-  var fArr = t.indexOf("[");
-  if (fArr !== -1) {
-    var sub = t.substring(fArr);
-    var lb = sub.lastIndexOf("]");
-    if (lb > 0) {
-      try {
-        var arr = JSON.parse(sub.substring(0, lb + 1));
-        if (Array.isArray(arr)) return arr;
-      } catch (e) {}
-    }
-  }
-
-  console.log("  \u274c Could not parse JSON");
-  console.log("  raw:", rawText.substring(0, 500));
-  return [];
-}
-
-
-// ==========================================
-// JSON parser (v3)
-// ==========================================
-function safeParseJson(rawText) {
-  if (!rawText || rawText.trim().length === 0) return [];
-  var raw = rawText;
-
-  // Remove think tags
-  var t = raw.replace(/<think>[\s\S]*?<\/think>/gi, "");
-  t = t.replace(/```json/gi, "").replace(/```/g, "");
-
-  // Find all { and } positions (outside strings)
-  var opens = [];
-  var closes = [];
-  var inStr = false;
-  var esc = false;
-  for (var i = 0; i < t.length; i++) {
-    var ch = t.charAt(i);
-    if (esc) { esc = false; continue; }
-    if (ch === "\\") { esc = true; continue; }
-    if (ch === "\"") { inStr = !inStr; continue; }
-    if (inStr) continue;
-    if (ch === "{") opens.push(i);
-    if (ch === "}") closes.push(i);
-  }
-
-  // Try each pair from the end
-  for (var idx = opens.length - 1; idx >= 0; idx--) {
-    var o = opens[idx];
-    var matchingC = -1;
-    for (var c2 = 0; c2 < closes.length; c2++) {
-      if (closes[c2] > o) { matchingC = closes[c2]; break; }
-    }
-    if (matchingC === -1) continue;
-    var candidate = t.substring(o, matchingC + 1);
-    try {
-      var obj = JSON.parse(candidate);
-      if (obj && Array.isArray(obj.news)) {
-        console.log("  \u2705 JSON parsed OK (news array, pos " + o + ")");
-        return obj.news;
-      }
-    } catch (e) {
-      // Try cleaning control chars
-      var cleaned = candidate.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, " ");
-      try {
-        var obj2 = JSON.parse(cleaned);
-        if (obj2 && Array.isArray(obj2.news)) {
-          console.log("  \u2705 JSON parsed OK (cleaned, pos " + o + ")");
-          return obj2.news;
-        }
-      } catch (e2) {}
-    }
-  }
-
-  console.log("  \u274c Could not parse JSON from " + raw.length + " chars");
-  console.log("  First 300:", raw.substring(0, 300));
-  console.log("  Last 300:", raw.substring(Math.max(0, raw.length - 300)));
-  return [];
-}
-
-
-// ==========================================
-// JSON parser (v3 - handles thinking text)
 // ==========================================
 function safeParseJson(rawText) {
   if (!rawText || rawText.trim().length === 0) return [];
