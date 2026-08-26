@@ -414,10 +414,8 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
-  'z-ai/glm-5.2:free',
-  'minimax/minimax-m3:free',
-  'google/gemma-4-31b-it:free',
   'nvidia/nemotron-3.5-lightning:free',
+  'nvidia/nemotron-3-super-120b-a12b:free',
 ];
 
 async function callOpenRouter(prompt, apiKey) {
