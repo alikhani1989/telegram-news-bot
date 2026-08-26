@@ -401,7 +401,7 @@ async function callGroq(prompt) {
   });
   const response = await Promise.race([
     httpPost(url, payload, { "Content-Type": "application/json", "Authorization": "Bearer " + GROQ_API_KEY }),
-    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 60000))
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 180000))
   ]);
   const data = JSON.parse(response);
   if (data.error) throw new Error("Groq Error: " + JSON.stringify(data.error));
@@ -414,8 +414,8 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
-  'nvidia/nemotron-3.5-lightning:free',
   'nvidia/nemotron-3-super-120b-a12b:free',
+  'nvidia/nemotron-3.5-lightning:free',
 ];
 
 async function callOpenRouter(prompt, apiKey) {
@@ -443,7 +443,7 @@ async function callOpenRouter(prompt, apiKey) {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + apiKey,
           }),
-          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 60000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 180000))
         ]);
         const data = JSON.parse(response);
         if (data.error) {
