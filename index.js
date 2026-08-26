@@ -414,13 +414,13 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
-  'nvidia/nemotron-3-super-120b-a12b:free',
   'poolside/laguna-s-2.1:free',
+  'nvidia/nemotron-3-super-120b-a12b:free',
 ];
 
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  const systemMsg = "CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Body of each news MUST be SHORT - maximum 2 short sentences, max 150 characters per paragraph. 5) Copy names EXACTLY from source. 6) Use مجلس not مجلس شورای اسلامی. 7) Only mention source if text says interview/conversation. If text says report/visit/visit, do NOT mention source name. 8) Start titles with ✴, body paragraphs with 🔸. Just output { \"news\": [...] }";
+  const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Copy names EXACTLY from source. 5) Use مجلس not مجلس شورای اسلامی. 6) Start titles with ✴, body paragraphs with 🔸. 7) Body should be 1-2 short paragraphs. Just output { \"news\": [...] }";
 
   for (let modelIndex = 0; modelIndex < AI_MODELS.length; modelIndex++) {
     const model = AI_MODELS[modelIndex];
@@ -472,7 +472,7 @@ async function callOpenRouter(prompt, apiKey) {
 function buildPrompt(recentMessages, recentTitlesPrompt) {
   let p = [];
 
-  p.push("شما سردبیر اخبار تلگرامی هستید. خبر خام را به خلاصه‌ای کوتاه و حرفه‌ای تبدیل کنید.");
+  p.push("شما سردبیر اخبار تلگرامی هستید. اخبار خام زیر را به خلاصه‌های حرفه‌ای تبدیل کنید.");
   p.push("");
   p.push("=== قوانین کلی ===");
   p.push("- مجلس شورای اسلامی → فقط مجلس");
@@ -489,12 +489,12 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("- تیتر باید مفهوم درست خبر را برساند");
   p.push("");
   p.push("=== قوانین متن ===");
-  p.push("- حداکثر ۲ جمله کوتاه. هر بند حداکثر ۱۵۰ کاراکتر.");
+  p.push("- ۱ یا ۲ بند کوتاه (بستگی به محتوا دارد)");
   p.push("- هر بند با 🔸 و یک فاصله شروع شود");
   p.push("- خط اول: نام + سمّت دقیق شخص");
   p.push("- حوزه انتخابیه نیاید (فقط «نماینده مجلس»)");
   p.push("- سمّت تکرار نشود (عضو کمیسیون X مجلس → عضو کمیسیون X)");
-  p.push("- فقط نکته اصلی خبر. از جزئیات غیرضروری صرف‌نظر کنید.");
+  p.push("- نکته اصلی خبر را با جزئیات بیان کنید (اعداد، شروط، ارقام مهم)");
   p.push("");
   p.push("=== قوانین ذکر منبع ===");
   p.push("- فقط وقتی «مصاحبه» یا «گفتگو» بیاید که متن اصلی دقیقاً همین را نوشته باشد.");
@@ -821,26 +821,39 @@ async function main() {
     if (newsArray === null) { console.log("❌ خطا در پارس JSON"); return; }
     if (newsArray.length === 0) { console.log("📭 خبری تولید نشد."); return; }
 
-    // بازیابی عکس
+    // بازیابی عکس - اولویت: OG تصویر مقاله > عکس تلگرام
     for (let i = 0; i < newsArray.length; i++) {
       const item = newsArray[i];
       const originalMsg = newMessages[i];
-      if (!item.image_url || !item.image_url.startsWith("http") || item.image_url.includes("telesco.pe")) {
-        if (item.source_link && item.source_link.startsWith("http")) {
-          console.log("  🔍 دریافت عکس از:", item.source_link.substring(0, 50));
-          const ogImage = await fetchOgImage(item.source_link);
-          if (ogImage && ogImage.startsWith("http")) {
-            item.image_url = ogImage;
-            console.log("  📷 عکس اصلی پیدا شد");
-          }
+      
+      // ۱. اگر عکس از AI اومده و معتبره، استفاده کن
+      let hasValidImage = item.image_url && item.image_url.startsWith("http") && !item.image_url.includes("telesco.pe") && item.image_url.length > 20;
+      
+      // ۲. اگر عکس معتبر نیست، از OG تصویر مقاله استفاده کن
+      if (!hasValidImage && item.source_link && item.source_link.startsWith("http")) {
+        console.log("  🔍 دریافت عکس OG از مقاله:", item.source_link.substring(0, 50));
+        const ogImage = await fetchOgImage(item.source_link);
+        if (ogImage && ogImage.startsWith("http") && ogImage.length > 20 && !ogImage.includes("telesco.pe")) {
+          item.image_url = ogImage;
+          hasValidImage = true;
+          console.log("  📷 عکس OG مقاله پیدا شد");
         }
       }
-      if ((!item.image_url || !item.image_url.startsWith("http")) && originalMsg && originalMsg.imageUrl) {
-        item.image_url = originalMsg.imageUrl;
-        console.log("  📷 عکس از تلگرام");
+      
+      // ۳. اگر هنوز عکس نداریم، از تلگرام استفاده کن (فقط اگر cdn باشد)
+      if (!hasValidImage && originalMsg && originalMsg.imageUrl) {
+        const tgImg = originalMsg.imageUrl;
+        // فقط عکس‌های cdn قابل اعتماد هستند (نه عکس کاربر)
+        if (tgImg.startsWith("http") && (tgImg.includes("cdn") || tgImg.includes("t.me"))) {
+          item.image_url = tgImg;
+          hasValidImage = true;
+          console.log("  📷 عکس از تلگرام (CDN):", tgImg.substring(0, 50));
+        } else {
+          console.log("  ⛔ عکس تلگرام رد شد (cdn نیست):", tgImg.substring(0, 50));
+          item.image_url = "";
+        }
       }
     }
-
     // بررسی تکرار
     const uniqueNews = [];
     for (const item of newsArray) {
