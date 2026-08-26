@@ -723,8 +723,8 @@ async function main() {
     }
 
     if (!foundLast || newMessages.length === 0) {
-      newMessages = messages.slice(-5);
-    } else if (newMessages.length > 5) {
+      newMessages = messages.slice(-3);
+    } else if (newMessages.length > 3) {
       newMessages = newMessages.slice(0, 5);
     }
 
@@ -771,7 +771,7 @@ async function main() {
       return 0;
     });
     let rssIndex = 0;
-    const MAX_RSS = 5; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
+    const MAX_RSS = 3; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
     for (const rss of sortedRss) {
       if (rss.description && rss.description.length > 50 && rssIndex < MAX_RSS) {
         // اگر لینک دارد، متن کامل را از وب‌سایت بخوان
