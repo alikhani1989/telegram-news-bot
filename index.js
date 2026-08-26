@@ -609,90 +609,64 @@ async function sendToTelegram(message, imageUrl, botToken, chatId) {
 // پارس JSON ایمن
 // ==========================================
 function safeParseJson(aiText) {
-  // حذف متن فکر کردن
+  // حذف متن فکر کردن (think tags)
   let t = aiText;
-  const thinkStart = t.indexOf("\u003Cthink\u003E");
-  const thinkEnd = t.indexOf("\u003C/think\u003E");
-  if (thinkStart !== -1 && thinkEnd !== -1) {
-    t = t.substring(0, thinkStart) + t.substring(thinkEnd + 8);
-  }
-  t = t.trim();
-
-  // حذف markdown code block
+  t = t.replace(/<think>[\s\S]*?<\/think>/gi, "");
   t = t.replace(/```json/gi, "").replace(/```/g, "").trim();
-
-  // حذف کاراکترهای مشکل‌ساز
   t = t.replace(/\r/g, "");
-  t = t.replace(/\u200C/g, " ").replace(/\u200D/g, " ");
-  t = t.replace(/\u200E/g, " ").replace(/\u200F/g, " ");
 
-  // پیدا کردن اولین { یا [
-  const jsonStart = t.indexOf("{");
-  const arrayStart = t.indexOf("[");
-  const firstJson = (jsonStart !== -1 && (arrayStart === -1 || jsonStart < arrayStart)) ? jsonStart : arrayStart;
-  if (firstJson > 0) t = t.substring(firstJson);
-
-  // جایگزینی newline داخل رشته‌ها
-  let result = "";
-  let inStr = false;
-  for (let ci = 0; ci < t.length; ci++) {
-    const ch = t[ci];
-    if (ch === '"' && (ci === 0 || t[ci - 1] !== "\\")) {
-      inStr = !inStr;
-      result += ch;
-    } else if (inStr && ch === "\n") {
-      result += "\\n";
-    } else if (inStr && ch === "\t") {
-      result += "\\t";
-    } else {
-      result += ch;
-    }
-  }
-  t = result;
-
-  // تلاش اول
-  try {
-    let parsedObj;
-    const firstArr = t.indexOf("[");
-    const firstObj = t.indexOf("{");
-    const isArray = firstArr !== -1 && (firstObj === -1 || firstArr < firstObj);
-    let jsonStr = isArray ? t.substring(firstArr) : t.substring(firstObj);
-    const closer = isArray ? "]" : "}";
-    if (!jsonStr.endsWith(closer)) {
-      const lastComplete = jsonStr.lastIndexOf("},");
-      if (lastComplete > 0) {
-        jsonStr = jsonStr.substring(0, lastComplete + 1) + closer;
-      } else {
-        jsonStr = jsonStr.replace(/:[ ]*"[^"]*$/, "").replace(/,[ ]*"[^"]*$/, "");
-        jsonStr += closer;
-      }
-    }
-    parsedObj = JSON.parse(jsonStr);
-    if (Array.isArray(parsedObj)) return parsedObj;
-    if (parsedObj && Array.isArray(parsedObj.news)) return parsedObj.news;
-    return [];
-  } catch (e1) {
-    // تلاش دوم
+  // پیدا کردن آخرین JSON معتبر
+  // اول {news: [...]} را جستجو کن
+  let match = t.match(/\{\s*"news"\s*:\s*\[[\s\S]*?\]\s*\}/);
+  if (match) {
     try {
-      let repaired = t.replace(/[\u0000-\u001f]/g, " ").replace(/\s+/g, " ");
-      const firstArr2 = repaired.indexOf("[");
-      const firstObj2 = repaired.indexOf("{");
-      const isArray2 = firstArr2 !== -1 && (firstObj2 === -1 || firstArr2 < firstObj2);
-      let jsonStr2 = isArray2 ? repaired.substring(firstArr2) : repaired.substring(firstObj2);
-      const lastComplete2 = jsonStr2.lastIndexOf("},");
-      if (lastComplete2 > 0) {
-        jsonStr2 = jsonStr2.substring(0, lastComplete2 + 1) + (isArray2 ? "]" : "}");
+      const parsed = JSON.parse(match[0]);
+      if (parsed && Array.isArray(parsed.news)) return parsed.news;
+    } catch (e) {}
+  }
+
+  // اگر پیدا نشد، از اولین { تا آخرین } را امتحان کن
+  const firstBrace = t.indexOf("{");
+  const lastBrace = t.lastIndexOf("}");
+  if (firstBrace !== -1 && lastBrace > firstBrace) {
+    let jsonStr = t.substring(firstBrace, lastBrace + 1);
+    // حذف کاراکترهای غیر JSON
+    jsonStr = jsonStr.replace(/[\u0000-\u001f]/g, " ");
+    // جایگزینی newline داخل رشته‌ها
+    let result = "";
+    let inStr = false;
+    for (let ci = 0; ci < jsonStr.length; ci++) {
+      const ch = jsonStr[ci];
+      if (ch === '"' && (ci === 0 || jsonStr[ci - 1] !== "\\")) {
+        inStr = !inStr;
       }
-      const parsed2 = JSON.parse(jsonStr2);
-      if (Array.isArray(parsed2)) return parsed2;
-      if (parsed2 && Array.isArray(parsed2.news)) return parsed2.news;
-      return [];
-    } catch (e2) {
-      console.log("  ❌ تعمیر JSON ناموفق:", e2.message);
-      console.log("  متن:", aiText.substring(0, 200));
-      return null;
+      result += ch;
+    }
+    try {
+      const parsed = JSON.parse(result);
+      if (parsed && Array.isArray(parsed.news)) return parsed.news;
+      if (Array.isArray(parsed)) return parsed;
+    } catch (e) {}
+  }
+
+  // تلاش آخر: پیدا کردن اولین آرایه
+  const firstArr = t.indexOf("[");
+  if (firstArr !== -1) {
+    let arrStr = t.substring(firstArr);
+    // پیدا کردن آخرین ]
+    const lastBracket = arrStr.lastIndexOf("]");
+    if (lastBracket > 0) {
+      arrStr = arrStr.substring(0, lastBracket + 1);
+      try {
+        const parsed = JSON.parse(arrStr);
+        if (Array.isArray(parsed)) return parsed;
+      } catch (e) {}
     }
   }
+
+  console.log("  ❌ توانایی پارس JSON وجود ندارد");
+  console.log("  متن دریافتی:", aiText.substring(0, 300));
+  return [];
 }
 
 // ==========================================
