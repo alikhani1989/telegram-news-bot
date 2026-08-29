@@ -454,11 +454,13 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
-  // اولویت اول: Nemotron (توکن بیشتر، خروجی کامل‌تر)
+  // اولویت اول: Nemotron Ultra (بهترین کیفیت رایگان، 1M context)
+  'nvidia/nemotron-3-ultra-550b-a55b:free',
+  // اولویت دوم: Nemotron Super (اگر ultra خطا داد)
   'nvidia/nemotron-3-super-120b-a12b:free',
-  // اولویت دوم: poolside (اگر nemotron خطا داد)
+  // اولویت سوم: poolside (اگر nemotron خطا داد)
   'poolside/laguna-s-2.1:free',
-  // اولویت سوم: مدل‌های دیگر
+  // اولویت چهارم: مدل‌های دیگر
   'nvidia/nemotron-3.5-lightning:free',
   'google/gemma-4-31b-it:free',
 ];
