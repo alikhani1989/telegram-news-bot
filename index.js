@@ -454,14 +454,13 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
-  // اولویت اول: poolside (کار می‌کنه)
-  'poolside/laguna-s-2.1:free',
-  // اولویت دوم: مدل‌های NVIDIA (اگر poolside خطا داد)
+  // اولویت اول: Nemotron (توکن بیشتر، خروجی کامل‌تر)
   'nvidia/nemotron-3-super-120b-a12b:free',
-  'nvidia/nemotron-3.5-lightning:free',
+  // اولویت دوم: poolside (اگر nemotron خطا داد)
+  'poolside/laguna-s-2.1:free',
   // اولویت سوم: مدل‌های دیگر
+  'nvidia/nemotron-3.5-lightning:free',
   'google/gemma-4-31b-it:free',
-  'minimax/minimax-m3:free',
 ];
 
 async function callOpenRouter(prompt, apiKey) {
@@ -478,7 +477,7 @@ async function callOpenRouter(prompt, apiKey) {
         { role: "user", content: prompt }
       ],
       temperature: 0.1,
-      max_tokens: 12000,
+      max_tokens: 16000,
       response_format: { type: "json_object" },
     });
 
@@ -530,15 +529,19 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("اخبار مهم را حتماً منتشر کنید.");
   p.push("");
   p.push("=== قوانین تیتر (خیلی مهم) ===");
-  p.push("- کوتاه، رویدادمحور، با ✴️ شروع شود");
-  p.push("- تیتر باید مفهوم درست خبر را برساند");
+  p.push("- حداکثر ۸ کلمه، رویدادمحور، با ✴️ شروع شود");
+  p.push("- تیتر باید مفهوم اصلی خبر را برساند");
+  p.push("- هرگز نام شخص در تیتر نیاید!");
   p.push("- هرگز تیتر را به صورت نقل قول ننویسید!");
+  p.push("- تیتر باید مثل تیتر روزنامه باشد: کوتاه، جذاب، گویا");
   p.push("");
   p.push("تیتر درست: ✴️ پایان جنگ علیه لبنان ضروری است");
   p.push("تیتر درست: ✴️ بنزین گران نخواهد شد");
   p.push("تیتر درست: ✴️ در آستانه توافق");
+  p.push("تیتر درست: ✴️ فضاسازی ترامپ نباید محاسبات کشور را تحت تأثیر قرار دهد");
   p.push("تیتر غلط: ❌ عراقچی: پایان جنگ علیه لبنان ضروری است");
   p.push("تیتر غلط: ❌ نیکزاد گفت: بنزین گران نمی‌شود");
+  p.push("تیتر غلط: ❌ عضو کمیسیون امنیت ملی مجلس ترامپ را متهم به جنجال‌آفرینی کرد");
   p.push("");
   p.push("=== قوانین متن (خیلی مهم) ===");
   p.push("- ۱ یا ۲ بند کوتاه (بستگی به محتوا دارد)");
@@ -548,6 +551,7 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("- حوزه انتخابیه نیاید (فقط «نماینده مجلس»)");
   p.push("- سمّت تکرار نشود (عضو کمیسیون X مجلس → عضو کمیسیون X)");
   p.push("- نکته اصلی خبر را با جزئیات بیان کنید (اعداد، شروط، ارقام مهم)");
+  p.push("- حداکثر طول هر پاراگراف متن: ۲ جمله کوتاه");
   p.push("");
   p.push("متن درست:");
   p.push("🔸 فداحسین مالکی عضو کمیسیون امنیت ملی مجلس در مصاحبه با خبرگزاری دانشجو گفت ایران و عمان بر مسیر پیشنهادی ایران تمرکز کرده‌اند.");
@@ -645,6 +649,9 @@ function safeParseJson(rawText) {
   // Step 1: Strip thinking text. The model often writes analysis before JSON.
   // Find the ACTUAL JSON start: first {"news" or first { before "news"
   var t = raw;
+  // Clean invalid Unicode characters (replacement chars, control chars)
+  t = t.replace(/\uFFFD/g, "");
+  t = t.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, " ");
   t = t.replace(/<think>[\s\S]*?<\/think>/gi, "");
   t = t.replace(/```json/gi, "").replace(/```/g, "");
 
@@ -784,7 +791,7 @@ async function main() {
 
     if (!foundLast || newMessages.length === 0) {
       newMessages = messages.slice(-3);
-    } else if (newMessages.length > 3) {
+    } else if (newMessages.length > 2) {
       newMessages = newMessages.slice(0, 5);
     }
 
@@ -831,7 +838,7 @@ async function main() {
       return 0;
     });
     let rssIndex = 0;
-    const MAX_RSS = 3; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
+    const MAX_RSS = 2; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
     for (const rss of sortedRss) {
       if (rss.description && rss.description.length > 50 && rssIndex < MAX_RSS) {
         // اگر لینک دارد، متن کامل را از وب‌سایت بخوان
@@ -891,33 +898,44 @@ async function main() {
     for (let i = 0; i < newsArray.length; i++) {
       const item = newsArray[i];
       const originalMsg = newMessages[i];
+      let hasValidImage = false;
       
-      // ۱. اگر عکس از AI اومده و معتبره، استفاده کن
-      let hasValidImage = item.image_url && item.image_url.startsWith("http") && !item.image_url.includes("telesco.pe") && item.image_url.length > 20;
-      
-      // ۲. اگر عکس معتبر نیست، از OG تصویر مقاله استفاده کن
-      if (!hasValidImage && item.source_link && item.source_link.startsWith("http")) {
-        console.log("  🔍 دریافت عکس OG از مقاله:", item.source_link.substring(0, 50));
+      // ۱. اول همیشه OG تصویر مقاله رو بگیر (قابل اعتمادترین)
+      if (item.source_link && item.source_link.startsWith("http")) {
+        console.log("  🔍 دریافت عکس OG از مقاله:", item.source_link.substring(0, 60));
         const ogImage = await fetchOgImage(item.source_link);
         if (ogImage && ogImage.startsWith("http") && ogImage.length > 20 && !ogImage.includes("telesco.pe")) {
           item.image_url = ogImage;
           hasValidImage = true;
-          console.log("  📷 عکس OG مقاله پیدا شد");
+          console.log("  📷 عکس OG مقاله پیدا شد:", ogImage.substring(0, 60));
+        } else {
+          console.log("  ⛔ عکس OG پیدا نشد");
         }
       }
       
-      // ۳. اگر هنوز عکس نداریم، از تلگرام استفاده کن (فقط اگر cdn باشد)
+      // ۲. اگر OG پیدا نشد، از عکس AI استفاده کن (فقط اگر معتبر باشد)
+      if (!hasValidImage && item.image_url && item.image_url.startsWith("http") && !item.image_url.includes("telesco.pe") && item.image_url.length > 20) {
+        hasValidImage = true;
+        console.log("  📷 عکس از AI:", item.image_url.substring(0, 60));
+      }
+      
+      // ۳. اگر هنوز عکس نداریم، از تلگرام استفاده کن (فقط CDN)
       if (!hasValidImage && originalMsg && originalMsg.imageUrl) {
         const tgImg = originalMsg.imageUrl;
-        // فقط عکس‌های cdn قابل اعتماد هستند (نه عکس کاربر)
         if (tgImg.startsWith("http") && (tgImg.includes("cdn") || tgImg.includes("t.me"))) {
           item.image_url = tgImg;
           hasValidImage = true;
-          console.log("  📷 عکس از تلگرام (CDN):", tgImg.substring(0, 50));
+          console.log("  📷 عکس از تلگرام (CDN):", tgImg.substring(0, 60));
         } else {
-          console.log("  ⛔ عکس تلگرام رد شد (cdn نیست):", tgImg.substring(0, 50));
+          console.log("  ⛔ عکس تلگرام رد شد (cdn نیست):", tgImg.substring(0, 60));
           item.image_url = "";
         }
+      }
+      
+      // ۴. اگر اصلاً عکسی نیست
+      if (!hasValidImage) {
+        item.image_url = "";
+        console.log("  ⛔ عکسی پیدا نشد");
       }
     }
     // بررسی تکرار
