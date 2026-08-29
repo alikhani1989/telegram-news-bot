@@ -465,7 +465,7 @@ const AI_MODELS = [
 
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Copy names EXACTLY from source. 5) Use مجلس not مجلس شورای اسلامی. 6) Start titles with ✴, body paragraphs with 🔸. 7) Body should be 1-2 short paragraphs. Just output { \"news\": [...] }";
+  const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Copy names EXACTLY from source. 5) Use مجلس not مجلس شورای اسلامی. 6) Start titles with ✴, body paragraphs with 🔸. 7) Body should be 1-2 short paragraphs. 8) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 9) Avoid sensational, absurd, or offensive comparisons in titles. Titles should be professional and journalistic. Just output { \"news\": [...] }";
 
   for (let modelIndex = 0; modelIndex < AI_MODELS.length; modelIndex++) {
     const model = AI_MODELS[modelIndex];
@@ -534,14 +534,18 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("- هرگز نام شخص در تیتر نیاید!");
   p.push("- هرگز تیتر را به صورت نقل قول ننویسید!");
   p.push("- تیتر باید مثل تیتر روزنامه باشد: کوتاه، جذاب، گویا");
+  p.push("- از مقایسه‌های نامتعارف و حساسیت‌برانگیز خودداری کنید");
+  p.push("- تیتر باید حرفه‌ای و خبری باشد، نه جنجالی یا توهین‌آمیز");
   p.push("");
   p.push("تیتر درست: ✴️ پایان جنگ علیه لبنان ضروری است");
   p.push("تیتر درست: ✴️ بنزین گران نخواهد شد");
   p.push("تیتر درست: ✴️ در آستانه توافق");
   p.push("تیتر درست: ✴️ فضاسازی ترامپ نباید محاسبات کشور را تحت تأثیر قرار دهد");
+  p.push("تیتر درست: ✴️ گزارش انتقادی از عملکرد دولت در حوزه سلامت");
   p.push("تیتر غلط: ❌ عراقچی: پایان جنگ علیه لبنان ضروری است");
   p.push("تیتر غلط: ❌ نیکزاد گفت: بنزین گران نمی‌شود");
   p.push("تیتر غلط: ❌ عضو کمیسیون امنیت ملی مجلس ترامپ را متهم به جنجال‌آفرینی کرد");
+  p.push("تیتر غلط: ❌ مقایسه پوشک با خون رهبر");
   p.push("");
   p.push("=== قوانین متن (خیلی مهم) ===");
   p.push("- ۱ یا ۲ بند کوتاه (بستگی به محتوا دارد)");
@@ -897,14 +901,38 @@ async function main() {
     // بازیابی عکس - اولویت: OG تصویر مقاله > عکس تلگرام
     for (let i = 0; i < newsArray.length; i++) {
       const item = newsArray[i];
-      const originalMsg = newMessages[i];
+      // پیدا کردن newMessage مربوطه بر اساس source_link
+      let originalMsg = null;
+      if (item.source_link) {
+        for (const m of newMessages) {
+          if (m.newsLink && m.newsLink.split('?')[0].split('#')[0] === item.source_link.split('?')[0].split('#')[0]) {
+            originalMsg = m;
+            break;
+          }
+        }
+      }
+      // اگر پیدا نشد، از RSS استفاده کن
+      if (!originalMsg) {
+        for (const m of newMessages) {
+          if (m.newsLink && item.source_link && m.newsLink === item.source_link) {
+            originalMsg = m;
+            break;
+          }
+        }
+      }
       let hasValidImage = false;
       
       // ۱. اول همیشه OG تصویر مقاله رو بگیر (قابل اعتمادترین)
       if (item.source_link && item.source_link.startsWith("http")) {
         console.log("  🔍 دریافت عکس OG از مقاله:", item.source_link.substring(0, 60));
         const ogImage = await fetchOgImage(item.source_link);
-        if (ogImage && ogImage.startsWith("http") && ogImage.length > 20 && !ogImage.includes("telesco.pe")) {
+        // فیلتر عکس‌های پیش‌فرض صحن مجلس و عکس‌های غیرمرتبط
+        const isDefaultImg = ogImage && (
+          ogImage.includes('default') || ogImage.includes('placeholder') ||
+          ogImage.includes('logo') || ogImage.includes('banner') ||
+          ogImage.includes('site-logo') || ogImage.includes('header')
+        );
+        if (ogImage && ogImage.startsWith("http") && ogImage.length > 20 && !ogImage.includes("telesco.pe") && !isDefaultImg) {
           item.image_url = ogImage;
           hasValidImage = true;
           console.log("  📷 عکس OG مقاله پیدا شد:", ogImage.substring(0, 60));
@@ -922,7 +950,10 @@ async function main() {
       // ۳. اگر هنوز عکس نداریم، از تلگرام استفاده کن (فقط CDN)
       if (!hasValidImage && originalMsg && originalMsg.imageUrl) {
         const tgImg = originalMsg.imageUrl;
-        if (tgImg.startsWith("http") && (tgImg.includes("cdn") || tgImg.includes("t.me"))) {
+        // فیلتر عکس‌های پیش‌فرض صحن مجلس
+        const isParliamentDefault = tgImg.includes('parliament') || tgImg.includes('majlis') ||
+          tgImg.includes('default') || tgImg.includes('placeholder');
+        if (tgImg.startsWith("http") && (tgImg.includes("cdn") || tgImg.includes("t.me")) && !isParliamentDefault) {
           item.image_url = tgImg;
           hasValidImage = true;
           console.log("  📷 عکس از تلگرام (CDN):", tgImg.substring(0, 60));
@@ -979,6 +1010,10 @@ async function main() {
       // حذف تکرار مجلس: عضو کمیسیون X مجلس → عضو کمیسیون X
       item.body = item.body.replace(/مجلس مجلس/g, 'مجلس');
 
+      // پاکسازی کاراکترهای انگلیسی ناخواسته از انتهای متن
+      item.body = item.body.replace(/\s*[A-Za-z]{3,}\s*$/g, '').trim();
+      item.title = item.title.replace(/\s*[A-Za-z]{3,}\s*$/g, '').trim();
+      
       let finalMessage = "<b>" + item.title + "</b>\n\n" + item.body + "\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net";
       if (item.source_link && item.source_link.length > 5) {
         finalMessage += '\n\n🔗 <a href="' + item.source_link + '">منبع خبر</a>';
