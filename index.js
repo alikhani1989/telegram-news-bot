@@ -38,6 +38,93 @@ function saveState(state) {
 // جلوگیری از تکرار
 // ==========================================
 const DUPLICATE_WINDOW_MS = 60 * 60 * 1000;
+const QUALITY_LOG_FILE = path.join(__dirname, 'quality-log.json');
+
+// ==========================================
+// سیستم بازخورد و اعتبارسنجی کیفیت
+// ==========================================
+function validateNewsItem(item, originalText) {
+  const issues = [];
+  let score = 100;
+
+  // ۱. بررسی تیتر
+  if (!item.title || item.title.length < 5) {
+    issues.push('تیتر خیلی کوتاه است');
+    score -= 20;
+  }
+  if (item.title && item.title.includes(':') && /^\s*[\u0600-\u06FF]+\s*:/i.test(item.title.replace('✴️', ''))) {
+    issues.push('تیتر به صورت نقل قول است');
+    score -= 15;
+  }
+  if (item.title && item.title.length > 60) {
+    issues.push('تیتر خیلی بلند است (' + item.title.length + ' کاراکتر)');
+    score -= 10;
+  }
+
+  // ۲. بررسی نام و سمّت
+  if (item.body) {
+    const nameMatch = item.body.match(/([\u0600-\u06FF]+\s+[\u0600-\u06FF]+)\s+(عضو|نماینده|رئیس|نایب|سخنگو)/);
+    if (!nameMatch) {
+      issues.push('نام و سمّت شخص در خط اول متن پیدا نشد');
+      score -= 15;
+    }
+    // بررسی مجلس شورای اسلامی
+    if (item.body.includes('مجلس شورای اسلامی')) {
+      issues.push(' مجلس شورای اسلامی باید مجلس باشد');
+      score -= 5;
+    }
+  }
+
+  // ۳. بررسی حجم متن
+  if (item.body && item.body.length < 80) {
+    issues.push('متن خیلی کوتاه است (' + item.body.length + ' کاراکتر)');
+    score -= 20;
+  }
+  if (item.body && item.body.length > 1500) {
+    issues.push('متن خیلی بلند است (' + item.body.length + ' کاراکتر)');
+    score -= 10;
+  }
+
+  // ۴. بررسی عبارات خشک
+  if (item.body && /اظهار کرد|وی افزود|خاطرنشان کرد|تصریح کرد/.test(item.body)) {
+    issues.push('عبارات خشک خبری استفاده شده');
+    score -= 10;
+  }
+
+  // ۵. بررسی منبع
+  if (item.body && item.body.includes('در مصاحبه با') && !item.body.includes('خبرنگار')) {
+    issues.push('منبع مصاحبه بدون نام خبرنگار ذکر شده');
+    score -= 5;
+  }
+
+  // ۶. بررسی حوزه انتخابیه
+  if (item.body && /نماینده مردم [^،]+ در مجلس/.test(item.body)) {
+    issues.push('حوزه انتخابیه آورده شده');
+    score -= 5;
+  }
+
+  // ۷. بررسی «وی»
+  if (item.body && /\bوی\b/.test(item.body)) {
+    issues.push('کلمه «وی» استفاده شده به جای نام');
+    score -= 10;
+  }
+
+  return { score: Math.max(0, score), issues };
+}
+
+function saveQualityReport(report) {
+  let existing = [];
+  try {
+    if (fs.existsSync(QUALITY_LOG_FILE)) {
+      existing = JSON.parse(fs.readFileSync(QUALITY_LOG_FILE, 'utf8'));
+    }
+  } catch (e) {}
+  existing.push(report);
+  // حفظ فقط ۵۰ گزارش اخیر
+  if (existing.length > 50) existing = existing.slice(-50);
+  fs.writeFileSync(QUALITY_LOG_FILE, JSON.stringify(existing, null, 2), 'utf8');
+  console.log('📋 گزارش کیفیت ذخیره شد. نمره: ' + report.avgScore + '/100');
+}
 
 function cleanOldPublished(publishedNews) {
   const now = Date.now();
@@ -904,6 +991,33 @@ async function main() {
     if (newsArray === null) { console.log("❌ خطا در پارس JSON"); return; }
     if (newsArray.length === 0) { console.log("📭 خبری تولید نشد."); return; }
 
+    // اعتبارسنجی کیفیت
+    const qualityReport = {
+      timestamp: new Date().toISOString(),
+      model: AI_MODELS[0],
+      items: [],
+      avgScore: 0
+    };
+    let totalScore = 0;
+    for (const item of newsArray) {
+      const origText = (item.source_link || '');
+      const validation = validateNewsItem(item, origText);
+      qualityReport.items.push({
+        title: (item.title || '').substring(0, 80),
+        score: validation.score,
+        issues: validation.issues
+      });
+      totalScore += validation.score;
+    }
+    qualityReport.avgScore = Math.round(totalScore / newsArray.length);
+    console.log('📊 نمره کیفیت: ' + qualityReport.avgScore + '/100');
+    if (qualityReport.avgScore < 60) {
+      console.log('⚠️ کیفیت پایین! مسائل:');
+      for (const item of qualityReport.items) {
+        if (item.issues.length > 0) console.log('  - ' + item.title + ': ' + item.issues.join(', '));
+      }
+    }
+
     // بازیابی عکس - اولویت: OG تصویر مقاله > عکس تلگرام
     for (let i = 0; i < newsArray.length; i++) {
       const item = newsArray[i];
@@ -1050,6 +1164,10 @@ async function main() {
     state.LAST_PROCESSED_SNIPPET = lastMsg.text.trim().substring(0, 50);
     saveState(state);
 
+    // ذخیره گزارش کیفیت
+    if (typeof qualityReport !== 'undefined' && qualityReport.items.length > 0) {
+      saveQualityReport(qualityReport);
+    }
     console.log("🎉 تمام شد!");
   } catch (error) {
     console.log("❌ خطا:", error.message);
