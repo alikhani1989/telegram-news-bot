@@ -271,15 +271,55 @@ async function fetchRSSNews() {
 // ==========================================
 async function fetchOgImage(url) {
   try {
-    const html = await httpGet(url);
-    const ogMatch = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i);
-    if (ogMatch) return ogMatch[1];
-    const twitterMatch = html.match(/<meta[^>]+name="twitter:image"[^>]+content="([^"]+)"/i);
-    if (twitterMatch) return twitterMatch[1];
+    // اول با Node.js تلاش کن
+    let html = await httpGet(url);
+    let img = extractOgImage(html);
+    if (img) return img;
+    
+    // اگر پیدا نشد، با curl تلاش کن (سایت‌هایی که Node.js رو بلاک می‌کنند)
+    const curlHtml = fetchHtmlWithCurl(url);
+    if (curlHtml) {
+      img = extractOgImage(curlHtml);
+      if (img) return img;
+    }
     return null;
   } catch (err) {
     return null;
   }
+}
+
+function extractOgImage(html) {
+  if (!html) return null;
+  // روش ۱: og:image
+  let m = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i);
+  if (m) return fixUrl(m[1]);
+  // روش ۱ب: content قبل از property
+  m = html.match(/<meta[^>]+content="([^"]+)"[^>]+property="og:image"/i);
+  if (m) return fixUrl(m[1]);
+  // روش ۲: twitter:image
+  m = html.match(/<meta[^>]+name="twitter:image"[^>]+content="([^"]+)"/i);
+  if (m) return fixUrl(m[1]);
+  // روش ۳: twitter:image:src
+  m = html.match(/<meta[^>]+name="twitter:image:src"[^>]+content="([^"]+)"/i);
+  if (m) return fixUrl(m[1]);
+  // روش ۴: schema.org
+  m = html.match(/"image"\s*:\s*"([^"]+)"/i);
+  if (m && m[1].startsWith('http')) return fixUrl(m[1]);
+  return null;
+}
+
+function fixUrl(url) {
+  if (!url) return null;
+  url = url.replace(/&amp;/g, '&').trim();
+  // اگر نسبی باشد
+  if (url.startsWith('//')) return 'https:' + url;
+  if (url.startsWith('/')) {
+    try {
+      const u = new URL(url, 'https://www.icana.ir');
+      return u.href;
+    } catch (e) {}
+  }
+  return url;
 }
 
 // ==========================================
@@ -489,37 +529,58 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("اخبار مهم: تکذیب، موضع‌گیری مقامات ارشد، تصمیمات کلیدی کمیسیون‌ها، انتقاد/حمایت از دولت، استیضاح، بودجه.");
   p.push("اخبار مهم را حتماً منتشر کنید.");
   p.push("");
-  p.push("=== قوانین تیتر ===");
+  p.push("=== قوانین تیتر (خیلی مهم) ===");
   p.push("- کوتاه، رویدادمحور، با ✴️ شروع شود");
-  p.push("- بدون نقل قول و بدون نام شخص");
   p.push("- تیتر باید مفهوم درست خبر را برساند");
+  p.push("- هرگز تیتر را به صورت نقل قول ننویسید!");
   p.push("");
-  p.push("=== قوانین متن ===");
+  p.push("تیتر درست: ✴️ پایان جنگ علیه لبنان ضروری است");
+  p.push("تیتر درست: ✴️ بنزین گران نخواهد شد");
+  p.push("تیتر درست: ✴️ در آستانه توافق");
+  p.push("تیتر غلط: ❌ عراقچی: پایان جنگ علیه لبنان ضروری است");
+  p.push("تیتر غلط: ❌ نیکزاد گفت: بنزین گران نمی‌شود");
+  p.push("");
+  p.push("=== قوانین متن (خیلی مهم) ===");
   p.push("- ۱ یا ۲ بند کوتاه (بستگی به محتوا دارد)");
   p.push("- هر بند با 🔸 و یک فاصله شروع شود");
-  p.push("- خط اول: نام + سمّت دقیق شخص");
+  p.push("- خط اول متن: نام + سمّت دقیق + سپس فعل (گفت/نوشت/تاکید کرد) + محتوا");
+  p.push("- نام و سمّت باید در همان خط اول پاراگراف اول بیاید، نه پاراگراف جداگانه");
   p.push("- حوزه انتخابیه نیاید (فقط «نماینده مجلس»)");
   p.push("- سمّت تکرار نشود (عضو کمیسیون X مجلس → عضو کمیسیون X)");
   p.push("- نکته اصلی خبر را با جزئیات بیان کنید (اعداد، شروط، ارقام مهم)");
   p.push("");
-  p.push("=== قوانین ذکر منبع ===");
-  p.push("- فقط وقتی «مصاحبه» یا «گفتگو» بیاید که متن اصلی دقیقاً همین را نوشته باشد.");
-  p.push("- اگر رسانه فقط خبر را نقل کرده (گزارش، بازدید، نشست)، منبع نیاورید.");
+  p.push("متن درست:");
+  p.push("🔸 فداحسین مالکی عضو کمیسیون امنیت ملی مجلس در مصاحبه با خبرگزاری دانشجو گفت ایران و عمان بر مسیر پیشنهادی ایران تمرکز کرده‌اند.");
+  p.push("");
+  p.push("متن غلط:");
+  p.push("🔸 فداحسین مالکی عضو کمیسیون امنیت ملی مجلس");
+  p.push("🔸 در دیدار با نائب رئیس مجلس...");  
+  p.push("");
+  p.push("=== قوانین ذکر منبع (خیلی مهم) ===");
+  p.push("- اگر متن اصلی نوشته «در گفتگو با خبرنگار خانه ملت» یا «در مصاحبه با خبرگزاری X» → حتماً در متن ذکر کنید");
+  p.push("- اگر رسانه فقط خبر را نقل کرده (گزارش، بازدید، نشست بدون مصاحبه) → منبع نیاورید");
+  p.push("- خانه ملت (ICANA) معمولاً خبرهای اختصاصی دارد → ذکر منبع الزامی است");
   p.push("");
   p.push("=== جلوگیری از تکرار ===");
   p.push("- عناوین اخیر فقط برای تشخیص تکراری هستند.");
   p.push("");
   p.push("=== فرمت خروجی ===");
   p.push('فقط JSON Object. هیچ متن خارج از JSON تولید نکنید.');
-  p.push('{"news":[{"title":"✴️ تیتر","body":"🔸 جمله اول.\\n\\n🔸 جمله دوم.","source_link":"لینک","image_url":"لینک یا خالی"]}');
+  p.push('{"news":[{"title":"✴️ تیتر","body":"🔸 جمله اول.\n\n🔸 جمله دوم.","source_link":"لینک","image_url":"لینک یا خالی"]}');
   p.push("");
-  p.push("=== نمونه ===");
+  p.push("=== نمونه‌های مطلوب ===");
   p.push("");
+  p.push("نمونه ۱ (مصاحبه اختصاصی):");
   p.push("تیتر: ✴️ در آستانه توافق");
   p.push("🔸 فداحسین مالکی عضو کمیسیون امنیت ملی مجلس در مصاحبه با خبرگزاری دانشجو گفت ایران و عمان بر مسیر پیشنهادی ایران تمرکز کرده‌اند.");
   p.push("");
   p.push("🔸 مالکی گفته در صورت تحقق توافق، کنترل تنگه هرمز کماکان در اختیار ایران خواهد بود.");
   p.push("");
+  p.push("نمونه ۲ (مصاحبه اختصاصی خانه ملت):");
+  p.push("تیتر: ✴️ به احترام اربعین سکوت کرده‌ایم");
+  p.push("🔸 علاءالدین بروجردی عضو کمیسیون امنیت ملی مجلس در گفتگو با خبرنگار خانه ملت درباره حمله عربستان به مقاومت عراق گفته ما به احترام ایام اربعین سکوت کرده‌ایم اما پاسخ سخت در راه است.");
+  p.push("");
+  p.push("نمونه ۳ (بدون مصاحبه):");
   p.push("تیتر: ✴️ بنزین گران نخواهد شد");
   p.push("🔸 علی نیکزاد نایب‌رئیس مجلس گفت افزایش قیمت بنزین منتفی است و جابه‌جایی سهمیه انجام می‌شود.");
   p.push("");
@@ -530,7 +591,6 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   if (recentTitlesPrompt) p.push(recentTitlesPrompt);
   return p.join("\n");
 }
-
 // ==========================================
 // ارسال به تلگرام
 // ==========================================
