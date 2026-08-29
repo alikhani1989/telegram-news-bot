@@ -39,6 +39,7 @@ function saveState(state) {
 // ==========================================
 const DUPLICATE_WINDOW_MS = 60 * 60 * 1000;
 const QUALITY_LOG_FILE = path.join(__dirname, 'quality-log.json');
+const REVIEW_LOG_FILE = path.join(__dirname, 'review-log.json');
 
 // ==========================================
 // سیستم بازخورد و اعتبارسنجی کیفیت
@@ -120,10 +121,88 @@ function saveQualityReport(report) {
     }
   } catch (e) {}
   existing.push(report);
-  // حفظ فقط ۵۰ گزارش اخیر
   if (existing.length > 50) existing = existing.slice(-50);
   fs.writeFileSync(QUALITY_LOG_FILE, JSON.stringify(existing, null, 2), 'utf8');
   console.log('📋 گزارش کیفیت ذخیره شد. نمره: ' + report.avgScore + '/100');
+}
+
+// ==========================================
+// بازخوانی بعد از انتشار
+// ==========================================
+async function reviewPublishedNews(chatId, publishedTitles) {
+  console.log('🔍 بازخوانی کانال مقصد...');
+  try {
+    const channelName = chatId.replace('@', '');
+    const channelMessages = await fetchTelegramMessages(channelName);
+    if (!channelMessages || channelMessages.length === 0) {
+      console.log('  ⚠️ پیامی در کانال مقصد پیدا نشد');
+      return null;
+    }
+    console.log('  📨 ' + channelMessages.length + ' پیام در کانال مقصد');
+
+    // پیدا کردن خبرهایی که تازه منتشر شدند
+    const recentPublished = [];
+    for (const msg of channelMessages.slice(0, 10)) {
+      const text = msg.text;
+      if (text.includes('ازما') || text.includes('azmaa_net')) {
+        recentPublished.push({
+          text: text.substring(0, 500),
+          hasImage: !!(msg.imageUrl && msg.imageUrl.length > 10),
+          imageUrl: msg.imageUrl || ''
+        });
+      }
+    }
+
+    if (recentPublished.length === 0) {
+      console.log('  ⚠️ خبری از ما در کانال مقصد پیدا نشد');
+      return null;
+    }
+
+    console.log('  ✅ ' + recentPublished.length + ' خبر منتشر شده پیدا شد');
+
+    // بررسی کیفیت خبرهای منتشر شده
+    const issues = [];
+    for (const pub of recentPublished) {
+      // بررسی آیا عکس داره
+      if (!pub.hasImage) {
+        issues.push('خبر بدون عکس: ' + pub.text.substring(0, 40) + '...');
+      }
+      // بررسی آیا متن انگلیسی داره
+      if (/[A-Za-z]{5,}/.test(pub.text.replace('azmaa_net', '').replace('selectednewsmajlis', ''))) {
+        issues.push('متن انگلیسی در خبر: ' + pub.text.substring(0, 40) + '...');
+      }
+      // بررسی آیا مجلس شورای اسلامی نوشته
+      if (pub.text.includes('مجلس شورای اسلامی')) {
+        issues.push('مجلس شورای اسلامی نوشته شده: ' + pub.text.substring(0, 40) + '...');
+      }
+    }
+
+    return {
+      timestamp: new Date().toISOString(),
+      totalPublished: recentPublished.length,
+      withImage: recentPublished.filter(p => p.hasImage).length,
+      withoutImage: recentPublished.filter(p => !p.hasImage).length,
+      issues: issues,
+      score: Math.max(0, 100 - (issues.length * 15))
+    };
+  } catch (err) {
+    console.log('  ❌ خطا در بازخوانی:', err.message);
+    return null;
+  }
+}
+
+function saveReviewReport(report) {
+  if (!report) return;
+  let existing = [];
+  try {
+    if (fs.existsSync(REVIEW_LOG_FILE)) {
+      existing = JSON.parse(fs.readFileSync(REVIEW_LOG_FILE, 'utf8'));
+    }
+  } catch (e) {}
+  existing.push(report);
+  if (existing.length > 50) existing = existing.slice(-50);
+  fs.writeFileSync(REVIEW_LOG_FILE, JSON.stringify(existing, null, 2), 'utf8');
+  console.log('📋 گزارش بازخوانی ذخیره شد. نمره: ' + report.score + '/100');
 }
 
 function cleanOldPublished(publishedNews) {
@@ -1168,6 +1247,13 @@ async function main() {
     if (typeof qualityReport !== 'undefined' && qualityReport.items.length > 0) {
       saveQualityReport(qualityReport);
     }
+
+    // بازخوانی بعد از انتشار
+    const reviewReport = await reviewPublishedNews(DESTINATION_CHAT_ID, recentTitles);
+    if (reviewReport) {
+      saveReviewReport(reviewReport);
+    }
+
     console.log("🎉 تمام شد!");
   } catch (error) {
     console.log("❌ خطا:", error.message);
