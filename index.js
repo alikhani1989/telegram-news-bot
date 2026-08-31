@@ -205,6 +205,80 @@ function saveReviewReport(report) {
   console.log('📋 گزارش بازخوانی ذخیره شد. نمره: ' + report.score + '/100');
 }
 
+async function sendQualityReportToTelegram(qualityReport, reviewReport, newsCount, botToken, chatId) {
+  try {
+    const now = new Date();
+    const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    const date = now.getFullYear() + '/' + (now.getMonth() + 1).toString().padStart(2, '0') + '/' + now.getDate().toString().padStart(2, '0');
+    
+    let report = '📊 <b>گزارش کیفیت</b>\n';
+    report += '🕐 ' + time + ' | 📅 ' + date + '\n';
+    report += '━━━━━━━━━━━━━━━━━\n\n';
+    
+    // گزارش قبل از انتشار
+    if (qualityReport && qualityReport.items && qualityReport.items.length > 0) {
+      report += '✅ <b>قبل از انتشار:</b> ' + qualityReport.items.length + ' خبر\n';
+      report += '📈 نمره میانگین: <b>' + qualityReport.avgScore + '/100</b>\n';
+      
+      // لیست مشکلات
+      const allIssues = qualityReport.items.flatMap(i => i.issues || []);
+      if (allIssues.length > 0) {
+        report += '⚠️ مشکلات:\n';
+        allIssues.forEach(issue => {
+          report += '  • ' + issue + '\n';
+        });
+      } else {
+        report += '✨ بدون مشکل\n';
+      }
+    } else {
+      report += '✅ <b>قبل از انتشار:</b> خبری تولید نشد\n';
+    }
+    
+    report += '\n';
+    
+    // گزارش بعد از انتشار
+    if (reviewReport) {
+      report += '🔍 <b>بعد از انتشار:</b> ' + reviewReport.totalPublished + ' خبر منتشر شد\n';
+      report += '🖼 عکس‌دار: ' + reviewReport.withImage + ' | بدون عکس: ' + reviewReport.withoutImage + '\n';
+      report += '📈 نمره: <b>' + reviewReport.score + '/100</b>\n';
+      
+      if (reviewReport.issues && reviewReport.issues.length > 0) {
+        report += '⚠️ مشکلات:\n';
+        reviewReport.issues.forEach(issue => {
+          report += '  • ' + issue.substring(0, 80) + '...\n';
+        });
+      }
+    }
+    
+    report += '\n━━━━━━━━━━━━━━━━━\n';
+    report += '🤖 خبرخوان مجلس | @selectednewsmajlis';
+    
+    // ارسال به تلگرام (به صورت پیام خصوصی به خودمان)
+    // از همان چت مقصد استفاده می‌کنیم ولی می‌توانیم چت جداگانه بسازیم
+    const payload = JSON.stringify({
+      chat_id: chatId,
+      text: report,
+      parse_mode: 'HTML',
+      disable_web_page_preview: true
+    });
+    
+    const response = await httpPost(
+      'https://api.telegram.org/bot' + botToken + '/sendMessage',
+      payload,
+      { 'Content-Type': 'application/json' }
+    );
+    
+    const result = JSON.parse(response);
+    if (result.ok) {
+      console.log('📊 گزارش کیفیت ارسال شد');
+    } else {
+      console.log('⚠️ خطا در ارسال گزارش:', result.description);
+    }
+  } catch (err) {
+    console.log('⚠️ خطا در ارسال گزارش:', err.message);
+  }
+}
+
 function cleanOldPublished(publishedNews) {
   const now = Date.now();
   return publishedNews.filter(item => (now - item.timestamp) < DUPLICATE_WINDOW_MS);
@@ -1253,6 +1327,9 @@ async function main() {
     if (reviewReport) {
       saveReviewReport(reviewReport);
     }
+
+    // ارسال گزارش به تلگرام
+    await sendQualityReportToTelegram(qualityReport, reviewReport, newsArray.length, BOT_TOKEN, DESTINATION_CHAT_ID);
 
     console.log("🎉 تمام شد!");
   } catch (error) {
