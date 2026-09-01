@@ -13,6 +13,7 @@ const STATE_FILE = path.join(__dirname, "state.json");
 function loadConfig() {
   const envConfig = {};
   if (process.env.OPENROUTER_API_KEY) envConfig.OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+  if (process.env.GEMINI_API_KEY) envConfig.GEMINI_API_KEY = process.env.GEMINI_API_KEY;
   if (process.env.BOT_TOKEN) envConfig.BOT_TOKEN = process.env.BOT_TOKEN;
   if (process.env.DESTINATION_CHAT_ID) envConfig.DESTINATION_CHAT_ID = process.env.DESTINATION_CHAT_ID;
   if (process.env.SOURCE_CHANNEL_ID) envConfig.SOURCE_CHANNEL_ID = process.env.SOURCE_CHANNEL_ID;
@@ -207,12 +208,14 @@ function saveReviewReport(report) {
 
 async function sendQualityReportToTelegram(qualityReport, reviewReport, newsCount, botToken, chatId) {
   try {
-    const now = new Date();
-    const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-    const date = now.getFullYear() + '/' + (now.getMonth() + 1).toString().padStart(2, '0') + '/' + now.getDate().toString().padStart(2, '0');
+    const time = getTehranTimeStr();
+    const date = getTehranDateStr();
+    const period = isTehranNight() ? '🌙 شب' : '☀️ روز';
+    const interval = isTehranNight() ? 'هر ۱ ساعت' : 'هر ۲ ساعت';
     
     let report = '📊 <b>گزارش کیفیت</b>\n';
-    report += '🕐 ' + time + ' | 📅 ' + date + '\n';
+    report += '🕐 ' + time + ' | 📅 ' + date + ' (' + period + ')\n';
+    report += '⏱️ ' + interval + '\n';
     report += '━━━━━━━━━━━━━━━━━\n\n';
     
     // گزارش قبل از انتشار
@@ -276,6 +279,49 @@ async function sendQualityReportToTelegram(qualityReport, reviewReport, newsCoun
     }
   } catch (err) {
     console.log('⚠️ خطا در ارسال گزارش:', err.message);
+  }
+}
+
+// ==========================================
+// زمان تهران و مدیریت فاصله گزارش
+// ==========================================
+function getTehranDate() {
+  // تبدیل به ساعت تهران (UTC+3:30)
+  const now = new Date();
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  const tehran = new Date(utc + (3.5 * 3600000));
+  return tehran;
+}
+
+function getTehranTimeStr() {
+  const t = getTehranDate();
+  return t.getHours().toString().padStart(2, '0') + ':' + t.getMinutes().toString().padStart(2, '0');
+}
+
+function getTehranDateStr() {
+  const t = getTehranDate();
+  return t.getFullYear() + '/' + (t.getMonth() + 1).toString().padStart(2, '0') + '/' + t.getDate().toString().padStart(2, '0');
+}
+
+function isTehranNight() {
+  // شب: ساعت 20 تا 8 صبح به وقت تهران
+  const hour = getTehranDate().getHours();
+  return hour >= 20 || hour < 8;
+}
+
+function shouldSendReport(state) {
+  const lastReportTime = state.LAST_REPORT_TIME || 0;
+  const now = Date.now();
+  const elapsed = now - lastReportTime;
+  
+  if (isTehranNight()) {
+    // شب: هر 1 ساعت
+    const NIGHT_INTERVAL = 60 * 60 * 1000; // 1 ساعت
+    return elapsed >= NIGHT_INTERVAL;
+  } else {
+    // روز: هر 2 ساعت
+    const DAY_INTERVAL = 2 * 60 * 60 * 1000; // 2 ساعت
+    return elapsed >= DAY_INTERVAL;
   }
 }
 
@@ -696,14 +742,54 @@ async function callGroq(prompt) {
 const AI_MODELS = [
   // اولویت اول: Nemotron Ultra (بهترین کیفیت رایگان، 1M context)
   'nvidia/nemotron-3-ultra-550b-a55b:free',
-  // اولویت دوم: Nemotron Super (اگر ultra خطا داد)
-  'nvidia/nemotron-3-super-120b-a12b:free',
-  // اولویت سوم: poolside (اگر nemotron خطا داد)
-  'poolside/laguna-s-2.1:free',
-  // اولویت چهارم: مدل‌های دیگر
-  'nvidia/nemotron-3.5-lightning:free',
-  'google/gemma-4-31b-it:free',
 ];
+
+
+// ==========================================
+// فراخوانی Gemini (اولویت اول)
+// ==========================================
+async function callGemini(prompt, apiKey) {
+  if (!apiKey) return null;
+  
+  const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
+  const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 8) Avoid sensational comparisons in titles. Just output { \"news\": [...] }";
+  
+  const payload = JSON.stringify({
+    contents: [
+      { role: "user", parts: [{ text: systemMsg + "\n\n" + prompt }] }
+    ],
+    generationConfig: {
+      temperature: 0.1,
+      maxOutputTokens: 16000,
+      responseMimeType: "application/json"
+    }
+  });
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const response = await Promise.race([
+        httpPost(url, payload, { "Content-Type": "application/json" }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 120000))
+      ]);
+      const data = JSON.parse(response);
+      if (data.error) {
+        console.log("  ⚠️ خطا از Gemini: " + (data.error.message || JSON.stringify(data.error)));
+        return null;
+      }
+      const content = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text;
+      if (!content || content.trim().length === 0) {
+        console.log("  ⚠️ پاسخ خالی از Gemini");
+        return null;
+      }
+      console.log("  ✅ مدل Gemini پاسخ داد");
+      return content;
+    } catch (e) {
+      console.log("  ⚠️ خطا Gemini: " + e.message);
+      if (attempt < 3) await new Promise(r => setTimeout(r, 5000));
+    }
+  }
+  return null;
+}
 
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
@@ -1134,7 +1220,12 @@ async function main() {
 
     console.log("🤖 ارسال به هوش مصنوعی...");
     const startTime = Date.now();
-    const aiText = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+        // اول OpenRouter (Nemotron Ultra)، بعد Gemini
+    let aiText = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+    if (!aiText) {
+      console.log("  🔄 OpenRouter ناموفق، تلاش با Gemini...");
+      aiText = await callGemini(prompt, config.GEMINI_API_KEY || "");
+    }
     console.log("⏱️ پاسخ در " + ((Date.now() - startTime) / 1000).toFixed(1) + " ثانیه.");
 
     if (!aiText || aiText.trim().length === 0) { console.log("❌ پاسخ خالی."); return; }
@@ -1328,8 +1419,14 @@ async function main() {
       saveReviewReport(reviewReport);
     }
 
-    // ارسال گزارش به تلگرام
-    await sendQualityReportToTelegram(qualityReport, reviewReport, newsArray.length, BOT_TOKEN, DESTINATION_CHAT_ID);
+    // ارسال گزارش به تلگرام (با رعایت فاصله زمانی)
+    if (shouldSendReport(state)) {
+      await sendQualityReportToTelegram(qualityReport, reviewReport, newsArray.length, BOT_TOKEN, DESTINATION_CHAT_ID);
+      state.LAST_REPORT_TIME = Date.now();
+      console.log('📊 گزارش ارسال شد (' + getTehranTimeStr() + ' به وقت تهران)');
+    } else {
+      console.log('📊 ارسال گزارش رد شد (فاصله زمانی رعایت نشده)');
+    }
 
     console.log("🎉 تمام شد!");
   } catch (error) {
@@ -1343,9 +1440,9 @@ async function main() {
 const INTERVAL_MINUTES = 15;
 
 async function runOnce() {
-  const now = new Date();
-  const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-  console.log('\n🕐 [' + time + '] شروع اجرا...');
+  const time = getTehranTimeStr();
+  const period = isTehranNight() ? '🌙 شب' : '☀️ روز';
+  console.log('\n🕐 [' + time + ' به وقت تهران] شروع اجرا... (' + period + ')');
   await main();
   console.log('⏰ اجرای بعدی: ' + INTERVAL_MINUTES + ' دقیقه دیگر');
 }
