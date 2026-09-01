@@ -791,6 +791,43 @@ async function callGemini(prompt, apiKey) {
   return null;
 }
 
+// ==========================================
+// فراخوانی Gemini از طریق Proxy (Apps Script)
+// ==========================================
+async function callGeminiProxy(prompt, proxyUrl) {
+  if (!proxyUrl) return null;
+  
+  console.log("  🔗 فراخوانی Gemini Proxy...");
+  const payload = JSON.stringify({
+    prompt: prompt,
+    model: "gemini-2.5-flash"
+  });
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const response = await Promise.race([
+        httpPost(proxyUrl, payload, { "Content-Type": "application/json" }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 120000))
+      ]);
+      const data = JSON.parse(response);
+      if (data.error) {
+        console.log("  ⚠️ خطا از Gemini Proxy: " + (data.error || JSON.stringify(data)));
+        return null;
+      }
+      if (data.content) {
+        console.log("  ✅ Gemini Proxy پاسخ داد");
+        return data.content;
+      }
+      console.log("  ⚠️ پاسخ غیرمنتظره از Proxy:", response.substring(0, 200));
+      return null;
+    } catch (e) {
+      console.log("  ⚠️ خطا Gemini Proxy: " + e.message);
+      if (attempt < 3) await new Promise(r => setTimeout(r, 5000));
+    }
+  }
+  return null;
+}
+
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
   const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Copy names EXACTLY from source. 5) Use مجلس not مجلس شورای اسلامی. 6) Start titles with ✴, body paragraphs with 🔸. 7) Body should be 1-2 short paragraphs. 8) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 9) Avoid sensational, absurd, or offensive comparisons in titles. Titles should be professional and journalistic. Just output { \"news\": [...] }";
@@ -836,7 +873,8 @@ async function callOpenRouter(prompt, apiKey) {
       }
     }
   }
-  throw new Error("همه مدل‌ها ناموفق بودند.");
+  console.log("  ❌ همه مدل‌های OpenRouter ناموفق بودند.");
+  return null;
 }
 
 // ==========================================
@@ -1220,11 +1258,55 @@ async function main() {
 
     console.log("🤖 ارسال به هوش مصنوعی...");
     const startTime = Date.now();
-        // اول OpenRouter (Nemotron Ultra)، بعد Gemini
-    let aiText = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+    
+    // بررسی آیا Nemotron تموم شده (از state)
+    let nemotronExhausted = state.NEMOTRON_EXHAUSTED || false;
+    let nemotronExhaustedDate = state.NEMOTRON_EXHAUSTED_DATE || '';
+    const todayTehran = getTehranDate().toISOString().substring(0, 10);
+    
+    // ریست روزانه: اگه روز جدید شده، Nemotron دوباره فعال می‌شه
+    if (nemotronExhausted && nemotronExhaustedDate !== todayTehran) {
+      nemotronExhausted = false;
+      state.NEMOTRON_EXHAUSTED = false;
+      console.log("🌅 روز جدید شد! Nemotron دوباره فعال می‌شه.");
+    }
+    
+    let aiText = null;
+    let usedModel = '';
+    
+    // اگه Nemotron تموم نشده، اول اون رو امتحان کن
+    if (!nemotronExhausted) {
+      console.log("  🥇 تلاش با Nemotron Ultra...");
+      aiText = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+      if (aiText) {
+        usedModel = 'Nemotron Ultra';
+      } else {
+        // Nemotron خطا داد → تموم شد! برای امروز Gemini بزن
+        nemotronExhausted = true;
+        state.NEMOTRON_EXHAUSTED = true;
+        state.NEMOTRON_EXHAUSTED_DATE = todayTehran;
+        console.log("  ⛔ Nemotron تموم شد! از فردا Gemini اولویت می‌شه.");
+      }
+    }
+    
+    // اگه Nemotron کار نکرد یا تموم شده، از Gemini استفاده کن
     if (!aiText) {
-      console.log("  🔄 OpenRouter ناموفق، تلاش با Gemini...");
-      aiText = await callGemini(prompt, config.GEMINI_API_KEY || "");
+      // اول تلاش با Proxy (Apps Script)
+      if (config.GEMINI_PROXY_URL) {
+        console.log("  🥈 تلاش با Gemini Proxy...");
+        aiText = await callGeminiProxy(prompt, config.GEMINI_PROXY_URL);
+        if (aiText) {
+          usedModel = 'Gemini (Proxy)';
+        }
+      }
+      // اگه Proxy کار نکرد، مستقیم امتحان کن
+      if (!aiText) {
+        console.log("  🥉 تلاش با Gemini مستقیم...");
+        aiText = await callGemini(prompt, config.GEMINI_API_KEY || "");
+        if (aiText) {
+          usedModel = 'Gemini (Direct)';
+        }
+      }
     }
     console.log("⏱️ پاسخ در " + ((Date.now() - startTime) / 1000).toFixed(1) + " ثانیه.");
 
@@ -1238,7 +1320,7 @@ async function main() {
     // اعتبارسنجی کیفیت
     const qualityReport = {
       timestamp: new Date().toISOString(),
-      model: AI_MODELS[0],
+      model: usedModel || AI_MODELS[0],
       items: [],
       avgScore: 0
     };
