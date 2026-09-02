@@ -905,11 +905,17 @@ async function callOpenRouter(prompt, apiKey) {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + apiKey,
           }),
-          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 30000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 15000))
         ]);
         const data = JSON.parse(response);
         if (data.error) {
-          console.log("  ⚠️ خطا از " + model + ": " + (data.error.message || JSON.stringify(data.error)));
+          const errMsg = data.error.message || JSON.stringify(data.error);
+          console.log("  ⚠️ خطا از " + model + ": " + errMsg);
+          // اگه خطای Rate Limit باشه، بقیه مدل‌ها رو هم امتحان نکن (همگی سهمیه مشترک دارن)
+          if (errMsg.includes("Rate limit") || errMsg.includes("rate_limit") || data.error.code === 429) {
+            console.log("  ⛔ Rate Limit! بقیه مدل‌ها رو رد کن.");
+            return null;
+          }
           break;
         }
         const content = data.choices[0].message.content;
@@ -921,7 +927,7 @@ async function callOpenRouter(prompt, apiKey) {
         return content;
       } catch (e) {
         console.log("  ⚠️ خطا: " + e.message);
-        if (attempt < 2) await new Promise(r => setTimeout(r, 5000));
+        if (attempt < 2) await new Promise(r => setTimeout(r, 2000));
       }
     }
   }
