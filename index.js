@@ -742,6 +742,10 @@ async function callGroq(prompt) {
 const AI_MODELS = [
   // اولویت اول: Nemotron Ultra (بهترین کیفیت رایگان، 1M context)
   'nvidia/nemotron-3-ultra-550b-a55b:free',
+  // اولویت دوم: Nemotron Super (اگر Ultra خطا داد)
+  'nvidia/nemotron-3-super-120b-a12b:free',
+  // اولویت سوم: Stealth Ox Alpha (رایگان)
+  'stealth/ox-alpha:free',
 ];
 
 
@@ -853,7 +857,7 @@ async function callOpenRouter(prompt, apiKey) {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + apiKey,
           }),
-          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 180000))
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 30000))
         ]);
         const data = JSON.parse(response);
         if (data.error) {
