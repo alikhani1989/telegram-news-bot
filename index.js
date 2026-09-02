@@ -835,7 +835,7 @@ async function callGeminiProxy(prompt, proxyUrl) {
 async function callMiniMax(prompt) {
   const models = ['minimax/minimax-m3:free', 'minimax/minimax-m2.7:free'];
   const url = 'https://openrouter.ai/api/v1/chat/completions';
-  const systemMsg = 'You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 8) Avoid sensational, absurd, or offensive comparisons in titles. Titles should be professional and journalistic. Just output { \"news\": [...] }';
+  const systemMsg = 'شما یک سردبیر اخبار تلگرامی هستید. خبر زیر را خلاصه کنید. قوانین: ۱) فقط JSON خروجی بده ۲) تیتر کوتاه و رویدادمحور با ✴️ ۳) متن با 🔸 شروع بشه ۴) نام و سمّت دقیق باشه ۵) بدون نقل قول در تیتر ۶) مجلس شورای اسلامی → فقط مجلس ۷) متن باید ۲ تا ۳ پاراگراف کوتاه باشد (نه فقط ۱ جمله) ۸) جزئیات مهم مثل اعداد، شروط، ارقام را حتماً بنویسید ۹) حوزه انتخابیه نیاید فقط «نماینده مجلس» ۱۰) ساختار: {\"news":[{\"title\":\"✴️ تیتر\",\"body\":\"🔸 پاراگراف اول\n\n🔸 پاراگراف دوم\",\"source_link\":\"لینک\",\"image_url\":\"لینک یا خالی\"}]}';
 
   for (const model of models) {
     console.log('  🟢 تلاش با MiniMax: ' + model);
