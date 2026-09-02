@@ -1505,6 +1505,7 @@ async function main() {
     if (shouldSendReport(state)) {
       await sendQualityReportToTelegram(qualityReport, reviewReport, newsArray.length, BOT_TOKEN, DESTINATION_CHAT_ID);
       state.LAST_REPORT_TIME = Date.now();
+      saveState(state);
       console.log('📊 گزارش ارسال شد (' + getTehranTimeStr() + ' به وقت تهران)');
     } else {
       console.log('📊 ارسال گزارش رد شد (فاصله زمانی رعایت نشده)');
