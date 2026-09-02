@@ -832,6 +832,54 @@ async function callGeminiProxy(prompt, proxyUrl) {
   return null;
 }
 
+async function callMiniMax(prompt) {
+  const models = ['minimax/minimax-m3:free', 'minimax/minimax-m2.7:free'];
+  const url = 'https://openrouter.ai/api/v1/chat/completions';
+  const systemMsg = 'You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 8) Avoid sensational, absurd, or offensive comparisons in titles. Titles should be professional and journalistic. Just output { \"news\": [...] }';
+
+  for (const model of models) {
+    console.log('  🟢 تلاش با MiniMax: ' + model);
+    const payload = JSON.stringify({
+      model: model,
+      messages: [
+        { role: 'system', content: systemMsg },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.1,
+      max_tokens: 16000,
+      response_format: { type: 'json_object' },
+    });
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const response = await Promise.race([
+          httpPost(url, payload, {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + (process.env.OPENROUTER_API_KEY || ''),
+          }),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 30000))
+        ]);
+        const data = JSON.parse(response);
+        if (data.error) {
+          console.log('  ⚠️ خطا از ' + model + ': ' + (data.error.message || '').substring(0, 80));
+          break;
+        }
+        const content = data.choices[0].message.content;
+        if (!content || content.trim().length === 0) {
+          console.log('  ⚠️ پاسخ خالی از ' + model);
+          break;
+        }
+        console.log('  ✅ مدل ' + model + ' پاسخ داد');
+        return content;
+      } catch (e) {
+        console.log('  ⚠️ خطا: ' + e.message);
+        if (attempt < 2) await new Promise(r => setTimeout(r, 3000));
+      }
+    }
+  }
+  return null;
+}
+
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
   const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Copy names EXACTLY from source. 5) Use مجلس not مجلس شورای اسلامی. 6) Start titles with ✴, body paragraphs with 🔸. 7) Body should be 1-2 short paragraphs. 8) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 9) Avoid sensational, absurd, or offensive comparisons in titles. Titles should be professional and journalistic. Just output { \"news\": [...] }";
@@ -1305,7 +1353,16 @@ async function main() {
       }
     }
     
-    // اگه Nemotron کار نکرد یا تموم شده، از Gemini استفاده کن
+    // اگه Nemotron کار نکرد، اول MiniMax رو امتحان کن (سهمیه جداگانه داره)
+    if (!aiText) {
+      console.log('  🟢 تلاش با MiniMax (سهمیه جداگانه)...');
+      aiText = await callMiniMax(prompt);
+      if (aiText) {
+        usedModel = 'MiniMax';
+      }
+    }
+
+    // اگه MiniMax هم کار نکرد، از Gemini استفاده کن
     if (!aiText) {
       // اول تلاش با Proxy (Apps Script)
       if (config.GEMINI_PROXY_URL) {
