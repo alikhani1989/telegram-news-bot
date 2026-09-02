@@ -835,7 +835,7 @@ async function callGeminiProxy(prompt, proxyUrl) {
 async function callMiniMax(prompt) {
   const models = ['minimax/minimax-m3:free', 'minimax/minimax-m2.7:free'];
   const url = 'https://openrouter.ai/api/v1/chat/completions';
-  const systemMsg = 'شما یک سردبیر اخبار تلگرامی هستید. خبر زیر را خلاصه کنید. قوانین: ۱) فقط JSON خروجی بده ۲) تیتر کوتاه و رویدادمحور با ✴️ ۳) متن با 🔸 شروع بشه ۴) نام و سمّت دقیق باشه ۵) بدون نقل قول در تیتر ۶) مجلس شورای اسلامی → فقط مجلس ۷) متن باید ۲ تا ۳ پاراگراف کوتاه باشد (نه فقط ۱ جمله) ۸) جزئیات مهم مثل اعداد، شروط، ارقام را حتماً بنویسید ۹) حوزه انتخابیه نیاید فقط «نماینده مجلس» ۱۰) ساختار: {\"news":[{\"title\":\"✴️ تیتر\",\"body\":\"🔸 پاراگراف اول\n\n🔸 پاراگراف دوم\",\"source_link\":\"لینک\",\"image_url\":\"لینک یا خالی\"}]}';
+  const systemMsg = 'You are a senior Persian-language news editor. Summarize the news below. Rules: 1) Output ONLY valid JSON 2) Title: short, event-focused, start with ✴️ 3) Body: start each paragraph with 🔸 4) Copy person names and titles EXACTLY from source 5) No quotes in title 6) Use مجلس not مجلس شورای اسلامی 7) Body MUST have 2-3 short paragraphs (not just 1 sentence) 8) Include key details like numbers, conditions, important figures 9) Do not mention electoral district, just «نماینده مجلس» 10) Structure: {\"news\":[{\"title\":\"✴️ title\",\"body\":\"🔸 paragraph one\n\n🔸 paragraph two\",\"source_link\":\"link\",\"image_url\":\"link or empty\"}]}';
 
   for (const model of models) {
     console.log('  🟢 تلاش با MiniMax: ' + model);
