@@ -914,7 +914,12 @@ async function callOpenRouter(prompt, apiKey) {
           // اگه خطای Rate Limit باشه، بقیه مدل‌ها رو هم امتحان نکن (همگی سهمیه مشترک دارن)
           if (errMsg.includes("Rate limit") || errMsg.includes("rate_limit") || data.error.code === 429) {
             console.log("  ⛔ Rate Limit! بقیه مدل‌ها رو رد کن.");
-            return null;
+            return { status: 'rate_limited' };
+          }
+          // اگه خطای overloaded باشه، فقط برای این مدل broken هست
+          if (errMsg.includes("overloaded") || errMsg.includes("Service temporarily") || errMsg.includes("503")) {
+            console.log("  🔄 مدل overloaded - از مدل بعدی امتحان کن.");
+            break; // فقط break کن، برو مدل بعدی
           }
           break;
         }
@@ -924,7 +929,7 @@ async function callOpenRouter(prompt, apiKey) {
           break;
         }
         console.log("  ✅ مدل " + model + " پاسخ داد");
-        return content;
+        return { status: 'success', content: content, model: model };
       } catch (e) {
         console.log("  ⚠️ خطا: " + e.message);
         if (attempt < 2) await new Promise(r => setTimeout(r, 2000));
@@ -932,7 +937,7 @@ async function callOpenRouter(prompt, apiKey) {
     }
   }
   console.log("  ❌ همه مدل‌های OpenRouter ناموفق بودند.");
-  return null;
+  return { status: 'all_failed' };
 }
 
 // ==========================================
@@ -1346,16 +1351,20 @@ async function main() {
     
     // اگه Nemotron تموم نشده، اول اون رو امتحان کن
     if (!nemotronExhausted) {
-      console.log("  🥇 تلاش با Nemotron Ultra...");
-      aiText = await callOpenRouter(prompt, OPENROUTER_API_KEY);
-      if (aiText) {
-        usedModel = 'Nemotron Ultra';
-      } else {
-        // Nemotron خطا داد → تموم شد! برای امروز Gemini بزن
+      console.log("  🥇 تلاش با Nemotron...");
+      const result = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+      if (result.status === 'success') {
+        aiText = result.content;
+        usedModel = result.model || 'Nemotron';
+      } else if (result.status === 'rate_limited') {
+        // فقط rate limit باعث غیرفعال شدن برای کل روز میشه
         nemotronExhausted = true;
         state.NEMOTRON_EXHAUSTED = true;
         state.NEMOTRON_EXHAUSTED_DATE = todayTehran;
-        console.log("  ⛔ Nemotron تموم شد! از فردا Gemini اولویت می‌شه.");
+        console.log("  ⛔ Nemotron rate limited! برای امروز MiniMax اولویت می‌شه.");
+      } else {
+        // overloaded یا all_failed - غیرفعال نکن، فقط رد شو
+        console.log("  🔄 Nemotron موقتاً غیرفعال. MiniMax امتحان می‌شه.");
       }
     }
     
