@@ -298,9 +298,30 @@ function getTehranTimeStr() {
   return t.getHours().toString().padStart(2, '0') + ':' + t.getMinutes().toString().padStart(2, '0');
 }
 
+function gregorianToJalali(gy, gm, gd) {
+  const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+  let gy2 = (gm > 2) ? (gy + 1) : gy;
+  let days = 355666 + (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
+  let jy = -1595 + (33 * Math.floor(days / 12053));
+  days %= 12053;
+  jy += 4 * Math.floor(days / 1461);
+  days %= 1461;
+  if (days > 365) { jy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
+  let jm, jd;
+  if (days < 186) { jm = 1 + Math.floor(days / 31); jd = 1 + (days % 31); }
+  else { jm = 7 + Math.floor((days - 186) / 30); jd = 1 + ((days - 186) % 30); }
+  return { jy: jy, jm: jm, jd: jd };
+}
+
+const PERSIAN_DAYS = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'];
+const PERSIAN_MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+
 function getTehranDateStr() {
   const t = getTehranDate();
-  return t.getFullYear() + '/' + (t.getMonth() + 1).toString().padStart(2, '0') + '/' + t.getDate().toString().padStart(2, '0');
+  const j = gregorianToJalali(t.getFullYear(), t.getMonth() + 1, t.getDate());
+  const dayName = PERSIAN_DAYS[t.getDay()];
+  const monthName = PERSIAN_MONTHS[j.jm - 1];
+  return dayName + ' ' + j.jd + ' ' + monthName + ' ' + j.jy;
 }
 
 function isTehranNight() {
