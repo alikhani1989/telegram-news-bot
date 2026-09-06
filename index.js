@@ -1355,38 +1355,21 @@ async function main() {
     console.log("🤖 ارسال به هوش مصنوعی...");
     const startTime = Date.now();
     
-    // بررسی آیا Nemotron تموم شده (از state)
-    let nemotronExhausted = state.NEMOTRON_EXHAUSTED || false;
-    let nemotronExhaustedDate = state.NEMOTRON_EXHAUSTED_DATE || '';
-    const todayTehran = getTehranDate().toISOString().substring(0, 10);
-    
-    // ریست روزانه: اگه روز جدید شده، Nemotron دوباره فعال می‌شه
-    if (nemotronExhausted && nemotronExhaustedDate !== todayTehran) {
-      nemotronExhausted = false;
-      state.NEMOTRON_EXHAUSTED = false;
-      console.log("🌅 روز جدید شد! Nemotron دوباره فعال می‌شه.");
-    }
-    
+    // همیشه Nemotron رو اول امتحان کن
+    // اگه rate limit باشه، فوری برمی‌گرده و MiniMax امتحان میشه
+    // اگه overloaded باشه، چند ثانیه صبر می‌کنه
     let aiText = null;
     let usedModel = '';
     
-    // اگه Nemotron تموم نشده، اول اون رو امتحان کن
-    if (!nemotronExhausted) {
-      console.log("  🥇 تلاش با Nemotron...");
-      const result = await callOpenRouter(prompt, OPENROUTER_API_KEY);
-      if (result.status === 'success') {
-        aiText = result.content;
-        usedModel = result.model || 'Nemotron';
-      } else if (result.status === 'rate_limited') {
-        // فقط rate limit باعث غیرفعال شدن برای کل روز میشه
-        nemotronExhausted = true;
-        state.NEMOTRON_EXHAUSTED = true;
-        state.NEMOTRON_EXHAUSTED_DATE = todayTehran;
-        console.log("  ⛔ Nemotron rate limited! برای امروز MiniMax اولویت می‌شه.");
-      } else {
-        // overloaded یا all_failed - غیرفعال نکن، فقط رد شو
-        console.log("  🔄 Nemotron موقتاً غیرفعال. MiniMax امتحان می‌شه.");
-      }
+    console.log("  🥇 تلاش با Nemotron...");
+    const result = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+    if (result.status === 'success') {
+      aiText = result.content;
+      usedModel = result.model || 'Nemotron';
+    } else if (result.status === 'rate_limited') {
+      console.log("  ⛔ Nemotron rate limited! MiniMax امتحان می‌شه.");
+    } else {
+      console.log("  🔄 Nemotron ناموفق. MiniMax امتحان می‌شه.");
     }
     
     // اگه Nemotron کار نکرد، اول MiniMax رو امتحان کن (سهمیه جداگانه داره)
