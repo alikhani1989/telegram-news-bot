@@ -38,7 +38,7 @@ function saveState(state) {
 // ==========================================
 // جلوگیری از تکرار
 // ==========================================
-const DUPLICATE_WINDOW_MS = 60 * 60 * 1000;
+const DUPLICATE_WINDOW_MS = 30 * 60 * 1000; // حافظه نیم ساعته برای جلوگیری از تکرار
 const QUALITY_LOG_FILE = path.join(__dirname, 'quality-log.json');
 const REVIEW_LOG_FILE = path.join(__dirname, 'review-log.json');
 
