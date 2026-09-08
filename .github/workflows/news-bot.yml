@@ -30,6 +30,7 @@ jobs:
         run: timeout 420 node index.js || true
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           DESTINATION_CHAT_ID: '@selectednewsmajlis'
           SOURCE_CHANNEL_ID: news_parliament
