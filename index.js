@@ -767,6 +767,8 @@ const AI_MODELS = [
   'nvidia/nemotron-3-super-120b-a12b:free',
   // اولویت سوم: Stealth Ox Alpha (رایگان)
   'stealth/ox-alpha:free',
+  // اولویت چهارم: Gemma 4 (سهمیه جداگانه)
+  'google/gemma-4-31b-it:free',
 ];
 
 
@@ -853,13 +855,22 @@ async function callGeminiProxy(prompt, proxyUrl) {
   return null;
 }
 
-async function callMiniMax(prompt) {
-  const models = ['minimax/minimax-m3:free', 'minimax/minimax-m2.7:free'];
+async function callFallbackModels(prompt) {
+  // مدل‌های رایگان جایگزین (هر کدوم سهمیه جداگانه ۲۰۰/روز داره)
+  const fallbackModels = [
+    'thinkingmachines/inkling:free',
+    'thinkingmachines/inkling-small:free',
+    'google/gemma-4-31b-it:free',
+    'google/gemma-4-26b-a4b-it:free',
+    'nvidia/nemotron-3.5-lightning:free',
+    'dots-studio/dots-3-note-preview:free',
+    'poolside/laguna-s-2.1:free',
+  ];
   const url = 'https://openrouter.ai/api/v1/chat/completions';
   const systemMsg = 'You are a senior Persian-language news editor. Summarize the news below. Rules: 1) Output ONLY valid JSON 2) Title: short, event-focused, start with ✴️ 3) Body: start each paragraph with 🔸 4) Copy person names and titles EXACTLY from source 5) No quotes in title 6) Use مجلس not مجلس شورای اسلامی 7) Body MUST have 2-3 short paragraphs (not just 1 sentence) 8) Include key details like numbers, conditions, important figures 9) Do not mention electoral district, just «نماینده مجلس» 10) Structure: {\"news\":[{\"title\":\"✴️ title\",\"body\":\"🔸 paragraph one\n\n🔸 paragraph two\",\"source_link\":\"link\",\"image_url\":\"link or empty\"}]}';
 
-  for (const model of models) {
-    console.log('  🟢 تلاش با MiniMax: ' + model);
+  for (const model of fallbackModels) {
+    console.log('  🟢 تلاش با مدل جایگزین: ' + model);
     const payload = JSON.stringify({
       model: model,
       messages: [
@@ -871,31 +882,28 @@ async function callMiniMax(prompt) {
       response_format: { type: 'json_object' },
     });
 
-    for (let attempt = 1; attempt <= 2; attempt++) {
-      try {
-        const response = await Promise.race([
-          httpPost(url, payload, {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + (process.env.OPENROUTER_API_KEY || ''),
-          }),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 30000))
-        ]);
-        const data = JSON.parse(response);
-        if (data.error) {
-          console.log('  ⚠️ خطا از ' + model + ': ' + (data.error.message || '').substring(0, 80));
-          break;
-        }
-        const content = data.choices[0].message.content;
-        if (!content || content.trim().length === 0) {
-          console.log('  ⚠️ پاسخ خالی از ' + model);
-          break;
-        }
-        console.log('  ✅ مدل ' + model + ' پاسخ داد');
-        return content;
-      } catch (e) {
-        console.log('  ⚠️ خطا: ' + e.message);
-        if (attempt < 2) await new Promise(r => setTimeout(r, 3000));
+    try {
+      const response = await Promise.race([
+        httpPost(url, payload, {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + (process.env.OPENROUTER_API_KEY || ''),
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 30000))
+      ]);
+      const data = JSON.parse(response);
+      if (data.error) {
+        console.log('  ⚠️ خطا از ' + model + ': ' + (data.error.message || '').substring(0, 80));
+        continue;
       }
+      const content = data.choices[0].message.content;
+      if (!content || content.trim().length === 0) {
+        console.log('  ⚠️ پاسخ خالی از ' + model);
+        continue;
+      }
+      console.log('  ✅ مدل ' + model + ' پاسخ داد');
+      return content;
+    } catch (e) {
+      console.log('  ⚠️ خطا از ' + model + ': ' + e.message);
     }
   }
   return null;
@@ -1367,17 +1375,17 @@ async function main() {
       aiText = result.content;
       usedModel = result.model || 'Nemotron';
     } else if (result.status === 'rate_limited') {
-      console.log("  ⛔ Nemotron rate limited! MiniMax امتحان می‌شه.");
+      console.log("  ⛔ Nemotron rate limited! مدل‌های جایگزین امتحان می‌شه.");
     } else {
-      console.log("  🔄 Nemotron ناموفق. MiniMax امتحان می‌شه.");
+      console.log("  🔄 Nemotron ناموفق. مدل‌های جایگزین امتحان می‌شه.");
     }
     
-    // اگه Nemotron کار نکرد، اول MiniMax رو امتحان کن (سهمیه جداگانه داره)
+    // اگه Nemotron کار نکرد، مدل‌های جایگزین رایگان رو امتحان کن
     if (!aiText) {
-      console.log('  🟢 تلاش با MiniMax (سهمیه جداگانه)...');
-      aiText = await callMiniMax(prompt);
+      console.log('  🟢 تلاش با مدل‌های جایگزین رایگان...');
+      aiText = await callFallbackModels(prompt);
       if (aiText) {
-        usedModel = 'MiniMax';
+        usedModel = 'Fallback';
       }
     }
 
