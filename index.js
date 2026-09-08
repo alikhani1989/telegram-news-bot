@@ -13,6 +13,7 @@ const STATE_FILE = path.join(__dirname, "state.json");
 function loadConfig() {
   const envConfig = {};
   if (process.env.OPENROUTER_API_KEY) envConfig.OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+  if (process.env.GROQ_API_KEY) envConfig.GROQ_API_KEY = process.env.GROQ_API_KEY;
   if (process.env.GEMINI_API_KEY) envConfig.GEMINI_API_KEY = process.env.GEMINI_API_KEY;
   if (process.env.BOT_TOKEN) envConfig.BOT_TOKEN = process.env.BOT_TOKEN;
   if (process.env.DESTINATION_CHAT_ID) envConfig.DESTINATION_CHAT_ID = process.env.DESTINATION_CHAT_ID;
@@ -735,26 +736,40 @@ async function fetchArticleText(url) {
 // ==========================================
 async function callGroq(prompt) {
   const GROQ_API_KEY = process.env.GROQ_API_KEY || '';
-  if (!GROQ_API_KEY) return null;
+  if (!GROQ_API_KEY) { console.log('  ⚠️ GROQ_API_KEY تنظیم نشده'); return null; }
   const url = "https://api.groq.com/openai/v1/chat/completions";
-  const payload = JSON.stringify({
-    model: "llama-3.1-8b-instant",
-    messages: [
-      { role: "system", content: "You are a Persian news editor. CRITICAL: 1) Copy person names EXACTLY from source. 2) Use مجلس not مجلس شورای اسلامی. OUTPUT ONLY VALID JSON, no explanation." },
-      { role: "user", content: prompt }
-    ],
-    temperature: 0.1,
-    max_tokens: 4000,
-  });
-  const response = await Promise.race([
-    httpPost(url, payload, { "Content-Type": "application/json", "Authorization": "Bearer " + GROQ_API_KEY }),
-    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 240000))
-  ]);
-  const data = JSON.parse(response);
-  if (data.error) throw new Error("Groq Error: " + JSON.stringify(data.error));
-  const content = data.choices[0].message.content;
-  if (!content || content.trim().length === 0) throw new Error("Groq پاسخ خالی");
-  return content;
+  const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 8) Avoid sensational comparisons in titles. Just output { \"news\": [...] }";
+  const models = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
+  for (const model of models) {
+    console.log('  🟡 تلاش با Groq: ' + model);
+    const payload = JSON.stringify({
+      model: model,
+      messages: [
+        { role: "system", content: systemMsg },
+        { role: "user", content: prompt }
+      ],
+      temperature: 0.1,
+      max_tokens: 4000,
+    });
+    try {
+      const response = await Promise.race([
+        httpPost(url, payload, { "Content-Type": "application/json", "Authorization": "Bearer " + GROQ_API_KEY }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 30000))
+      ]);
+      const data = JSON.parse(response);
+      if (data.error) {
+        console.log('  ⚠️ خطا از Groq ' + model + ': ' + (data.error.message || '').substring(0, 80));
+        continue;
+      }
+      const content = data.choices[0].message.content;
+      if (!content || content.trim().length === 0) { console.log('  ⚠️ پاسخ خالی از Groq'); continue; }
+      console.log('  ✅ مدل Groq ' + model + ' پاسخ داد');
+      return content;
+    } catch (e) {
+      console.log('  ⚠️ خطا از Groq: ' + e.message);
+    }
+  }
+  return null;
 }
 
 // ==========================================
@@ -1380,7 +1395,15 @@ async function main() {
       console.log("  🔄 Nemotron ناموفق. مدل‌های جایگزین امتحان می‌شه.");
     }
     
-    // اگه Nemotron کار نکرد، مدل‌های جایگزین رایگان رو امتحان کن
+    // اگه Nemotron کار نکرد، Groq رو امتحان کن (۱۴,۴۰۰ درخواست رایگان)
+    if (!aiText) {
+      console.log('  🟡 تلاش با Groq...');
+      aiText = await callGroq(prompt);
+      if (aiText) {
+        usedModel = 'Groq';
+      }
+    }
+    // اگه Groq هم کار نکرد، مدل‌های جایگزین رایگان رو امتحان کن
     if (!aiText) {
       console.log('  🟢 تلاش با مدل‌های جایگزین رایگان...');
       aiText = await callFallbackModels(prompt);
