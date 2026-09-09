@@ -739,7 +739,7 @@ async function callGroq(prompt) {
   if (!GROQ_API_KEY) { console.log('  ⚠️ GROQ_API_KEY تنظیم نشده'); return null; }
   const url = "https://api.groq.com/openai/v1/chat/completions";
   const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 8) Avoid sensational comparisons in titles. Just output { \"news\": [...] }";
-  const models = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
+  const models = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'meta-llama/llama-4-scout-17b-16e-instruct'];
   for (const model of models) {
     console.log('  🟡 تلاش با Groq: ' + model);
     const payload = JSON.stringify({
