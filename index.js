@@ -15,6 +15,7 @@ function loadConfig() {
   if (process.env.OPENROUTER_API_KEY) envConfig.OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
   if (process.env.GROQ_API_KEY) envConfig.GROQ_API_KEY = process.env.GROQ_API_KEY;
   if (process.env.GEMINI_API_KEY) envConfig.GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+  if (process.env.NARA_ROUTER_API_KEY) envConfig.NARA_ROUTER_API_KEY = process.env.NARA_ROUTER_API_KEY;
   if (process.env.BOT_TOKEN) envConfig.BOT_TOKEN = process.env.BOT_TOKEN;
   if (process.env.DESTINATION_CHAT_ID) envConfig.DESTINATION_CHAT_ID = process.env.DESTINATION_CHAT_ID;
   if (process.env.SOURCE_CHANNEL_ID) envConfig.SOURCE_CHANNEL_ID = process.env.SOURCE_CHANNEL_ID;
@@ -732,6 +733,47 @@ async function fetchArticleText(url) {
 }
 
 // ==========================================
+// NaraRouter API (پشتیبان رایگان)
+// ==========================================
+async function callNaraRouter(prompt) {
+  const NARA_KEY = process.env.NARA_ROUTER_API_KEY || '';
+  if (!NARA_KEY) { console.log('  ⚠️ NARA_ROUTER_API_KEY تنظیم نشده'); return null; }
+  const url = 'https://router.bynara.id/v1/chat/completions';
+  const systemMsg = 'You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. Just output { \"news\": [...] }';
+  const models = ['tencent-hy3-free'];
+  for (const model of models) {
+    console.log('  🟣 تلاش با NaraRouter: ' + model);
+    const payload = JSON.stringify({
+      model: model,
+      messages: [
+        { role: 'system', content: systemMsg },
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0.1,
+      max_tokens: 4000,
+    });
+    try {
+      const response = await Promise.race([
+        httpPost(url, payload, { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + NARA_KEY }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 30000))
+      ]);
+      const data = JSON.parse(response);
+      if (data.error) {
+        console.log('  ⚠️ خطا از NaraRouter ' + model + ': ' + (data.error.message || '').substring(0, 80));
+        continue;
+      }
+      const content = data.choices[0].message.content;
+      if (!content || content.trim().length === 0) { console.log('  ⚠️ پاسخ خالی از NaraRouter'); continue; }
+      console.log('  ✅ مدل NaraRouter ' + model + ' پاسخ داد');
+      return content;
+    } catch (e) {
+      console.log('  ⚠️ خطا از NaraRouter: ' + e.message);
+    }
+  }
+  return null;
+}
+
+// ==========================================
 // Groq API
 // ==========================================
 async function callGroq(prompt) {
@@ -1414,7 +1456,15 @@ async function main() {
         usedModel = 'Groq';
       }
     }
-    // اگه Groq هم کار نکرد و OpenRouter rate limit نبود، مدل‌های جایگزین رو امتحان کن
+    // اگه Groq هم کار نکرد، NaraRouter رو امتحان کن (رایگان)
+    if (!aiText) {
+      console.log('  🟣 تلاش با NaraRouter...');
+      aiText = await callNaraRouter(prompt);
+      if (aiText) {
+        usedModel = 'NaraRouter';
+      }
+    }
+    // اگه NaraRouter هم کار نکرد و OpenRouter rate limit نبود، مدل‌های جایگزین رو امتحان کن
     // اگه OpenRouter rate limit بود، دیگه سراغش نرو (همگی سهمیه مشترک دارن)
     if (!aiText && result.status !== 'rate_limited') {
       console.log('  🟢 تلاش با مدل‌های جایگزین رایگان...');
