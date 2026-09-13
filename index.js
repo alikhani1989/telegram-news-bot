@@ -1406,7 +1406,7 @@ async function main() {
       console.log("  🔄 Nemotron ناموفق. مدل‌های جایگزین امتحان می‌شه.");
     }
     
-    // اگه Nemotron کار نکرد، Groq رو امتحان کن (۱۴,۴۰۰ درخواست رایگان)
+    // اگه Nemotron کار نکرد، Groq رو امتحان کن (سهمیه جداگانه)
     if (!aiText) {
       console.log('  🟡 تلاش با Groq...');
       aiText = await callGroq(prompt);
@@ -1414,8 +1414,9 @@ async function main() {
         usedModel = 'Groq';
       }
     }
-    // اگه Groq هم کار نکرد، مدل‌های جایگزین رایگان رو امتحان کن
-    if (!aiText) {
+    // اگه Groq هم کار نکرد و OpenRouter rate limit نبود، مدل‌های جایگزین رو امتحان کن
+    // اگه OpenRouter rate limit بود، دیگه سراغش نرو (همگی سهمیه مشترک دارن)
+    if (!aiText && result.status !== 'rate_limited') {
       console.log('  🟢 تلاش با مدل‌های جایگزین رایگان...');
       aiText = await callFallbackModels(prompt);
       if (aiText) {
