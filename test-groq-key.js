@@ -16,11 +16,8 @@ console.log('🔑 کلید Groq: ' + GROQ_API_KEY.substring(0, 12) + '...');
 console.log('');
 
 const models = [
-  'openai/gpt-oss-120b',
-  'openai/gpt-oss-20b',
-  'meta-llama/llama-4-scout-17b-16e-instruct',
-  'qwen/qwen3-32b',
-  'moonshotai/kimi-k2-instruct',
+  'openai/gpt-oss-120b',  // بهترین مدل رایگان
+  'openai/gpt-oss-20b',    // مدل کوچکتر
 ];
 
 async function testModel(model) {
