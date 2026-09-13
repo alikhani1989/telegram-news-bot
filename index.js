@@ -739,7 +739,13 @@ async function callGroq(prompt) {
   if (!GROQ_API_KEY) { console.log('  ⚠️ GROQ_API_KEY تنظیم نشده'); return null; }
   const url = "https://api.groq.com/openai/v1/chat/completions";
   const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 8) Avoid sensational comparisons in titles. Just output { \"news\": [...] }";
-  const models = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'meta-llama/llama-4-scout-17b-16e-instruct'];
+  const models = [
+    'openai/gpt-oss-120b',
+    'openai/gpt-oss-20b',
+    'qwen/qwen3-32b',
+    'moonshotai/kimi-k2-instruct',
+    'meta-llama/llama-4-scout-17b-16e-instruct',
+  ];
   for (const model of models) {
     console.log('  🟡 تلاش با Groq: ' + model);
     const payload = JSON.stringify({
@@ -758,7 +764,17 @@ async function callGroq(prompt) {
       ]);
       const data = JSON.parse(response);
       if (data.error) {
-        console.log('  ⚠️ خطا از Groq ' + model + ': ' + (data.error.message || '').substring(0, 80));
+        const errMsg = (data.error.message || '').substring(0, 100);
+        console.log('  ⚠️ خطا از Groq ' + model + ': ' + errMsg);
+        // اگه model_not_found بود، از مدل بعدی رد شو
+        if (data.error.code === 'model_not_found' || errMsg.includes('does not exist')) {
+          continue;
+        }
+        // اگه rate limit بود، بقیه مدل‌ها رو رد کن (همگی سهمیه مشترک دارن)
+        if (data.error.code === 'rate_limit_exceeded' || errMsg.includes('Rate limit') || data.error.code === 429) {
+          console.log('  ⛔ Groq Rate Limit! بقیه مدل‌ها رو رد کن.');
+          return null;
+        }
         continue;
       }
       const content = data.choices[0].message.content;
@@ -871,15 +887,13 @@ async function callGeminiProxy(prompt, proxyUrl) {
 }
 
 async function callFallbackModels(prompt) {
-  // مدل‌های رایگان جایگزین (هر کدوم سهمیه جداگانه ۲۰۰/روز داره)
+  // مدل‌های رایگان OpenRouter
+  // توجه: سهمیه ۵۰ درخواست در روز بین همه مدل‌ها مشترکه
   const fallbackModels = [
-    'thinkingmachines/inkling:free',
-    'thinkingmachines/inkling-small:free',
-    'google/gemma-4-31b-it:free',
-    'google/gemma-4-26b-a4b-it:free',
     'nvidia/nemotron-3.5-lightning:free',
-    'dots-studio/dots-3-note-preview:free',
+    'google/gemma-4-31b-it:free',
     'poolside/laguna-s-2.1:free',
+    'dots-studio/dots-3-note-preview:free',
   ];
   const url = 'https://openrouter.ai/api/v1/chat/completions';
   const systemMsg = 'You are a senior Persian-language news editor. Summarize the news below. Rules: 1) Output ONLY valid JSON 2) Title: short, event-focused, start with ✴️ 3) Body: start each paragraph with 🔸 4) Copy person names and titles EXACTLY from source 5) No quotes in title 6) Use مجلس not مجلس شورای اسلامی 7) Body MUST have 2-3 short paragraphs (not just 1 sentence) 8) Include key details like numbers, conditions, important figures 9) Do not mention electoral district, just «نماینده مجلس» 10) Structure: {\"news\":[{\"title\":\"✴️ title\",\"body\":\"🔸 paragraph one\n\n🔸 paragraph two\",\"source_link\":\"link\",\"image_url\":\"link or empty\"}]}';
