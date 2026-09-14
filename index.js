@@ -611,9 +611,18 @@ function extractOgImage(html) {
   // روش ۳: twitter:image:src
   m = html.match(/<meta[^>]+name="twitter:image:src"[^>]+content="([^"]+)"/i);
   if (m) return fixUrl(m[1]);
-  // روش ۴: schema.org
+  // روش ۴: schema.org image
   m = html.match(/"image"\s*:\s*"([^"]+)"/i);
   if (m && m[1].startsWith('http')) return fixUrl(m[1]);
+  // روش ۵: هر meta tag که محتوای jpg/png/jpeg/webp داره
+  m = html.match(/<meta[^>]+content="([^"]+\.(jpg|jpeg|png|webp)[^"]*)"/i);
+  if (m) return fixUrl(m[1]);
+  // روش ۶: لینک canonical با تصویر
+  m = html.match(/<link[^>]+rel="image_src"[^>]+href="([^"]+)"/i);
+  if (m) return fixUrl(m[1]);
+  // روش ۷: اولین عکس بزرگ در article
+  m = html.match(/<article[^>]*>[\s\S]*?<img[^>]+src="([^"]+)"/i);
+  if (m && m[1].length > 20) return fixUrl(m[1]);
   return null;
 }
 
