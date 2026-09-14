@@ -739,8 +739,8 @@ async function callNaraRouter(prompt) {
   const NARA_KEY = process.env.NARA_ROUTER_API_KEY || '';
   if (!NARA_KEY) { console.log('  ⚠️ NARA_ROUTER_API_KEY تنظیم نشده'); return null; }
   const url = 'https://router.bynara.id/v1/chat/completions';
-  const systemMsg = 'You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. Just output { \"news\": [...] }';
-  const models = ['tencent-hy3-free'];
+  const systemMsg = 'شما سردبیر اخبار تلگرامی هستید. فقط JSON خروجی بدهید. قوانین: ۱) فقط JSON خام. هیچ متن دیگری ننویسید. ۲) تیتر: کوتاه (حداکثر ۸ کلمه)، رویدادمحور، با ✴️ شروع شود. هرگز نام شخص در تیتر نیاید! ۳) متن: با 🔸 شروع شود. خط اول: نام + سمّت + فعل. حداکثر ۲ جمله. ۴) مجلس شورای اسلامی → فقط مجلس. ۵) فرمت: {"news":[{"title":"✴️ تیتر","body":"🔸 متن","source_link":"لینک","image_url":"لینک یا خالی"]}';
+  const models = ['tencent-hy3-free', 'agnes-2.5-flash'];
   for (const model of models) {
     console.log('  🟣 تلاش با NaraRouter: ' + model);
     const payload = JSON.stringify({
@@ -780,7 +780,7 @@ async function callGroq(prompt) {
   const GROQ_API_KEY = process.env.GROQ_API_KEY || '';
   if (!GROQ_API_KEY) { console.log('  ⚠️ GROQ_API_KEY تنظیم نشده'); return null; }
   const url = "https://api.groq.com/openai/v1/chat/completions";
-  const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) Copy names EXACTLY from source. 4) Use مجلس not مجلس شورای اسلامی. 5) Start titles with ✴, body paragraphs with 🔸. 6) Body should be 1-2 short paragraphs. 7) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 8) Avoid sensational comparisons in titles. Just output { \"news\": [...] }";
+  const systemMsg = "شما سردبیر اخبار تلگرامی هستید. فقط JSON خروجی بدهید. قوانین: ۱) فقط JSON خام. هیچ متن دیگری ننویسید. ۲) تیتر: کوتاه (حداکثر ۸ کلمه)، رویدادمحور، با ✴️ شروع شود. هرگز نام شخص در تیتر نیاید! ۳) متن: با 🔸 شروع شود. خط اول: نام + سمّت + فعل. حداکثر ۲ جمله. ۴) مجلس شورای اسلامی → فقط مجلس. ۵) فرمت: {\"news\":[{\"title\":\"✴️ تیتر\",\"body\":\"🔸 متن\",\"source_link\":\"لینک\",\"image_url\":\"لینک یا خالی\"}]}";
   const models = [
     'openai/gpt-oss-120b',  // بهترین مدل رایگان Groq
     'openai/gpt-oss-20b',    // مدل کوچکتر ولی سریع‌تر
@@ -935,7 +935,7 @@ async function callFallbackModels(prompt) {
     'dots-studio/dots-3-note-preview:free',
   ];
   const url = 'https://openrouter.ai/api/v1/chat/completions';
-  const systemMsg = 'You are a senior Persian-language news editor. Summarize the news below. Rules: 1) Output ONLY valid JSON 2) Title: short, event-focused, start with ✴️ 3) Body: start each paragraph with 🔸 4) Copy person names and titles EXACTLY from source 5) No quotes in title 6) Use مجلس not مجلس شورای اسلامی 7) Body MUST have 2-3 short paragraphs (not just 1 sentence) 8) Include key details like numbers, conditions, important figures 9) Do not mention electoral district, just «نماینده مجلس» 10) Structure: {\"news\":[{\"title\":\"✴️ title\",\"body\":\"🔸 paragraph one\n\n🔸 paragraph two\",\"source_link\":\"link\",\"image_url\":\"link or empty\"}]}';
+  const systemMsg = 'شما سردبیر اخبار تلگرامی هستید. فقط JSON خروجی بدهید. قوانین: ۱) فقط JSON خام. هیچ متن دیگری ننویسید. ۲) تیتر: کوتاه (حداکثر ۸ کلمه)، رویدادمحور، با ✴️ شروع شود. هرگز نام شخص در تیتر نیاید! ۳) متن: با 🔸 شروع شود. خط اول: نام + سمّت + فعل. حداکثر ۲ جمله. ۴) مجلس شورای اسلامی → فقط مجلس. ۵) فرمت: {\"news\":[{\"title\":\"✴️ تیتر\",\"body\":\"🔸 متن\",\"source_link\":\"لینک\",\"image_url\":\"لینک یا خالی\"}]}';
 
   for (const model of fallbackModels) {
     console.log('  🟢 تلاش با مدل جایگزین: ' + model);
@@ -979,7 +979,7 @@ async function callFallbackModels(prompt) {
 
 async function callOpenRouter(prompt, apiKey) {
   const url = "https://openrouter.ai/api/v1/chat/completions";
-  const systemMsg = "You are a senior Persian-language news editor. You write concise Telegram news items. CRITICAL RULES: 1) ONLY output raw JSON. ZERO text before or after. 2) NEVER write analysis, thinking, or reasoning. 3) NEVER explain your work. 4) Copy names EXACTLY from source. 5) Use مجلس not مجلس شورای اسلامی. 6) Start titles with ✴, body paragraphs with 🔸. 7) Body should be 1-2 short paragraphs. 8) Titles MUST be event-focused, NOT quote-style. NEVER start title with a person name followed by colon. 9) Avoid sensational, absurd, or offensive comparisons in titles. Titles should be professional and journalistic. Just output { \"news\": [...] }";
+  const systemMsg = "شما سردبیر اخبار تلگرامی هستید. فقط JSON خروجی بدهید. قوانین: ۱) فقط JSON خام. هیچ متن دیگری ننویسید. ۲) تیتر: کوتاه (حداکثر ۸ کلمه)، رویدادمحور، با ✴️ شروع شود. هرگز نام شخص در تیتر نیاید! ۳) متن: با 🔸 شروع شود. خط اول: نام + سمّت + فعل. حداکثر ۲ جمله. ۴) مجلس شورای اسلامی → فقط مجلس. ۵) فرمت: {\"news\":[{\"title\":\"✴️ تیتر\",\"body\":\"🔸 متن\",\"source_link\":\"لینک\",\"image_url\":\"لینک یا خالی\"}]}";
 
   for (let modelIndex = 0; modelIndex < AI_MODELS.length; modelIndex++) {
     const model = AI_MODELS[modelIndex];
@@ -1448,20 +1448,20 @@ async function main() {
       console.log("  🔄 Nemotron ناموفق. مدل‌های جایگزین امتحان می‌شه.");
     }
     
-    // اگه Nemotron کار نکرد، Groq رو امتحان کن (سهمیه جداگانه)
-    if (!aiText) {
-      console.log('  🟡 تلاش با Groq...');
-      aiText = await callGroq(prompt);
-      if (aiText) {
-        usedModel = 'Groq';
-      }
-    }
-    // اگه Groq هم کار نکرد، NaraRouter رو امتحان کن (رایگان)
+    // اگه Nemotron کار نکرد، NaraRouter رو امتحان کن (رایگان و پایدار)
     if (!aiText) {
       console.log('  🟣 تلاش با NaraRouter...');
       aiText = await callNaraRouter(prompt);
       if (aiText) {
         usedModel = 'NaraRouter';
+      }
+    }
+    // اگه NaraRouter هم کار نکرد، Groq رو امتحان کن (سهمیه جداگانه)
+    if (!aiText) {
+      console.log('  🟡 تلاش با Groq...');
+      aiText = await callGroq(prompt);
+      if (aiText) {
+        usedModel = 'Groq';
       }
     }
     // اگه NaraRouter هم کار نکرد و OpenRouter rate limit نبود، مدل‌های جایگزین رو امتحان کن
