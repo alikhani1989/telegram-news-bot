@@ -739,7 +739,7 @@ async function callNaraRouter(prompt) {
   const NARA_KEY = process.env.NARA_ROUTER_API_KEY || '';
   if (!NARA_KEY) { console.log('  ⚠️ NARA_ROUTER_API_KEY تنظیم نشده'); return null; }
   const url = 'https://router.bynara.id/v1/chat/completions';
-  const systemMsg = 'شما سردبیر اخبار تلگرامی هستید. فقط JSON خروجی بدهید. قوانین: ۱) فقط JSON خام. هیچ متن دیگری ننویسید. ۲) تیتر: کوتاه (حداکثر ۸ کلمه)، رویدادمحور، با ✴️ شروع شود. هرگز نام شخص در تیتر نیاید! ۳) متن: با 🔸 شروع شود. خط اول: نام + سمّت + فعل. حداکثر ۲ جمله. ۴) مجلس شورای اسلامی → فقط مجلس. ۵) فرمت: {"news":[{"title":"✴️ تیتر","body":"🔸 متن","source_link":"لینک","image_url":"لینک یا خالی"]}';
+  const systemMsg = 'شما سردبیر اخبار تلگرامی هستید. فقط JSON خروجی بدهید. قوانین مهم: ۱) فقط JSON خام. هیچ متن دیگری ننویسید. ۲) تیتر: کوتاه (حداکثر ۸ کلمه)، رویدادمحور، با ✴️ شروع شود. هرگز نام شخص در تیتر نیاید! هرگز تیتر نقل قولی نباشد! ۳) متن: با 🔸 شروع شود. خط اول: نام + سمّت + فعل. حداکثر ۲ جمله. ۴) مجلس شورای اسلامی → فقط مجلس. ۵) فرمت: {"news":[{"title":"✴️ تیتر","body":"🔸 متن","source_link":"لینک","image_url":"لینک یا خالی"]}';
   const models = ['tencent-hy3-free', 'agnes-2.5-flash'];
   for (const model of models) {
     console.log('  🟣 تلاش با NaraRouter: ' + model);
@@ -1188,6 +1188,26 @@ async function sendToTelegram(message, imageUrl, botToken, chatId) {
 // ==========================================
 // JSON parser (improved)
 // ==========================================
+// نرمال‌سازی فرمت خروجی مدل‌ها
+function normalizeNewsItem(item) {
+  // تبدیل text به body
+  if (item.text && !item.body) {
+    item.body = item.text;
+    delete item.text;
+  }
+  // تبدیل headline به title
+  if (item.headline && !item.title) {
+    item.title = item.headline;
+    delete item.headline;
+  }
+  // تبدیل content به body
+  if (item.content && !item.body) {
+    item.body = item.content;
+    delete item.content;
+  }
+  return item;
+}
+
 function safeParseJson(rawText) {
   if (!rawText || rawText.trim().length === 0) return [];
   var raw = rawText;
@@ -1256,7 +1276,7 @@ function safeParseJson(rawText) {
         var obj = JSON.parse(candidate);
         if (obj && Array.isArray(obj.news)) {
           console.log("  \u2705 JSON OK (" + obj.news.length + " news, " + candidate.length + " chars)");
-          return obj.news;
+          return obj.news.map(normalizeNewsItem);
         }
       } catch (e) {
         // Try cleaning control chars
@@ -1265,7 +1285,7 @@ function safeParseJson(rawText) {
           var obj2 = JSON.parse(cleaned);
           if (obj2 && Array.isArray(obj2.news)) {
             console.log("  \u2705 JSON OK (cleaned, " + obj2.news.length + " news)");
-            return obj2.news;
+            return obj2.news.map(normalizeNewsItem);
           }
         } catch (e2) {}
       }
@@ -1284,9 +1304,9 @@ function safeParseJson(rawText) {
       var obj3 = JSON.parse(t.substring(o2, mc + 1));
       if (obj3 && Array.isArray(obj3.news)) {
         console.log("  \u2705 JSON from fallback (pos " + o2 + ")");
-        return obj3.news;
+        return obj3.news.map(normalizeNewsItem);
       }
-      if (Array.isArray(obj3)) return obj3;
+      if (Array.isArray(obj3)) return obj3.map(normalizeNewsItem);
     } catch (e) {}
   }
 
