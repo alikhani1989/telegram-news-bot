@@ -43,8 +43,6 @@ function saveState(state) {
 const DUPLICATE_WINDOW_MS = 30 * 60 * 1000; // حافظه نیم ساعته برای جلوگیری از تکرار
 const QUALITY_LOG_FILE = path.join(__dirname, 'quality-log.json');
 const REVIEW_LOG_FILE = path.join(__dirname, 'review-log.json');
-const NEWS_DB_FILE = path.join(__dirname, 'news-database.json');
-const DAILY_REPORT_FILE = path.join(__dirname, 'daily-quality-report.json');
 
 // ==========================================
 // سیستم بازخورد و اعتبارسنجی کیفیت
@@ -132,139 +130,151 @@ function saveQualityReport(report) {
 }
 
 // ==========================================
-// دیتابیس ذخیره خبرهای منتشر شده
+// چک‌لیست جامع اشتباهات رایج
 // ==========================================
-function loadNewsDatabase() {
-  try {
-    if (fs.existsSync(NEWS_DB_FILE)) {
-      return JSON.parse(fs.readFileSync(NEWS_DB_FILE, 'utf8'));
-    }
-  } catch (e) {}
-  return [];
-}
+const COMMON_MISTAKES = [
+  // اشتباهات نام و سمت
+  { pattern: 'رئیس دفتر ریاست جمهوری', fix: 'رئیس دفتر رئیس‌جمهور', category: 'سمت اشتباه', penalty: 20 },
+  { pattern: 'وزیر محیط زیست', fix: 'رئیس سازمان محیط زیست', category: 'سمت اشتباه', penalty: 20 },
+  { pattern: 'رئیس مجلس شورای اسلامی', fix: 'رئیس مجلس', category: 'سمت اشتباه', penalty: 5 },
+  { pattern: 'نایب رئیس مجلس شورای اسلامی', fix: 'نایب رئیس مجلس', category: 'سمت اشتباه', penalty: 5 },
+  { pattern: 'عضو کمیسیون مجلس', fix: 'عضو کمیسیون', category: 'سمت اشتباه', penalty: 5 },
+  { pattern: 'نماینده مجلس شورای اسلامی', fix: 'نماینده مجلس', category: 'سمت اشتباه', penalty: 5 },
+  // اشتباهات رایج در نام افراد (از تجربه قبلی)
+  { pattern: 'قالباب', fix: 'قالیباف', category: 'نام غلط', penalty: 30 },
+  { pattern: 'نیکزاد ثمرین', fix: 'نیکزاد ثمرین', category: 'نام', penalty: 0 }, // فقط چک کن
+  // اشتباهات مصاحبه
+  { pattern: 'در مصاحبه با', checkOriginal: true, category: 'مصاحبه اشتباه', penalty: 25 },
+  { pattern: 'در گفتگو با', checkOriginal: true, category: 'مصاحبه اشتباه', penalty: 25 },
+];
 
-function saveNewsToDatabase(item, originalText, model) {
-  const db = loadNewsDatabase();
+// ==========================================
+// دیتابیس ذخیره خبرها در state.json (پایدار)
+// ==========================================
+function saveNewsToState(state, item, originalText, model) {
+  if (!state.NEWS_DATABASE) state.NEWS_DATABASE = [];
   const entry = {
     id: Date.now() + '_' + Math.random().toString(36).substr(2, 5),
     timestamp: new Date().toISOString(),
-    title: item.title || '',
-    body: item.body || '',
+    title: (item.title || '').substring(0, 200),
+    body: (item.body || '').substring(0, 500),
     source_link: item.source_link || '',
-    image_url: item.image_url || '',
     model: model || 'unknown',
-    originalText: (originalText || '').substring(0, 3000),
     qualityScore: 0,
     qualityIssues: [],
-    reviewed: false,
-    reviewResult: null
+    reviewed: false
   };
-  db.push(entry);
-  // نگه‌داشتن فقط ۵۰۰ خبر آخر
-  if (db.length > 500) {
-    db.splice(0, db.length - 500);
+  state.NEWS_DATABASE.push(entry);
+  // نگه‌داشتن فقط ۲۰۰ خبر آخر
+  if (state.NEWS_DATABASE.length > 200) {
+    state.NEWS_DATABASE = state.NEWS_DATABASE.slice(-200);
   }
-  fs.writeFileSync(NEWS_DB_FILE, JSON.stringify(db, null, 2), 'utf8');
   console.log('💾 خبر در دیتابیس ذخیره شد: ' + (item.title || '').substring(0, 50));
-  return entry.id;
+}
+
+function trackMistake(state, issueCategory) {
+  if (!state.MISTAKE_STATS) state.MISTAKE_STATS = {};
+  if (!state.MISTAKE_STATS[issueCategory]) state.MISTAKE_STATS[issueCategory] = 0;
+  state.MISTAKE_STATS[issueCategory]++;
 }
 
 // ==========================================
 // بازبینی خودکار کیفیت بعد از انتشار
 // ==========================================
-async function autoReviewPublishedNews(newsItems, sourceTexts) {
+autoReviewPublishedNews = async function(state, newsItems, sourceLinks) {
   console.log('\n🔍 === بازبینی خودکار کیفیت ===');
-  const db = loadNewsDatabase();
   const reviewResults = [];
   
   for (let i = 0; i < newsItems.length; i++) {
     const item = newsItems[i];
-    const originalText = sourceTexts[i] || '';
+    const originalText = ''; // متن اصلی قبلاً خوانده شده
     const issues = [];
     let score = 100;
     
     // ۱. بررسی مصاحبه اشتباه
     const hasInterviewClaim = /مصاحبه با|گفتگو با/.test(item.body);
-    const hasInterviewInOriginal = /مصاحبه|گفتگو|به نقل از/.test(originalText);
-    const hasEventInOriginal = /مراسم|نشست|همایش|کنفرانس|جشن|افتتاح|بازدید/.test(originalText);
-    
-    if (hasInterviewClaim && !hasInterviewInOriginal && hasEventInOriginal) {
-      issues.push('❌ مصاحبه اشتباه: خبر فقط گزارش مراسم/نشست است، مصاحبه نیست');
-      score -= 25;
+    if (hasInterviewClaim) {
+      // اگه مصاحبه ذکر شده ولی در متن اصلی نبوده
+      issues.push('⚠️ مصاحبه ذکر شده - نیاز به بررسی دستی');
+      score -= 10;
+      trackMistake(state, 'مصاحبه اشتباه');
     }
     
-    // ۲. بررسی نام افراد
-    // استخراج نام از متن اصلی
-    const originalNames = originalText.match(/([\u0600-\u06FF]+\s+[\u0600-\u06FF]+)\s+(گفت|نوشت|اظهار کرد|افزود|تاکید کرد|خاطرنشان کرد)/g) || [];
-    const summaryNames = item.body.match(/([\u0600-\u06FF]+\s+[\u0600-\u06FF]+)\s+(عضو|نماینده|رئیس|نایب|سخنگو)/g) || [];
-    
-    if (summaryNames.length > 0 && originalNames.length > 0) {
-      const summaryName = summaryNames[0].split(/\s+(عضو|نماینده|رئیس|نایب|سخنگو)/)[0].trim();
-      const originalName = originalNames[0].split(/\s+(گفت|نوشت|اظهار|افزود|تاکید)/)[0].trim();
-      
-      if (summaryName !== originalName && !originalText.includes(summaryName)) {
-        issues.push('❌ نام اشتباه: خلاصه «' + summaryName + '» ولی متن اصلی «' + originalName + '»');
-        score -= 30;
+    // ۲. بررسی چک‌لیست اشتباهات رایج
+    for (const mistake of COMMON_MISTAKES) {
+      if (mistake.fix && item.body && item.body.includes(mistake.pattern) && mistake.pattern !== mistake.fix) {
+        issues.push('❌ ' + mistake.category + ': «' + mistake.pattern + '» → «' + mistake.fix + '»');
+        score -= mistake.penalty;
+        trackMistake(state, mistake.category);
       }
     }
     
-    // ۳. بررسی سمت افراد
-    const titlePatterns = [
-      { fake: 'رئیس دفتر ریاست جمهوری', real: 'رئیس دفتر رئیس‌جمهور' },
-      { fake: 'وزیر محیط زیست', real: 'رئیس سازمان محیط زیست' },
-      { fake: 'رئیس مجلس شورای اسلامی', real: 'رئیس مجلس' },
-    ];
-    for (const tp of titlePatterns) {
-      if (item.body.includes(tp.fake)) {
-        issues.push('❌ سمت اشتباه: «' + tp.fake + '» باید «' + tp.real + '» باشد');
-        score -= 20;
-      }
+    // ۳. بررسی نام افراد
+    const summaryNames = (item.body || '').match(/([\u0600-\u06FF]+\s+[\u0600-\u06FF]+)\s+(عضو|نماینده|رئیس|نایب|سخنگو)/g) || [];
+    if (summaryNames.length === 0 && item.body && item.body.length > 50) {
+      issues.push('⚠️ نام و سمّت شخص در خط اول متن پیدا نشد');
+      score -= 10;
     }
     
     // ۴. بررسی طول متن
     if (item.body && item.body.length < 100) {
       issues.push('⚠️ متن خیلی کوتاه: ' + item.body.length + ' کاراکتر');
       score -= 15;
+      trackMistake(state, 'متن کوتاه');
     }
     
     // ۵. بررسی مجلس شورای اسلامی
     if (item.body && item.body.includes('مجلس شورای اسلامی')) {
       issues.push('⚠️ مجلس شورای اسلامی → مجلس');
       score -= 5;
+      trackMistake(state, 'مجلس شورای اسلامی');
     }
     
     // ۶. بررسی حوزه انتخابیه
     if (item.body && /نماینده مردم [^،]+ در مجلس/.test(item.body)) {
       issues.push('⚠️ حوزه انتخابیه آورده شده');
       score -= 5;
+      trackMistake(state, 'حوزه انتخابیه');
     }
     
-    // ۷. بررسی منبع ذکر شده
-    if (hasInterviewClaim) {
-      const sourceMatch = item.body.match(/مصاحبه با ([^،]+)|گفتگو با ([^،]+)/);
-      if (sourceMatch) {
-        const claimedSource = sourceMatch[1] || sourceMatch[2];
-        if (!originalText.includes(claimedSource)) {
-          issues.push('❌ منبع اشتباه: «' + claimedSource + '» در متن اصلی نیست');
-          score -= 15;
+    // ۷. بررسی تیتر کلی/مبهم
+    if (item.title) {
+      const weakTitlePatterns = ['بررسی', 'نشست', 'بازدید', 'گفتگو', 'مصاحبه'];
+      for (const weak of weakTitlePatterns) {
+        if (item.title.replace('✴️', '').trim().startsWith(weak)) {
+          issues.push('⚠️ تیتر کلی: شروع با «' + weak + '»');
+          score -= 10;
+          trackMistake(state, 'تیتر کلی');
+          break;
         }
       }
+    }
+    
+    // ۸. بررسی «وی» به جای نام
+    if (item.body && /\bوی\b/.test(item.body)) {
+      issues.push('⚠️ کلمه «وی» استفاده شده به جای نام');
+      score -= 10;
+      trackMistake(state, 'استفاده از وی');
+    }
+    
+    // ۹. بررسی عبارات خشک
+    if (item.body && /اظهار کرد|خاطرنشان کرد|تصریح کرد/.test(item.body)) {
+      issues.push('⚠️ عبارات خشک خبری');
+      score -= 5;
+      trackMistake(state, 'عبارات خشک');
     }
     
     score = Math.max(0, score);
     
     // ذخیره نتیجه در دیتابیس
-    for (const entry of db) {
-      if (entry.source_link === item.source_link && !entry.reviewed) {
-        entry.qualityScore = score;
-        entry.qualityIssues = issues;
-        entry.reviewed = true;
-        entry.reviewResult = {
-          timestamp: new Date().toISOString(),
-          score: score,
-          issues: issues
-        };
-        break;
+    if (state.NEWS_DATABASE) {
+      for (const entry of state.NEWS_DATABASE) {
+        if (entry.source_link === item.source_link && !entry.reviewed) {
+          entry.qualityScore = score;
+          entry.qualityIssues = issues;
+          entry.reviewed = true;
+          break;
+        }
       }
     }
     
@@ -277,9 +287,6 @@ async function autoReviewPublishedNews(newsItems, sourceTexts) {
     
     console.log('  📊 ' + (item.title || '').substring(0, 40) + ': ' + score + '/100' + (issues.length > 0 ? ' (' + issues.length + ' مشکل)' : ''));
   }
-  
-  // ذخیره دیتابیس آپدیت شده
-  fs.writeFileSync(NEWS_DB_FILE, JSON.stringify(db, null, 2), 'utf8');
   
   // محاسبه نمره میانگین
   const avgScore = reviewResults.length > 0 
@@ -295,13 +302,13 @@ async function autoReviewPublishedNews(newsItems, sourceTexts) {
 // ==========================================
 // گزارش روزانه کیفیت
 // ==========================================
-function generateDailyReport() {
-  const db = loadNewsDatabase();
+function generateDailyReport(state) {
+  const db = state.NEWS_DATABASE || [];
   const today = getTehranDateStr();
   const todayEntries = db.filter(e => {
     const d = new Date(e.timestamp);
-    const tehranDate = getTehranDate();
-    return d.toISOString().substring(0, 10) === tehranDate.toISOString().substring(0, 10);
+    const t = getTehranDate();
+    return d.toISOString().substring(0, 10) === t.toISOString().substring(0, 10);
   });
   
   if (todayEntries.length === 0) {
@@ -342,14 +349,10 @@ function generateDailyReport() {
     .slice(0, 5)
     .map(([issue, count]) => ({ issue, count }));
   
-  // ذخیره گزارش
-  fs.writeFileSync(DAILY_REPORT_FILE, JSON.stringify(report, null, 2), 'utf8');
-  console.log('📊 گزارش روزانه ذخیره شد: ' + today);
-  
   return report;
 }
 
-function formatDailyReport(report) {
+function formatDailyReport(report, state) {
   if (!report) return '📊 گزارش روزانه: خبری منتشر نشد';
   
   let msg = '📊 <b>گزارش کیفیت روزانه</b>\n';
@@ -366,9 +369,18 @@ function formatDailyReport(report) {
     msg += '  • ' + model + ': ' + count + ' خبر\n';
   }
   
+  // آمار اشتباهات تکراری
+  if (state.MISTAKE_STATS && Object.keys(state.MISTAKE_STATS).length > 0) {
+    msg += '\n🔄 <b>آمار اشتباهات تکراری</b>:\n';
+    const sorted = Object.entries(state.MISTAKE_STATS).sort((a, b) => b[1] - a[1]);
+    for (const [category, count] of sorted.slice(0, 5)) {
+      msg += '  • ' + category + ': ' + count + ' بار\n';
+    }
+  }
+  
   // مشکلات رایج
   if (report.topIssues.length > 0) {
-    msg += '\n⚠️ مشکلات رایج:\n';
+    msg += '\n⚠️ مشکلات امروز:\n';
     for (const issue of report.topIssues) {
       msg += '  • ' + issue.issue + ' (' + issue.count + ' بار)\n';
     }
@@ -2058,8 +2070,7 @@ async function main() {
           timestamp: Date.now()
         });
         // ذخیره در دیتابیس برای بازبینی خودکار
-        const originalText = newsArray[i] && newsArray[i].source_link ? (await fetchArticleText(newsArray[i].source_link) || '') : '';
-        saveNewsToDatabase(item, originalText, usedModel);
+        saveNewsToState(state, item, '', usedModel);
       } else {
         console.log("  ❌ خطا:", result.description || JSON.stringify(result));
       }
@@ -2081,7 +2092,7 @@ async function main() {
 
     // بازبینی خودکار کیفیت بعد از انتشار
     console.log('\n🔍 === بازبینی خودکار بعد از انتشار ===');
-    const autoReviewResult = await autoReviewPublishedNews(uniqueNews, newsArray.map(n => n.source_link || ''));
+    const autoReviewResult = await autoReviewPublishedNews(state, uniqueNews, newsArray.map(n => n.source_link || ''));
     
     // بازخوانی بعد از انتشار
     const reviewReport = await reviewPublishedNews(DESTINATION_CHAT_ID, recentTitles);
@@ -2091,9 +2102,9 @@ async function main() {
     
     // گزارش روزانه (هر ۲ ساعت)
     if (shouldSendReport(state)) {
-      const dailyReport = generateDailyReport();
+      const dailyReport = generateDailyReport(state);
       if (dailyReport) {
-        const dailyMsg = formatDailyReport(dailyReport);
+        const dailyMsg = formatDailyReport(dailyReport, state);
         try {
           await httpPost(
             'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage',
