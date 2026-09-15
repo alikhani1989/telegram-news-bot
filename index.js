@@ -1838,6 +1838,9 @@ async function main() {
     let usedModel = '';
     
     console.log("  🥇 تلاش با Nemotron...");
+    console.log("  🔑 OPENROUTER_API_KEY: " + (OPENROUTER_API_KEY ? 'تنظیم شده (' + OPENROUTER_API_KEY.substring(0, 8) + '...)' : '❌ تنظیم نشده'));
+    console.log("  🔑 NARA_ROUTER_API_KEY: " + ((process.env.NARA_ROUTER_API_KEY || '') ? 'تنظیم شده' : '❌ تنظیم نشده'));
+    console.log("  🔑 GROQ_API_KEY: " + ((process.env.GROQ_API_KEY || '') ? 'تنظیم شده' : '❌ تنظیم نشده'));
     const result = await callOpenRouter(prompt, OPENROUTER_API_KEY);
     if (result.status === 'success') {
       aiText = result.content;
@@ -1854,6 +1857,9 @@ async function main() {
       aiText = await callNaraRouter(prompt);
       if (aiText) {
         usedModel = 'NaraRouter';
+        console.log('  ✅ NaraRouter موفق بود!');
+      } else {
+        console.log('  ❌ NaraRouter ناموفق بود.');
       }
     }
     // اگه NaraRouter هم کار نکرد، Groq رو امتحان کن (سهمیه جداگانه)
@@ -1862,6 +1868,9 @@ async function main() {
       aiText = await callGroq(prompt);
       if (aiText) {
         usedModel = 'Groq';
+        console.log('  ✅ Groq موفق بود!');
+      } else {
+        console.log('  ❌ Groq ناموفق بود.');
       }
     }
     // اگه NaraRouter هم کار نکرد و OpenRouter rate limit نبود، مدل‌های جایگزین رو امتحان کن
