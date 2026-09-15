@@ -2028,6 +2028,11 @@ async function main() {
       const item = uniqueNews[i];
       if (!item.title || !item.body) continue;
 
+      // اصلاح فاصله بین بند‌ها: اگر 🔸 بدون \n\n قبلش اومده، اضافه کن
+      item.body = item.body.replace(/([^\n])\s*(🔸)/g, '$1\n\n$2');
+      // اگر چند 🔸 پشت هم اومده، فقط یکی باشه
+      item.body = item.body.replace(/(🔸[^\n]*?)\n*🔸/g, '$1\n\n🔸');
+
       item.body = item.body.replace(/مجلس شورای اسلامی/g, "مجلس");
       item.title = item.title.replace(/مجلس شورای اسلامی/g, "مجلس");
       item.body = item.body.replace(/صفطولانی/g, "صف طولانی");
@@ -2044,7 +2049,9 @@ async function main() {
       // حذف تکرار مجلس: عضو کمیسیون X مجلس → عضو کمیسیون X
       item.body = item.body.replace(/مجلس مجلس/g, ' مجلس');
       item.body = item.body.replace(/مجلس\s+مجلس/g, 'مجلس');
-      item.body = item.body.replace(/\s+/g, ' ').trim();
+      // حفظ فاصله بین بند‌ها (\n\n) و حذف فاصله‌های اضافی
+      item.body = item.body.replace(/([^\n])\n([^\n])/g, '$1\n$2');
+      item.body = item.body.replace(/ {2,}/g, ' ').trim();
       
       // اصلاح خودکار تیتر
       item.title = fixTitle(item.title, item.body);
