@@ -43,6 +43,8 @@ function saveState(state) {
 const DUPLICATE_WINDOW_MS = 30 * 60 * 1000; // حافظه نیم ساعته برای جلوگیری از تکرار
 const QUALITY_LOG_FILE = path.join(__dirname, 'quality-log.json');
 const REVIEW_LOG_FILE = path.join(__dirname, 'review-log.json');
+const NEWS_DB_FILE = path.join(__dirname, 'news-database.json');
+const DAILY_REPORT_FILE = path.join(__dirname, 'daily-quality-report.json');
 
 // ==========================================
 // سیستم بازخورد و اعتبارسنجی کیفیت
@@ -127,6 +129,255 @@ function saveQualityReport(report) {
   if (existing.length > 50) existing = existing.slice(-50);
   fs.writeFileSync(QUALITY_LOG_FILE, JSON.stringify(existing, null, 2), 'utf8');
   console.log('📋 گزارش کیفیت ذخیره شد. نمره: ' + report.avgScore + '/100');
+}
+
+// ==========================================
+// دیتابیس ذخیره خبرهای منتشر شده
+// ==========================================
+function loadNewsDatabase() {
+  try {
+    if (fs.existsSync(NEWS_DB_FILE)) {
+      return JSON.parse(fs.readFileSync(NEWS_DB_FILE, 'utf8'));
+    }
+  } catch (e) {}
+  return [];
+}
+
+function saveNewsToDatabase(item, originalText, model) {
+  const db = loadNewsDatabase();
+  const entry = {
+    id: Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+    timestamp: new Date().toISOString(),
+    title: item.title || '',
+    body: item.body || '',
+    source_link: item.source_link || '',
+    image_url: item.image_url || '',
+    model: model || 'unknown',
+    originalText: (originalText || '').substring(0, 3000),
+    qualityScore: 0,
+    qualityIssues: [],
+    reviewed: false,
+    reviewResult: null
+  };
+  db.push(entry);
+  // نگه‌داشتن فقط ۵۰۰ خبر آخر
+  if (db.length > 500) {
+    db.splice(0, db.length - 500);
+  }
+  fs.writeFileSync(NEWS_DB_FILE, JSON.stringify(db, null, 2), 'utf8');
+  console.log('💾 خبر در دیتابیس ذخیره شد: ' + (item.title || '').substring(0, 50));
+  return entry.id;
+}
+
+// ==========================================
+// بازبینی خودکار کیفیت بعد از انتشار
+// ==========================================
+async function autoReviewPublishedNews(newsItems, sourceTexts) {
+  console.log('\n🔍 === بازبینی خودکار کیفیت ===');
+  const db = loadNewsDatabase();
+  const reviewResults = [];
+  
+  for (let i = 0; i < newsItems.length; i++) {
+    const item = newsItems[i];
+    const originalText = sourceTexts[i] || '';
+    const issues = [];
+    let score = 100;
+    
+    // ۱. بررسی مصاحبه اشتباه
+    const hasInterviewClaim = /مصاحبه با|گفتگو با/.test(item.body);
+    const hasInterviewInOriginal = /مصاحبه|گفتگو|به نقل از/.test(originalText);
+    const hasEventInOriginal = /مراسم|نشست|همایش|کنفرانس|جشن|افتتاح|بازدید/.test(originalText);
+    
+    if (hasInterviewClaim && !hasInterviewInOriginal && hasEventInOriginal) {
+      issues.push('❌ مصاحبه اشتباه: خبر فقط گزارش مراسم/نشست است، مصاحبه نیست');
+      score -= 25;
+    }
+    
+    // ۲. بررسی نام افراد
+    // استخراج نام از متن اصلی
+    const originalNames = originalText.match(/([\u0600-\u06FF]+\s+[\u0600-\u06FF]+)\s+(گفت|نوشت|اظهار کرد|افزود|تاکید کرد|خاطرنشان کرد)/g) || [];
+    const summaryNames = item.body.match(/([\u0600-\u06FF]+\s+[\u0600-\u06FF]+)\s+(عضو|نماینده|رئیس|نایب|سخنگو)/g) || [];
+    
+    if (summaryNames.length > 0 && originalNames.length > 0) {
+      const summaryName = summaryNames[0].split(/\s+(عضو|نماینده|رئیس|نایب|سخنگو)/)[0].trim();
+      const originalName = originalNames[0].split(/\s+(گفت|نوشت|اظهار|افزود|تاکید)/)[0].trim();
+      
+      if (summaryName !== originalName && !originalText.includes(summaryName)) {
+        issues.push('❌ نام اشتباه: خلاصه «' + summaryName + '» ولی متن اصلی «' + originalName + '»');
+        score -= 30;
+      }
+    }
+    
+    // ۳. بررسی سمت افراد
+    const titlePatterns = [
+      { fake: 'رئیس دفتر ریاست جمهوری', real: 'رئیس دفتر رئیس‌جمهور' },
+      { fake: 'وزیر محیط زیست', real: 'رئیس سازمان محیط زیست' },
+      { fake: 'رئیس مجلس شورای اسلامی', real: 'رئیس مجلس' },
+    ];
+    for (const tp of titlePatterns) {
+      if (item.body.includes(tp.fake)) {
+        issues.push('❌ سمت اشتباه: «' + tp.fake + '» باید «' + tp.real + '» باشد');
+        score -= 20;
+      }
+    }
+    
+    // ۴. بررسی طول متن
+    if (item.body && item.body.length < 100) {
+      issues.push('⚠️ متن خیلی کوتاه: ' + item.body.length + ' کاراکتر');
+      score -= 15;
+    }
+    
+    // ۵. بررسی مجلس شورای اسلامی
+    if (item.body && item.body.includes('مجلس شورای اسلامی')) {
+      issues.push('⚠️ مجلس شورای اسلامی → مجلس');
+      score -= 5;
+    }
+    
+    // ۶. بررسی حوزه انتخابیه
+    if (item.body && /نماینده مردم [^،]+ در مجلس/.test(item.body)) {
+      issues.push('⚠️ حوزه انتخابیه آورده شده');
+      score -= 5;
+    }
+    
+    // ۷. بررسی منبع ذکر شده
+    if (hasInterviewClaim) {
+      const sourceMatch = item.body.match(/مصاحبه با ([^،]+)|گفتگو با ([^،]+)/);
+      if (sourceMatch) {
+        const claimedSource = sourceMatch[1] || sourceMatch[2];
+        if (!originalText.includes(claimedSource)) {
+          issues.push('❌ منبع اشتباه: «' + claimedSource + '» در متن اصلی نیست');
+          score -= 15;
+        }
+      }
+    }
+    
+    score = Math.max(0, score);
+    
+    // ذخیره نتیجه در دیتابیس
+    for (const entry of db) {
+      if (entry.source_link === item.source_link && !entry.reviewed) {
+        entry.qualityScore = score;
+        entry.qualityIssues = issues;
+        entry.reviewed = true;
+        entry.reviewResult = {
+          timestamp: new Date().toISOString(),
+          score: score,
+          issues: issues
+        };
+        break;
+      }
+    }
+    
+    reviewResults.push({
+      title: (item.title || '').substring(0, 60),
+      source_link: item.source_link || '',
+      score: score,
+      issues: issues
+    });
+    
+    console.log('  📊 ' + (item.title || '').substring(0, 40) + ': ' + score + '/100' + (issues.length > 0 ? ' (' + issues.length + ' مشکل)' : ''));
+  }
+  
+  // ذخیره دیتابیس آپدیت شده
+  fs.writeFileSync(NEWS_DB_FILE, JSON.stringify(db, null, 2), 'utf8');
+  
+  // محاسبه نمره میانگین
+  const avgScore = reviewResults.length > 0 
+    ? Math.round(reviewResults.reduce((s, r) => s + r.score, 0) / reviewResults.length)
+    : 0;
+  
+  console.log('\n📈 نمره میانگین: ' + avgScore + '/100');
+  console.log('📋 تعداد مشکلات: ' + reviewResults.reduce((s, r) => s + r.issues.length, 0));
+  
+  return { items: reviewResults, avgScore: avgScore };
+}
+
+// ==========================================
+// گزارش روزانه کیفیت
+// ==========================================
+function generateDailyReport() {
+  const db = loadNewsDatabase();
+  const today = getTehranDateStr();
+  const todayEntries = db.filter(e => {
+    const d = new Date(e.timestamp);
+    const tehranDate = getTehranDate();
+    return d.toISOString().substring(0, 10) === tehranDate.toISOString().substring(0, 10);
+  });
+  
+  if (todayEntries.length === 0) {
+    return null;
+  }
+  
+  const reviewed = todayEntries.filter(e => e.reviewed);
+  const withIssues = reviewed.filter(e => e.qualityIssues && e.qualityIssues.length > 0);
+  const avgScore = reviewed.length > 0 
+    ? Math.round(reviewed.reduce((s, e) => s + e.qualityScore, 0) / reviewed.length)
+    : 0;
+  
+  const report = {
+    date: today,
+    totalNews: todayEntries.length,
+    reviewedCount: reviewed.length,
+    withIssuesCount: withIssues.length,
+    avgScore: avgScore,
+    models: {},
+    topIssues: []
+  };
+  
+  // شمارش مدل‌ها
+  for (const e of todayEntries) {
+    report.models[e.model] = (report.models[e.model] || 0) + 1;
+  }
+  
+  // جمع‌آوری مشکلات رایج
+  const issueCounts = {};
+  for (const e of withIssues) {
+    for (const issue of e.qualityIssues) {
+      const key = issue.substring(0, 50);
+      issueCounts[key] = (issueCounts[key] || 0) + 1;
+    }
+  }
+  report.topIssues = Object.entries(issueCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([issue, count]) => ({ issue, count }));
+  
+  // ذخیره گزارش
+  fs.writeFileSync(DAILY_REPORT_FILE, JSON.stringify(report, null, 2), 'utf8');
+  console.log('📊 گزارش روزانه ذخیره شد: ' + today);
+  
+  return report;
+}
+
+function formatDailyReport(report) {
+  if (!report) return '📊 گزارش روزانه: خبری منتشر نشد';
+  
+  let msg = '📊 <b>گزارش کیفیت روزانه</b>\n';
+  msg += '📅 ' + report.date + '\n';
+  msg += '━━━━━━━━━━━━━━━━━\n\n';
+  msg += '📰 کل اخبار: ' + report.totalNews + '\n';
+  msg += '🔍 بررسی شده: ' + report.reviewedCount + '\n';
+  msg += '⚠️ دارای مشکل: ' + report.withIssuesCount + '\n';
+  msg += '📈 نمره میانگین: <b>' + report.avgScore + '/100</b>\n\n';
+  
+  // مدل‌ها
+  msg += '🤖 مدل‌های استفاده شده:\n';
+  for (const [model, count] of Object.entries(report.models)) {
+    msg += '  • ' + model + ': ' + count + ' خبر\n';
+  }
+  
+  // مشکلات رایج
+  if (report.topIssues.length > 0) {
+    msg += '\n⚠️ مشکلات رایج:\n';
+    for (const issue of report.topIssues) {
+      msg += '  • ' + issue.issue + ' (' + issue.count + ' بار)\n';
+    }
+  }
+  
+  msg += '\n━━━━━━━━━━━━━━━━━\n';
+  msg += '🤖 خبرخوان مجلس | @selectednewsmajlis';
+  
+  return msg;
 }
 
 // ==========================================
@@ -1806,6 +2057,9 @@ async function main() {
           source_link: item.source_link || "",
           timestamp: Date.now()
         });
+        // ذخیره در دیتابیس برای بازبینی خودکار
+        const originalText = newsArray[i] && newsArray[i].source_link ? (await fetchArticleText(newsArray[i].source_link) || '') : '';
+        saveNewsToDatabase(item, originalText, usedModel);
       } else {
         console.log("  ❌ خطا:", result.description || JSON.stringify(result));
       }
@@ -1825,10 +2079,32 @@ async function main() {
       saveQualityReport(qualityReport);
     }
 
+    // بازبینی خودکار کیفیت بعد از انتشار
+    console.log('\n🔍 === بازبینی خودکار بعد از انتشار ===');
+    const autoReviewResult = await autoReviewPublishedNews(uniqueNews, newsArray.map(n => n.source_link || ''));
+    
     // بازخوانی بعد از انتشار
     const reviewReport = await reviewPublishedNews(DESTINATION_CHAT_ID, recentTitles);
     if (reviewReport) {
       saveReviewReport(reviewReport);
+    }
+    
+    // گزارش روزانه (هر ۲ ساعت)
+    if (shouldSendReport(state)) {
+      const dailyReport = generateDailyReport();
+      if (dailyReport) {
+        const dailyMsg = formatDailyReport(dailyReport);
+        try {
+          await httpPost(
+            'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage',
+            JSON.stringify({ chat_id: DESTINATION_CHAT_ID, text: dailyMsg, parse_mode: 'HTML', disable_web_page_preview: true }),
+            { 'Content-Type': 'application/json' }
+          );
+          console.log('📊 گزارش روزانه ارسال شد');
+        } catch (e) {
+          console.log('⚠️ خطا در ارسال گزارش روزانه:', e.message);
+        }
+      }
     }
 
     // ارسال گزارش به تلگرام (با رعایت فاصله زمانی)
