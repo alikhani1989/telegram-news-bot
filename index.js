@@ -2164,5 +2164,12 @@ async function runOnce() {
 }
 
 runOnce().then(() => {
-  setInterval(() => { runOnce(); }, INTERVAL_MINUTES * 60 * 1000);
+  // اگر روی GitHub Actions هستیم، فقط یک بار اجرا بشه و تموم بشه
+  if (process.env.GITHUB_ACTIONS) {
+    console.log('✅ اجرا روی GitHub Actions تموم شد.');
+    process.exit(0);
+  } else {
+    // حالت محلی: هر ۱۵ دقیقه اجرا بشه
+    setInterval(() => { runOnce(); }, INTERVAL_MINUTES * 60 * 1000);
+  }
 });
