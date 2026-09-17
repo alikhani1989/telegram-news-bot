@@ -1946,7 +1946,7 @@ async function main() {
       }
     }
 
-    // بازیابی عکس - اولویت: OG تصویر مقاله > عکس تلگرام
+    // بازیابی عکس و لینک منبع - اولویت: OG تصویر مقاله > عکس تلگرام
     for (let i = 0; i < newsArray.length; i++) {
       const item = newsArray[i];
       // پیدا کردن newMessage مربوطه بر اساس source_link
@@ -1966,6 +1966,13 @@ async function main() {
             originalMsg = m;
             break;
           }
+        }
+      }
+      // اگر source_link از مدل نیومد، از لینک تلگرام یا RSS استفاده کن
+      if (!item.source_link || item.source_link.length < 10) {
+        if (originalMsg && originalMsg.newsLink) {
+          item.source_link = originalMsg.newsLink;
+          console.log('  🔗 لینک منبع از تلگرام:', item.source_link.substring(0, 60));
         }
       }
       let hasValidImage = false;
@@ -2028,6 +2035,12 @@ async function main() {
       uniqueNews.push(item);
     }
 
+    // نمایش وضعیت عکس و لینک هر خبر
+    for (const item of uniqueNews) {
+      const hasImage = item.image_url && item.image_url.startsWith('http') && item.image_url.length > 20;
+      const hasLink = item.source_link && item.source_link.startsWith('http') && item.source_link.length > 10;
+      console.log('  📰 ' + (item.title || '').substring(0, 40) + ': عکس=' + (hasImage ? '✅' : '❌') + ' | لینک=' + (hasLink ? '✅' : '❌'));
+    }
     if (uniqueNews.length === 0) {
       console.log("📭 همه تکراری بودند.");
       state.PUBLISHED_NEWS = publishedNews;
