@@ -1970,9 +1970,21 @@ async function main() {
       }
       // اگر source_link از مدل نیومد، از لینک تلگرام یا RSS استفاده کن
       if (!item.source_link || item.source_link.length < 10) {
+        // ۱. از تلگرام
         if (originalMsg && originalMsg.newsLink) {
           item.source_link = originalMsg.newsLink;
           console.log('  🔗 لینک منبع از تلگرام:', item.source_link.substring(0, 60));
+        }
+        // ۲. از RSS: جستجو در recentMessages بر اساس تیتر
+        if (!item.source_link || item.source_link.length < 10) {
+          const titleWords = (item.title || '').replace(/[✴️🔸]/g, '').trim().split(/\s+/).filter(w => w.length > 3);
+          if (titleWords.length >= 2) {
+            const rssMatch = recentMessages.match(new RegExp('\[لینک منبع:\s*(https?://[^\]]+)\][\s\S]*?' + titleWords[0], 'i'));
+            if (rssMatch) {
+              item.source_link = rssMatch[1];
+              console.log('  🔗 لینک منبع از RSS:', item.source_link.substring(0, 60));
+            }
+          }
         }
       }
       let hasValidImage = false;
@@ -2063,9 +2075,7 @@ async function main() {
       // اگر چند 🔸 پشت هم اومده، فقط یکی باشه
       item.body = item.body.replace(/(🔸[^\n]*?)\n*🔸/g, '$1\n\n🔸');
 
-      item.body = item.body.replace(/مجلس شورای اسلامی/g, "مجلس");
-      item.title = item.title.replace(/مجلس شورای اسلامی/g, "مجلس");
-      item.body = item.body.replace(/صفطولانی/g, "صف طولانی");
+
       // حذف «مصاحبه» اشتباه اگر خبر فقط گزارش باشد
       // اگر متن شامل «گزارش»، «بازدید»، «نشست»، «افتتاح» باشد بدون کلمه «مصاحبه» یا «گفتگو» صریح
       const hasInterview = /مصاحبه|گفتگو/.test(item.body);
@@ -2079,6 +2089,17 @@ async function main() {
       // حذف تکرار مجلس: عضو کمیسیون X مجلس → عضو کمیسیون X
       item.body = item.body.replace(/مجلس مجلس/g, ' مجلس');
       item.body = item.body.replace(/مجلس\s+مجلس/g, 'مجلس');
+      // اصلاح غلط املایی رایج
+      item.body = item.body.replace(/صفطولانی/g, 'صف طولانی');
+      item.body = item.body.replace(/قالباب/g, 'قالیباف');
+      item.body = item.body.replace(/اظهار داشت/g, 'گفت');
+      item.body = item.body.replace(/اظهار کرد/g, 'گفت');
+      item.body = item.body.replace(/خاطرنشان کرد/g, 'گفت');
+      item.body = item.body.replace(/تصریح کرد/g, 'گفت');
+      item.body = item.body.replace(/وی افزود/g, 'او همچنین گفت');
+      item.body = item.body.replace(/وی گفت/g, function(match) { return match; });
+      item.body = item.body.replace(/مجلس شورای اسلامی/g, 'مجلس');
+      item.title = item.title.replace(/مجلس شورای اسلامی/g, 'مجلس');
       // حفظ فاصله بین بند‌ها (\n\n) و حذف فاصله‌های اضافی
       item.body = item.body.replace(/([^\n])\n([^\n])/g, '$1\n$2');
       item.body = item.body.replace(/ {2,}/g, ' ').trim();
@@ -2089,6 +2110,16 @@ async function main() {
       // پاکسازی کاراکترهای انگلیسی ناخواسته از انتهای متن
       item.body = item.body.replace(/\s*[A-Za-z]{3,}\s*$/g, '').trim();
       item.title = item.title.replace(/\s*[A-Za-z]{3,}\s*$/g, '').trim();
+      
+      // لاگ وضعیت خبر
+      console.log('  📰 [' + (usedModel || '?') + '] ' + (item.title || '').substring(0, 50) + ' | عکس=' + (imageUrl ? '✅' : '❌') + ' | لینک=' + (item.source_link && item.source_link.length > 5 ? '✅' : '❌') + ' | طول متن=' + (item.body || '').length);
+      
+      // دروازه کیفیت: اگر متن خیلی کوتاه بود، ارسال نکن
+      const bodyText = (item.body || '').split(String.fromCharCode(10)).join('').trim();
+      if (bodyText.length < 80) {
+        console.log('  ⛔ رد شد: متن خیلی کوتاه (' + bodyText.length + ' کاراکتر)');
+        continue;
+      }
       
       let finalMessage = "<b>" + item.title + "</b>\n\n" + item.body + "\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net";
       if (item.source_link && item.source_link.length > 5) {
