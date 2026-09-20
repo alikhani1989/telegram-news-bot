@@ -1137,14 +1137,14 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
-  // اولویت اول: Nemotron Ultra (بهترین کیفیت رایگان، 1M context)
+  // اولویت اول: DeepSeek V4 Flash (بهترین کیفیت رایگان، فارسی عالی)
+  'deepseek/deepseek-v4-flash-0731:free',
+  // اولویت دوم: Qwen3.8 (کیفیت بالا، فارسی خوب)
+  'qwen/qwen3.8-27b:free',
+  // اولویت سوم: Nemotron Ultra (اگر بالایی‌ها خطا دادن)
   'nvidia/nemotron-3-ultra-550b-a55b:free',
-  // اولویت دوم: Nemotron Super (اگر Ultra خطا داد)
-  'nvidia/nemotron-3-super-120b-a12b:free',
-  // اولویت سوم: Stealth Ox Alpha (رایگان)
-  'stealth/ox-alpha:free',
-  // اولویت چهارم: Gemma 4 (سهمیه جداگانه)
-  'google/gemma-4-31b-it:free',
+  // اولویت چهارم: Z.ai GLM 5.2
+  'z-ai/glm-5.2:free',
 ];
 
 
@@ -1235,10 +1235,11 @@ async function callFallbackModels(prompt) {
   // مدل‌های رایگان OpenRouter
   // توجه: سهمیه ۵۰ درخواست در روز بین همه مدل‌ها مشترکه
   const fallbackModels = [
-    'nvidia/nemotron-3.5-lightning:free',
+    'deepseek/deepseek-v4-flash-0731:free',
+    'qwen/qwen3.8-27b:free',
+    'nvidia/nemotron-3-ultra-550b-a55b:free',
+    'z-ai/glm-5.2:free',
     'google/gemma-4-31b-it:free',
-    'poolside/laguna-s-2.1:free',
-    'dots-studio/dots-3-note-preview:free',
   ];
   const url = 'https://openrouter.ai/api/v1/chat/completions';
   const systemMsg = 'شما یک سردبیر حرفه‌ای خبر تلگرام هستید. فقط JSON خروجی بدهید.' + '\n' +
