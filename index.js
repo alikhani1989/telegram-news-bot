@@ -1973,19 +1973,28 @@ async function main() {
           item.source_link = originalMsg.newsLink;
           console.log('  🔗 لینک منبع از تلگرام:', item.source_link.substring(0, 60));
         }
-        // ۲. از RSS: جستجو در recentMessages بر اساس تیتر
+        // ۲. از RSS: جستجو در recentMessages بر اساس تیتر (بدون regex)
         if (!item.source_link || item.source_link.length < 10) {
-          const titleWords = (item.title || '').replace(/[✴️🔸]/g, '').trim().split(/\s+/).filter(w => w.length > 3);
+          const cleanTitle = (item.title || '').replace(/[✴️🔸]/g, '').trim();
+          const titleWords = cleanTitle.split(/\s+/).filter(w => w.length > 3);
           if (titleWords.length >= 2) {
-            try {
-              const escapedWord = titleWords[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-              const rssMatch = recentMessages.match(new RegExp('\[لینک منبع:\s*(https?://[^\]]+)\][\s\S]*?' + escapedWord, 'i'));
-              if (rssMatch) {
-                item.source_link = rssMatch[1];
-                console.log('  🔗 لینک منبع از RSS:', item.source_link.substring(0, 60));
+            // جستجوی ساده متنی: خطوط recentMessages رو ببین
+            const lines = recentMessages.split('\n');
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i];
+              // اگه خط شامل لینک منبع باشه
+              if (line.includes('[لینک منبع:') && line.includes('http')) {
+                const urlMatch = line.match(/https?:\/\/[^\s\]]+/);
+                if (urlMatch) {
+                  // چک کن آیا تیتر خبر بعدی یا قبلی شامل کلمه کلیدی هست
+                  const nearbyText = (lines[i-1] || '') + ' ' + (lines[i+1] || '') + ' ' + line;
+                  if (nearbyText.includes(titleWords[0])) {
+                    item.source_link = urlMatch[0];
+                    console.log('  🔗 لینک منبع از RSS:', item.source_link.substring(0, 60));
+                    break;
+                  }
+                }
               }
-            } catch (e) {
-              console.log('  ⚠️ خطا در regex بازیابی لینک:', e.message);
             }
           }
         }
