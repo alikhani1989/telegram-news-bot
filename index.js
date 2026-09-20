@@ -1973,28 +1973,35 @@ async function main() {
           item.source_link = originalMsg.newsLink;
           console.log('  🔗 لینک منبع از تلگرام:', item.source_link.substring(0, 60));
         }
-        // ۲. از RSS: جستجو در recentMessages بر اساس تیتر (بدون regex)
+        // ۲. از RSS: جستجو در recentMessages بر اساس متن خلاصه
         if (!item.source_link || item.source_link.length < 10) {
-          const cleanTitle = (item.title || '').replace(/[✴️🔸]/g, '').trim();
-          const titleWords = cleanTitle.split(/\s+/).filter(w => w.length > 3);
-          if (titleWords.length >= 2) {
-            // جستجوی ساده متنی: خطوط recentMessages رو ببین
+          const bodyWords = (item.body || '').replace(/[🔸✴️]/g, '').trim().split(/\s+/).filter(w => w.length > 4);
+          if (bodyWords.length >= 1) {
             const lines = recentMessages.split('\n');
+            let bestLink = '';
+            let bestScore = 0;
             for (let i = 0; i < lines.length; i++) {
               const line = lines[i];
-              // اگه خط شامل لینک منبع باشه
               if (line.includes('[لینک منبع:') && line.includes('http')) {
                 const urlMatch = line.match(/https?:\/\/[^\s\]]+/);
                 if (urlMatch) {
-                  // چک کن آیا تیتر خبر بعدی یا قبلی شامل کلمه کلیدی هست
-                  const nearbyText = (lines[i-1] || '') + ' ' + (lines[i+1] || '') + ' ' + line;
-                  if (nearbyText.includes(titleWords[0])) {
-                    item.source_link = urlMatch[0];
-                    console.log('  🔗 لینک منبع از RSS:', item.source_link.substring(0, 60));
-                    break;
+                  // متن خبر اصلی رو از چند خط بعدی بگیر
+                  const nearbyContent = lines.slice(Math.max(0, i-2), i+5).join(' ');
+                  // تعداد کلمات مشترک رو بشمر
+                  let score = 0;
+                  for (const word of bodyWords.slice(0, 8)) {
+                    if (nearbyContent.includes(word)) score++;
+                  }
+                  if (score > bestScore) {
+                    bestScore = score;
+                    bestLink = urlMatch[0];
                   }
                 }
               }
+            }
+            if (bestLink && bestScore >= 2) {
+              item.source_link = bestLink;
+              console.log('  🔗 لینک منبع از RSS (امتیاز ' + bestScore + '):', item.source_link.substring(0, 60));
             }
           }
         }
