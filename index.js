@@ -1137,13 +1137,11 @@ async function callGroq(prompt) {
 // OpenRouter API
 // ==========================================
 const AI_MODELS = [
-  // اولویت اول: DeepSeek V4 Flash (بهترین کیفیت رایگان، فارسی عالی)
-  'deepseek/deepseek-v4-flash-0731:free',
-  // اولویت دوم: Qwen3.8 (کیفیت بالا، فارسی خوب)
+  // اولویت اول: Qwen3.8 (کیفیت بالا، فارسی خوب)
   'qwen/qwen3.8-27b:free',
-  // اولویت سوم: Nemotron Ultra (اگر بالایی‌ها خطا دادن)
+  // اولویت دوم: Nemotron Ultra (اگر Qwen خطا داد)
   'nvidia/nemotron-3-ultra-550b-a55b:free',
-  // اولویت چهارم: Z.ai GLM 5.2
+  // اولویت سوم: Z.ai GLM 5.2
   'z-ai/glm-5.2:free',
 ];
 
@@ -1235,7 +1233,6 @@ async function callFallbackModels(prompt) {
   // مدل‌های رایگان OpenRouter
   // توجه: سهمیه ۵۰ درخواست در روز بین همه مدل‌ها مشترکه
   const fallbackModels = [
-    'deepseek/deepseek-v4-flash-0731:free',
     'qwen/qwen3.8-27b:free',
     'nvidia/nemotron-3-ultra-550b-a55b:free',
     'z-ai/glm-5.2:free',
