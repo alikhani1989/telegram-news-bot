@@ -2112,6 +2112,9 @@ async function main() {
       item.body = item.body.replace(/\s*[A-Za-z]{3,}\s*$/g, '').trim();
       item.title = item.title.replace(/\s*[A-Za-z]{3,}\s*$/g, '').trim();
       
+      // تعیین عکس قبل از لاگ
+      const imageUrl = item.image_url && item.image_url.startsWith("http") && item.image_url.length > 20 ? item.image_url : null;
+      
       // لاگ وضعیت خبر
       console.log('  📰 [' + (usedModel || '?') + '] ' + (item.title || '').substring(0, 50) + ' | عکس=' + (imageUrl ? '✅' : '❌') + ' | لینک=' + (item.source_link && item.source_link.length > 5 ? '✅' : '❌') + ' | طول متن=' + (item.body || '').length);
       
@@ -2126,8 +2129,6 @@ async function main() {
       if (item.source_link && item.source_link.length > 5) {
         finalMessage += '\n\n🔗 <a href="' + item.source_link + '">منبع خبر</a>';
       }
-
-      const imageUrl = item.image_url && item.image_url.startsWith("http") && item.image_url.length > 20 ? item.image_url : null;
       const result = await sendToTelegram(finalMessage, imageUrl, BOT_TOKEN, DESTINATION_CHAT_ID);
 
       if (result.ok) {
