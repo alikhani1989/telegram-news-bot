@@ -1977,10 +1977,15 @@ async function main() {
         if (!item.source_link || item.source_link.length < 10) {
           const titleWords = (item.title || '').replace(/[✴️🔸]/g, '').trim().split(/\s+/).filter(w => w.length > 3);
           if (titleWords.length >= 2) {
-            const rssMatch = recentMessages.match(new RegExp('\[لینک منبع:\s*(https?://[^\]]+)\][\s\S]*?' + titleWords[0], 'i'));
-            if (rssMatch) {
-              item.source_link = rssMatch[1];
-              console.log('  🔗 لینک منبع از RSS:', item.source_link.substring(0, 60));
+            try {
+              const escapedWord = titleWords[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+              const rssMatch = recentMessages.match(new RegExp('\[لینک منبع:\s*(https?://[^\]]+)\][\s\S]*?' + escapedWord, 'i'));
+              if (rssMatch) {
+                item.source_link = rssMatch[1];
+                console.log('  🔗 لینک منبع از RSS:', item.source_link.substring(0, 60));
+              }
+            } catch (e) {
+              console.log('  ⚠️ خطا در regex بازیابی لینک:', e.message);
             }
           }
         }
