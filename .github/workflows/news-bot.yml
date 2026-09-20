@@ -5,6 +5,9 @@ on:
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run-bot:
     runs-on: ubuntu-latest
@@ -12,6 +15,9 @@ jobs:
     steps:
       - name: دریافت کد
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: نصب Node.js
         uses: actions/setup-node@v4
@@ -29,9 +35,14 @@ jobs:
           SOURCE_CHANNEL_ID: news_parliament
 
       - name: ذخیره وضعیت در مخزن
+        if: success()
         run: |
           git config user.name "News Bot"
           git config user.email "bot@github-actions"
-          git add state.json
-          git diff --staged --quiet || git commit -m "🔄 بروزرسانی خودکار وضعیت [skip ci]"
-          git push
+          git add -A
+          if git diff --staged --quiet; then
+            echo "تغییری ذخیره نشد"
+          else
+            git commit -m "🔄 بروزرسانی خودکار وضعیت [skip ci]"
+            git push
+          fi
