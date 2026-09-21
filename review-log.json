@@ -1,15 +1,5 @@
 [
   {
-    "timestamp": "2026-09-20T13:16:35.690Z",
-    "totalPublished": 6,
-    "withImage": 6,
-    "withoutImage": 0,
-    "issues": [
-      "متن انگلیسی در خبر: ✴️   قیمت‌گذاری شفاف نفت خام و فرآورده‌ه..."
-    ],
-    "score": 85
-  },
-  {
     "timestamp": "2026-09-20T13:31:47.097Z",
     "totalPublished": 7,
     "withImage": 7,
@@ -399,6 +389,14 @@
     "timestamp": "2026-09-21T10:32:04.948Z",
     "totalPublished": 6,
     "withImage": 6,
+    "withoutImage": 0,
+    "issues": [],
+    "score": 100
+  },
+  {
+    "timestamp": "2026-09-21T15:16:42.901Z",
+    "totalPublished": 5,
+    "withImage": 5,
     "withoutImage": 0,
     "issues": [],
     "score": 100
