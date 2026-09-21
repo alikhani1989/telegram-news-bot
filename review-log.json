@@ -1,13 +1,5 @@
 [
   {
-    "timestamp": "2026-08-31T07:16:37.845Z",
-    "totalPublished": 10,
-    "withImage": 10,
-    "withoutImage": 0,
-    "issues": [],
-    "score": 100
-  },
-  {
     "timestamp": "2026-09-20T07:46:33.540Z",
     "totalPublished": 10,
     "withImage": 10,
@@ -397,6 +389,14 @@
   },
   {
     "timestamp": "2026-09-21T00:16:19.196Z",
+    "totalPublished": 8,
+    "withImage": 8,
+    "withoutImage": 0,
+    "issues": [],
+    "score": 100
+  },
+  {
+    "timestamp": "2026-09-21T01:01:38.752Z",
     "totalPublished": 8,
     "withImage": 8,
     "withoutImage": 0,
