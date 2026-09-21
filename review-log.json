@@ -1,15 +1,5 @@
 [
   {
-    "timestamp": "2026-08-29T14:20:52.567Z",
-    "totalPublished": 10,
-    "withImage": 10,
-    "withoutImage": 0,
-    "issues": [
-      "متن انگلیسی در خبر: ✴️   حل مشکلات داخلی کلید مقابله با فشار..."
-    ],
-    "score": 85
-  },
-  {
     "timestamp": "2026-08-31T07:16:37.845Z",
     "totalPublished": 10,
     "withImage": 10,
@@ -401,6 +391,14 @@
     "timestamp": "2026-09-21T00:01:33.058Z",
     "totalPublished": 9,
     "withImage": 9,
+    "withoutImage": 0,
+    "issues": [],
+    "score": 100
+  },
+  {
+    "timestamp": "2026-09-21T00:16:19.196Z",
+    "totalPublished": 8,
+    "withImage": 8,
     "withoutImage": 0,
     "issues": [],
     "score": 100
