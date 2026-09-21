@@ -2147,6 +2147,10 @@ async function main() {
       if (item.source_link && item.source_link.length > 5) {
         finalMessage += '\n\n🔗 <a href="' + item.source_link + '">منبع خبر</a>';
       }
+      // نمایش مدل هوش مصنوعی سازنده خلاصه (جهت ردیابی کیفیت)
+      if (usedModel) {
+        finalMessage += '\n\u200F🤖 مدل: ' + usedModel;
+      }
       const result = await sendToTelegram(finalMessage, imageUrl, BOT_TOKEN, DESTINATION_CHAT_ID);
 
       if (result.ok) {
