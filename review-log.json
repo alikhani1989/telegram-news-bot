@@ -1,13 +1,5 @@
 [
   {
-    "timestamp": "2026-09-21T00:01:33.058Z",
-    "totalPublished": 9,
-    "withImage": 9,
-    "withoutImage": 0,
-    "issues": [],
-    "score": 100
-  },
-  {
     "timestamp": "2026-09-21T00:16:19.196Z",
     "totalPublished": 8,
     "withImage": 8,
@@ -581,6 +573,17 @@
   },
   {
     "timestamp": "2026-09-22T11:34:55.898Z",
+    "totalPublished": 6,
+    "withImage": 6,
+    "withoutImage": 0,
+    "issues": [
+      "متن انگلیسی در خبر: ✴️   اقتصاد جنگی باید موزائیکی و نامتقار...",
+      "متن انگلیسی در خبر: ✴️   طرح‌های دوفوریتی باید در دستور کار ..."
+    ],
+    "score": 70
+  },
+  {
+    "timestamp": "2026-09-22T11:57:02.726Z",
     "totalPublished": 6,
     "withImage": 6,
     "withoutImage": 0,
