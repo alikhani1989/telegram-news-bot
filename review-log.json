@@ -1,13 +1,5 @@
 [
   {
-    "timestamp": "2026-09-20T23:31:32.625Z",
-    "totalPublished": 7,
-    "withImage": 7,
-    "withoutImage": 0,
-    "issues": [],
-    "score": 100
-  },
-  {
     "timestamp": "2026-09-20T23:46:15.319Z",
     "totalPublished": 9,
     "withImage": 9,
@@ -584,5 +576,15 @@
       "متن انگلیسی در خبر: ✴️   پیگیری بخشایش برای تسریع فیبر نوری ..."
     ],
     "score": 40
+  },
+  {
+    "timestamp": "2026-09-22T10:46:51.525Z",
+    "totalPublished": 6,
+    "withImage": 6,
+    "withoutImage": 0,
+    "issues": [
+      "متن انگلیسی در خبر: ✴️   پیگیری بخشایش برای تسریع فیبر نوری ..."
+    ],
+    "score": 85
   }
 ]
