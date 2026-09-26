@@ -1204,8 +1204,9 @@ async function callNaraRouter(prompt) {
     'نمونه تیتر بد: ❌ بررسی طرح مقابله با نفوذ' + '\n' +
     'نمونه تیتر بد: ❌ نشست کمیسیون امنیت ملی' + '\n\n' +
     'فرمت: {"news":[{"title":"✴️ تیتر","body":"🔸 جمله اول.\n\n🔸 جمله دوم.","source_link":"لینک","image_url":"لینک یا خالی"]}';
-  // فقط agnes-2.5-flash روی NaraRouter فعال است (tencent-hy3-free وجود ندارد)
-  const models = ['agnes-2.5-flash'];
+  // agnes-3-flash جدیدتر و باکیفیت‌تر از 2.5 است (تست شده: فارسی بهتر، بدون جعل مصاحبه)
+  // توجه: مدل‌های claude-* روی NaraRouter پولی هستند (payment_required)
+  const models = ['agnes-3-flash', 'agnes-2.5-flash'];
   for (const model of models) {
     console.log('  🟣 تلاش با NaraRouter: ' + model);
     const payload = JSON.stringify({
