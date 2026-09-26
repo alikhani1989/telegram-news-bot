@@ -116,6 +116,88 @@ function validateNewsItem(item, originalText) {
   return { score: Math.max(0, score), issues };
 }
 
+// ==========================================
+// تأیید صفر توکنی: مقایسه خلاصه با متن اصلی خبر
+// (بدون هوش مصنوعی؛ جعل مصاحبه، نام غلط و عدد جعلی را قبل از انتشار می‌گیرد)
+// ==========================================
+function verifyAgainstOriginal(item, originalText) {
+  const issues = [];
+  if (!originalText || String(originalText).length < 100) return issues;
+  const orig = String(originalText);
+  const summary = ((item.title || '') + ' ' + (item.body || '')).replace(/[✴️🔸]/g, ' ');
+
+  // نرمال‌سازی ی/ک عربی و حذف اعراب برای مقایسه مطمئن
+  const norm = function (s) {
+    return s.replace(/[\u064A\u0649]/g, 'ی').replace(/[\u0643]/g, 'ک').replace(/[\u064B-\u0652\u0670]/g, '');
+  };
+  const origNorm = norm(orig);
+  const sumNorm = norm(summary);
+
+  // ۱. ادعای مصاحبه/گفتگو که در متن اصلی وجود ندارد → جعل
+  const interviewMatches = sumNorm.match(/در (گفتگو|مصاحبه)(?:\u200cای)? با ([^،.؛!؟\n]{3,60})/g) || [];
+  for (const m of interviewMatches) {
+    if (!/گفتگو|مصاحبه/.test(origNorm)) {
+      issues.push('جعل مصاحبه: «' + m.trim().substring(0, 60) + '» ولی در متن اصلی خبر مصاحبه‌ای نیست');
+      continue;
+    }
+    const inner = m.replace(/^در\s+\S+\s+با\s*/, '');
+    const words = inner.split(/\s+/).filter(function (w) { return w.length > 3; });
+    let hits = 0;
+    for (const w of words.slice(0, 6)) { if (origNorm.includes(w)) hits++; }
+    if (hits < 2 && words.length >= 2) {
+      issues.push('رسانه مصاحبه مشکوک: «' + inner.trim().substring(0, 40) + '» در متن اصلی پیدا نشد');
+    }
+  }
+
+  // ۲. نام شخصی که هیچ واژه‌اش در متن اصلی نیست → نام جعل/غلط
+  // (اسم واقعی بلافاصله قبل از سمت می‌آید؛ پس دنباله انتهایی واژه‌ها را چک می‌کنیم
+  //  تا کلمات اضافه قبل از نام، چک را خراب نکنند)
+  const COMMON_NOUNS = ['مجلس', 'دولت', 'کمیسیون', 'شورا', 'شورای', 'هیئت', 'وزارت', 'سازمان', 'خانه', 'دفتر', 'مردم', 'کشور', 'ایران', 'بازار', 'رسانه', 'مجلس شورای', 'گروه', 'ستاد', 'فراکسیون'];
+  const ROLE_WORDS = ['عضو', 'نماینده', 'رئیس', 'نایب', 'سخنگو', 'وزیر', 'معاون'];
+  const nameRoleMatches = sumNorm.match(/[\u0600-\u06FF]{2,15}(?:[\s\u200c]+[\u0600-\u06FF]{2,15}){1,3}\s+(عضو|نماینده|رئیس|نایب|سخنگو|وزیر|معاون)/g) || [];
+  const seenNames = {};
+  for (const nr of nameRoleMatches) {
+    const roleM = nr.match(/(عضو|نماینده|رئیس|نایب|سخنگو|وزیر|معاون)$/);
+    const namePart = nr.substring(0, nr.length - (roleM ? roleM[1].length : 0)).trim();
+    if (!namePart || namePart.length < 4 || seenNames[namePart]) continue;
+    seenNames[namePart] = true;
+    const nameWords = namePart.split(/[\s\u200c]+/).filter(function (w) { return w.length > 2; });
+    if (nameWords.length === 0) continue;
+    let suspicious = false;
+    if (nameWords.length === 1) {
+      const w = nameWords[0];
+      if (!COMMON_NOUNS.includes(w) && !ROLE_WORDS.includes(w) && w.length >= 4 && !origNorm.includes(w)) suspicious = true;
+    } else {
+      // پنجره‌های دومِ متوالی: اگر دو کلمه پشت‌سرهم (که اسم عمومی/نقش نیستند) در متن اصلی نباشند → نام جعلی
+      for (let i = 0; i < nameWords.length - 1; i++) {
+        const w1 = nameWords[i], w2 = nameWords[i + 1];
+        if (COMMON_NOUNS.includes(w1) || COMMON_NOUNS.includes(w2)) continue;
+        if (ROLE_WORDS.includes(w1) || ROLE_WORDS.includes(w2)) continue;
+        if (!origNorm.includes(w1) && !origNorm.includes(w2)) { suspicious = true; break; }
+      }
+    }
+    if (suspicious) {
+      issues.push('نام مشکوک: «' + namePart + '» در متن اصلی خبر وجود ندارد');
+    }
+  }
+
+  // ۳. اعداد مهم (۳ رقم به بالا) که در متن اصلی نیستند → عدد جعلی
+  const numMatches = sumNorm.match(/[۰-۹0-9]{2,}/g) || [];
+  const toLatin = function (s) { return s.replace(/[۰-۹]/g, function (d) { return String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)); }); };
+  const origLatin = toLatin(orig);
+  const missing = [];
+  for (const nRaw of numMatches) {
+    const n = toLatin(nRaw.replace(/[٫,،]/g, ''));
+    if (n.length < 3) continue;
+    if (!origLatin.includes(n)) missing.push(nRaw);
+  }
+  if (missing.length > 0) {
+    issues.push('اعداد ناموجود در متن اصلی: ' + missing.join('، '));
+  }
+
+  return issues;
+}
+
 function saveQualityReport(report) {
   let existing = [];
   try {
@@ -1753,7 +1835,7 @@ function fixTitle(title, body) {
   title = title.replace(/([\u0600-\u06FF]+\s+[\u0600-\u06FF]+)\s+گفت\s*$/, '').trim();
   
   // اگر تیتر فقط «بررسی» یا «نشست» یا «بازدید» باشد → از متن نتیجه بگیر
-  const vaguePatterns = /^(بررسی|نشست|بازدید|پیگیری|توضیح|پرداختن به|اشاره به|談話)/;
+  const vaguePatterns = /^(بررسی|نشست|بازدید|پیگیری|توضیح|پرداختن به|اشاره به|گفتگو|مصاحبه|談話)/;
   if (vaguePatterns.test(title.replace('✴️', '').trim())) {
     // سعی کن از متن، نتیجه یا تصمیم اصلی رو پیدا کنی
     const resultPatterns = [
@@ -1879,6 +1961,7 @@ async function main() {
       return 0;
     });
     let rssIndex = 0;
+    const rssOriginalMap = {}; // لینک → متن اصلی برای تأیید صفر توکنی
     const MAX_RSS = 2; // حداکثر ۶ خبر RSS (۲ تا ICANA + ۴ تا بقیه)
     for (const rss of sortedRss) {
       if (rss.description && rss.description.length > 50 && rssIndex < MAX_RSS) {
@@ -1898,6 +1981,7 @@ async function main() {
             console.log("  ⚠️ خطا در خواندن RSS:", e.message);
           }
         }
+        rssOriginalMap[rss.link] = fullText;
         recentMessages += "\n\n===== NEWS RSS " + (rssIndex + 1) + " =====\n";
         recentMessages += "[لینک منبع: " + rss.link + "]\n";
         recentMessages += "[منبع: " + rss.source + "]\n";
@@ -2054,6 +2138,11 @@ async function main() {
             break;
           }
         }
+      }
+      // متن اصلی خبر برای تأیید صفر توکنی (مقایسه با خلاصه)
+      item._originalText = originalMsg ? (originalMsg.fullText || originalMsg.text || '') : '';
+      if (!item._originalText && item.source_link && rssOriginalMap[item.source_link]) {
+        item._originalText = rssOriginalMap[item.source_link];
       }
       // اگر source_link از مدل نیومد، از لینک تلگرام یا RSS استفاده کن
       if (!item.source_link || item.source_link.length < 10) {
@@ -2230,6 +2319,15 @@ async function main() {
       // لاگ وضعیت خبر
       console.log('  📰 [' + (usedModel || '?') + '] ' + (item.title || '').substring(0, 50) + ' | عکس=' + (imageUrl ? '✅' : '❌') + ' | لینک=' + (item.source_link && item.source_link.length > 5 ? '✅' : '❌') + ' | طول متن=' + (item.body || '').length);
       
+      // === تأیید صفر توکنی: مقایسه خلاصه با متن اصلی خبر ===
+      // جعل مصاحبه، نام جعلی و عدد جعلی → خبر قبل از انتشار رد می‌شود
+      const verifyIssues = verifyAgainstOriginal(item, item._originalText || '');
+      if (verifyIssues.length > 0) {
+        console.log('  ⛔ رد شد (عدم تطابق با متن اصلی): ' + verifyIssues.join(' | '));
+        trackMistake(state, 'جعل محتوا/مصاحبه');
+        continue;
+      }
+
       // دروازه کیفیت: اگر متن خیلی کوتاه بود، ارسال نکن
       const bodyText = (item.body || '').split(String.fromCharCode(10)).join('').trim();
       if (bodyText.length < 80) {
