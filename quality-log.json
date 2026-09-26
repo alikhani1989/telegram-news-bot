@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-09-25T02:01:43.742Z",
-    "model": "Groq",
-    "items": [
-      {
-        "title": "✴️ سخنرانی رئیس‌جمهور در ملل «غرورآفرین»",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-09-25T02:16:15.941Z",
     "model": "NaraRouter",
     "items": [
@@ -1056,5 +1044,17 @@
       }
     ],
     "avgScore": 97
+  },
+  {
+    "timestamp": "2026-09-26T05:31:12.769Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ بنزین گران نخواهد شد",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
