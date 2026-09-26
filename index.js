@@ -305,22 +305,25 @@ autoReviewPublishedNews = async function(state, newsItems, sourceLinks) {
 function generateDailyReport(state) {
   const db = state.NEWS_DATABASE || [];
   const today = getTehranDateStr();
+  // مقایسه تاریخ تهران (نه UTC) با تاریخ ثبت هر خبر
+  const todayTehran = getTehranDate();
+  const todayStr = todayTehran.getUTCFullYear() + '-' + String(todayTehran.getUTCMonth() + 1).padStart(2, '0') + '-' + String(todayTehran.getUTCDate()).padStart(2, '0');
   const todayEntries = db.filter(e => {
-    const d = new Date(e.timestamp);
-    const t = getTehranDate();
-    return d.toISOString().substring(0, 10) === t.toISOString().substring(0, 10);
+    try {
+      return getTehranDateStrFromIso(e.timestamp) === todayStr;
+    } catch (err) { return false; }
   });
-  
+
   if (todayEntries.length === 0) {
     return null;
   }
-  
+
   const reviewed = todayEntries.filter(e => e.reviewed);
   const withIssues = reviewed.filter(e => e.qualityIssues && e.qualityIssues.length > 0);
-  const avgScore = reviewed.length > 0 
+  const avgScore = reviewed.length > 0
     ? Math.round(reviewed.reduce((s, e) => s + e.qualityScore, 0) / reviewed.length)
     : 0;
-  
+
   const report = {
     date: today,
     totalNews: todayEntries.length,
@@ -330,12 +333,12 @@ function generateDailyReport(state) {
     models: {},
     topIssues: []
   };
-  
+
   // شمارش مدل‌ها
   for (const e of todayEntries) {
     report.models[e.model] = (report.models[e.model] || 0) + 1;
   }
-  
+
   // جمع‌آوری مشکلات رایج
   const issueCounts = {};
   for (const e of withIssues) {
@@ -348,47 +351,100 @@ function generateDailyReport(state) {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5)
     .map(([issue, count]) => ({ issue, count }));
-  
+
+  // جزئیات پست‌های امروز (برای گزارش خوانا)
+  report.posts = todayEntries.map(e => ({
+    title: (e.title || '').replace('✴️', '').trim().substring(0, 50),
+    model: e.model || 'نامشخص',
+    problems: (e.qualityIssues || []).map(i => humanizeIssue(i))
+  }));
+
+  // مدل‌های مشکل‌ساز امروز
+  const modelStats = {};
+  for (const e of todayEntries) {
+    const m = e.model || 'نامشخص';
+    if (!modelStats[m]) modelStats[m] = { total: 0, bad: 0 };
+    modelStats[m].total++;
+    if (e.qualityIssues && e.qualityIssues.length > 0) modelStats[m].bad++;
+  }
+  report.badModels = Object.entries(modelStats)
+    .filter(function (s) { return s[1].bad > 0; })
+    .map(function (s) { return { model: s[0], bad: s[1].bad, total: s[1].total }; });
+
   return report;
 }
 
+// تبدیل عنوان داخلی مشکل به جمله فارسی قابل‌فهم
+function humanizeIssue(issue) {
+  const s = String(issue || '');
+  const map = [
+    ['تیتر کلی', 'تیتر کلی و بی‌ربط بود (مثلاً فقط «بررسی» یا «نشست»)'],
+    ['متن خیلی کوتاه', 'متن خلاصه خیلی کوتاه و ناقص بود'],
+    ['نام و سمّت شخص', 'نام یا سمت اشخاص به‌درستی نیامده بود'],
+    ['مجلس شورای اسلامی', 'به‌جای «مجلس» نوشته شده بود «مجلس شورای اسلامی»'],
+    ['حوزه انتخابیه', 'حوزه انتخابیه اضافه نوشته شده بود'],
+    ['مصاحبه', 'برای خبرِ غیرمصاحبه‌ای، ادعای مصاحبه/منبع آمده بود'],
+    ['عبارات خشک', 'از عبارات خشک خبری (اظهار کرد، تصریح کرد و…) استفاده شده بود'],
+    ['استفاده از وی', 'به‌جای نام شخص از کلمه «وی» استفاده شده بود'],
+    ['قالباب', 'غلط املایی در نام («قالباب» به‌جای «قالیباف»)']
+  ];
+  for (const pair of map) {
+    if (s.includes(pair[0])) return '▪️ ' + pair[1];
+  }
+  return '▪️ ' + s;
+}
+
+// تاریخ جلالی تهران از یک timestamp ایزو (yyyy-mm-dd تهران)
+function getTehranDateStrFromIso(iso) {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '';
+  const tehran = new Date(d.getTime() + (3.5 * 3600000));
+  return tehran.getUTCFullYear() + '-' + String(tehran.getUTCMonth() + 1).padStart(2, '0') + '-' + String(tehran.getUTCDate()).padStart(2, '0');
+}
+
 function formatDailyReport(report, state) {
-  if (!report) return '📊 گزارش روزانه: خبری منتشر نشد';
-  
-  let msg = '📊 <b>گزارش کیفیت روزانه</b>\n';
+  if (!report) return '🔍 گزارش نظارت: امروز خبری منتشر نشد';
+
+  let msg = '🔍 <b>گزارش نظارت بر پست‌های امروز</b>\n';
   msg += '📅 ' + report.date + '\n';
   msg += '━━━━━━━━━━━━━━━━━\n\n';
-  msg += '📰 کل اخبار: ' + report.totalNews + '\n';
-  msg += '🔍 بررسی شده: ' + report.reviewedCount + '\n';
-  msg += '⚠️ دارای مشکل: ' + report.withIssuesCount + '\n';
-  msg += '📈 نمره میانگین: <b>' + report.avgScore + '/100</b>\n\n';
-  
-  // مدل‌ها
-  msg += '🤖 مدل‌های استفاده شده:\n';
-  for (const [model, count] of Object.entries(report.models)) {
-    msg += '  • ' + model + ': ' + count + ' خبر\n';
+  msg += '📣 امروز ' + report.totalNews + ' خبر منتشر شد.\n\n';
+
+  // وضعیت هر پست به زبان ساده
+  if (report.posts && report.posts.length > 0) {
+    let okCount = 0;
+    for (const post of report.posts) {
+      if (post.problems.length === 0) { okCount++; continue; }
+      msg += '⚠️ <b>' + post.title + '</b>\n';
+      for (const pr of post.problems) {
+        msg += '   ' + pr + '\n';
+      }
+    }
+    msg += '\n✅ ' + okCount + ' پست از ' + report.posts.length + ' پست سالم بود';
+    if (okCount === report.posts.length) msg += ' — همه پست‌ها مشکلی ندارند 👌';
+    msg += '\n';
   }
-  
-  // آمار اشتباهات تکراری
+
+  // مدل‌های مشکل‌ساز
+  if (report.badModels && report.badModels.length > 0) {
+    msg += '\n🤖 <b>مدل‌های مشکل‌ساز امروز:</b>\n';
+    for (const bm of report.badModels) {
+      msg += '  • ' + bm.model + ': ' + bm.bad + ' پست مشکل‌دار از ' + bm.total + ' پست\n';
+    }
+  }
+
+  // آمار کلی اشتباهات (حافظه بلندمدت)
   if (state.MISTAKE_STATS && Object.keys(state.MISTAKE_STATS).length > 0) {
-    msg += '\n🔄 <b>آمار اشتباهات تکراری</b>:\n';
+    msg += '\n🔄 <b>اشتباهات پرتکرار از ابتدا:</b>\n';
     const sorted = Object.entries(state.MISTAKE_STATS).sort((a, b) => b[1] - a[1]);
     for (const [category, count] of sorted.slice(0, 5)) {
       msg += '  • ' + category + ': ' + count + ' بار\n';
     }
   }
-  
-  // مشکلات رایج
-  if (report.topIssues.length > 0) {
-    msg += '\n⚠️ مشکلات امروز:\n';
-    for (const issue of report.topIssues) {
-      msg += '  • ' + issue.issue + ' (' + issue.count + ' بار)\n';
-    }
-  }
-  
+
   msg += '\n━━━━━━━━━━━━━━━━━\n';
   msg += '🤖 خبرخوان مجلس | @selectednewsmajlis';
-  
+
   return msg;
 }
 
@@ -433,9 +489,36 @@ async function reviewPublishedNews(chatId, publishedTitles) {
       if (!pub.hasImage) {
         issues.push('خبر بدون عکس: ' + pub.text.substring(0, 40) + '...');
       }
-      // بررسی آیا متن انگلیسی داره
-      if (/[A-Za-z]{5,}/.test(pub.text.replace('azmaa_net', '').replace('selectednewsmajlis', ''))) {
-        issues.push('متن انگلیسی در خبر: ' + pub.text.substring(0, 40) + '...');
+      // بررسی آیا متن انگلیسی داره (لینک‌ها و آیدی‌ها حذف می‌شن چون طبیعتاً لاتین هستن)
+      const textWithoutLinks = pub.text
+        .replace(/https?:\/\/\S+/g, '')          // لینک‌ها
+        .replace(/@[A-Za-z0-9_]+/g, '')           // آیدی‌ها
+        .replace(/[\u2190-\u2BFF\u2600-\u27BF\uFE0F\u200F\u200E]/g, '');  // ایموجی و نمادها
+      if (/[A-Za-z]{5,}/.test(textWithoutLinks)) {
+        issues.push('متن انگلیسی در خبر: ' + pub.text.replace(/https?:\/\/\S+/g, '').substring(0, 40) + '...');
+      }
+      // بررسی برچسب مدل (هر پست باید برچسب داشته باشه)
+      if (!pub.text.includes('🤖 مدل:')) {
+        issues.push('بدون برچسب مدل: ' + pub.text.substring(0, 40) + '...');
+      }
+      // بررسی جعل منبع/مصاحبه (دروغ رایج مدل‌های ضعیف)
+      // تیتر نباید حاوی «گفتگو با» یا «مصاحبه با» یا «در خبر ... گفت» باشد
+      const titleLine = (pub.text.split('\n')[0] || '');
+      if (/گفتگو با|مصاحبه با|در (خبر|سایت|خبرگزاری)\s/.test(titleLine)) {
+        issues.push('تیتر آلوده به ذکر منبع/رسانه: ' + titleLine.substring(0, 50));
+      }
+      // «در خبر ایرنا گفت» / «در تابناک گفت» و مشابه در بدنه — ذکر رسانه بدون مصاحبه واقعی ممنوع
+      const mediaAttr1 = pub.text.match(/در (خبر|سایت|پایگاه|روزنامه|خبرگزاری)\s+[^،,\.\n]{2,30}?\s+(گفت|نوشت|تاکید کرد)(?=\s|،|\.|$)/);
+      const mediaAttr2 = pub.text.match(/در (ایرنا|خانه ملت|تابناک|دنیای اقتصاد|باشگاه خبرنگاران جوان|سنتی نیوز|یجس|خبر جوان)\s+(گفت|نوشت|تاکید کرد)(?=\s|،|\.|$)/);
+      const mediaAttr = mediaAttr1 || mediaAttr2;
+      if (mediaAttr) {
+        issues.push('ذکر رسانه به‌عنوان منبع نقل‌قول (مشکوک به جعل): «...' + mediaAttr[0].substring(0, 40) + '»');
+      }
+      // بررسی غلط املایی شناخته‌شده
+      for (const mistake of COMMON_MISTAKES) {
+        if (mistake.penalty > 0 && mistake.fix && mistake.pattern !== mistake.fix && pub.text.includes(mistake.pattern)) {
+          issues.push('غلط املایی/نام: «' + mistake.pattern + '» باید «' + mistake.fix + '» باشد: ' + pub.text.substring(0, 30) + '...');
+        }
       }
       // بررسی آیا مجلس شورای اسلامی نوشته
       if (pub.text.includes('مجلس شورای اسلامی')) {
@@ -477,47 +560,50 @@ async function sendQualityReportToTelegram(qualityReport, reviewReport, newsCoun
     const date = getTehranDateStr();
     const period = isTehranNight() ? '🌙 شب' : '☀️ روز';
     const interval = isTehranNight() ? 'هر ۱ ساعت' : 'هر ۲ ساعت';
-    
-    let report = '📊 <b>گزارش کیفیت</b>\n';
+
+    let report = '📊 <b>گزارش دوره‌ای کیفیت</b>\n';
     report += '🕐 ' + time + ' | 📅 ' + date + ' (' + period + ')\n';
     report += '⏱️ ' + interval + '\n';
     report += '━━━━━━━━━━━━━━━━━\n\n';
-    
-    // گزارش قبل از انتشار
+
+    // قبل از انتشار: خلاصه ساده
     if (qualityReport && qualityReport.items && qualityReport.items.length > 0) {
-      report += '✅ <b>قبل از انتشار:</b> ' + qualityReport.items.length + ' خبر\n';
-      report += '📈 نمره میانگین: <b>' + qualityReport.avgScore + '/100</b>\n';
-      
-      // لیست مشکلات
-      const allIssues = qualityReport.items.flatMap(i => i.issues || []);
-      if (allIssues.length > 0) {
-        report += '⚠️ مشکلات:\n';
-        allIssues.forEach(issue => {
-          report += '  • ' + issue + '\n';
-        });
+      const badItems = qualityReport.items.filter(i => (i.issues || []).length > 0);
+      if (badItems.length === 0) {
+        report += '✍️ <b>قبل از انتشار:</b> ' + qualityReport.items.length + ' خبر تولید شد و هر ' + qualityReport.items.length + ' تاش مشکلی نداشت.\n';
       } else {
-        report += '✨ بدون مشکل\n';
+        report += '✍️ <b>قبل از انتشار:</b> ' + badItems.length + ' خبر از ' + qualityReport.items.length + ' خبر مشکل داشت:\n';
+        for (const it of badItems.slice(0, 4)) {
+          report += '  • ' + (it.title || '').replace('✴️', '').trim().substring(0, 40) + '\n';
+          for (const issue of (it.issues || []).slice(0, 3)) {
+            report += '     ' + humanizeIssue(issue) + '\n';
+          }
+        }
       }
     } else {
-      report += '✅ <b>قبل از انتشار:</b> خبری تولید نشد\n';
+      report += '✍️ <b>قبل از انتشار:</b> خبری تولید نشد\n';
     }
-    
+
     report += '\n';
-    
-    // گزارش بعد از انتشار
+
+    // بعد از انتشار: پست‌های واقعی کانال که بازخوانی شدن
     if (reviewReport) {
-      report += '🔍 <b>بعد از انتشار:</b> ' + reviewReport.totalPublished + ' خبر منتشر شد\n';
+      report += '📣 <b>بعد از انتشار:</b> ' + reviewReport.totalPublished + ' پست آخر کانال بازخوانی شد\n';
       report += '🖼 عکس‌دار: ' + reviewReport.withImage + ' | بدون عکس: ' + reviewReport.withoutImage + '\n';
-      report += '📈 نمره: <b>' + reviewReport.score + '/100</b>\n';
-      
       if (reviewReport.issues && reviewReport.issues.length > 0) {
-        report += '⚠️ مشکلات:\n';
+        report += '\n⚠️ <b>مشکلات پست‌های منتشرشده:</b>\n';
+        const seen = new Set();
         reviewReport.issues.forEach(issue => {
-          report += '  • ' + issue.substring(0, 80) + '...\n';
+          const key = issue.substring(0, 30);
+          if (seen.has(key)) return;
+          seen.add(key);
+          report += '  • ' + issue.substring(0, 100) + '\n';
         });
+      } else {
+        report += '✨ هیچ مشکلی در پست‌های منتشرشده دیده نشد\n';
       }
     }
-    
+
     report += '\n━━━━━━━━━━━━━━━━━\n';
     report += '🤖 خبرخوان مجلس | @selectednewsmajlis';
     
@@ -560,7 +646,7 @@ function getTehranDate() {
 
 function getTehranTimeStr() {
   const t = getTehranDate();
-  return t.getHours().toString().padStart(2, '0') + ':' + t.getMinutes().toString().padStart(2, '0');
+  return t.getUTCHours().toString().padStart(2, '0') + ':' + t.getUTCMinutes().toString().padStart(2, '0');
 }
 
 function gregorianToJalali(gy, gm, gd) {
@@ -583,15 +669,16 @@ const PERSIAN_MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'ت�
 
 function getTehranDateStr() {
   const t = getTehranDate();
-  const j = gregorianToJalali(t.getFullYear(), t.getMonth() + 1, t.getDate());
-  const dayName = PERSIAN_DAYS[t.getDay()];
+  const j = gregorianToJalali(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate());
+  // نکته: getUTCDay برمی‌گرداند ۰=یکشنبه ... ۶=شنبه — هفته فارسی از شنبه شروع می‌شود
+  const dayName = PERSIAN_DAYS[(t.getUTCDay() + 1) % 7];
   const monthName = PERSIAN_MONTHS[j.jm - 1];
   return dayName + ' ' + j.jd + ' ' + monthName + ' ' + j.jy;
 }
 
 function isTehranNight() {
   // شب: ساعت 20 تا 8 صبح به وقت تهران
-  const hour = getTehranDate().getHours();
+  const hour = getTehranDate().getUTCHours();
   return hour >= 20 || hour < 8;
 }
 
@@ -1029,7 +1116,8 @@ async function callNaraRouter(prompt) {
     'نمونه تیتر بد: ❌ بررسی طرح مقابله با نفوذ' + '\n' +
     'نمونه تیتر بد: ❌ نشست کمیسیون امنیت ملی' + '\n\n' +
     'فرمت: {"news":[{"title":"✴️ تیتر","body":"🔸 جمله اول.\n\n🔸 جمله دوم.","source_link":"لینک","image_url":"لینک یا خالی"]}';
-  const models = ['tencent-hy3-free', 'agnes-2.5-flash'];
+  // فقط agnes-2.5-flash روی NaraRouter فعال است (tencent-hy3-free وجود ندارد)
+  const models = ['agnes-2.5-flash'];
   for (const model of models) {
     console.log('  🟣 تلاش با NaraRouter: ' + model);
     const payload = JSON.stringify({
@@ -1439,6 +1527,7 @@ function buildPrompt(recentMessages, recentTitlesPrompt) {
   p.push("=== قوانین ذکر منبع (خیلی مهم) ===");
   p.push("- فقط وقتی منبع ذکر کنید که متن اصلی صریحاً نوشته «در گفتگو با خبرنگار X» یا «در مصاحبه با خبرگزاری X»");
   p.push("- اگر رسانه فقط خبر را گزارش کرده (بازدید، نشست، افتتاح، گزارش) بدون مصاحبه صریح → اصلاً اسم رسانه نیاورید");
+  p.push("- مطلقاً ساختگی ننویسید! هرگز عباراتی مثل «در خبر ایرنا گفت»، «در تابناک گفت»، «در سایت سنتی نیوز گفت» نسازید — این‌ها دروغ محض هستند");
   p.push("- خانه ملت (ICANA) همیشه اختصاصی نیست! فقط وقتی منبع بیاورید که نوشته «گفتگو با خبرنگار خانه ملت»");
   p.push("- تشخیص: اگر متن شامل «گزارش»، «بازدید»، «نشست»، «افتتاح» باشد بدون کلمه «مصاحبه» یا «گفتگو» → منبع نیاورید");
   p.push("");
@@ -2103,6 +2192,11 @@ async function main() {
         item.body = item.body.replace(/در مصاحبه با [^،,]+ /g, '');
         item.body = item.body.replace(/در گفتگو با [^،,]+ /g, '');
       }
+      // الگوی جعل رایج مدل‌های ضعیف: «عضو X در خبر ایرنا گفت» / «قالیباف در تابناک گفت»
+      // رسانه‌ای که فقط خبر را منتشر کرده، منبع نقل‌قول نیست → عبارت رسانه حذف و فعل نگه داشته می‌شود
+      // (توجه: «در گفتگو با خبرنگار X» دست نمی‌خورد چون ممکن است مصاحبه واقعی باشد)
+      item.body = item.body.replace(/در (خبر|سایت|پایگاه|روزنامه|خبرگزاری)\s+[^،,\.\n]{2,30}?\s+(گفت|نوشت|تاکید کرد|اظهار کرد)(?=\s|،|\.|$)/g, '$2');
+      item.body = item.body.replace(/در (ایرنا|خانه ملت|تابناک|دنیای اقتصاد|باشگاه خبرنگاران جوان|سنتی نیوز|یجس|خبر جوان)\s+(گفت|نوشت|تاکید کرد|اظهار کرد)(?=\s|،|\.|$)/g, '$2');
       // حذف حوزه انتخابیه: نماینده مردم X، Y و Z در مجلس → نماینده مجلس
       item.body = item.body.replace(/نماینده مردم [^،,]+ در مجلس/g, 'نماینده مجلس');
       // حذف تکرار مجلس: عضو کمیسیون X مجلس → عضو کمیسیون X
@@ -2147,10 +2241,8 @@ async function main() {
       if (item.source_link && item.source_link.length > 5) {
         finalMessage += '\n\n🔗 <a href="' + item.source_link + '">منبع خبر</a>';
       }
-      // نمایش مدل هوش مصنوعی سازنده خلاصه (جهت ردیابی کیفیت)
-      if (usedModel) {
-        finalMessage += '\n\u200F🤖 مدل: ' + usedModel;
-      }
+      // نمایش مدل هوش مصنوعی سازنده خلاصه (جهت ردیابی کیفیت) — همیشه اجباری
+      finalMessage += '\n\u200F🤖 مدل: ' + (usedModel || 'نامشخص');
       const result = await sendToTelegram(finalMessage, imageUrl, BOT_TOKEN, DESTINATION_CHAT_ID);
 
       if (result.ok) {
