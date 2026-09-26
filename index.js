@@ -273,15 +273,7 @@ autoReviewPublishedNews = async function(state, newsItems, sourceLinks) {
     const issues = [];
     let score = 100;
     
-    // ۱. بررسی مصاحبه اشتباه
-    const hasInterviewClaim = /مصاحبه با|گفتگو با/.test(item.body);
-    if (hasInterviewClaim) {
-      // اگه مصاحبه ذکر شده ولی در متن اصلی نبوده
-      issues.push('⚠️ مصاحبه ذکر شده - نیاز به بررسی دستی');
-      score -= 10;
-      trackMistake(state, 'مصاحبه اشتباه');
-    }
-    
+    // (بررسی جعل مصاحبه حالا با verifyAgainstOriginal قبل از انجام می‌شود؛ اینجا فقط چک‌های قطعی)
     // ۲. بررسی چک‌لیست اشتباهات رایج
     for (const mistake of COMMON_MISTAKES) {
       if (mistake.fix && item.body && item.body.includes(mistake.pattern) && mistake.pattern !== mistake.fix) {
@@ -549,8 +541,9 @@ async function reviewPublishedNews(chatId, publishedTitles) {
     for (const msg of channelMessages.slice(0, 10)) {
       const text = msg.text;
       if (text.includes('ازما') || text.includes('azmaa_net')) {
+        // متن کامل نگه داشته می‌شود؛ برش فقط برای نمایش است (برچسب مدل آخر پست است و نباید در چک از دست برود)
         recentPublished.push({
-          text: text.substring(0, 500),
+          text: text,
           hasImage: !!(msg.imageUrl && msg.imageUrl.length > 10),
           imageUrl: msg.imageUrl || ''
         });
@@ -571,15 +564,18 @@ async function reviewPublishedNews(chatId, publishedTitles) {
       if (!pub.hasImage) {
         issues.push('خبر بدون عکس: ' + pub.text.substring(0, 40) + '...');
       }
-      // بررسی آیا متن انگلیسی داره (لینک‌ها و آیدی‌ها حذف می‌شن چون طبیعتاً لاتین هستن)
-      const textWithoutLinks = pub.text
+      // فقط بدنه خبری بررسی می‌شود؛ فوتر (فوتر کانال، لینک، برچسب مدل) حذف می‌شود
+      // چون لینک و اسم مدل طبیعتاً لاتین هستند و جزو «متن انگلیسی» خبر نیستند
+      const newsContent = pub.text.split('🇮🇷 این خانه')[0];
+      const textWithoutLinks = newsContent
         .replace(/https?:\/\/\S+/g, '')          // لینک‌ها
         .replace(/@[A-Za-z0-9_]+/g, '')           // آیدی‌ها
+        .replace(/🤖 مدل:[^\n]*/g, '')            // برچسب مدل (اسم مدل لاتین است)
         .replace(/[\u2190-\u2BFF\u2600-\u27BF\uFE0F\u200F\u200E]/g, '');  // ایموجی و نمادها
       if (/[A-Za-z]{5,}/.test(textWithoutLinks)) {
-        issues.push('متن انگلیسی در خبر: ' + pub.text.replace(/https?:\/\/\S+/g, '').substring(0, 40) + '...');
+        issues.push('متن انگلیسی در خبر: ' + newsContent.replace(/https?:\/\/\S+/g, '').substring(0, 40) + '...');
       }
-      // بررسی برچسب مدل (هر پست باید برچسب داشته باشه)
+      // بررسی برچسب مدل (هر پست باید برچسب داشته باشه) — روی متن کامل
       if (!pub.text.includes('🤖 مدل:')) {
         issues.push('بدون برچسب مدل: ' + pub.text.substring(0, 40) + '...');
       }
@@ -918,11 +914,21 @@ async function fetchTelegramMessages(channelId) {
   const blocks = response.split(/<div class="tgme_widget_message\b/);
 
   for (let i = 1; i < blocks.length; i++) {
-    const block = blocks[i];
-    const textMatch = block.match(/tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/);
-    if (textMatch) {
-      let htmlText = textMatch[1];
-      const text = htmlText.replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]*>/gm, " ").trim();
+    const block = blocks[i];      const textMatch = block.match(/tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/);
+      if (textMatch) {
+        let htmlText = textMatch[1];
+        const text = htmlText
+          .replace(/<br\s*\/?>/gi, "\n")
+          .replace(/<[^>]*>/gm, " ")
+          .replace(/&rlm;/g, "")
+          .replace(/&lrm;/g, "")
+          .replace(/&zwnj;/g, "\u200c")
+          .replace(/&nbsp;/g, " ")
+          .replace(/&amp;/g, "&")
+          .replace(/&quot;/g, '"')
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">")
+          .trim();
       let newsLink = "";
       const allLinks = htmlText.match(/href="(https?:\/\/[^"]+)"/g);
       if (allLinks) {
