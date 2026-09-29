@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-09-28T10:02:15.749Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ دولتمردان پیشین خواستار خروج فوری ایران از NPT شدند",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-09-28T10:32:29.123Z",
     "model": "Groq",
     "items": [
@@ -1318,5 +1306,17 @@
       }
     ],
     "avgScore": 90
+  },
+  {
+    "timestamp": "2026-09-29T16:47:25.690Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ ضریب خودکفایی غذایی کشور بیش از ۸۵ درصد است",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
