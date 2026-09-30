@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-09-29T17:46:46.009Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ معرفی نماینده به بند ویژه روحانیت زندان اوین",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-09-29T18:17:17.743Z",
     "model": "NaraRouter",
     "items": [
@@ -1183,5 +1171,19 @@
       }
     ],
     "avgScore": 100
+  },
+  {
+    "timestamp": "2026-09-30T14:02:04.485Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ تعیین تکلیف آب، قنات و مدرسه روستای ممبین",
+        "score": 90,
+        "issues": [
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 90
   }
 ]
