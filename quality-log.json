@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-09-29T16:47:25.690Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ ضریب خودکفایی غذایی کشور بیش از ۸۵ درصد است",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-09-29T17:02:23.563Z",
     "model": "NaraRouter",
     "items": [
@@ -1173,5 +1161,22 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-09-30T13:16:39.952Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ تکذیب شایعه خروج ایران از پادمان",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ مذاکره با آمریکا اساساً بی‌فایده بود",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
