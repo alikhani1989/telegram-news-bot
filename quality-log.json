@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-10-01T04:01:45.142Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ کواهایی: محاصره زمینی آمریکا دور از انتظار نیست",
-        "score": 85,
-        "issues": [
-          "تیتر به صورت نقل قول است"
-        ]
-      }
-    ],
-    "avgScore": 85
-  },
-  {
     "timestamp": "2026-10-01T04:16:33.273Z",
     "model": "NaraRouter",
     "items": [
@@ -1136,5 +1122,17 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-01T23:02:17.303Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ بنزین گران نخواهد شد",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
