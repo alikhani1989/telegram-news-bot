@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-01T12:16:41.585Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ آمادگی کمیسیون عمران مجلس برای پیگیری نتایج اجلاس شوراها",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-01T14:02:09.651Z",
     "model": "NaraRouter",
     "items": [
@@ -1031,5 +1019,22 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-10-02T05:18:12.968Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ پیگیری مطالبات ۴۲۰ همتی گندمکاران",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تغییر دکترین از واکنشی به ساختاری",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
