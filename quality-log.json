@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-02T14:46:41.574Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ عدم عقب‌نشینی ایران در برابر تهدیدها",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-02T15:02:11.499Z",
     "model": "NaraRouter",
     "items": [
@@ -1357,5 +1345,19 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-03T23:46:46.071Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ کنترل کامل نیروهای مسلح بر تحرکات دشمن",
+        "score": 90,
+        "issues": [
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 90
   }
 ]
