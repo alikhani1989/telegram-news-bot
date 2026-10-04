@@ -40,12 +40,29 @@ function initials(name) {
   return parts[0].slice(0, 1) + parts[1].slice(0, 1);
 }
 
+// تاریخ شمسی (محاسبه‌ی ریاضی، بدون وابستگی به بی‌انیتی)
+function toJalali(gy, gm, gd) {
+  const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+  const gy2 = gm > 2 ? gy + 1 : gy;
+  let days = 355666 + (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
+  let jy = -1595 + (33 * Math.floor(days / 12053));
+  days %= 12053;
+  jy += 4 * Math.floor(days / 1461);
+  days %= 1461;
+  if (days > 365) { jy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
+  const jm = days < 186 ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
+  const jd = 1 + (days < 186 ? days % 31 : (days - 186) % 30);
+  return { jy, jm, jd };
+}
+
+const FA_MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+
 function faDate(iso) {
   if (!iso) return '';
   const d = new Date(iso);
   if (isNaN(d.getTime())) return '';
-  const months = ['ژانویه', 'فوریه', 'مارس', 'آوریل', 'مه', 'ژوئن', 'ژوئیه', 'اوت', 'سپتامبر', 'اکتبر', 'نوامبر', 'دسامبر'];
-  return d.getUTCDate() + ' ' + months[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+  const { jy, jm, jd } = toJalali(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
+  return jd + ' ' + FA_MONTHS[jm - 1] + ' ' + jy;
 }
 
 // فونت فارسی داخل خود فایل جاسازی می‌شود (base64): کارت به اینترنت وابسته نیست و
@@ -77,13 +94,24 @@ body{width:1100px;font-family:Vazirmatn,Tahoma,'Segoe UI',sans-serif;direction:r
 .date{font-size:21px;color:#8a97a3;margin-top:4px}
 .badge{background:#eaf3fa;color:#12558c;font-size:20px;padding:9px 20px;border-radius:999px;
   align-self:flex-start;white-space:nowrap;font-weight:700}
-.body{padding:30px 32px 8px;font-size:29px;line-height:2.05;color:#16222d;white-space:pre-wrap;word-wrap:break-word}
+.body{padding:30px 32px 26px;font-size:29px;line-height:2.05;color:#16222d;white-space:pre-wrap;word-wrap:break-word}
+/* جدا کردن واضح شعار کانال از توییت نماینده با خط نازک */
 .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:22px 32px 28px;border-top:1px solid #eef1f4;margin-top:10px}
-.brand{font-size:22px;color:#54636f;line-height:1.7}
+  padding:20px 32px 26px;border-top:2px solid #e6ebf0;background:#f7f9fb;margin:0}
+.brand{font-size:22px;color:#54636f;line-height:1.8}
 .brand b{color:#0f1b24;font-weight:700}
+.flag{width:30px;height:20px;border-radius:3px;vertical-align:-4px;margin-left:7px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.12);display:inline-block}
 .hint{font-size:21px;color:#98a4ae;direction:ltr}
 `;
+
+// پرچم ایران به‌صورت SVG: ایموجی پرچم در رندر بدون‌واسطه روی ویندوز نمایش داده نمی‌شود
+// و به‌جایش دو حرف «IR» نشان داده می‌شود.
+const IRAN_FLAG_SVG = '<svg viewBox="0 0 30 20" width="30" height="20" xmlns="http://www.w3.org/2000/svg">' +
+  '<rect y="0" width="30" height="6.67" fill="#239F40"/>' +
+  '<rect y="6.67" width="30" height="6.66" fill="#FFFFFF"/>' +
+  '<rect y="13.33" width="30" height="6.67" fill="#DA0000"/>' +
+  '</svg>';
 
 function buildTweetCardHtml(t) {
   const avatar = t.avatarUrl && /^https?:\/\//.test(t.avatarUrl)
@@ -104,8 +132,7 @@ function buildTweetCardHtml(t) {
   </div>
   <div class="body">${esc(t.text)}</div>
   <div class="foot">
-    <div class="brand"><b>🇮🇷 این خانه</b> #ازما ست<br>🔰 @azmaa_net</div>
-    <div class="hint">توییت اصلی نماینده در توییتر</div>
+    <div class="brand"><span class="flag">${IRAN_FLAG_SVG}</span><b>این خانه</b> #ازما ست<br>@azmaa_net</div>
   </div>
 </div>
 </body></html>`;
