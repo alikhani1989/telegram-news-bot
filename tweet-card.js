@@ -107,15 +107,15 @@ body{width:1100px;font-family:Vazirmatn,Tahoma,'Segoe UI',sans-serif;direction:r
 /* واترمارک: مطلق و بدون اثر روی قد کارت.
    line-height صریح لازم است چون از .body ارث می‌برد و آن را ۴۲۸ پیکبل می‌کرد. */
 .wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:50px;line-height:1;font-weight:700;color:#dde4e9;
+  font-size:44px;line-height:1;font-weight:700;color:#e9eef2;
   pointer-events:none;letter-spacing:-1px;direction:ltr;white-space:nowrap;z-index:0;overflow:hidden}
 .txt{position:relative;z-index:1;white-space:pre-wrap}
 /* جدا کردن واضح شعار کانال از توییت نماینده با خط نازک */
 .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:16px 32px 18px;border-top:2px solid #e6ebf0;background:#f7f9fb;margin:0}
-.brand{font-size:22px;color:#54636f;line-height:1.5}
+.brand{font-size:22px;color:#54636f;line-height:1.25}
 .brand b{color:#0f1b24;font-weight:700}
-.brand .id{display:block;margin-top:1px;direction:ltr;text-align:right;color:#7d8b98;font-size:21px}
+.brand .id{display:block;direction:ltr;text-align:right;color:#7d8b98;font-size:21px;line-height:1.25}
 `;
 
 // واترمارک بزرگ و کم‌رنگ روی متن توییت: جلوی انتشار کارت بدون ذکر منبع را می‌گیرد.
