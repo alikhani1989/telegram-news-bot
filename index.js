@@ -560,8 +560,10 @@ async function reviewPublishedNews(chatId, publishedTitles) {
     // بررسی کیفیت خبرهای منتشر شده
     const issues = [];
     for (const pub of recentPublished) {
-      // بررسی آیا عکس داره
-      if (!pub.hasImage) {
+      // پست توییت (بدون AI) قالب متفاوتی دارد و عمداً برچسب «بدون خلاصه‌سازی» دارد
+      const isTweetPost = pub.text.includes('متن اصلی توییت');
+      // بررسی آیا عکس داره (توییت‌ها عکس اجباری ندارند)
+      if (!pub.hasImage && !isTweetPost) {
         issues.push('خبر بدون عکس: ' + pub.text.substring(0, 40) + '...');
       }
       // فقط بدنه خبری بررسی می‌شود؛ فوتر (فوتر کانال، لینک، برچسب مدل) حذف می‌شود
@@ -571,24 +573,26 @@ async function reviewPublishedNews(chatId, publishedTitles) {
         .replace(/https?:\/\/\S+/g, '')          // لینک‌ها
         .replace(/@[A-Za-z0-9_]+/g, '')           // آیدی‌ها
         .replace(/🤖 مدل:[^\n]*/g, '')            // برچسب مدل (اسم مدل لاتین است)
+        .replace(/🔗 <a[^>]*>[^<]*<\/a>/g, '')   // متن لنگر لینک
+        .replace(/\(@[A-Za-z0-9_]+\)/g, '')       // شناسه‌ی کاربری داخل پرانتز (توییت)
         .replace(/[\u2190-\u2BFF\u2600-\u27BF\uFE0F\u200F\u200E]/g, '');  // ایموجی و نمادها
       if (/[A-Za-z]{5,}/.test(textWithoutLinks)) {
         issues.push('متن انگلیسی در خبر: ' + newsContent.replace(/https?:\/\/\S+/g, '').substring(0, 40) + '...');
       }
       // بررسی برچسب مدل (هر پست باید برچسب داشته باشه) — روی متن کامل
       // پست بدون برچسب از ربات ما نیست → اسکریپت قدیمی گوگل (Apps Script) هنوز فعال است
-      if (!pub.text.includes('🤖 مدل:')) {
+      if (!pub.text.includes('🤖 مدل:') && !isTweetPost) {
         issues.push('پست خارجی (بدون برچسب مدل — احتمالاً اسکریپت قدیمی گوگل): ' + pub.text.substring(0, 40) + '...');
       }
       // بررسی جعل منبع/مصاحبه (دروغ رایج مدل‌های ضعیف)
       // تیتر نباید حاوی «گفتگو با» یا «مصاحبه با» یا «در خبر ... گفت» باشد
       const titleLine = (pub.text.split('\n')[0] || '');
-      if (/گفتگو با|مصاحبه با|در (خبر|سایت|خبرگزاری)\s/.test(titleLine)) {
+      if (!isTweetPost && /گفتگو با|مصاحبه با|در (خبر|سایت|خبرگزاری)\s/.test(titleLine)) {
         issues.push('تیتر آلوده به ذکر منبع/رسانه: ' + titleLine.substring(0, 50));
       }
       // «در خبر ایرنا گفت» / «در تابناک گفت» و مشابه در بدنه — ذکر رسانه بدون مصاحبه واقعی ممنوع
-      const mediaAttr1 = pub.text.match(/در (خبر|سایت|پایگاه|روزنامه|خبرگزاری)\s+[^،,\.\n]{2,30}?\s+(گفت|نوشت|تاکید کرد)(?=\s|،|\.|$)/);
-      const mediaAttr2 = pub.text.match(/در (ایرنا|خانه ملت|تابناک|دنیای اقتصاد|باشگاه خبرنگاران جوان|سنتی نیوز|یجس|خبر جوان)\s+(گفت|نوشت|تاکید کرد)(?=\s|،|\.|$)/);
+      const mediaAttr1 = isTweetPost ? null : pub.text.match(/در (خبر|سایت|پایگاه|روزنامه|خبرگزاری)\s+[^،,\.\n]{2,30}?\s+(گفت|نوشت|تاکید کرد)(?=\s|،|\.|$)/);
+      const mediaAttr2 = isTweetPost ? null : pub.text.match(/در (ایرنا|خانه ملت|تابناک|دنیای اقتصاد|باشگاه خبرنگاران جوان|سنتی نیوز|یجس|خبر جوان)\s+(گفت|نوشت|تاکید کرد)(?=\s|،|\.|$)/);
       const mediaAttr = mediaAttr1 || mediaAttr2;
       if (mediaAttr) {
         issues.push('ذکر رسانه به‌عنوان منبع نقل‌قول (مشکوک به جعل): «...' + mediaAttr[0].substring(0, 40) + '»');
@@ -1012,6 +1016,168 @@ async function fetchRSSNews() {
     }
   }
   return allNews;
+}
+
+// ==========================================
+// منبع توییتر: لیست نمایندگان مجلس
+// خواندن با Apify (پلن رایگان = ۵ دلار اعتبار ماهانه، بدون کارت بانکی)
+// نکته: متن توییت خام و بدون AI منتشر می‌شود → نه جعلی دارد، نه هزینه‌ی مدل
+// ==========================================
+const APIFY_TWITTER_ACTOR = 'apidojo~twitter-list-scraper';
+const APIFY_BASE = 'https://api.apify.com/v2/acts/' + APIFY_TWITTER_ACTOR + '/run-sync-get-dataset-items';
+
+// توییت فقط وقتی منتشر می‌شود که به کار مجلس ربط داشته باشد
+const TWEET_PARLIAMENT_KEYWORDS = [
+  'مجلس', 'نماینده', 'نمایندگان', 'کمیسیون', 'کمیسیون‌ها', 'هیئت رئیسه', 'هئیت رئیسه',
+  'شورای نگهبان', 'قانون', 'قانونگذاری', 'طرح', 'لایحه', 'بودجه', 'استیضاح',
+  'صحنه علنی', 'جلسه علنی', 'رئیس مجلس', 'نایب رئیس مجلس', 'فراکسیون',
+  'معاون رئیس', 'دستور جلسه', 'گزارش کمیسیون', 'رأی‌گیری', 'رای‌گیری'
+];
+
+const TWEET_MIN_LEN = 40;   // توییت کوتاه («لایک») ارزش انتشار ندارد
+const TWEET_MAX_LEN = 700;  // متن خیلی بلند (رشته‌توییت) نصفه می‌ماند
+const TWEET_MAX_PER_RUN = 3;
+const TWEET_MAX_PER_DAY = 8;
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// اولین مقدار موجود بین یک یا چند منبع و چند کلید
+// مثال: tweetFirst([author, item], ['name','displayName']) → نام از author، وگرنه از خود توییت
+function tweetFirst(sources, keys) {
+  if (!Array.isArray(sources)) sources = [sources];
+  for (const src of sources) {
+    if (!src || typeof src !== 'object') continue;
+    for (const k of keys) {
+      const v = src[k];
+      if (v !== undefined && v !== null && v !== '') return v;
+    }
+  }
+  return '';
+}
+
+function normalizeTweet(item) {
+  const author = (item && (item.author || item.user || item.user_info)) || {};
+  const rawText = tweetFirst(item, ['full_text', 'fullText', 'text', 'tweet_text', 'note_tweet', 'content', 'body']);
+  let text = typeof rawText === 'object' && rawText !== null ? (rawText.text || '') : String(rawText || '');
+  const handle = tweetFirst([author, item], ['screen_name', 'screenName', 'username', 'user_name', 'handle']) || '';
+  const name = tweetFirst([author, item], ['name', 'displayName', 'display_name', 'full_name', 'fullName', 'userName', 'user_name']) || '';
+  const id = tweetFirst(item, ['id', 'rest_id', 'restId', 'tweet_id', 'tweetId', 'conversation_id']) || '';
+  let url = tweetFirst(item, ['url', 'twitterUrl', 'twitter_url', 'link', 'tweetUrl']);
+  if (!url && handle && id) url = 'https://x.com/' + String(handle).replace(/^@/, '') + '/status/' + id;
+  return {
+    id: String(id || url || text.substring(0, 40)),
+    url: String(url || ''),
+    text: text,
+    name: String(name || '').trim(),
+    handle: String(handle || '').replace(/^@/, '').trim(),
+    createdAt: tweetFirst(item, ['created_at', 'createdAt', 'date', 'timestamp', 'published_at']),
+    isRetweet: !!(item.isRetweet || item.is_retweet || item.retweeted || /^\s*RT\s*@/.test(text)),
+    isReply: !!(item.inReplyToId || item.in_reply_to_status_id || item.inReplyToStatusId || item.is_reply || item.inReplyToUserId),
+    lang: tweetFirst(item, ['lang', 'language'])
+  };
+}
+
+function tweetIsPublishable(t) {
+  if (!t || !t.text) return { ok: false, why: 'بدون متن' };
+  if (t.isRetweet) return { ok: false, why: 'ری‌تویت' };
+  if (t.isReply) return { ok: false, why: 'ریپلای' };
+  if (/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(t.text)) return { ok: false, why: 'کاراکتر غیرفارسی' };
+  if (t.text.trim().length < TWEET_MIN_LEN) return { ok: false, why: 'خیلی کوتاه' };
+  if (t.text.trim().length > TWEET_MAX_LEN) return { ok: false, why: 'خیلی بلند' };
+  // فقط متن فارسی می‌پذیریم (نمایندگان فارسی‌زبان‌اند)
+  const persian = (t.text.match(/[\u0600-\u06FF]/g) || []).length;
+  if (persian < 20) return { ok: false, why: 'فارسی نیست' };
+  // فیلتر موضوع: باید به کار مجلس ربط داشته باشد
+  if (!TWEET_PARLIAMENT_KEYWORDS.some(k => t.text.includes(k))) return { ok: false, why: 'خارج از موضوع مجلس' };
+  return { ok: true };
+}
+
+function formatTweetPost(t) {
+  const who = escapeHtml(t.name || 'نماینده مجلس');
+  const attribution = t.name && t.handle ? who + ' (@' + escapeHtml(t.handle) + ')' : (t.name ? who : '@' + escapeHtml(t.handle || ''));
+  const body = t.text.split(/\n{2,}/).map(p => '🔸 ' + escapeHtml(p.trim()).replace(/\n/g, '\n')).join('\n\n');
+  let msg = '<b>🐦 ' + attribution + '</b>\n\n' + body;
+  msg += '\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net';
+  if (t.url && t.url.startsWith('http')) {
+    msg += '\n\n🔗 <a href="' + t.url + '">توییت در توییتر</a>';
+  }
+  // برچسب اجباری: این پست AI نیست، پس صریح می‌گوییم (هم گیت بازبینی پاس می‌شود، هم شفاف)
+  msg += '\n\n🤖 مدل: بدون خلاصه‌سازی (متن اصلی توییت)';
+  return msg;
+}
+
+async function fetchTwitterListTweets(listUrl) {
+  const token = process.env.APIFY_TOKEN || '';
+  if (!token) return { error: 'APIFY_TOKEN تنظیم نشده' };
+  const url = APIFY_BASE + '?token=' + encodeURIComponent(token) + '&format=json&clean=true&skipHidden=true';
+  const body = JSON.stringify({ startUrls: [listUrl], maxItems: 40 });
+  const res = await httpPost(url, body, { 'Content-Type': 'application/json' });
+  const parsed = JSON.parse(res);
+  const rows = Array.isArray(parsed) ? parsed : (parsed && parsed.items) || [];
+  if (!Array.isArray(rows)) return { error: 'پاسخ ناشناخته از Apify: ' + String(res).substring(0, 120) };
+  return { tweets: rows.map(normalizeTweet) };
+}
+
+// انتشار توییت‌های لیست (مستقل از خط لوله‌ی خبر، بدون AI)
+async function publishTwitterListTweets(state, botToken, chatId) {
+  const listUrl = (process.env.TWITTER_LIST_URL || '').trim();
+  if (!listUrl) { console.log('🐦 لیست توییتر: تنظیم نشده (TWITTER_LIST_URL) — رد شد'); return 0; }
+  if (!(process.env.APIFY_TOKEN || '').trim()) { console.log('🐦 لیست توییتر: APIFY_TOKEN تنظیم نشده — رد شد'); return 0; }
+
+  if (!Array.isArray(state.TWEET_IDS)) state.TWEET_IDS = [];
+  const today = new Date().toISOString().slice(0, 10);
+  if (state.TWEET_LAST_DAY !== today) { state.TWEET_LAST_DAY = today; state.TWEET_COUNT_TODAY = 0; }
+  if ((state.TWEET_COUNT_TODAY || 0) >= TWEET_MAX_PER_DAY) {
+    console.log('🐦 سقف روزانه توییت رسید (' + TWEET_MAX_PER_DAY + ') — رد شد');
+    return 0;
+  }
+
+  console.log('🐦 خواندن لیست توییتر: ' + listUrl.substring(0, 70));
+  let result;
+  try {
+    result = await fetchTwitterListTweets(listUrl);
+  } catch (e) {
+    console.log('  ⚠️ خطا در خواندن لیست توییتر: ' + e.message);
+    return 0;
+  }
+  if (result.error) { console.log('  ⚠️ ' + result.error); return 0; }
+
+  const seen = {};
+  for (const id of state.TWEET_IDS) seen[id] = true;
+  const fresh = [];
+  for (const t of result.tweets) {
+    const verdict = tweetIsPublishable(t);
+    if (!verdict.ok) { continue; }
+    if (seen[t.id]) continue;
+    seen[t.id] = true;
+    fresh.push(t);
+  }
+  console.log('  🐦 ' + result.tweets.length + ' توییت خوانده شد، ' + fresh.length + ' تازه و مرتبط');
+  if (fresh.length === 0) return 0;
+
+  let published = 0;
+  for (const t of fresh.slice(0, TWEET_MAX_PER_RUN)) {
+    const msg = formatTweetPost(t);
+    try {
+      const res = await sendToTelegram(msg, null, botToken, chatId);
+      if (res.ok) {
+        state.TWEET_IDS.push(t.id);
+        state.TWEET_COUNT_TODAY = (state.TWEET_COUNT_TODAY || 0) + 1;
+        published++;
+        console.log('  ✅ توییت ' + (t.handle || '?') + ' منتشر شد');
+      } else {
+        console.log('  ❌ خطای تلگرام:', res.description || JSON.stringify(res));
+      }
+    } catch (e) {
+      console.log('  ❌ خطا در ارسال توییت:', e.message);
+    }
+  }
+  if (state.TWEET_IDS.length > 500) state.TWEET_IDS = state.TWEET_IDS.slice(-500);
+  saveState(state);
+  return published;
 }
 
 // ==========================================
@@ -1905,6 +2071,9 @@ async function main() {
     const state = loadState();
     const lastProcessed = state.LAST_PROCESSED_SNIPPET || "";
     let recentTitles = state.RECENT_TITLES || [];
+
+    // منبع توییتر (لیست نمایندگان) — مستقل از خبرها، قبل از هر return زودهنگام
+    await publishTwitterListTweets(state, BOT_TOKEN, DESTINATION_CHAT_ID);
 
     let newMessages = [];
     let foundLast = false;

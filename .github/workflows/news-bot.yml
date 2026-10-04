@@ -8,6 +8,9 @@ on:
 permissions:
   contents: write
 
+# عملیات گیت (commit/push وضعیت) ممکن است به دلیل همزمانی با اجرای دیگر reject شود؛
+# تلاش مجدد بدون از دست دادن تغییرات
+
 jobs:
   run-bot:
     runs-on: ubuntu-latest
@@ -33,6 +36,8 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           DESTINATION_CHAT_ID: '@selectednewsmajlis'
           SOURCE_CHANNEL_ID: news_parliament
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          TWITTER_LIST_URL: ${{ secrets.TWITTER_LIST_URL }}
 
       - name: ذخیره وضعیت در مخزن
         if: success()
@@ -43,6 +48,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "تغییری ذخیره نشد"
           else
-            git commit -m "🔄 بروزرسانی خودکار وضعیت [skip ci]"
-            git push
+          git commit -m "🔄 بروزرسانی خودکار وضعیت [skip ci]"
+          git push || (git pull --rebase origin main && git push)
           fi

@@ -1,6 +1,7 @@
 node_modules/
 config.json
-state.json
+# state.json عمداً دیگر نادیده گرفته نمی‌شود: حافظه‌ی ضدتکرار و شناسه‌ی توییت‌های منتشرشده
+# باید بین اجراهای GitHub Actions باقی بماند، وگرنه هر خبر/توییت هر ۲۰ دقیقه تکرار می‌شود.
 debug*.js
 check_*.js
 test_*.js
