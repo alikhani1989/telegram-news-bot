@@ -1057,7 +1057,9 @@ async function fetchRSSNews() {
 // خواندن با Apify (پلن رایگان = ۵ دلار اعتبار ماهانه، بدون کارت بانکی)
 // نکته: متن توییت خام و بدون AI منتشر می‌شود → نه جعلی دارد، نه هزینه‌ی مدل
 // ==========================================
-const APIFY_TWITTER_ACTOR = 'apidojo~twitter-list-scraper';
+// اکتور قدیمی (twitter-list-scraper) از کار افتاده و فقط {"demo":true} برمی‌گرداند؛
+// این یکی با همان لیست و همان قیمت کار می‌کند
+const APIFY_TWITTER_ACTOR = 'apidojo~tweet-scraper';
 const APIFY_BASE = 'https://api.apify.com/v2/acts/' + APIFY_TWITTER_ACTOR + '/run-sync-get-dataset-items';
 
 // توییت فقط وقتی منتشر می‌شود که به کار مجلس ربط داشته باشد
@@ -1142,7 +1144,7 @@ function normalizeTweet(rawItem) {
     isReply: !!(item.isReply || item.inReplyToId || item.in_reply_to_status_id || item.inReplyToStatusId || item.is_reply || item.inReplyToUserId),
     lang: tweetFirst(item, ['lang', 'language']),
     imageUrl: extractTweetImage(item),
-    avatarUrl: tweetFirst([author], ['profileImageUrl', 'profile_image_url', 'avatarUrl', 'avatar', 'profileImage']) || ''
+    avatarUrl: tweetFirst([author], ['profilePicture', 'profileImageUrl', 'profile_image_url', 'avatarUrl', 'avatar', 'profileImage']) || ''
   };
 }
 
@@ -1202,7 +1204,7 @@ async function fetchTwitterListTweets(listUrl) {
   const token = process.env.APIFY_TOKEN || '';
   if (!token) return { error: 'APIFY_TOKEN تنظیم نشده' };
   const url = APIFY_BASE + '?token=' + encodeURIComponent(token) + '&format=json&clean=true&skipHidden=true';
-  // ورودی رسمی اکتور: startUrls آرایه‌ی رشته + maxItems (listIds را هم می‌دهیم تا لیست شناسایی شود)
+  // ورودی اکتور: startUrls آرایه‌ی رشته + maxItems
   const listIdMatch = listUrl.match(/lists\/(\d+)/);
   const input = { startUrls: [listUrl], maxItems: TWEET_FETCH_MAX_ITEMS };
   if (listIdMatch) input.listIds = [listIdMatch[1]];
