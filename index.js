@@ -1116,14 +1116,21 @@ async function fetchTwitterListTweets(listUrl) {
   const body = JSON.stringify({ startUrls: [listUrl], maxItems: 40 });
   const res = await httpPost(url, body, { 'Content-Type': 'application/json' });
   const parsed = JSON.parse(res);
+  // خطای سرویس (توکن غلط، اعتبار تمام‌شده، لیست ناموجود) نباید بی‌صدا «۰ توییت» به نظر برسد
+  if (parsed && parsed.error) {
+    return { error: 'Apify: ' + (parsed.error.message || parsed.error.type || JSON.stringify(parsed.error)).substring(0, 160) };
+  }
   const rows = Array.isArray(parsed) ? parsed : (parsed && parsed.items) || [];
   if (!Array.isArray(rows)) return { error: 'پاسخ ناشناخته از Apify: ' + String(res).substring(0, 120) };
   return { tweets: rows.map(normalizeTweet) };
 }
 
 // انتشار توییت‌های لیست (مستقل از خط لوله‌ی خبر، بدون AI)
+// لیست عمومی نمایندگان مجلس در توییتر (می‌توان با TWITTER_LIST_URL تغییرش داد)
+const DEFAULT_TWITTER_LIST_URL = 'https://x.com/i/lists/1967107576799039911';
+
 async function publishTwitterListTweets(state, botToken, chatId) {
-  const listUrl = (process.env.TWITTER_LIST_URL || '').trim();
+  const listUrl = (process.env.TWITTER_LIST_URL || DEFAULT_TWITTER_LIST_URL).trim();
   if (!listUrl) { console.log('🐦 لیست توییتر: تنظیم نشده (TWITTER_LIST_URL) — رد شد'); return 0; }
   if (!(process.env.APIFY_TOKEN || '').trim()) { console.log('🐦 لیست توییتر: APIFY_TOKEN تنظیم نشده — رد شد'); return 0; }
 

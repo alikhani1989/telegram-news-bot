@@ -37,7 +37,7 @@ jobs:
           DESTINATION_CHAT_ID: '@selectednewsmajlis'
           SOURCE_CHANNEL_ID: news_parliament
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-          TWITTER_LIST_URL: ${{ secrets.TWITTER_LIST_URL }}
+          TWITTER_LIST_URL: https://x.com/i/lists/1967107576799039911
 
       - name: ذخیره وضعیت در مخزن
         if: success()
