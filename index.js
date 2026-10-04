@@ -1027,17 +1027,29 @@ const APIFY_TWITTER_ACTOR = 'apidojo~twitter-list-scraper';
 const APIFY_BASE = 'https://api.apify.com/v2/acts/' + APIFY_TWITTER_ACTOR + '/run-sync-get-dataset-items';
 
 // توییت فقط وقتی منتشر می‌شود که به کار مجلس ربط داشته باشد
-const TWEET_PARLIAMENT_KEYWORDS = [
-  'مجلس', 'نماینده', 'نمایندگان', 'کمیسیون', 'کمیسیون‌ها', 'هیئت رئیسه', 'هئیت رئیسه',
-  'شورای نگهبان', 'قانون', 'قانونگذاری', 'طرح', 'لایحه', 'بودجه', 'استیضاح',
-  'صحنه علنی', 'جلسه علنی', 'رئیس مجلس', 'نایب رئیس مجلس', 'فراکسیون',
-  'معاون رئیس', 'دستور جلسه', 'گزارش کمیسیون', 'رأی‌گیری', 'رای‌گیری'
-];
+// فیلتر موضوع کلمات کلیدی حذف شد (به درخواست صاحب کانال): هرچه نماینده نوشته
+// منتشر می‌شود؛ فقط چیزهای بی‌محتوا (ری‌تویت/ریپلای/غیرفارسی/خیلی کوتاه) حذف می‌شود.
 
 const TWEET_MIN_LEN = 40;   // توییت کوتاه («لایک») ارزش انتشار ندارد
 const TWEET_MAX_LEN = 700;  // متن خیلی بلند (رشته‌توییت) نصفه می‌ماند
-const TWEET_MAX_PER_RUN = 3;
-const TWEET_MAX_PER_DAY = 8;
+const TWEET_MAX_PER_RUN = 8;
+const TWEET_MAX_PER_DAY = 25;
+
+// ==========================================
+// تضمین هزینه‌ی صفر
+// Apify به‌ازای هر آیتم نتیجه هزیه می‌گیرد (فعلاً $0.40 به‌ازای ۱۰۰۰ آیتم) و اعتبار
+// رایگان حساب $5 در ماه است. اگر ربات هر ۳۰ دقیقه لیست را بخواند، ماهی $23 می‌شود.
+// بنابراین: (۱) فقط هر چند ساعت یک‌بار لیست خوانده می‌شود،(۲) هزینه‌ی ماه تا
+// عملاً برآورد و نگه‌داری می‌شود و پیش از رسیدن به سقف، خواندن متوقف می‌گردد.
+// ==========================================
+const TWEET_FETCH_EVERY_HOURS = 4;   // فاصله‌ی خواندن لیست از سرویس
+const TWEET_FETCH_INTERVAL_MS = TWEET_FETCH_EVERY_HOURS * 3600000;
+const TWEET_FETCH_MAX_ITEMS = 30;    // سقف آیتم هر بار خواندن (روی هزینه اثر دارد)
+const APIFY_PRICE_PER_1K = 0.40;     // دلار به‌ازای ۱۰۰۰ آیتم
+const TWEET_MONTHLY_BUDGET_USD = 4;  // سقف هزینه‌ی ماهانه (کمتر از اعتبار ۵ دلاری)
+
+// زمان جاری (ملاموتبه جداسازی می‌شود تا تست بتواند زمان مجازی بدهد)
+function nowMs() { return Date.now(); }
 
 function escapeHtml(s) {
   return String(s == null ? '' : s)
@@ -1078,8 +1090,27 @@ function normalizeTweet(item) {
     createdAt: tweetFirst(item, ['created_at', 'createdAt', 'date', 'timestamp', 'published_at']),
     isRetweet: !!(item.isRetweet || item.is_retweet || item.retweeted || /^\s*RT\s*@/.test(text)),
     isReply: !!(item.inReplyToId || item.in_reply_to_status_id || item.inReplyToStatusId || item.is_reply || item.inReplyToUserId),
-    lang: tweetFirst(item, ['lang', 'language'])
+    lang: tweetFirst(item, ['lang', 'language']),
+    imageUrl: extractTweetImage(item),
+    avatarUrl: tweetFirst([author], ['profileImageUrl', 'profile_image_url', 'avatarUrl', 'avatar', 'profileImage']) || ''
   };
+}
+
+// عکس ضمیمه‌شده به خود توییت (نه آواتار)؛ اگر نبود یعنی پست متنی است
+function extractTweetImage(item) {
+  const tryMedia = (media) => {
+    if (!media) return '';
+    const list = Array.isArray(media) ? media : [media];
+    for (const m of list) {
+      if (!m || typeof m !== 'object') continue;
+      const type = String(m.type || '').toLowerCase();
+      if (type && type !== 'photo' && type !== 'image' && type !== 'animated_gif') continue;
+      const url = tweetFirst(m, ['url', 'media_url_https', 'media_url', 'previewImageUrl', 'preview_image_url', 'src', 'link']);
+      if (url && String(url).startsWith('http')) return String(url);
+    }
+    return '';
+  };
+  return tryMedia(item.media) || tryMedia(item.photos) || tryMedia(item.mediaItems) || tryMedia(item.extendedEntities);
 }
 
 function tweetIsPublishable(t) {
@@ -1092,8 +1123,7 @@ function tweetIsPublishable(t) {
   // فقط متن فارسی می‌پذیریم (نمایندگان فارسی‌زبان‌اند)
   const persian = (t.text.match(/[\u0600-\u06FF]/g) || []).length;
   if (persian < 20) return { ok: false, why: 'فارسی نیست' };
-  // فیلتر موضوع: باید به کار مجلس ربط داشته باشد
-  if (!TWEET_PARLIAMENT_KEYWORDS.some(k => t.text.includes(k))) return { ok: false, why: 'خارج از موضوع مجلس' };
+  // کوت‌تویت (نظر درباره‌ی حرف یک نفر دیگر) منتشر می‌شود؛ فقط ری‌تویت و ریپلای حذف می‌شوند
   return { ok: true };
 }
 
@@ -1115,7 +1145,7 @@ async function fetchTwitterListTweets(listUrl) {
   const token = process.env.APIFY_TOKEN || '';
   if (!token) return { error: 'APIFY_TOKEN تنظیم نشده' };
   const url = APIFY_BASE + '?token=' + encodeURIComponent(token) + '&format=json&clean=true&skipHidden=true';
-  const body = JSON.stringify({ startUrls: [listUrl], maxItems: 40 });
+  const body = JSON.stringify({ startUrls: [listUrl], maxItems: TWEET_FETCH_MAX_ITEMS });
   const res = await httpPost(url, body, { 'Content-Type': 'application/json' });
   const parsed = JSON.parse(res);
   // خطای سرویس (توکن غلط، اعتبار تمام‌شده، لیست ناموجود) نباید بی‌صدا «۰ توییت» به نظر برسد
@@ -1144,6 +1174,20 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     return 0;
   }
 
+  // === محافظ هزینه: این‌ها تضمین می‌کنند اعتبار رایگان بیرون نرود ===
+  const month = today.slice(0, 7);
+  if (state.APIFY_MONTH !== month) { state.APIFY_MONTH = month; state.APIFY_ITEMS = 0; }
+  const spentUsd = (state.APIFY_ITEMS || 0) / 1000 * APIFY_PRICE_PER_1K;
+  if (spentUsd >= TWEET_MONTHLY_BUDGET_USD) {
+    console.log('🐦 سقف هزینه‌ی ماهانه رسید ($' + spentUsd.toFixed(2) + ' از $' + TWEET_MONTHLY_BUDGET_USD + ') — این ماه دیگر لیست خوانده نمی‌شود');
+    return 0;
+  }
+  const lastFetch = state.APIFY_LAST_FETCH || 0;
+  if (lastFetch && (nowMs() - lastFetch) < TWEET_FETCH_INTERVAL_MS) {
+    const hoursSince = (nowMs() - lastFetch) / 3600000;
+    console.log('🐦 لیست توییتر: ' + hoursSince.toFixed(1) + ' ساعت از آخرین خواندن گذشته (فاصله: ' + TWEET_FETCH_EVERY_HOURS + ' ساعت) — رد شد');
+    return 0;
+  }
   console.log('🐦 خواندن لیست توییتر: ' + listUrl.substring(0, 70));
   let result;
   try {
@@ -1153,6 +1197,13 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     return 0;
   }
   if (result.error) { console.log('  ⚠️ ' + result.error); return 0; }
+
+  // صورت‌حساب هزینه‌ی همین خواندن (فقط وقتی سرویس واقعاً داده برگردانده)
+  const fetched = result.tweets.length;
+  state.APIFY_ITEMS = (state.APIFY_ITEMS || 0) + fetched;
+  state.APIFY_LAST_FETCH = nowMs();
+  const newSpent = state.APIFY_ITEMS / 1000 * APIFY_PRICE_PER_1K;
+  console.log('  💵 هزینه‌ی ماهانه: $' + newSpent.toFixed(3) + ' از سقف $' + TWEET_MONTHLY_BUDGET_USD);
 
   const seen = {};
   for (const id of state.TWEET_IDS) seen[id] = true;
@@ -1164,19 +1215,19 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     seen[t.id] = true;
     fresh.push(t);
   }
-  console.log('  🐦 ' + result.tweets.length + ' توییت خوانده شد، ' + fresh.length + ' تازه و مرتبط');
+  console.log('  🐦 ' + result.tweets.length + ' توییت خوانده شد، ' + fresh.length + ' تازه و قابل انتشار');
   if (fresh.length === 0) return 0;
 
   let published = 0;
   for (const t of fresh.slice(0, TWEET_MAX_PER_RUN)) {
     const msg = formatTweetPost(t);
     try {
-      const res = await sendToTelegram(msg, null, botToken, chatId);
+      const res = await sendToTelegram(msg, t.imageUrl || null, botToken, chatId);
       if (res.ok) {
         state.TWEET_IDS.push(t.id);
         state.TWEET_COUNT_TODAY = (state.TWEET_COUNT_TODAY || 0) + 1;
         published++;
-        console.log('  ✅ توییت ' + (t.handle || '?') + ' منتشر شد');
+        console.log('  ✅ توییت ' + (t.handle || '?') + ' منتشر شد' + (t.imageUrl ? ' (با عکس)' : ''));
       } else {
         console.log('  ❌ خطای تلگرام:', res.description || JSON.stringify(res));
       }
