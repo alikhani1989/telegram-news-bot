@@ -1062,7 +1062,9 @@ function normalizeTweet(item) {
   const author = (item && (item.author || item.user || item.user_info)) || {};
   const rawText = tweetFirst(item, ['full_text', 'fullText', 'text', 'tweet_text', 'note_tweet', 'content', 'body']);
   let text = typeof rawText === 'object' && rawText !== null ? (rawText.text || '') : String(rawText || '');
-  const handle = tweetFirst([author, item], ['screen_name', 'screenName', 'username', 'user_name', 'handle']) || '';
+  // لینک‌های کوتاه x/t.co فقط راه رسیدن به خود توییت‌اند → حذف (لینک اصلی پایین پست می‌آید)
+  text = text.replace(/https:\/\/t\.co\/[A-Za-z0-9]+/g, '').replace(/[ \t]+$/gm, '');
+  const handle = tweetFirst([author, item], ['userName', 'screen_name', 'screenName', 'username', 'user_name', 'handle']) || '';
   const name = tweetFirst([author, item], ['name', 'displayName', 'display_name', 'full_name', 'fullName', 'userName', 'user_name']) || '';
   const id = tweetFirst(item, ['id', 'rest_id', 'restId', 'tweet_id', 'tweetId', 'conversation_id']) || '';
   let url = tweetFirst(item, ['url', 'twitterUrl', 'twitter_url', 'link', 'tweetUrl']);
