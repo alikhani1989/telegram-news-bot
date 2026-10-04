@@ -48,9 +48,21 @@ function faDate(iso) {
   return d.getUTCDate() + ' ' + months[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
 }
 
+// فونت فارسی داخل خود فایل جاسازی می‌شود (base64): کارت به اینترنت وابسته نیست و
+// در رندر headless هم حروف به‌هم نمی‌چسبند (مشکلی که با لینک CDN دیده شد).
+function fontFaceCss() {
+  const dir = path.join(__dirname, 'fonts');
+  const face = (file, weight) => {
+    const p = path.join(dir, file);
+    if (!fs.existsSync(p)) return '';
+    const b64 = fs.readFileSync(p).toString('base64');
+    return `@font-face{font-family:Vazirmatn;src:url(data:font/woff2;base64,${b64}) format('woff2');font-weight:${weight};font-style:normal;}\n`;
+  };
+  return face('Vazirmatn-Regular.woff2', 400) + face('Vazirmatn-Bold.woff2', 700);
+}
+
 const CARD_CSS = `
-@font-face{font-family:Vazirmatn;src:url(https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2)format('woff2');font-weight:400}
-@font-face{font-family:Vazirmatn;src:url(https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2)format('woff2');font-weight:700}
+${fontFaceCss()}
 *{box-sizing:border-box;margin:0;padding:0}
 body{width:1100px;font-family:Vazirmatn,Tahoma,'Segoe UI',sans-serif;direction:rtl;
   background:linear-gradient(135deg,#0f2027 0%,#1b3a4b 55%,#14293a 100%);padding:36px}
