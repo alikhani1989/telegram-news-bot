@@ -1559,7 +1559,8 @@ async function callGroq(prompt) {
       const content = data.choices[0].message.content;
       if (!content || content.trim().length === 0) { console.log('  ⚠️ پاسخ خالی از Groq'); continue; }
       console.log('  ✅ مدل Groq ' + model + ' پاسخ داد');
-      return content;
+      // نام مدل را هم برمی‌گردانیم تا برچسب پست دقیق باشد (نه فقط «Groq»)
+      return { content: content, model: model };
     } catch (e) {
       console.log('  ⚠️ خطا از Groq: ' + e.message);
     }
@@ -1575,8 +1576,8 @@ const AI_MODELS = [
   'qwen/qwen3.8-27b:free',
   // اولویت دوم: Nemotron Ultra (اگر Qwen خطا داد)
   'nvidia/nemotron-3-ultra-550b-a55b:free',
-  // اولویت سوم: Z.ai GLM 5.2
-  'z-ai/glm-5.2:free',
+  // اولویت سوم: Ling 3.0 Flash (جایگزین GLM — نسخه‌ی :free آن حذف شده)
+  'inclusionai/ling-3.0-flash-sante:free',
 ];
 
 
@@ -1669,7 +1670,9 @@ async function callFallbackModels(prompt) {
   const fallbackModels = [
     'qwen/qwen3.8-27b:free',
     'nvidia/nemotron-3-ultra-550b-a55b:free',
-    'z-ai/glm-5.2:free',
+    // z-ai/glm-5.2:free حذف شده (نسخه‌ی پولی جایگزین شد)؛ این دو را آوردیم
+    'inclusionai/ling-3.0-flash-sante:free',
+    'apodex/apodex-1.1-mini:free',
     'google/gemma-4-31b-it:free',
   ];
   const url = 'https://openrouter.ai/api/v1/chat/completions';
@@ -2328,9 +2331,10 @@ async function main() {
     // اگه NaraRouter هم کار نکرد، Groq رو امتحان کن (سهمیه جداگانه)
     if (!aiText) {
       console.log('  🟡 تلاش با Groq...');
-      aiText = await callGroq(prompt);
-      if (aiText) {
-        usedModel = 'Groq';
+      const groqResult = await callGroq(prompt);
+      if (groqResult) {
+        aiText = groqResult.content;
+        usedModel = 'Groq ' + groqResult.model;
         console.log('  ✅ Groq موفق بود!');
       } else {
         console.log('  ❌ Groq ناموفق بود.');
