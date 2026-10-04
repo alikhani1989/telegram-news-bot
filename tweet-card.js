@@ -56,13 +56,19 @@ function toJalali(gy, gm, gd) {
 }
 
 const FA_MONTHS = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+const FA_DIGITS = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+// تبدیل ارقام لاتین به فارسی (تاریخ باید کاملاً فارسی دیده شود)
+function faDigits(s) {
+  return String(s).replace(/[0-9]/g, (d) => FA_DIGITS[Number(d)]);
+}
 
 function faDate(iso) {
   if (!iso) return '';
   const d = new Date(iso);
   if (isNaN(d.getTime())) return '';
   const { jy, jm, jd } = toJalali(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate());
-  return jd + ' ' + FA_MONTHS[jm - 1] + ' ' + jy;
+  return faDigits(jd) + ' ' + FA_MONTHS[jm - 1] + ' ' + faDigits(jy);
 }
 
 // فونت فارسی داخل خود فایل جاسازی می‌شود (base64): کارت به اینترنت وابسته نیست و
@@ -94,23 +100,30 @@ body{width:1100px;font-family:Vazirmatn,Tahoma,'Segoe UI',sans-serif;direction:r
 .date{font-size:21px;color:#8a97a3;margin-top:4px}
 .badge{background:#eaf3fa;color:#12558c;font-size:20px;padding:9px 20px;border-radius:999px;
   align-self:flex-start;white-space:nowrap;font-weight:700}
-.body{padding:30px 32px 26px;font-size:29px;line-height:2.05;color:#16222d;white-space:pre-wrap;word-wrap:break-word}
+.body{padding:30px 32px 20px;font-size:29px;line-height:2.05;color:#16222d;white-space:pre-wrap;word-wrap:break-word}
+/* واترمارک: آیدی کانال در پایین متن توییت، کم‌رنگ و نامحسوس */
+.wm{margin:0 32px 4px;text-align:center;font-size:19px;color:#b9c3cc;letter-spacing:.3px;
+  direction:ltr}
+.wm .flag{margin-left:6px}
 /* جدا کردن واضح شعار کانال از توییت نماینده با خط نازک */
 .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:20px 32px 26px;border-top:2px solid #e6ebf0;background:#f7f9fb;margin:0}
 .brand{font-size:22px;color:#54636f;line-height:1.8}
 .brand b{color:#0f1b24;font-weight:700}
-.flag{width:30px;height:20px;border-radius:3px;vertical-align:-4px;margin-left:7px;
+.flag{width:30px;height:16px;border-radius:2px;vertical-align:-4px;margin-left:7px;
   box-shadow:0 0 0 1px rgba(0,0,0,.12);display:inline-block}
-.hint{font-size:21px;color:#98a4ae;direction:ltr}
 `;
 
-// پرچم ایران به‌صورت SVG: ایموجی پرچم در رندر بدون‌واسطه روی ویندوز نمایش داده نمی‌شود
-// و به‌جایش دو حرف «IR» نشان داده می‌شود.
-const IRAN_FLAG_SVG = '<svg viewBox="0 0 30 20" width="30" height="20" xmlns="http://www.w3.org/2000/svg">' +
-  '<rect y="0" width="30" height="6.67" fill="#239F40"/>' +
-  '<rect y="6.67" width="30" height="6.66" fill="#FFFFFF"/>' +
-  '<rect y="13.33" width="30" height="6.67" fill="#DA0000"/>' +
+// نشان کوچک ایران: سه نوار رنگی + کلمه «ایران».
+// چرا پرچم کامل کشیده نشد؟ نشان شیر و خورشید در اندازه‌ی کوچک کارت (۳۴ پیکسل) با
+// پرتوهای سفید روی نوار سفید محو می‌شد و ناقص به نظر می‌رسید؛ کشیدن دستیِ درست
+// نشان بسیار پیچیده و در این اندازه تفاوتی نمی‌کند. پس نشان ساده و خوانا انتخاب شد.
+const IRAN_FLAG_SVG = '<svg viewBox="0 0 64 34" width="30" height="16" xmlns="http://www.w3.org/2000/svg">' +
+  '<rect width="64" height="11.34" fill="#239F40"/>' +
+  '<rect y="11.33" width="64" height="11.34" fill="#FFFFFF"/>' +
+  '<rect y="22.66" width="64" height="11.34" fill="#DA0000"/>' +
+  '<text x="32" y="22.5" font-size="9.5" font-weight="700" fill="#239F40" text-anchor="middle" ' +
+  'font-family="Tahoma,sans-serif">ایران</text>' +
   '</svg>';
 
 function buildTweetCardHtml(t) {
@@ -131,8 +144,9 @@ function buildTweetCardHtml(t) {
     <div class="badge">نماینده مجلس</div>
   </div>
   <div class="body">${esc(t.text)}</div>
+  <div class="wm"><span class="flag">${IRAN_FLAG_SVG}</span> @azmaa_net</div>
   <div class="foot">
-    <div class="brand"><span class="flag">${IRAN_FLAG_SVG}</span><b>این خانه</b> #ازما ست<br>@azmaa_net</div>
+    <div class="brand"><b>این خانه</b> #ازما ست</div>
   </div>
 </div>
 </body></html>`;
