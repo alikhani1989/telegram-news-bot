@@ -248,9 +248,12 @@
       "timestamp": 1791110827685
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "یک طرح و پنج سوال از دو وزیر اعلام وصول شد \n #شبست",
+  "LAST_PROCESSED_SNIPPET": "استیضاح در میانه بحران؛ نمایندگان مسئولیت تبعات تص",
   "LAST_REPORT_TIME": 1791107243080,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 10,
-  "APIFY_LAST_FETCH": 1791103581794
+  "APIFY_LAST_FETCH": 1791103581794,
+  "MISTAKE_STATS": {
+    "جعل محتوا/مصاحبه": 1
+  }
 }
