@@ -1202,8 +1202,11 @@ async function fetchTwitterListTweets(listUrl) {
   const token = process.env.APIFY_TOKEN || '';
   if (!token) return { error: 'APIFY_TOKEN تنظیم نشده' };
   const url = APIFY_BASE + '?token=' + encodeURIComponent(token) + '&format=json&clean=true&skipHidden=true';
-  // چند نام رایج برای سقف آیتم می‌فرستیم تا اگر اکتور نام دیگری بخواهد، باز هم ۳۰ آیتم بگیریم
-  const body = JSON.stringify({ startUrls: [{ url: listUrl }], startUrl: listUrl, maxItems: TWEET_FETCH_MAX_ITEMS, maxItemsPerRun: TWEET_FETCH_MAX_ITEMS, items: TWEET_FETCH_MAX_ITEMS });
+  // ورودی رسمی اکتور: startUrls آرایه‌ی رشته + maxItems (listIds را هم می‌دهیم تا لیست شناسایی شود)
+  const listIdMatch = listUrl.match(/lists\/(\d+)/);
+  const input = { startUrls: [listUrl], maxItems: TWEET_FETCH_MAX_ITEMS };
+  if (listIdMatch) input.listIds = [listIdMatch[1]];
+  const body = JSON.stringify(input);
   const res = await httpPost(url, body, { 'Content-Type': 'application/json' });
   const parsed = JSON.parse(res);
   // خطای سرویس (توکن غلط، اعتبار تمام‌شده، لیست ناموجود) نباید بی‌صدا «۰ توییت» به نظر برسد
@@ -1212,9 +1215,13 @@ async function fetchTwitterListTweets(listUrl) {
   }
   const rows = Array.isArray(parsed) ? parsed : (parsed && parsed.items) || [];
   if (!Array.isArray(rows)) return { error: 'پاسخ ناشناخته از Apify: ' + String(res).substring(0, 120) };
+  // اگر سرویس به‌جای داده‌ی واقعی، آیتم نمایشی برگرداند نباید بی‌خودی هزینه حساب کنیم
+  const isDemo = rows.length > 0 && rows.every(r => r && r.demo === true);
   const tweets = rows.map(normalizeTweet);
-  // اگر ساختار خروجی عوض شده باشد، کلیدهای خام را برای تشخیص نگه می‌داریم
   const rawSample = rows[0] ? { keys: Object.keys(rows[0]), first: JSON.stringify(rows[0]).substring(0, 600) } : null;
+  if (isDemo) {
+    return { tweets: [], demo: true, rawSample: rawSample, error: 'سرویس فقط داده‌ی نمایشی (demo) برگرداند — اکتور داده‌ی واقعی نداد' };
+  }
   return { tweets: tweets, rawSample: rawSample };
 }
 
@@ -1257,7 +1264,18 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     console.log('  ⚠️ خطا در خواندن لیست توییتر: ' + e.message);
     return 0;
   }
-  if (result.error) { console.log('  ⚠️ ' + result.error); return 0; }
+  if (result.error) {
+    console.log('  ⚠️ ' + result.error);
+    state.TWEET_LAST_FETCH_DIAG = {
+      at: new Date(nowMs()).toISOString(),
+      fetched: 0, fresh: 0, demo: !!result.demo,
+      rawSample: result.rawSample || null, rejects: {}, error: result.error
+    };
+    // تا وقتی مشکل حل نشده، هر ۴ ساعت پول حروم نکن
+    state.APIFY_LAST_FETCH = nowMs();
+    saveState(state);
+    return 0;
+  }
 
   // صورت‌حساب هزینه‌ی همین خواندن (فقط وقتی سرویس واقعاً داده برگردانده)
   const fetched = result.tweets.length;
@@ -1290,9 +1308,11 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     rejects: rejectReasons,
     newest: sampleTitles.slice(0, 5),
     rawSample: result.rawSample || null,
+    allBlank: result.tweets.length > 0 && result.tweets.every(t => !t.text),
     maxItemsRequested: TWEET_FETCH_MAX_ITEMS,
     useCard: TWEET_USE_CARD
   };
+  if (state.TWEET_LAST_FETCH_DIAG.allBlank) console.log('  🚨 همه‌ی آیتم‌ها بی‌متن بودند — ساختار خروجی سرویس عوض شده');
   if (fresh.length === 0) { saveState(state); return 0; }
 
   let published = 0;
