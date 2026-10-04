@@ -100,31 +100,23 @@ body{width:1100px;font-family:Vazirmatn,Tahoma,'Segoe UI',sans-serif;direction:r
 .date{font-size:21px;color:#8a97a3;margin-top:4px}
 .badge{background:#eaf3fa;color:#12558c;font-size:20px;padding:9px 20px;border-radius:999px;
   align-self:flex-start;white-space:nowrap;font-weight:700}
-.body{padding:30px 32px 20px;font-size:29px;line-height:2.05;color:#16222d;white-space:pre-wrap;word-wrap:break-word}
-/* واترمارک: آیدی کانال در پایین متن توییت، کم‌رنگ و نامحسوس */
-.wm{margin:0 32px 4px;text-align:center;font-size:19px;color:#b9c3cc;letter-spacing:.3px;
-  direction:ltr}
-.wm .flag{margin-left:6px}
+/* بدنه‌ی توییت با واترمارک کم‌رنگ در پس‌زمینه */
+.body{position:relative;padding:30px 32px 26px;font-size:29px;line-height:2.05;color:#16222d;white-space:pre-wrap;word-wrap:break-word}
+.wm{position:absolute;left:0;right:0;top:78px;bottom:26px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:56px;font-weight:700;color:#c8d2da;opacity:1;
+  pointer-events:none;letter-spacing:-1px;direction:ltr;white-space:nowrap;z-index:0;overflow:hidden}
+.txt{position:relative;z-index:1}
 /* جدا کردن واضح شعار کانال از توییت نماینده با خط نازک */
 .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:20px 32px 26px;border-top:2px solid #e6ebf0;background:#f7f9fb;margin:0}
 .brand{font-size:22px;color:#54636f;line-height:1.8}
 .brand b{color:#0f1b24;font-weight:700}
-.flag{width:30px;height:16px;border-radius:2px;vertical-align:-4px;margin-left:7px;
-  box-shadow:0 0 0 1px rgba(0,0,0,.12);display:inline-block}
+.brand .id{display:block;margin-top:4px;direction:ltr;text-align:right;color:#7d8b98;font-size:21px}
 `;
 
-// نشان کوچک ایران: سه نوار رنگی + کلمه «ایران».
-// چرا پرچم کامل کشیده نشد؟ نشان شیر و خورشید در اندازه‌ی کوچک کارت (۳۴ پیکسل) با
-// پرتوهای سفید روی نوار سفید محو می‌شد و ناقص به نظر می‌رسید؛ کشیدن دستیِ درست
-// نشان بسیار پیچیده و در این اندازه تفاوتی نمی‌کند. پس نشان ساده و خوانا انتخاب شد.
-const IRAN_FLAG_SVG = '<svg viewBox="0 0 64 34" width="30" height="16" xmlns="http://www.w3.org/2000/svg">' +
-  '<rect width="64" height="11.34" fill="#239F40"/>' +
-  '<rect y="11.33" width="64" height="11.34" fill="#FFFFFF"/>' +
-  '<rect y="22.66" width="64" height="11.34" fill="#DA0000"/>' +
-  '<text x="32" y="22.5" font-size="9.5" font-weight="700" fill="#239F40" text-anchor="middle" ' +
-  'font-family="Tahoma,sans-serif">ایران</text>' +
-  '</svg>';
+// واترمارک بزرگ و کم‌رنگ روی متن توییت: جلوی انتشار کارت بدون ذکر منبع را می‌گیرد.
+const CARD_WATERMARK = '@selectednewsmajlis';
 
 function buildTweetCardHtml(t) {
   const avatar = t.avatarUrl && /^https?:\/\//.test(t.avatarUrl)
@@ -143,13 +135,37 @@ function buildTweetCardHtml(t) {
     </div>
     <div class="badge">نماینده مجلس</div>
   </div>
-  <div class="body">${esc(t.text)}</div>
-  <div class="wm"><span class="flag">${IRAN_FLAG_SVG}</span> @azmaa_net</div>
+  <div class="body">
+    <div class="wm">${esc(CARD_WATERMARK)}</div>
+    <div class="txt">${esc(t.text)}</div>
+  </div>
   <div class="foot">
-    <div class="brand"><b>این خانه</b> #ازما ست</div>
+    <div class="brand"><b>این خانه</b> #ازما ست<span class="id">@azmaa_net</span></div>
   </div>
 </div>
 </body></html>`;
+}
+
+// قد کارت با قد متن متناسب است؛ ارتفاع ثابت باعث می‌شد فوتر از کادر بیرون بزند
+// یا متن وسط کارت بنشیند. اینجا قد واقعی محتوا اندازه‌گیری و استفاده می‌شود.
+function measureCardHeight(t) {
+  const chrome = findChrome();
+  if (!chrome) return 760;
+  const html = buildTweetCardHtml(t).replace('</body>',
+    '<script>window.onload=function(){document.title=document.body.scrollHeight;};</script></body>');
+  const tmp = path.join(os.tmpdir(), 'card_measure_' + Date.now() + '.html');
+  fs.writeFileSync(tmp, html, 'utf8');
+  const url = 'file:///' + tmp.split(path.sep).join('/');
+  try {
+    const out = execFileSync(chrome, ['--headless=new', '--disable-gpu', '--no-sandbox',
+      '--dump-dom', '--virtual-time-budget=8000', url], { stdio: ['pipe', 'pipe', 'pipe'], timeout: 90000, maxBuffer: 8 * 1024 * 1024 }).toString();
+    const m = out.match(/<title>(\d+)<\/title>/);
+    return m ? Math.max(420, Math.min(1800, Number(m[1]) + 20)) : 760;
+  } catch (e) {
+    return 760;
+  } finally {
+    try { fs.unlinkSync(tmp); } catch (e2) { /* بی‌اهمیت */ }
+  }
 }
 
 function renderTweetCardPng(t, outPath) {
@@ -161,11 +177,12 @@ function renderTweetCardPng(t, outPath) {
   // کروم مسیر نسبی را نمی‌پذیرد → مسیر مطلق با جداکننده‌ی / برای file://
   const outAbs = path.resolve(outPath);
   const url = 'file:///' + tmpHtml.split(path.sep).join('/');
+  const height = measureCardHeight(t);
   try {
     execFileSync(chrome, [
       '--headless=new', '--disable-gpu', '--no-sandbox', '--hide-scrollbars',
       '--force-device-scale-factor=1', '--virtual-time-budget=8000',
-      '--window-size=1100,760', '--screenshot=' + outAbs, url,
+      '--window-size=1100,' + height, '--screenshot=' + outAbs, url,
     ], { stdio: 'pipe', timeout: 90000 });
   } finally {
     try { fs.unlinkSync(tmpHtml); } catch (e) { /* بی‌اهمیت */ }
@@ -174,4 +191,4 @@ function renderTweetCardPng(t, outPath) {
   return outAbs;
 }
 
-module.exports = { buildTweetCardHtml, renderTweetCardPng, findChrome };
+module.exports = { buildTweetCardHtml, renderTweetCardPng, findChrome, measureCardHeight };
