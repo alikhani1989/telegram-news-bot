@@ -118,6 +118,19 @@
       "qualityScore": 0,
       "qualityIssues": [],
       "reviewed": false
+    },
+    {
+      "id": "1791107241891_yz2ft",
+      "timestamp": "2026-10-04T09:47:21.891Z",
+      "title": "✴️ ناکارآمد نشان دادن مجلس جفا به جمهوری اسلامی است",
+      "body": "🔸 روح‌الله لکعلی‌آبادی نایب‌رئیس کمیسیون بهداشت مجلس گفت باید از توجیه هرروزه ناکارآمدی مجلس خودداری کرد؛ برگزاری مجازی جلسات مانعی ندارد.\n\n🔸 وی تأکید کرد: تخریب مجلس، دولت و قوه قضاییه به معنای نابودی جمهوری اسلامی ایران است.",
+      "source_link": "https://www.khabaronline.ir/news/2283438/%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D9%85%D8%AC%D9%84%D8%B3-%DA%AF%D9%88%DB%8C%D8%A7-%D8%A7%D9%85%D8%B1%D9%88%D8%B2-%D9%87%DB%8C%DA%86-%D8%AF%DB%8C%D9%88%D8%A7%D8%B1%DB%8C-%DA%A9%D9%88%D8%AA%D8%A7%D9%87-%D8%AA%D8%B1-%D8%A7%D8%B2-%D9%82%D8%A7%D9%84%DB%8C%D8%A8%D8%A7%D9%81-%D8%AF%D8%B1-%D8%A7%DB%8C%D9%86",
+      "model": "NaraRouter",
+      "qualityScore": 90,
+      "qualityIssues": [
+        "⚠️ نام و سمّت شخص در خط اول متن پیدا نشد"
+      ],
+      "reviewed": true
     }
   ],
   "RECENT_TITLES": [
@@ -130,47 +143,18 @@
     "جلسه بعدی مجلس برای ۱۴ مهر برنامه‌ریزی شد",
     "حضور نمایندگان در صحن علنی بدون مانع",
     "تصویب استفساریه قیمت قیر در بودجه ۱۴۰۵",
-    "قالیباف: حتماً موضوع ارز را دنبال می‌کنم"
+    "قالیباف: حتماً موضوع ارز را دنبال می‌کنم",
+    "ناکارآمد نشان دادن مجلس جفا به جمهوری اسلامی است"
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ اهمیت رفع انسداد رودخانه‌ها در جهرم",
-      "source_link": "https://www.mehrnews.com/news/6967337/%D9%85%D8%B3%DB%8C%D8%B1-%D8%B1%D9%88%D8%AF%D8%AE%D8%A7%D9%86%D9%87-%D9%87%D8%A7%DB%8C-%D8%AC%D9%87%D8%B1%D9%85-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%A7%D8%B2-%D8%AA%D8%B5%D8%B1%D9%81-%D9%88-%D8%A7%D9%86%D8%B3%D8%AF%D8%A7%D8%AF-%D9%BE%D8%A7%DA%A9-%D8%B4%D9%88%D8%AF",
-      "timestamp": 1791103668713
-    },
-    {
-      "title": "✴️ جلسات علنی مجلس از هفته آینده وبینار می‌شود",
-      "source_link": "https://www.seratnews.com/fa/news/750579/%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%DA%AF%D8%A7%D9%86-%D8%AF%D9%88%D8%A8%D8%A7%D8%B1%D9%87-%D8%A8%D9%87-%D9%85%D8%AC%D9%84%D8%B3-%D9%85%DB%8C-%D8%B1%D9%88%D9%86%D8%AF",
-      "timestamp": 1791103670640
-    },
-    {
-      "title": "✴️ دولت باید گزارش قانون برنامه هفتم را ارائه دهد",
-      "source_link": "https://rasanews.ir/fa/news/828697/%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D8%AF-%D8%B9%D8%B6%D9%88-%D9%87%DB%8C%D8%A3%D8%AA-%D8%B1%DB%8C%DB%8C%D8%B3%D9%87-%D9%85%D8%AC%D9%84%D8%B3-%D8%A7%D8%B2-%D8%B9%D8%AF%D9%85-%D8%A7%D8%B1%D8%A7%D8%A6%D9%87-%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4-%D8%AF%D9%88%D9%84%D8%AA-%D8%AF%D8%B1-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C-%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-%D9%87%D9%81%D8%AA%D9%85",
-      "timestamp": 1791103672108
-    },
-    {
-      "title": "✴️ جلسه بعدی مجلس برای ۱۴ مهر برنامه‌ریزی شد",
-      "source_link": "https://icana.ir/news/425481/%D9%BE%D8%A7%DB%8C%D8%A7%D9%86-%D9%86%D8%B4%D8%B3%D8%AA-%D8%B9%D9%84%D9%86%DB%8C-%D8%A7%D9%85%D8%B1%D9%88%D8%B2-%DB%B1%DB%B2-%D9%85%D9%87%D8%B1-%D9%85%D8%A7%D9%87-%D9%85%D8%AC%D9%84%D8%B3",
-      "timestamp": 1791103674175
-    },
-    {
-      "title": "✴️ حضور نمایندگان در صحن علنی بدون مانع",
-      "source_link": "https://icana.ir/news/425479/%D8%AA%D8%B6%D8%B9%DB%8C%D9%81-%D9%82%D9%88%D8%A7%DB%8C-%D8%B3%D9%87-%DA%AF%D8%A7%D9%86%D9%87-%D8%AF%D8%B1-%D8%B4%D8%B1%D8%A7%DB%8C%D8%B7-%D8%AD%D8%B3%D8%A7%D8%B3-%DA%A9%D9%86%D9%88%D9%86%DB%8C-%D8%AC%D9%81%D8%A7-%D8%A8%D9%87-%DA%A9%D8%B4%D9%88%D8%B1-%D8%A7%D8%B3%D8%AA-%D8%A7%D9%85%D8%B1%D9%88%D8%B2",
-      "timestamp": 1791103674964
-    },
-    {
-      "title": "✴️ تصویب استفساریه قیمت قیر در بودجه ۱۴۰۵",
-      "source_link": "https://www.mehrnews.com/news/6967361/%D9%85%D9%88%D8%A7%D9%81%D9%82%D8%AA-%D9%85%D8%AC%D9%84%D8%B3-%D8%A8%D8%A7-%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%DB%8C%D9%87-%D9%86%D8%AD%D9%88%D9%87-%D8%AA%D8%A3%D9%85%DB%8C%D9%86-%D9%88-%D8%AA%D9%88%D8%B2%DB%8C%D8%B9-%D9%82%DB%8C%D8%B1-%D8%AF%D8%B1-%D8%B3%D8%A7%D9%84-%DB%B1%DB%B4%DB%B0%DB%B5",
-      "timestamp": 1791104541641
-    },
-    {
-      "title": "✴️ قالیباف: حتماً موضوع ارز را دنبال می‌کنم",
-      "source_link": "https://www.mashreghnews.ir/news/1843501/%D9%82%D8%A7%D9%84%DB%8C%D8%A8%D8%A7%D9%81-%D8%A7%D8%B2-%D8%B9%D8%B1%D8%B6%D9%87-%D8%A7%D8%B1%D8%B2-%DB%B1%DB%B0-%D9%87%D8%B2%D8%A7%D8%B1-%D8%AF%D9%84%D8%A7%D8%B1%DB%8C-%D8%AA%D8%B9%D8%AC%D8%A8-%DA%A9%D8%B1%D8%AF%D9%85-%D8%B4%D8%AE%D8%B5%D8%A7-%D9%BE%DB%8C%DA%AF%DB%8C%D8%B1%DB%8C-%D9%85%DB%8C-%DA%A9%D9%86%D9%85",
-      "timestamp": 1791104683778
+      "title": "✴️ ناکارآمد نشان دادن مجلس جفا به جمهوری اسلامی است",
+      "source_link": "https://www.khabaronline.ir/news/2283438/%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D9%85%D8%AC%D9%84%D8%B3-%DA%AF%D9%88%DB%8C%D8%A7-%D8%A7%D9%85%D8%B1%D9%88%D8%B2-%D9%87%DB%8C%DA%86-%D8%AF%DB%8C%D9%88%D8%A7%D8%B1%DB%8C-%DA%A9%D9%88%D8%AA%D8%A7%D9%87-%D8%AA%D8%B1-%D8%A7%D8%B2-%D9%82%D8%A7%D9%84%DB%8C%D8%A8%D8%A7%D9%81-%D8%AF%D8%B1-%D8%A7%DB%8C%D9%86",
+      "timestamp": 1791107241891
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "چرا کشت و صنعت مغان به جلسات سران قوا رسید، اما جا",
-  "LAST_REPORT_TIME": 1791100002792,
+  "LAST_PROCESSED_SNIPPET": "آخرین خبر از مذاکرات با آمریکایی‌ها | یک نکته کلید",
+  "LAST_REPORT_TIME": 1791107243080,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 10,
   "APIFY_LAST_FETCH": 1791103581794
