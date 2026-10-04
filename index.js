@@ -1107,7 +1107,20 @@ function tweetFirst(sources, keys) {
   return '';
 }
 
-function normalizeTweet(item) {
+function normalizeTweet(rawItem) {
+  // بعضی نسخه‌های خروجی، توییت را یک لایه تودرتو می‌دهند ({tweet:{...}} یا {data:{...}})
+  let item = rawItem;
+  if (item && typeof item === 'object' && !Array.isArray(item)) {
+    for (const k of ['tweet', 'tweet_data', 'data', 'result', 'item']) {
+      const inner = item[k];
+      if (inner && typeof inner === 'object' && !Array.isArray(inner) && Object.keys(inner).length) {
+        const merged = Object.assign({}, inner, { author: (inner.author || inner.user || item.author || item.user) });
+        for (const ek of ['id', 'id_str', 'full_text', 'text', 'url']) if (item[ek] !== undefined && merged[ek] === undefined) merged[ek] = item[ek];
+        item = merged;
+        break;
+      }
+    }
+  }
   const author = (item && (item.author || item.user || item.user_info)) || {};
   const rawText = tweetFirst(item, ['full_text', 'fullText', 'text', 'tweet_text', 'note_tweet', 'content', 'body']);
   let text = typeof rawText === 'object' && rawText !== null ? (rawText.text || '') : String(rawText || '');
@@ -1115,7 +1128,7 @@ function normalizeTweet(item) {
   text = text.replace(/https:\/\/t\.co\/[A-Za-z0-9]+/g, '').replace(/[ \t]+$/gm, '');
   const handle = tweetFirst([author, item], ['userName', 'screen_name', 'screenName', 'username', 'user_name', 'handle']) || '';
   const name = tweetFirst([author, item], ['name', 'displayName', 'display_name', 'full_name', 'fullName', 'userName', 'user_name']) || '';
-  const id = tweetFirst(item, ['id', 'rest_id', 'restId', 'tweet_id', 'tweetId', 'conversation_id']) || '';
+  const id = tweetFirst(item, ['id', 'id_str', 'rest_id', 'restId', 'tweet_id', 'tweetId', 'conversation_id']) || '';
   let url = tweetFirst(item, ['url', 'twitterUrl', 'twitter_url', 'link', 'tweetUrl']);
   if (!url && handle && id) url = 'https://x.com/' + String(handle).replace(/^@/, '') + '/status/' + id;
   return {
@@ -1126,7 +1139,7 @@ function normalizeTweet(item) {
     handle: String(handle || '').replace(/^@/, '').trim(),
     createdAt: tweetFirst(item, ['created_at', 'createdAt', 'date', 'timestamp', 'published_at']),
     isRetweet: !!(item.isRetweet || item.is_retweet || item.retweeted || /^\s*RT\s*@/.test(text)),
-    isReply: !!(item.inReplyToId || item.in_reply_to_status_id || item.inReplyToStatusId || item.is_reply || item.inReplyToUserId),
+    isReply: !!(item.isReply || item.inReplyToId || item.in_reply_to_status_id || item.inReplyToStatusId || item.is_reply || item.inReplyToUserId),
     lang: tweetFirst(item, ['lang', 'language']),
     imageUrl: extractTweetImage(item),
     avatarUrl: tweetFirst([author], ['profileImageUrl', 'profile_image_url', 'avatarUrl', 'avatar', 'profileImage']) || ''
@@ -1189,7 +1202,8 @@ async function fetchTwitterListTweets(listUrl) {
   const token = process.env.APIFY_TOKEN || '';
   if (!token) return { error: 'APIFY_TOKEN تنظیم نشده' };
   const url = APIFY_BASE + '?token=' + encodeURIComponent(token) + '&format=json&clean=true&skipHidden=true';
-  const body = JSON.stringify({ startUrls: [listUrl], maxItems: TWEET_FETCH_MAX_ITEMS });
+  // چند نام رایج برای سقف آیتم می‌فرستیم تا اگر اکتور نام دیگری بخواهد، باز هم ۳۰ آیتم بگیریم
+  const body = JSON.stringify({ startUrls: [{ url: listUrl }], startUrl: listUrl, maxItems: TWEET_FETCH_MAX_ITEMS, maxItemsPerRun: TWEET_FETCH_MAX_ITEMS, items: TWEET_FETCH_MAX_ITEMS });
   const res = await httpPost(url, body, { 'Content-Type': 'application/json' });
   const parsed = JSON.parse(res);
   // خطای سرویس (توکن غلط، اعتبار تمام‌شده، لیست ناموجود) نباید بی‌صدا «۰ توییت» به نظر برسد
@@ -1198,7 +1212,10 @@ async function fetchTwitterListTweets(listUrl) {
   }
   const rows = Array.isArray(parsed) ? parsed : (parsed && parsed.items) || [];
   if (!Array.isArray(rows)) return { error: 'پاسخ ناشناخته از Apify: ' + String(res).substring(0, 120) };
-  return { tweets: rows.map(normalizeTweet) };
+  const tweets = rows.map(normalizeTweet);
+  // اگر ساختار خروجی عوض شده باشد، کلیدهای خام را برای تشخیص نگه می‌داریم
+  const rawSample = rows[0] ? { keys: Object.keys(rows[0]), first: JSON.stringify(rows[0]).substring(0, 600) } : null;
+  return { tweets: tweets, rawSample: rawSample };
 }
 
 // انتشار توییت‌های لیست (مستقل از خط لوله‌ی خبر، بدون AI)
@@ -1272,6 +1289,7 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     fresh: fresh.length,
     rejects: rejectReasons,
     newest: sampleTitles.slice(0, 5),
+    rawSample: result.rawSample || null,
     maxItemsRequested: TWEET_FETCH_MAX_ITEMS,
     useCard: TWEET_USE_CARD
   };
