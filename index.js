@@ -1252,15 +1252,30 @@ async function publishTwitterListTweets(state, botToken, chatId) {
   const seen = {};
   for (const id of state.TWEET_IDS) seen[id] = true;
   const fresh = [];
+  const rejectReasons = {};
+  const sampleTitles = [];
   for (const t of result.tweets) {
+    sampleTitles.push({ id: t.id, handle: t.handle, createdAt: t.createdAt || null, len: (t.text || '').length });
     const verdict = tweetIsPublishable(t);
-    if (!verdict.ok) { continue; }
-    if (seen[t.id]) continue;
+    if (!verdict.ok) { rejectReasons[verdict.why] = (rejectReasons[verdict.why] || 0) + 1; continue; }
+    if (seen[t.id]) { rejectReasons['قبلاً منتشر شده'] = (rejectReasons['قبلاً منتشر شده'] || 0) + 1; continue; }
     seen[t.id] = true;
     fresh.push(t);
   }
   console.log('  🐦 ' + result.tweets.length + ' توییت خوانده شد، ' + fresh.length + ' تازه و قابل انتشار');
-  if (fresh.length === 0) return 0;
+  if (Object.keys(rejectReasons).length) console.log('  🔎 دلیل رد: ' + JSON.stringify(rejectReasons));
+
+  // تشخیص عیب: چرا چیزی منتشر نشد؟ (لاگ Actions در دسترس نیست، پس در state.json می‌نویسیم)
+  state.TWEET_LAST_FETCH_DIAG = {
+    at: new Date(nowMs()).toISOString(),
+    fetched: result.tweets.length,
+    fresh: fresh.length,
+    rejects: rejectReasons,
+    newest: sampleTitles.slice(0, 5),
+    maxItemsRequested: TWEET_FETCH_MAX_ITEMS,
+    useCard: TWEET_USE_CARD
+  };
+  if (fresh.length === 0) { saveState(state); return 0; }
 
   let published = 0;
   for (const t of fresh.slice(0, TWEET_MAX_PER_RUN)) {
