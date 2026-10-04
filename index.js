@@ -183,7 +183,39 @@ function verifyAgainstOriginal(item, originalText) {
     }
   }
 
-  // ۳. اعداد مهم (۳ رقم به بالا) که در متن اصلی نیستند → عدد جعلی
+  // ۳. سمتی که در متن اصلی نیامده → جعل. نمونه‌ی واقعی: «حمیدرضا حاجی‌بابایی وزیر دفاع گفت…»
+  // در حالی که متن اصلی او را «نماینده مجلس» معرفی کرده بود.
+  const roleRegex = /([ؠ-ۿ]{2,15}(?:[‌\s]+[ؠ-ۿ]{2,15}){1,3})\s+(نماینده|نایب رئیس|سخنگو|رئیس|وزیر|معاون|دبیر|عضو)/g;
+  const roleMatches = sumNorm.match(roleRegex) || [];
+  const QUANTIFIERS = ['دو', 'سه', 'چهار', 'پنج', 'چند', 'چندین', 'برخی', 'همه', 'هر', 'تعدادی', 'مقامات'];
+  const origFlat = origNorm.replace(/[‌‏‎‎]/g, ' ');
+  for (const rm of roleMatches) {
+    const roleM = rm.match(/(نماینده|نایب رئیس|سخنگو|رئیس|وزیر|معاون|دبیر|عضو)$/);
+    if (!roleM) continue;
+    const namePart = rm.substring(0, rm.length - roleM[1].length).trim();
+    if (!namePart) continue;
+    // آخرین واژه پیش از سمت، باید نام خودِ شخص باشد («معرفی دو وزیر» نیست)
+    const rawWords = namePart.split(/[\s‌‏]+/).filter(Boolean);
+    if (rawWords.length === 0) continue;
+    const lastWord = rawWords[rawWords.length - 1];
+    if (lastWord.length < 3) continue;
+    if (QUANTIFIERS.indexOf(lastWord) !== -1) continue;
+    const role = norm(roleM[1]);
+    // معیار دقیق: همین «نام + سمت» باید در متن منبع هم آمده باشد
+    if (!origFlat.includes(lastWord + ' ' + role)) {
+      // اگر همین شخص با سمتِ دیگری در منبع آمده ⇒ سمت عوض شده
+      let inOrigOtherRole = false;
+      for (const r2 of ['نماینده', 'نایب رئیس', 'سخنگو', 'رئیس', 'وزیر', 'معاون', 'دبیر', 'عضو']) {
+        if (origFlat.includes(lastWord + ' ' + norm(r2))) { inOrigOtherRole = true; break; }
+      }
+      if (inOrigOtherRole) {
+        const displayName = rawWords.slice(-2).join(' ');
+        issues.push('سمت جعلی: «' + displayName + ' ' + roleM[1] + '» — متن منبع سمت دیگری برای او آورده');
+      }
+    }
+  }
+
+  // ۴. اعداد مهم (۳ رقم به بالا) که در متن اصلی نیستند → عدد جعلی
   const numMatches = sumNorm.match(/[۰-۹0-9]{2,}/g) || [];
   const toLatin = function (s) { return s.replace(/[۰-۹]/g, function (d) { return String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)); }); };
   const origLatin = toLatin(orig);
@@ -1786,6 +1818,12 @@ async function callOpenRouter(prompt, apiKey) {
             console.log("  ⛔ Rate Limit! بقیه مدل‌ها رو رد کن.");
             return { status: 'rate_limited' };
           }
+          // سهمیه‌ی روزانه‌ی مدل‌های رایگان تمام شده: تا فردا اصلاً سراغ OpenRouter نمی‌رویم
+          // (همه‌ی مدل‌های :free همین یک سهمیه را دارند، پس امتحان بیشتر فقط وقت تلف می‌کند)
+          if (errMsg.includes("free-models-per-day") || errMsg.includes("free model requests per day")) {
+            console.log("  ⛔ سهمیه‌ی روزانه‌ی مدل‌های رایگان تمام شد.");
+            return { status: 'quota_exhausted' };
+          }
           // اگه خطای overloaded باشه، فقط برای این مدل broken هست
           if (errMsg.includes("overloaded") || errMsg.includes("Service temporarily") || errMsg.includes("503")) {
             console.log("  🔄 مدل overloaded - از مدل بعدی امتحان کن.");
@@ -2304,13 +2342,23 @@ async function main() {
     let usedModel = '';
     
     console.log("  🥇 تلاش با Nemotron...");
+    // اگر امروز سهمیه‌ی رایگان تمام شده، مستقیم می‌رویم سراغ ارائه‌دهنده‌های بعدی
+    const quotaDay = new Date().toISOString().slice(0, 10);
+    const skipOpenRouter = state.OPENROUTER_QUOTA_DAY === quotaDay;
+    if (skipOpenRouter) console.log('  ⏭️ سهمیه‌ی روزانه‌ی OpenRouter امروز تمام شده — رد می‌شویم.');
     console.log("  🔑 OPENROUTER_API_KEY: " + (OPENROUTER_API_KEY ? 'تنظیم شده (' + OPENROUTER_API_KEY.substring(0, 8) + '...)' : '❌ تنظیم نشده'));
     console.log("  🔑 NARA_ROUTER_API_KEY: " + ((process.env.NARA_ROUTER_API_KEY || '') ? 'تنظیم شده' : '❌ تنظیم نشده'));
     console.log("  🔑 GROQ_API_KEY: " + ((process.env.GROQ_API_KEY || '') ? 'تنظیم شده' : '❌ تنظیم نشده'));
-    const result = await callOpenRouter(prompt, OPENROUTER_API_KEY);
+    const result = skipOpenRouter ? { status: 'quota_exhausted' } : await callOpenRouter(prompt, OPENROUTER_API_KEY);
     if (result.status === 'success') {
       aiText = result.content;
       usedModel = result.model || 'Nemotron';
+    } else if (result.status === 'quota_exhausted') {
+      // سهمیه‌ی روزانه‌ی مدل‌های رایگان تمام شده ⇒ تا پایان امروز (UTC) اصلاً سراغ
+      // OpenRouter نمی‌رویم؛ همه‌ی این مدل‌ها یک سهمیه دارند و امتحان دوباره
+      // فقط چند ثانیه از هر اجرا را هدر می‌دهد.
+      state.OPENROUTER_QUOTA_DAY = new Date().toISOString().slice(0, 10);
+      console.log('  ⛔ سهمیه‌ی روزانه‌ی OpenRouter تمام شد — تا فردا صبح (UTC) امتحان نمی‌شود.');
     } else if (result.status === 'rate_limited') {
       console.log("  ⛔ Nemotron rate limited! مدل‌های جایگزین امتحان می‌شه.");
     } else {
@@ -2342,7 +2390,7 @@ async function main() {
     }
     // اگه NaraRouter هم کار نکرد و OpenRouter rate limit نبود، مدل‌های جایگزین رو امتحان کن
     // اگه OpenRouter rate limit بود، دیگه سراغش نرو (همگی سهمیه مشترک دارن)
-    if (!aiText && result.status !== 'rate_limited') {
+    if (!aiText && result.status !== 'rate_limited' && result.status !== 'quota_exhausted') {
       console.log('  🟢 تلاش با مدل‌های جایگزین رایگان...');
       aiText = await callFallbackModels(prompt);
       if (aiText) {
@@ -2587,6 +2635,9 @@ async function main() {
       item.body = item.body.replace(/خاطرنشان کرد/g, 'گفت');
       item.body = item.body.replace(/تصریح کرد/g, 'گفت');
       item.body = item.body.replace(/وی افزود/g, 'او همچنین گفت');
+      // «او افزود» هم مشکل‌ساز است (قانون ۹: فقط «گفت»)
+      item.body = item.body.replace(/(^|\s)(او|وی|ایشان) افزود/g, '$1$2 همچنین گفت');
+      item.body = item.body.replace(/ افزود/g, ' گفت');
       item.body = item.body.replace(/وی گفت/g, function(match) { return match; });
       item.body = item.body.replace(/مجلس شورای اسلامی/g, 'مجلس');
       item.title = item.title.replace(/مجلس شورای اسلامی/g, 'مجلس');
