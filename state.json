@@ -2,10 +2,15 @@
   "TWEET_IDS": [
     "2106622911188804020",
     "2106621862654730487",
-    "2106656795305357601"
+    "2106656795305357601",
+    "2106735961350574230",
+    "2106728040348659868",
+    "2106659932695105747",
+    "2106646296085790811",
+    "2106634084415942886"
   ],
   "TWEET_LAST_DAY": "2026-10-04",
-  "TWEET_COUNT_TODAY": 3,
+  "TWEET_COUNT_TODAY": 8,
   "NEWS_DATABASE": [
     {
       "id": "1791099995680_5wjf8",
@@ -515,56 +520,86 @@
   "LAST_PROCESSED_SNIPPET": "رئیس کل بانک مرکزی درباره دلار پاسخ نداد و مراسم خ",
   "LAST_REPORT_TIME": 1791122578146,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 40,
-  "APIFY_LAST_FETCH": 0,
+  "APIFY_ITEMS": 50,
+  "APIFY_LAST_FETCH": 1791123349308,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-04T13:46:23.171Z",
+    "at": "2026-10-04T14:15:49.308Z",
     "fetched": 10,
-    "fresh": 0,
+    "fresh": 5,
     "rejects": {
-      "بدون متن": 10
+      "ری‌تویت": 2,
+      "قبلاً منتشر شده": 2,
+      "خیلی کوتاه": 1
     },
     "newest": [
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2106735961350574230",
+        "handle": "MojtabaZarei50",
+        "createdAt": "Sun Oct 04 13:19:29 +0000 2026",
+        "len": 276
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2106728040348659868",
+        "handle": "DrRahimZare",
+        "createdAt": "Sun Oct 04 12:48:00 +0000 2026",
+        "len": 280
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2106725794860982477",
+        "handle": "ali_khezrian",
+        "createdAt": "Sun Oct 04 12:39:05 +0000 2026",
+        "len": 142
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2106659932695105747",
+        "handle": "drbehrozmohebbi",
+        "createdAt": "Sun Oct 04 08:17:22 +0000 2026",
+        "len": 185
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2106656795305357601",
+        "handle": "Ruhollahnejabat",
+        "createdAt": "Sun Oct 04 08:04:54 +0000 2026",
+        "len": 279
       }
     ],
     "rawSample": {
       "keys": [
-        "demo"
+        "type",
+        "id",
+        "url",
+        "twitterUrl",
+        "text",
+        "fullText",
+        "source",
+        "retweetCount",
+        "replyCount",
+        "likeCount",
+        "quoteCount",
+        "viewCount",
+        "createdAt",
+        "lang",
+        "bookmarkCount",
+        "isReply",
+        "conversationId",
+        "possiblySensitive",
+        "author",
+        "extendedEntities",
+        "card",
+        "place",
+        "entities",
+        "isRetweet",
+        "isQuote",
+        "media",
+        "videos",
+        "isConversationControlled"
       ],
-      "first": "{\"demo\":true}"
+      "first": "{\"type\":\"tweet\",\"id\":\"2106735961350574230\",\"url\":\"https://x.com/MojtabaZarei50/status/2106735961350574230\",\"twitterUrl\":\"https://twitter.com/MojtabaZarei50/status/2106735961350574230\",\"text\":\"🟦 اعلام وصول طرح اصلاح قانون تعیین وظایف و تشکیلات شورای امنیت کشور با تأکید بر ایجاد حکمرانی امنیت شناختی در مجلس شورای اسلامی \\n\\n🔷️ به فضل الهی طرح اصلاح قانون تعیین وظایف و تشکیلات شورای امنیت کشور را که با تأکید بر ایجاد حکمرانی امنیت شناختی در مقابله با تهدیدات و جنگ‌های شناختی _ روانی در کمیته تخصصی کمیسیون امنیت ملی تهیه کرده بودم امروز در صحن علنی مجلس اعلام وصول شد \\n🔹️این طرح که به انفعال رس"
     },
+    "allBlank": false,
     "maxItemsRequested": 30,
     "useCard": true
   }
