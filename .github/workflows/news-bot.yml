@@ -27,6 +27,15 @@ jobs:
         with:
           node-version: '20'
 
+      # کارت تصویری توییت بدون مرورگر رندر نمی‌شود
+      - name: نصب مرورگر برای کارت تصویری
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq chromium fonts-liberation >/dev/null 2>&1 \
+            || (sudo apt-get install -y -qq chromium-browser fonts-liberation >/dev/null 2>&1) \
+            || true
+          (which chromium || which chromium-browser || which google-chrome) || echo "مرورگر نصب نشد — پست متنی می‌رود"
+
       - name: اجرای ربات
         run: timeout 420 node index.js || true
         env:
