@@ -3,6 +3,8 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const os = require("os");
+const tweetCard = require("./tweet-card");
 
 // ==========================================
 // تنظیمات
@@ -1030,6 +1032,9 @@ const APIFY_BASE = 'https://api.apify.com/v2/acts/' + APIFY_TWITTER_ACTOR + '/ru
 // فیلتر موضوع کلمات کلیدی حذف شد (به درخواست صاحب کانال): هرچه نماینده نوشته
 // منتشر می‌شود؛ فقط چیزهای بی‌محتوا (ری‌تویت/ریپلای/غیرفارسی/خیلی کوتاه) حذف می‌شود.
 
+// کارت تصویری: اگر مرورگر نبود یا رندر شکست خورد، خودکار به متن ساده برمی‌گردیم
+const TWEET_USE_CARD = !['0', 'false', 'no'].includes(String(process.env.TWEET_USE_CARD || '').toLowerCase());
+
 const TWEET_MIN_LEN = 40;   // توییت کوتاه («لایک») ارزش انتشار ندارد
 const TWEET_MAX_LEN = 700;  // متن خیلی بلند (رشته‌توییت) نصفه می‌ماند
 const TWEET_MAX_PER_RUN = 8;
@@ -1141,6 +1146,13 @@ function formatTweetPost(t) {
   return msg;
 }
 
+// کپشن کوتاه زیر کارت: متن توییت داخل خود تصویر است، پس فقط لینک و برچسب مدل
+function formatTweetCardCaption(t) {
+  let msg = '🔗 <a href="' + t.url + '">توییت در توییتر</a>';
+  msg += '\n\n🤖 مدل: بدون خلاصه‌سازی (متن اصلی توییت)';
+  return msg;
+}
+
 async function fetchTwitterListTweets(listUrl) {
   const token = process.env.APIFY_TOKEN || '';
   if (!token) return { error: 'APIFY_TOKEN تنظیم نشده' };
@@ -1220,19 +1232,37 @@ async function publishTwitterListTweets(state, botToken, chatId) {
 
   let published = 0;
   for (const t of fresh.slice(0, TWEET_MAX_PER_RUN)) {
-    const msg = formatTweetPost(t);
-    try {
-      const res = await sendToTelegram(msg, t.imageUrl || null, botToken, chatId);
-      if (res.ok) {
-        state.TWEET_IDS.push(t.id);
-        state.TWEET_COUNT_TODAY = (state.TWEET_COUNT_TODAY || 0) + 1;
-        published++;
-        console.log('  ✅ توییت ' + (t.handle || '?') + ' منتشر شد' + (t.imageUrl ? ' (با عکس)' : ''));
-      } else {
-        console.log('  ❌ خطای تلگرام:', res.description || JSON.stringify(res));
+    // اول کارت تصویری؛ اگر مرورگر نبود یا رندر/ارسال شکست خورد، متن ساده می‌رود
+    let sent = false;
+    let viaCard = false;
+    if (TWEET_USE_CARD) {
+      const png = path.join(os.tmpdir(), 'tweet_card_' + Date.now() + '_' + published + '.png');
+      try {
+        tweetCard.renderTweetCardPng({ name: t.name, handle: t.handle, createdAt: t.createdAt, text: t.text, avatarUrl: t.avatarUrl }, png);
+        const caption = formatTweetCardCaption(t);
+        const res = await sendPhotoFileToTelegram(png, caption, botToken, chatId);
+        if (res.ok) { sent = true; viaCard = true; }
+        else console.log('  ⚠️ ارسال کارت ناموفق، متن ساده می‌رود:', res.description || JSON.stringify(res));
+      } catch (e) {
+        console.log('  ⚠️ ساخت/ارسال کارت ناموفق، متن ساده می‌رود: ' + e.message);
+      } finally {
+        try { fs.unlinkSync(png); } catch (e2) { /* بی‌اهمیت */ }
       }
-    } catch (e) {
-      console.log('  ❌ خطا در ارسال توییت:', e.message);
+    }
+    if (!sent) {
+      try {
+        const res = await sendToTelegram(formatTweetPost(t), t.imageUrl || null, botToken, chatId);
+        if (res.ok) sent = true;
+        else console.log('  ❌ خطای تلگرام:', res.description || JSON.stringify(res));
+      } catch (e) {
+        console.log('  ❌ خطا در ارسال توییت:', e.message);
+      }
+    }
+    if (sent) {
+      state.TWEET_IDS.push(t.id);
+      state.TWEET_COUNT_TODAY = (state.TWEET_COUNT_TODAY || 0) + 1;
+      published++;
+      console.log('  ✅ توییت ' + (t.handle || '?') + ' منتشر شد' + (viaCard ? ' (کارت تصویری)' : (t.imageUrl ? ' (با عکس)' : '')));
     }
   }
   if (state.TWEET_IDS.length > 500) state.TWEET_IDS = state.TWEET_IDS.slice(-500);
@@ -1923,6 +1953,23 @@ async function sendToTelegram(message, imageUrl, botToken, chatId) {
   const response = await httpPost(baseUrl + "sendMessage", payload, {
     "Content-Type": "application/json",
   });
+  return JSON.parse(response);
+}
+
+// ارسال فایل محلی به تلگرام (کارت توییت از فایل PNG ساخته می‌شود، نه از اینترنت)
+async function sendPhotoFileToTelegram(filePath, caption, botToken, chatId) {
+  const baseUrl = "https://api.telegram.org/bot" + botToken + "/";
+  const buffer = fs.readFileSync(filePath);
+  const boundary = "----FormBoundary" + Date.now();
+  const parts = [];
+  parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"chat_id\"\r\n\r\n" + chatId + "\r\n"));
+  parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n" + caption + "\r\n"));
+  parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"parse_mode\"\r\n\r\nHTML\r\n"));
+  parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"disable_web_page_preview\"\r\n\r\ntrue\r\n"));
+  parts.push(Buffer.from("--" + boundary + "\r\nContent-Disposition: form-data; name=\"photo\"; filename=\"tweet-card.png\"\r\nContent-Type: image/png\r\n\r\n"));
+  parts.push(buffer);
+  parts.push(Buffer.from("\r\n--" + boundary + "--\r\n"));
+  const response = await httpPostMultipart(baseUrl + "sendPhoto", boundary, Buffer.concat(parts));
   return JSON.parse(response);
 }
 
