@@ -100,13 +100,16 @@ body{width:1100px;font-family:Vazirmatn,Tahoma,'Segoe UI',sans-serif;direction:r
 .date{font-size:21px;color:#8a97a3;margin-top:4px}
 .badge{background:#eaf3fa;color:#12558c;font-size:20px;padding:9px 20px;border-radius:999px;
   align-self:flex-start;white-space:nowrap;font-weight:700}
-/* بدنه‌ی توییت با واترمارک کم‌رنگ در پس‌زمینه */
-.body{position:relative;padding:30px 32px 26px;font-size:29px;line-height:2.05;color:#16222d;white-space:pre-wrap;word-wrap:break-word}
-.wm{position:absolute;left:0;right:0;top:78px;bottom:26px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:56px;font-weight:700;color:#c8d2da;opacity:1;
+/* بدنه‌ی توییت با واترمارک کم‌رنگ در پس‌زمینه.
+   white-space باید فقط روی متن باشد، نه روی کل بدنه؛ وگرنه فاصله‌گذاری HTML بین
+   تگ‌ها به‌صورت خط خالی رندر می‌شود و حدود ۳۰۰ پیکسل فضای اضافه می‌سازد. */
+.body{position:relative;padding:30px 32px 26px;font-size:29px;line-height:2.05;color:#16222d;word-wrap:break-word}
+/* واترمارک: مطلق و بدون اثر روی قد کارت.
+   line-height صریح لازم است چون از .body ارث می‌برد و آن را ۴۲۸ پیکبل می‌کرد. */
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:58px;line-height:1;font-weight:700;color:#cdd6dd;
   pointer-events:none;letter-spacing:-1px;direction:ltr;white-space:nowrap;z-index:0;overflow:hidden}
-.txt{position:relative;z-index:1}
+.txt{position:relative;z-index:1;white-space:pre-wrap}
 /* جدا کردن واضح شعار کانال از توییت نماینده با خط نازک */
 .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:20px 32px 26px;border-top:2px solid #e6ebf0;background:#f7f9fb;margin:0}
@@ -116,7 +119,7 @@ body{width:1100px;font-family:Vazirmatn,Tahoma,'Segoe UI',sans-serif;direction:r
 `;
 
 // واترمارک بزرگ و کم‌رنگ روی متن توییت: جلوی انتشار کارت بدون ذکر منبع را می‌گیرد.
-const CARD_WATERMARK = '@selectednewsmajlis';
+const CARD_WATERMARK = '@azmaa_net';
 
 function buildTweetCardHtml(t) {
   const avatar = t.avatarUrl && /^https?:\/\//.test(t.avatarUrl)
@@ -135,10 +138,7 @@ function buildTweetCardHtml(t) {
     </div>
     <div class="badge">نماینده مجلس</div>
   </div>
-  <div class="body">
-    <div class="wm">${esc(CARD_WATERMARK)}</div>
-    <div class="txt">${esc(t.text)}</div>
-  </div>
+  <div class="body"><div class="wm">${esc(CARD_WATERMARK)}</div><div class="txt">${esc(t.text)}</div></div>
   <div class="foot">
     <div class="brand"><b>این خانه</b> #ازما ست<span class="id">@azmaa_net</span></div>
   </div>
