@@ -1109,6 +1109,23 @@ function tweetFirst(sources, keys) {
   return '';
 }
 
+// لینک آواتار توییتر با پسوند _normal فقط ۴۸×۴۸ است و در کارت ۹۶×۹۶ کشیده و تار دیده می‌شود
+// ⇒ تبدیل به نسخه‌ی باکیفیت (۴۰۰×۴۰۰)
+function upgradeAvatarUrl(url) {
+  const u = String(url || '');
+  if (!u || !/^https?:\/\//.test(u)) return u;
+  if (/_normal(\.\w+)?(\?|$)/.test(u)) {
+    const bigger = u.replace(/_normal(\.\w+)?(\?|$)/, '_bigger$1$2');
+    if (/_bigger/.test(bigger)) return bigger;
+  }
+  // اگر پسوند اندازه‌ی صریح داشت، همان را به ۴۰۰ می‌رسانیم (۴۸/۷۳۷/۹۰۰ ...)
+  if (/(pbs\.twimg\.com|abs\.twimg\.com|profile_images)/.test(u)) {
+    const sized = u.replace(/_\d{2,4}x\d{2,4}(\.\w+)?(\?|$)/, '_400x400$1$2');
+    if (/_400x400/.test(sized)) return sized;
+  }
+  return u;
+}
+
 function normalizeTweet(rawItem) {
   // بعضی نسخه‌های خروجی، توییت را یک لایه تودرتو می‌دهند ({tweet:{...}} یا {data:{...}})
   let item = rawItem;
@@ -1144,7 +1161,7 @@ function normalizeTweet(rawItem) {
     isReply: !!(item.isReply || item.inReplyToId || item.in_reply_to_status_id || item.inReplyToStatusId || item.is_reply || item.inReplyToUserId),
     lang: tweetFirst(item, ['lang', 'language']),
     imageUrl: extractTweetImage(item),
-    avatarUrl: tweetFirst([author], ['profilePicture', 'profileImageUrl', 'profile_image_url', 'avatarUrl', 'avatar', 'profileImage']) || ''
+    avatarUrl: upgradeAvatarUrl(tweetFirst([author], ['profilePicture', 'profileImageUrl', 'profile_image_url', 'avatarUrl', 'avatar', 'profileImage']) || '')
   };
 }
 
