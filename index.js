@@ -1326,6 +1326,82 @@ async function fetchTwitterListTweets(listUrl) {
   return { tweets: tweets, rawSample: rawSample };
 }
 
+// ==========================================
+// هشدار و گزارش بررسی لیست توییتر (روی خود کانال)
+// سرویس‌های scraping گاهی بی‌سروصدا خالی برمی‌گردند؛ بدون این پیام‌ها کسی
+// نمی‌فهمد چرا چند روز توییتی منتشر نشده. ارسال پیام تلگرام رایگان است.
+// ==========================================
+const TWEET_ALERT_REPEAT_MS = 6 * 3600000;  // حداقل فاصله‌ی دو هشدار پشت‌سرهم
+
+// آیا وقتش رسیده که هشدار خرابی دوباره فرستاده شود؟ (خلاصه‌ی خالی = روبه‌راه شدن)
+function tweetAlertDue(state, now) {
+  if (!state.TWEET_ALERT_ACTIVE) return true;
+  return (now - (state.TWEET_ALERT_AT || 0)) >= TWEET_ALERT_REPEAT_MS;
+}
+
+function tweetAlertMessage(diag) {
+  let msg = '⚠️ <b>بررسی لیست توییتر: سرویس داده نداد</b>\n\n';
+  if (diag && diag.error) msg += 'خطا: ' + escapeHtml(String(diag.error).slice(0, 200)) + '\n';
+  if (diag && diag.allBlank) msg += 'سرویس آیتم خالی برگرداند (ساختار خروجی عوض شده).\n';
+  if (diag && !diag.error && !diag.allBlank) msg += 'هیچ توییتی در لیست برگردانده نشد.\n';
+  msg += '\n⏰ تا رفع مشکل، هر ' + tweetCard.faDigits(TWEET_FETCH_EVERY_HOURS) + ' ساعت دوباره امتحان می‌شود.';
+  return msg;
+}
+
+function tweetRecoveryMessage() {
+  return '✅ <b>لیست توییتر دوباره وصل شد</b>\n\nارسال توییت‌ها از این پس طبق روال قبلی ادامه دارد.';
+}
+
+// گزارش روزانه‌ی وضعیت لیست (روزی یک پیام، نه هر ساعت)
+function tweetStatusMessage(state, healthy, diag) {
+  const today = new Date(nowMs()).toISOString().slice(0, 10);
+  let msg = healthy ? '🔎 <b>گزارش بررسی لیست توییتر</b>' : '🔎 <b>گزارش بررسی لیست توییتر (هشدار)</b>';
+  msg += '\n\n' + (healthy ? '✅ سرویس: سالم' : '❌ سرویس: خراب — داده‌ای برنمی‌گرداند');
+  msg += '\n📅 تاریخ: ' + tweetCard.faDate(today + 'T00:00:00.000Z');
+  msg += '\n🐦 توییت‌های امروز: ' + tweetCard.faDigits(state.TWEET_COUNT_TODAY || 0);
+  msg += '\n⏰ دفعه‌ی قبل بررسی: ' + (state.APIFY_LAST_FETCH ? tweetCard.faDate(new Date(state.APIFY_LAST_FETCH).toISOString()) + ' ساعت ' + tweetCard.faDigits(String(new Date(state.APIFY_LAST_FETCH).getUTCHours()).padStart(2, '0') + ':' + String(new Date(state.APIFY_LAST_FETCH).getUTCMinutes()).padStart(2, '0')) : '—');
+  msg += '\n💵 هزینه‌ی این ماه: $' + ((state.APIFY_ITEMS || 0) / 1000 * APIFY_PRICE_PER_1K).toFixed(3);
+  if (diag && diag.rejects && Object.keys(diag.rejects).length) {
+    msg += '\n🚫 توییت‌های ردشده: ' + tweetCard.faDigits(Object.keys(diag.rejects).join('، '));
+  }
+  return msg;
+}
+
+// ارسال پیام وضعیت؛ خطای ارسال نباید خط لوله‌ی خبر را بشکند
+async function sendTweetNotice(text, botToken, chatId) {
+  try {
+    const res = await sendToTelegram(text, null, botToken, chatId);
+    console.log((res && res.ok ? '  📣 ' : '  ⚠️ ارسال پیام وضعیت ناموفق: ') + (res && res.ok ? 'پیام وضعیت ارسال شد' : ((res && res.description) || '')));
+    return !!(res && res.ok);
+  } catch (e) {
+    console.log('  ⚠️ ارسال پیام وضعیت ناموفق: ' + e.message);
+    return false;
+  }
+}
+
+// هشدار + گزارش روزانه؛ هر دو به کانال می‌روند
+async function tweetHealthNotice(state, botToken, chatId, healthy, diag) {
+  const now = nowMs();
+  const today = new Date(now).toISOString().slice(0, 10);
+  if (!healthy) {
+    if (tweetAlertDue(state, now)) {
+      state.TWEET_ALERT_ACTIVE = true;
+      state.TWEET_ALERT_AT = now;
+      if (await sendTweetNotice(tweetAlertMessage(diag), botToken, chatId)) saveState(state);
+    }
+  } else if (state.TWEET_ALERT_ACTIVE) {
+    state.TWEET_ALERT_ACTIVE = false;
+    state.TWEET_ALERT_AT = 0;
+    await sendTweetNotice(tweetRecoveryMessage(), botToken, chatId);
+    saveState(state);
+  }
+  if (state.TWEET_STATUS_DAY !== today) {
+    state.TWEET_STATUS_DAY = today;
+    await sendTweetNotice(tweetStatusMessage(state, healthy, diag), botToken, chatId);
+    saveState(state);
+  }
+}
+
 // انتشار توییت‌های لیست (مستقل از خط لوله‌ی خبر، بدون AI)
 // لیست عمومی نمایندگان مجلس در توییتر (می‌توان با TWITTER_LIST_URL تغییرش داد)
 const DEFAULT_TWITTER_LIST_URL = 'https://x.com/i/lists/1967107576799039911';
@@ -1363,6 +1439,8 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     result = await fetchTwitterListTweets(listUrl);
   } catch (e) {
     console.log('  ⚠️ خطا در خواندن لیست توییتر: ' + e.message);
+    await tweetHealthNotice(state, botToken, chatId, false, { error: e.message });
+    saveState(state);
     return 0;
   }
   if (result.error) {
@@ -1374,6 +1452,7 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     };
     // تا وقتی مشکل حل نشده، هر ۴ ساعت پول حروم نکن
     state.APIFY_LAST_FETCH = nowMs();
+    await tweetHealthNotice(state, botToken, chatId, false, state.TWEET_LAST_FETCH_DIAG);
     saveState(state);
     return 0;
   }
@@ -1414,6 +1493,8 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     useCard: TWEET_USE_CARD
   };
   if (state.TWEET_LAST_FETCH_DIAG.allBlank) console.log('  🚨 همه‌ی آیتم‌ها بی‌متن بودند — ساختار خروجی سرویس عوض شده');
+  // سرویس داده داد ولی هیچ‌کدام قابل انتشار نبود: یعنی سرویس سالم است
+  await tweetHealthNotice(state, botToken, chatId, true, state.TWEET_LAST_FETCH_DIAG);
   if (fresh.length === 0) { saveState(state); return 0; }
 
   let published = 0;

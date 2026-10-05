@@ -191,4 +191,4 @@ function renderTweetCardPng(t, outPath) {
   return outAbs;
 }
 
-module.exports = { buildTweetCardHtml, renderTweetCardPng, findChrome, measureCardHeight };
+module.exports = { buildTweetCardHtml, renderTweetCardPng, findChrome, measureCardHeight, faDate, faDigits };
