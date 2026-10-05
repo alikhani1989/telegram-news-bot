@@ -2255,12 +2255,12 @@
     }
   ],
   "LAST_PROCESSED_SNIPPET": "جزئیات نحوه بررسی صلاحیت وزیر پیشنهادی دفاع در مجل",
-  "LAST_REPORT_TIME": 1791238690348,
+  "LAST_REPORT_TIME": 1791243197209,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
   "APIFY_LAST_FETCH": 1791242216807,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 12
+    "جعل محتوا/مصاحبه": 13
   },
   "TWEET_LAST_FETCH_DIAG": {
     "at": "2026-10-05T23:16:56.807Z",
