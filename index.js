@@ -1196,25 +1196,104 @@ function tweetIsPublishable(t) {
   return { ok: true };
 }
 
-function formatTweetPost(t) {
-  const who = escapeHtml(t.name || 'نماینده مجلس');
-  const attribution = t.name && t.handle ? who + ' (@' + escapeHtml(t.handle) + ')' : (t.name ? who : '@' + escapeHtml(t.handle || ''));
-  const body = t.text.split(/\n{2,}/).map(p => '🔸 ' + escapeHtml(p.trim()).replace(/\n/g, '\n')).join('\n\n');
-  let msg = '<b>🐦 ' + attribution + '</b>\n\n' + body;
+// متن توییت برای کپشن: حداکثر دو بند، شروع با نام نماینده
+function tweetCaptionBody(t) {
+  const paras = String(t.text || '').split(/\n{2,}/).map(p => p.trim().replace(/\n/g, ' ')).filter(Boolean).slice(0, 2);
+  // هر تکه جداگانه escape می‌شود؛ escape کردن رشته‌ی به‌هم‌چسبیده یعنی &lt;b&gt; و دردسر
+  const who = escapeHtml(t.name || t.handle || 'نماینده مجلس');
+  const first = escapeHtml(paras[0] || '');
+  const out = who + (first ? ': ' + first : ':');
+  return paras[1] ? out + '\n\n' + escapeHtml(paras[1]) : out;
+}
+
+// حدس ساده و بدون اینترنت: اولین جمله، کوتاه‌شده
+function tweetFallbackTitle(text) {
+  const first = String(text || '').split(/(?<=[.؟!])\s|\n/)[0].trim();
+  let s = first.replace(/\s+/g, ' ').trim();
+  if (s.length > 62) s = s.slice(0, 62).replace(/\s+\S*$/, '') + '…';
+  return s || 'توییت نماینده';
+}
+
+// یک تیتر کوتاه فارسی از Groq (رایگان)؛ فقط متن برمی‌گرداند
+async function callGroqTitle(text, name) {
+  const url = 'https://api.groq.com/openai/v1/chat/completions';
+  const payload = JSON.stringify({
+    model: 'openai/gpt-oss-20b',
+    messages: [
+      { role: 'system', content: 'تو یک سردبیر خبر فارسی هستی. فقط یک تیتر کوتاه بنویس و هیچ چیز دیگری ننویس. حداکثر ۸ کلمه. بدون ایموجی، بدون نقل‌قول، بدون نقطه در انتها، بدون نام شخص.' },
+      { role: 'user', content: 'نام نویسنده: ' + (name || 'نامشخص') + '\nمتن توییت:\n' + text.substring(0, 900) + '\n\nتیتر:' }
+    ],
+    temperature: 0.2,
+    max_tokens: 60,
+  });
+  const response = await Promise.race([
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (process.env.GROQ_API_KEY || '') },
+      body: payload,
+    }),
+    new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 25000)),
+  ]);
+  const data = await response.json();
+  if (!response.ok || !data || !Array.isArray(data.choices)) throw new Error('Groq ' + response.status);
+  const raw = String((data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '').trim();
+  const title = raw.split('\n')[0].replace(/^["'«\-\s*#]+|["'»\s.]+$/g, '').trim();
+  if (!title || title.length > 120) return null;
+  if (/[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/.test(title)) return null; // فقط فارسی
+  return title;
+}
+
+// تیتر کوتاه بر اساس محتوا؛ اول از Groq، وگرنه از اولین جمله‌ی توییت
+async function tweetTitle(t) {
+  const text = String(t.text || '').trim();
+  if ((process.env.GROQ_API_KEY || '') && text) {
+    try {
+      const title = await callGroqTitle(text, t.name || '');
+      if (title) return title;
+    } catch (e) { /* می‌رویم سراغ حدس ساده */ }
+  }
+  return tweetFallbackTitle(text);
+}
+
+// قالب ثابت کپشن توییت‌ها:
+// 💬 تیتر
+// 🔸 متن توییت (حداکثر دو بند، با نام نماینده)
+// 🇮🇷 این خانه #ازما ست
+// 🔰 @azmaa_net
+// تلگرام برای کپشن عکس ۱۰۲۴ کاراکتر بیشتر نمی‌پذیرد ⇒ فوتر و لینک حفظ می‌شود، بدنه کوتاه می‌شود
+const TELEGRAM_CAPTION_MAX = 1000;
+
+function tweetCaptionTemplate(t, title) {
+  let body = tweetCaptionBody(t);
+  let msg = '💬 <b>' + escapeHtml(title || tweetFallbackTitle(t.text)) + '</b>';
+  msg += '\n\n🔸' + body;
   msg += '\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net';
   if (t.url && t.url.startsWith('http')) {
     msg += '\n\n🔗 <a href="' + t.url + '">توییت در توییتر</a>';
   }
   // برچسب اجباری: این پست AI نیست، پس صریح می‌گوییم (هم گیت بازبینی پاس می‌شود، هم شفاف)
   msg += '\n\n🤖 مدل: بدون خلاصه‌سازی (متن اصلی توییت)';
+  if (msg.length > TELEGRAM_CAPTION_MAX) {
+    const room = TELEGRAM_CAPTION_MAX - (msg.length - body.length) - 1;
+    body = body.length > room ? body.slice(0, Math.max(0, room - 1)).replace(/\s+\S*$/, '') + '…' : body;
+    msg = '💬 <b>' + escapeHtml(title || tweetFallbackTitle(t.text)) + '</b>';
+    msg += '\n\n🔸' + body;
+    msg += '\n\n🇮🇷 این خانه #ازما ست\n🔰 @azmaa_net';
+    if (t.url && t.url.startsWith('http')) {
+      msg += '\n\n🔗 <a href="' + t.url + '">توییت در توییتر</a>';
+    }
+    msg += '\n\n🤖 مدل: بدون خلاصه‌سازی (متن اصلی توییت)';
+  }
   return msg;
 }
 
-// کپشن کوتاه زیر کارت: متن توییت داخل خود تصویر است، پس فقط لینک و برچسب مدل
-function formatTweetCardCaption(t) {
-  let msg = '🔗 <a href="' + t.url + '">توییت در توییتر</a>';
-  msg += '\n\n🤖 مدل: بدون خلاصه‌سازی (متن اصلی توییت)';
-  return msg;
+function formatTweetPost(t, title) {
+  return tweetCaptionTemplate(t, title);
+}
+
+// کپشن زیر کارت تصویری هم از همان قالب استفاده می‌کند
+function formatTweetCardCaption(t, title) {
+  return tweetCaptionTemplate(t, title);
 }
 
 async function fetchTwitterListTweets(listUrl) {
@@ -1343,7 +1422,7 @@ async function publishTwitterListTweets(state, botToken, chatId) {
       const png = path.join(os.tmpdir(), 'tweet_card_' + Date.now() + '_' + published + '.png');
       try {
         tweetCard.renderTweetCardPng({ name: t.name, handle: t.handle, createdAt: t.createdAt, text: t.text, avatarUrl: t.avatarUrl }, png);
-        const caption = formatTweetCardCaption(t);
+        const caption = formatTweetCardCaption(t, await tweetTitle(t));
         const res = await sendPhotoFileToTelegram(png, caption, botToken, chatId);
         if (res.ok) { sent = true; viaCard = true; }
         else console.log('  ⚠️ ارسال کارت ناموفق، متن ساده می‌رود:', res.description || JSON.stringify(res));
@@ -1355,7 +1434,7 @@ async function publishTwitterListTweets(state, botToken, chatId) {
     }
     if (!sent) {
       try {
-        const res = await sendToTelegram(formatTweetPost(t), t.imageUrl || null, botToken, chatId);
+        const res = await sendToTelegram(formatTweetPost(t, await tweetTitle(t)), t.imageUrl || null, botToken, chatId);
         if (res.ok) sent = true;
         else console.log('  ❌ خطای تلگرام:', res.description || JSON.stringify(res));
       } catch (e) {
