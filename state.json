@@ -1958,13 +1958,13 @@
   "LAST_PROCESSED_SNIPPET": "جعفری‌آذر: استیضاح وزیر کار مطرح است؛ بازنشستگان ه",
   "LAST_REPORT_TIME": 1791191013604,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 90,
-  "APIFY_LAST_FETCH": 1791183753925,
+  "APIFY_ITEMS": 100,
+  "APIFY_LAST_FETCH": 1791199051349,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 7
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-05T07:02:33.925Z",
+    "at": "2026-10-05T11:17:31.349Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
