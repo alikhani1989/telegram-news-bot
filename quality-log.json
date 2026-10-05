@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-04T17:32:57.578Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ پیشنهاد مذاکره آمریکا از طریق قطر منتقل شد",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-04T17:47:52.433Z",
     "model": "NaraRouter",
     "items": [
@@ -1240,5 +1228,17 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-10-05T15:33:10.161Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ افزایش اعتبارات توسعه روستایی در بودجه ۱۴۰۶",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
