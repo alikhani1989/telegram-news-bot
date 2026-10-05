@@ -2198,57 +2198,17 @@
   "LAST_REPORT_TIME": 1791200029554,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791199051349,
+  "APIFY_LAST_FETCH": 1791206214870,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 7
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-05T11:17:31.349Z",
-    "fetched": 10,
+    "at": "2026-10-05T13:16:54.870Z",
+    "fetched": 0,
     "fresh": 0,
-    "rejects": {
-      "بدون متن": 10
-    },
-    "newest": [
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      }
-    ],
-    "rawSample": {
-      "keys": [
-        "noResults"
-      ],
-      "first": "{\"noResults\":true}"
-    },
-    "allBlank": true,
-    "maxItemsRequested": 30,
-    "useCard": true
+    "demo": false,
+    "rawSample": null,
+    "rejects": {},
+    "error": "Apify: Monthly usage hard limit exceeded"
   }
 }
