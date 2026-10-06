@@ -17,28 +17,6 @@
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
-      "id": "1791137012244_guwnc",
-      "timestamp": "2026-10-04T18:03:32.244Z",
-      "title": "✴️ انتقاد نماینده تهران از ارزپاشی بانک مرکزی",
-      "body": "🔸 نماینده تهران از تخصیص ۲ میلیارد دلار ارز با کارت ملی به عنوان ساده‌انگارانه‌ترین روش بانک مرکزی نام برد و خواستار برخورد فوری رئیس مجلس شد.\n\n🔸 محمدباقر قالیباف رئیس مجلس گفت این تصمیم جای تعجب داشت و هیئت رئیسه با جدیت موضوع را پیگیری خواهد کرد.",
-      "source_link": "https://www.javanonline.ir/fa/news/1382702/%D8%A7%D8%B1%D8%B2%D9%BE%D8%A7%D8%B4%DB%8C-%D8%A8%D8%A7%D9%86%DA%A9-%D9%85%D8%B1%DA%A9%D8%B2%DB%8C-%D8%A7%D8%B9%D8%AA%D8%B1%D8%A7%D8%B6-%D9%85%D8%AC%D9%84%D8%B3-%D8%B1%D8%A7-%D8%A8%D8%B1%D8%A7%D9%86%DA%AF%DB%8C%D8%AE%D8%AA",
-      "model": "NaraRouter",
-      "qualityScore": 0,
-      "qualityIssues": [],
-      "reviewed": false
-    },
-    {
-      "id": "1791137018625_m2az4",
-      "timestamp": "2026-10-04T18:03:38.625Z",
-      "title": "✴️ هشدار رئیس کمیسیون امنیت ملی به آمریکا",
-      "body": "🔸 ابراهیم عزیزی رئیس کمیسیون امنیت ملی و سیاست خارجی مجلس در پیامی نوشت خروج از افغانستان و عراق آغاز راه اخراج کامل نیروهای آمریکایی از منطقه غرب آسیاست.",
-      "source_link": "https://www.khabaronline.ir/news/2283723/%D8%B1%D8%A6%DB%8C%D8%B3-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7%DB%8C%DB%8C-%D9%87%D8%A7-%D8%A7%D8%B2-%DA%AF%D8%A7%D9%85-%D8%B3%D9%88%D9%85-%D8%B4%D8%A7%D9%86-%D8%AF%D8%B1-%D9%85%D9%86%D8%B7%D9%82%D9%87",
-      "model": "NaraRouter",
-      "qualityScore": 0,
-      "qualityIssues": [],
-      "reviewed": false
-    },
-    {
       "id": "1791137018798_05a2w",
       "timestamp": "2026-10-04T18:03:38.798Z",
       "title": "✴️ نامگذاری آمریکا به عنوان ضد بریت",
@@ -2225,11 +2203,31 @@
       "qualityScore": 0,
       "qualityIssues": [],
       "reviewed": false
+    },
+    {
+      "id": "1791273866048_hyz08",
+      "timestamp": "2026-10-06T08:04:26.048Z",
+      "title": "✴️ شورای نگهبان از رسانه‌ها تشکر کرد",
+      "body": "🔸 سیامک ره‌پیک عضو حقوقدان و قائم مقام دبیر شورای نگهبا گفت در جلسه با مدیران رسانه‌ای، از تلاش‌های مطبوعات در دوران سخت جنگ تحمیلی تشکر کرد.\n\n🔸 همچنین به همکاری رسانه‌ها در اطلاع‌رسانی اقدامات نهاد اشاره کرد.",
+      "source_link": "https://www.jamaran.news/fa/tiny/news-1730238",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
+    },
+    {
+      "id": "1791273868504_5xk79",
+      "timestamp": "2026-10-06T08:04:28.504Z",
+      "title": "✴️ تذکر کتبی به دستگاه‌های اجرایی",
+      "body": "🔸 فرشاد ابراهیم پور نماینده مجلس گفت تذکر کتبی ۲۵ نماینده درباره مشکلات روستاییان و عشایر به دستگاه‌های اجرایی قرائت شد.\n\n🔸 موارد شامل مدارس عشایری، پنل خورشیدی، جاده دسترسی، آب، برق و عدم انحلال سازمان امور عشایر بود.",
+      "source_link": "https://icana.ir/news/425627/%D8%AA%D8%B0%DA%A9%D8%B1-%DA%A9%D8%AA%D8%A8%DB%8C-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%DA%AF%D8%A7%D9%86-%D8%A8%D9%87-%D9%85%D8%B3%D8%A6%D9%88%D9%84%D8%A7%D9%86-%D8%AF%D8%B3%D8%AA%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C%DB%8C",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
     }
   ],
   "RECENT_TITLES": [
-    "رد ارتباط تراستی‌ها با استعفای وزیر نفت",
-    "تعیین موعد پرداخت معوقه بازنشستگان تأمین اجتماعی",
     "بازگشت نظارت آژانس مشروط به محکومیت تجاوزات آمریکا است",
     "تنها ۲ درصد بودجه فرهنگی به برنامه می‌رسد",
     "سفر نظارتی کمیسیون امور داخلی به اردبیل",
@@ -2242,44 +2240,11 @@
     "نیکزاد: تنگه هرمز با قیمت سوخت آمریکا مشخص میشود",
     "تذکر ظهوریان درباره فرآیند استیضاح وزیر کار",
     "استیضاح وزیر کار با نقص آیین‌نامه",
-    "حضور نیروهای مسلح مردمی در عراق"
+    "حضور نیروهای مسلح مردمی در عراق",
+    "شورای نگهبان از رسانه‌ها تشکر کرد",
+    "تذکر کتبی به دستگاه‌های اجرایی"
   ],
   "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ تعیین مجازات افشای اطلاعات طبقه‌بندی شده",
-      "source_link": "https://www.mashreghnews.ir/news/1843954/%D9%85%D8%AC%D8%A7%D8%B2%D8%A7%D8%AA-%D8%A7%D9%81%D8%B4%D8%A7%DB%8C-%D8%A7%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA-%D8%B1%D8%B3%D9%85%DB%8C-%DA%A9%D8%B4%D9%88%D8%B1-%D8%A8%D8%B1%D8%A7%DB%8C-%DA%A9%D8%A7%D8%B1%DA%AF%D8%B2%D8%A7%D8%B1-%D8%A8%DB%8C%DA%AF%D8%A7%D9%86%D9%87-%D8%AA%D8%B9%DB%8C%DB%8C%D9%86-%D8%B4%D8%AF",
-      "timestamp": 1791270343876
-    },
-    {
-      "title": "✴️ طرح مقابله با نفوذ بیگانگان بازنگری می‌شود",
-      "source_link": "https://www.mashreghnews.ir/news/1843956/%D8%B7%D8%B1%D8%AD-%D9%85%D9%82%D8%A7%D8%A8%D9%84%D9%87-%D8%A8%D8%A7-%D9%86%D9%81%D9%88%D8%B0-%D8%A8%DB%8C%D8%BA%D8%A7%D9%86%D8%AF%D8%BA%D8%A7%D9%86-%D8%A8%D8%A7%D8%B2%D9%86%D8%AC%D8%B1%DB%8C-%D9%85%DB%8C%E2%80%8C%D8%B4%D9%88%D8%AF",
-      "timestamp": 1791270344139
-    },
-    {
-      "title": "✴️ پرداخت پول گندم کشاورزان تا حد قابل توجه انجام شد",
-      "source_link": "https://icana.ir/news/425607/%D8%A8%DB%8C%DA%AF%D8%AF%D9%84%DB%8C-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%DB%8C-%DA%A9%D9%87-%D8%AF%D8%B1-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D9%88%D8%B6%D8%B9%DB%8C%D8%AA-%D9%85%D8%B9%DB%8C%D8%B4%D8%AA%DB%8C-%D8%A7%D8%B4-%D9%85%D8%A7%D9%86%D8%AF%D9%87-%DA%86%DA%AF%D9%88%D9%86%D9%87-%D8%A8%D8%A7%DB%8C%D8%AF",
-      "timestamp": 1791270346065
-    },
-    {
-      "title": "✴️ گفت منابع مالی برای خرید کولر و رفع کمبود تجهیزات سرمایشی...",
-      "source_link": "https://www.mehrnews.com/news/6969358/%D8%A7%D8%AE%D8%AA%D8%B5%D8%A7%D8%B5-%DB%B1%DB%B0%D9%85%DB%8C%D9%84%DB%8C%D8%A7%D8%B1%D8%AF-%D8%AA%D9%88%D9%85%D8%A7%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AA%D8%AC%D9%87%DB%8C%D8%B2%D8%A7%D8%AA-%D8%B3%D8%B1%D9%85%D8%A7%DB%8C%D8%B4%DB%8C-%D9%85%D8%AF%D8%A7%D8%B1%D8%B3-%D8%AD%D9%88%D8%B2%D9%87-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%DB%8C%D9%87",
-      "timestamp": 1791270348272
-    },
-    {
-      "title": "✴️ انتخابات شوراها در ماه آینده برگزار می‌شود",
-      "source_link": "https://www.yjc.ir/fa/news/9136149/%D8%A7%D8%AD%D8%AA%D9%85%D8%A7%D9%84-%D8%A8%D8%B1%DA%AF%D8%B2%D8%A7%D8%B1%DB%8C-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D8%B4%D9%88%D8%B1%D8%A7%D9%87%D8%A7%DB%8C-%D9%87%D9%81%D8%AA%D9%85-%D8%AF%D8%B1-%D9%85%D8%A7%D9%87-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D9%81%DB%8C%D9%84%D9%85",
-      "timestamp": 1791270829200
-    },
-    {
-      "title": "✴️ نیکزاد: تنگه هرمز با قیمت سوخت آمریکا مشخص میشود",
-      "source_link": "https://www.hamshahrionline.ir/news/1074460/%D8%A8%D8%A7%D8%B2-%D8%A8%D9%88%D8%AF%D9%86-%DB%8C%D8%A7-%D8%A8%D8%B3%D8%AA%D9%87-%D8%A8%D9%88%D8%AF%D9%86-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%DA%A9%D9%86%D8%A7%DB%8C%D9%87-%D8%AA%D9%86%D8%AF-%D9%85%D9%82%D8%A7%D9%85-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D8%A8%D9%87-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE",
-      "timestamp": 1791271095695
-    },
-    {
-      "title": "✴️ تذکر ظهوریان درباره فرآیند استیضاح وزیر کار",
-      "source_link": "https://icana.ir/news/425613/%D8%B8%D9%87%D9%88%D8%B1%DB%8C%D8%A7%D9%86-%D8%B1%D9%88%D9%86%D8%AF-%D8%A8%D8%B1%D8%B1%D8%B3%DB%8C-%D8%A7%D8%B3%D8%AA%DB%8C%D8%B6%D8%A7%D8%AD-%D9%88%D8%B2%DB%8C%D8%B1-%DA%A9%D8%A7%D8%B1-%D8%B4%D9%81%D8%A7%D9%81-%D8%B4%D9%88%D8%AF",
-      "timestamp": 1791271102777
-    },
     {
       "title": "✴️ استیضاح وزیر کار با نقص آیین‌نامه",
       "source_link": "https://www.imna.ir/news/1010010/%D8%B8%D9%87%D9%88%D8%B1%DB%8C%D8%A7%D9%86-%D8%B1%D9%88%D9%86%D8%AF-%D8%A8%D8%B1%D8%B1%D8%B3%DB%8C-%D8%A7%D8%B3%D8%AA%DB%8C%D8%B6%D8%A7%D8%AD-%D9%88%D8%B2%DB%8C%D8%B1-%DA%A9%D8%A7%D8%B1-%D8%B4%D9%81%D8%A7%D9%81-%D8%B4%D9%88%D8%AF",
@@ -2289,9 +2254,19 @@
       "title": "✴️ حضور نیروهای مسلح مردمی در عراق",
       "source_link": "https://www.seratnews.com/fa/news/750778/%D8%AD%D8%B4%D8%AF%D8%A7%D9%84%D8%B4%D8%B9%D8%A8%DB%8C-%D9%85%DB%8C-%D9%85%D8%A7%D9%86%D8%AF-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%82%D8%A7%D8%A8%D9%84-%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF-%D9%86%DB%8C%D8%B3%D8%AA",
       "timestamp": 1791272148672
+    },
+    {
+      "title": "✴️ شورای نگهبان از رسانه‌ها تشکر کرد",
+      "source_link": "https://www.jamaran.news/fa/tiny/news-1730238",
+      "timestamp": 1791273866048
+    },
+    {
+      "title": "✴️ تذکر کتبی به دستگاه‌های اجرایی",
+      "source_link": "https://icana.ir/news/425627/%D8%AA%D8%B0%DA%A9%D8%B1-%DA%A9%D8%AA%D8%A8%DB%8C-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%DA%AF%D8%A7%D9%86-%D8%A8%D9%87-%D9%85%D8%B3%D8%A6%D9%88%D9%84%D8%A7%D9%86-%D8%AF%D8%B3%D8%AA%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C%DB%8C",
+      "timestamp": 1791273868504
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "حشدالشعبی می‌ماند آمریکا قابل اعتماد نیست \n #صراط",
+  "LAST_PROCESSED_SNIPPET": "ممنوعیت اتباع ایرانی برای مصاحبه با رسانه‌های معان",
   "LAST_REPORT_TIME": 1791268526981,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
