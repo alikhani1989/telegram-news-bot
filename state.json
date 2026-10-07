@@ -17,17 +17,6 @@
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
-      "id": "1791253118952_0k7c9",
-      "timestamp": "2026-10-06T02:18:38.952Z",
-      "title": "✴️ نماینده تهران: خروج از انپیتی دشمنان را از دست می‌دهیم",
-      "body": "🔸 محمد سراج نماینده تهران در مجلس گفت اگر اکنون از انپیتی خارج شویم، دوستانمان را از دست میدهیم چون آمریکا، روسیه و چین با این طرح مخالفت کرده‌اند.\n\n🔸 سراج تأکید کرد که تهدید به خروج از انپیتی به‌جا است اما اجرای واقعی آن ضررهایی دارد و باید در مقابل شورای حکام، اتحادیه‌ای جدید ایجاد کرد.",
-      "source_link": "https://www.khabaronline.ir/news/2284023/%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D8%AA%D9%87%D8%B1%D8%A7%D9%86-%D8%A7%DA%AF%D8%B1-%D9%85%D8%A7-%D8%A7%D8%B2-%D8%A7%D9%86-%D9%BE%DB%8C-%D8%AA%DB%8C-%D8%AE%D8%A7%D8%B1%D8%AC-%D8%A8%D8%B4%D9%88%DB%8C%D9%85-%D9%85%D9%81%D9%87%D9%88%D9%85%D8%B4-%D8%A7%DB%8C%D9%86-%D8%A7%D8%B3%D8%AA",
-      "model": "NaraRouter",
-      "qualityScore": 100,
-      "qualityIssues": [],
-      "reviewed": true
-    },
-    {
       "id": "1791253120860_fykn5",
       "timestamp": "2026-10-06T02:18:40.860Z",
       "title": "✴️ افتتاح ۴۵۰ میلیارد تومان پروژه در خداآفرین",
@@ -2229,10 +2218,20 @@
       "qualityScore": 0,
       "qualityIssues": [],
       "reviewed": false
+    },
+    {
+      "id": "1791398926400_2krcv",
+      "timestamp": "2026-10-07T18:48:46.400Z",
+      "title": "✴️ شهر خوی میزبان اقوام و مذاهب",
+      "body": "🔸 نماینده مردم خوی و چایپاره مجلس گفت از این پس شهر خوی میزبان قوام، ادیان و مذاهب ایران و جهان خواهد بود و ما خوی را با شمس تبریزی جهانی می‌کنیم.\n\n🔸 این برنامه در چارچوب ارتقای فرهنگ و گردشگری اجرا می‌شود.",
+      "source_link": "https://www.taghribnews.com/fa/news/741313/%D8%B4%D9%87%D8%B1-%D8%AE%D9%88%DB%8C-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD-%D8%A8%D8%A7%D8%B1%DA%AF%D8%A7%D9%87-%D8%B4%D9%85%D8%B3-%D8%AA%D8%A8%D8%B1%DB%8C%D8%B2%DB%8C-%D8%AC%D9%87%D8%A7%D9%86%DB%8C-%D9%85%DB%8C-%D8%B4%D9%88%D8%AF",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
     }
   ],
   "RECENT_TITLES": [
-    "قدرت واقعی ملت به ایمان است",
     "معرفی مهرداد اخلاقی وزیر دفاع",
     "ضرورت تعلیق قانون مبارزه با قاچاق",
     "دولت دست به افزایش حقوق می‌زند",
@@ -2246,39 +2245,10 @@
     "ایمان و توکل، راز شکست‌ناپذیری ایران",
     "افتتاح بارگاه شمس تبریزی در خوی",
     "ایران با فشار اقتصادی آمریکا مواجه شد",
-    "انتخابات شوراهای شهر و روستا الکترونیکی"
+    "انتخابات شوراهای شهر و روستا الکترونیکی",
+    "شهر خوی میزبان اقوام و مذاهب"
   ],
   "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ وزیر خارجه گزارش سفر به نیویورک",
-      "source_link": "https://www.mizanonline.ir/fa/news/4922546/%D8%AC%D9%84%D8%B3%D9%87-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%DA%AF%D8%A7%D9%86-%D9%85%D8%AC%D9%84%D8%B3-%D9%88-%D9%88%D8%B2%DB%8C%D8%B1-%D8%A7%D9%85%D9%88%D8%B1-%D8%AE%D8%A7%D8%B1%D8%AC%D9%87",
-      "timestamp": 1791395341019
-    },
-    {
-      "title": "✴️ لاهوتی: مجلس در مذاکرات برجام نقش ندارد",
-      "source_link": "https://www.jamaran.news/fa/tiny/news-1730445",
-      "timestamp": 1791395342766
-    },
-    {
-      "title": "✴️ قاضی‌زاده هاشمی: تقویت بوم‌گردی روستاها ضروری",
-      "source_link": "https://www.mehrnews.com/news/6971177/%D8%A8%D8%A7%DB%8C%D8%AF-%D8%B7%D8%B1%D8%AD-%D9%87%D8%A7%DB%8C-%D8%AA%D8%B3%D9%87%DB%8C%D9%84%D8%A7%D8%AA-%D8%A8%D9%88%D9%85-%DA%AF%D8%B1%D8%AF%DB%8C-%D8%AF%D8%B1-%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%D9%87%D8%A7-%D8%AA%D9%82%D9%88%DB%8C%D8%AA-%D8%B4%D9%88%D8%AF",
-      "timestamp": 1791395345130
-    },
-    {
-      "title": "✴️ نوباوه وطن: اتهام نشر اکاذیب کذب است",
-      "source_link": "https://icana.ir/news/425733/%D9%BE%D8%A7%D8%B3%D8%AE-%D8%A8%DB%8C%DA%98%D9%86-%D9%86%D9%88%D8%A8%D8%A7%D9%88%D9%87-%D8%A8%D9%87-%D8%AC%D9%88%D8%A7%D8%A8%DB%8C%D9%87-%D9%85%D8%B1%DA%A9%D8%B2-%D8%B1%D8%B3%D8%A7%D9%86%D9%87",
-      "timestamp": 1791395347014
-    },
-    {
-      "title": "✴️ فروش نفت به تراستی‌ها ادامه دارد",
-      "source_link": "https://www.asriran.com/fa/news/1197152/%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D9%85%D8%AC%D9%84%D8%B3-%D8%A7%DA%AF%D8%B1-%D8%A2%D9%82%D8%A7%DB%8C-%D9%BE%D8%A7%DA%A9-%D9%86%DA%98%D8%A7%D8%AF-%D8%A7%D8%B3%D8%AA%D8%B9%D9%81%D8%A7-%D9%87%D9%85-%D9%86%D9%85%DB%8C-%D8%AF%D8%A7%D8%AF-%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D9%84%D8%BA%D9%88-%D9%82%D8%B1%D8%A7%D8%B1%D8%AF%D8%A7%D8%AF%D9%87%D8%A7%DB%8C-%D9%86%D9%81%D8%AA%DB%8C-%D8%A8%D8%A7-%DA%86%DB%8C%D9%86-%D8%AD%D8%AA%D9%85%D8%A7-%D8%A7%D8%B3%D8%AA%DB%8C%D8%B6%D8%A7%D8%AD-%D9%85%DB%8C-%D8%B4%D8%AF",
-      "timestamp": 1791395885065
-    },
-    {
-      "title": "✴️ ایمان و توکل، راز شکست‌ناپذیری ایران",
-      "source_link": "https://defapress.ir/fa/news/868494/%D8%B1%D8%A7%D8%B3%D8%AA%DB%8C%D9%86%D9%87-%D8%AF%D8%B4%D9%85%D9%86-%D8%AF%D8%B1-%D9%87%D8%B1-%DA%86%D9%87%D8%A7%D8%B1-%D8%B1%D8%A7%D9%87%D8%A8%D8%B1%D8%AF-%D8%AE%D9%88%D8%AF-%D8%B9%D9%84%DB%8C%D9%87-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%B4%DA%A9%D8%B3%D8%AA-%D8%AE%D9%88%D8%B1%D8%AF",
-      "timestamp": 1791395886162
-    },
     {
       "title": "✴️ افتتاح بارگاه شمس تبریزی در خوی",
       "source_link": "https://www.mehrnews.com/news/6971300/%DA%86%D9%87%D8%A7%D8%B1-%D9%85%D8%B1%DA%A9%D8%B2-%D9%BE%DA%98%D9%88%D9%87%D8%B4%DB%8C-%D8%A8%D8%B2%D8%B1%DA%AF-%D9%85%D8%B1%D8%AA%D8%A8%D8%B7-%D8%A8%D8%A7-%D8%AE%D9%88%DB%8C-%D9%88-%D8%B4%D9%85%D8%B3-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF-%D8%B4%D9%88%D8%AF",
@@ -2293,18 +2263,23 @@
       "title": "✴️ انتخابات شوراهای شهر و روستا الکترونیکی",
       "source_link": "https://www.mehrnews.com/news/6971303/%D8%B4%D9%88%D8%B1%D8%A7%D9%87%D8%A7-%D9%85%DB%8C-%D8%AA%D9%88%D8%A7%D9%86%D9%86%D8%AF-%D8%AA%D8%AD%D9%88%D9%84-%D8%B9%D9%85%DB%8C%D9%82-%D8%AF%D8%B1-%D8%AC%D8%A7%D9%85%D8%B9%D9%87-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF-%DA%A9%D9%86%D9%86%D8%AF",
       "timestamp": 1791397175353
+    },
+    {
+      "title": "✴️ شهر خوی میزبان اقوام و مذاهب",
+      "source_link": "https://www.taghribnews.com/fa/news/741313/%D8%B4%D9%87%D8%B1-%D8%AE%D9%88%DB%8C-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD-%D8%A8%D8%A7%D8%B1%DA%AF%D8%A7%D9%87-%D8%B4%D9%85%D8%B3-%D8%AA%D8%A8%D8%B1%DB%8C%D8%B2%DB%8C-%D8%AC%D9%87%D8%A7%D9%86%DB%8C-%D9%85%DB%8C-%D8%B4%D9%88%D8%AF",
+      "timestamp": 1791398926400
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "شوراها می‌توانند تحول عمیق در جامعه ایجاد کنند \n #",
+  "LAST_PROCESSED_SNIPPET": "شهر خوی با افتتاح بارگاه شمس تبریزی جهانی می‌شود \n",
   "LAST_REPORT_TIME": 1791395348219,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791395245095,
+  "APIFY_LAST_FETCH": 1791398849359,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 22
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-07T17:47:25.095Z",
+    "at": "2026-10-07T18:47:29.359Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
