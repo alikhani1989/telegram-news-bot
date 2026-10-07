@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-06T07:33:25.728Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ استیضاح وزیر کار با نقص آیین‌نامه",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ حضور نیروهای مسلح مردمی در عراق",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-06T08:04:19.534Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1106,6 +1089,18 @@
       },
       {
         "title": "✴️ همکاری صنعتی ایران‑افغانستان در کمیسیون ویژه حمایت",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-07T04:33:48.621Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ هشدار افزایش بی‌سابقه نرخ ارز",
         "score": 100,
         "issues": []
       }
