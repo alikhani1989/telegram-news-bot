@@ -2274,12 +2274,12 @@
   "LAST_REPORT_TIME": 1791346713511,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791343930377,
+  "APIFY_LAST_FETCH": 1791348408619,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 21
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-07T03:32:10.377Z",
+    "at": "2026-10-07T04:46:48.619Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
