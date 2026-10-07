@@ -17,28 +17,6 @@
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
-      "id": "1791201822411_15fti",
-      "timestamp": "2026-10-05T12:03:42.411Z",
-      "title": "✴️ بازگشایی تنگه هرمز مشروط به اقدام آمریکا است",
-      "body": "🔸 حسن قشقاوی سخنگوی کمیسیون امنیت ملی و سیاست خارجی مجلس گفت تا پیش از وصول شرایط ایران، تنگه هرمز باز نخواهد شد و اکنون توپ در زمین آمریکاست که آیا به آنچه بین دو رئیس‌جمهور امضا شد پایبند است یا خیر.",
-      "source_link": "https://rasanews.ir/fa/news/828790/%D9%82%D8%B4%D9%82%D8%A7%D9%88%DB%8C-%D8%AA%D9%86%DA%AF%D9%87-%D9%87%D8%B1%D9%85%D8%B2-%D8%A8%D8%A7%D8%B2%DA%AF%D8%B4%D8%A7%DB%8C%DB%8C-%D9%86%D8%AE%D9%88%D8%A7%D9%87%D8%AF-%D8%B4%D8%AF-%D8%AA%D9%88%D9%BE-%D8%AF%D8%B1-%D8%B2%D9%85%DB%8C%D9%86-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7%D8%B3%D8%AA",
-      "model": "NaraRouter",
-      "qualityScore": 0,
-      "qualityIssues": [],
-      "reviewed": false
-    },
-    {
-      "id": "1791201825229_ocwek",
-      "timestamp": "2026-10-05T12:03:45.229Z",
-      "title": "✴️ آغاز جلسات ترکیبی در مجلس",
-      "body": "🔸الله بیاتی سخنگوی کمیسیون شوراها و امور داخلی مجلس گفت بر اساس تصمیم هیئت رئیسه، تعدادی از نمایندگان به صورت حضوری و بخش دیگری تعاملات به صورت مجازی خواهند داشت.",
-      "source_link": "https://www.iscanews.ir/news/1320502/%D8%B1%D8%A4%D8%B3%D8%A7%DB%8C-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86-%D9%87%D8%A7-%D8%AF%D8%B1-%D8%B5%D8%AD%D9%86-%D8%B9%D9%84%D9%86%DB%8C-%D8%AD%D8%B6%D9%88%D8%B1-%D9%85%DB%8C-%DB%8C%D8%A7%D8%A8%D9%86%D8%AF-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8%D8%A7%D8%AA-%D8%B4%D9%88%D8%B1%D8%A7%D9%87%D8%A7-%D8%AF%D8%B1",
-      "model": "NaraRouter",
-      "qualityScore": 0,
-      "qualityIssues": [],
-      "reviewed": false
-    },
-    {
       "id": "1791202680255_qwdvt",
       "timestamp": "2026-10-05T12:18:00.255Z",
       "title": "✴️ شفافسازی فروش نفت و بازگشت منابع ضروری است",
@@ -2229,11 +2207,31 @@
       "qualityScore": 0,
       "qualityIssues": [],
       "reviewed": false
+    },
+    {
+      "id": "1791342255915_ihs0g",
+      "timestamp": "2026-10-07T03:04:15.915Z",
+      "title": "✴️ پرتاب ۳ ماهواره تا شب عید",
+      "body": "🔸 وزیر ارتباطات گفت در حوزه ماهواره‌های عملیاتی، رویکرد خود را از توسعه فناوری به سمت توسعه کاربرد تغییر داده‌ایم.\n\n🔸 هدف پرتاب ۳ ماهواره از منظومه شهید سلیمانی تا شب عید است و این اقدام مقدمه‌ای برای حضور جدی‌تر ایران در فضا خواهد بود.",
+      "source_link": "https://www.khabaronline.ir/news/2284581/%D9%88%D8%B2%DB%8C%D8%B1-%D8%A7%D8%B1%D8%AA%D8%A8%D8%A7%D8%B7%D8%A7%D8%AA-%D8%AA%D8%A7-%D8%B4%D8%A8-%D8%B9%DB%8C%D8%AF-%DB%B3-%D9%85%D8%A7%D9%87%D9%88%D8%A7%D8%B1%D9%87-%D8%A7%D8%B2-%D9%85%D9%86%D8%B8%D9%88%D9%85%D9%87-%D8%B4%D9%87%DB%8C%D8%AF-%D8%B3%D9%84%DB%8C%D9%85%D8%A7%D9%86%DB%8C-%D8%B1%D8%A7",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
+    },
+    {
+      "id": "1791342391694_o99np",
+      "timestamp": "2026-10-07T03:06:31.694Z",
+      "title": "✴️ استیضاح عراقچی در سامانه ثبت شد",
+      "body": "🔸 محمد رشیدی نماینده مجلس گفت استیضاح عراقچی توسط یکی از نمایندگان در سامانه ثبت شده است.\n\n🔸 این استیضاح هنوز به هیئت‌رئیسه ارجاع نشده و بررسی‌های بعدی ادامه دارد.",
+      "source_link": "https://www.qudsonline.ir/news/1169181/%D9%85%DB%8C%D8%AF%D8%B1%DB%8C-%D9%86%D8%B1%D9%81%D8%AA%D9%87-%D8%A8%D8%B1%DA%AF%D8%B4%D8%AA-%D8%A7%D8%B3%D8%AA%DB%8C%D8%B6%D8%A7%D8%AD-%D8%B9%D8%B1%D8%A7%D9%82%DA%86%DB%8C-%DA%A9%D9%84%DB%8C%D8%AF-%D8%AE%D9%88%D8%B1%D8%AF-%D8%A7%D8%AF%D8%A7%D9%85%D9%87-%DB%8C%D9%82%D9%87-%DA%AF%DB%8C%D8%B1%DB%8C-%D9%87%D8%A7%DB%8C",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
     }
   ],
   "RECENT_TITLES": [
-    "تقویت حضور دستگاه‌ها در فضای مجازی همدان",
-    "رأی اعتماد به وزیر دفاع در اواخر مهر",
     "دیدار نماینده عراقی با سفیر ایران در بغداد",
     "گفت در نشست با مرکز ملی فضای مجازی به بررسی مسائل مرتبط پ...",
     "کمیسیون حمایت از تولید با صنایع افغانستان",
@@ -2246,24 +2244,11 @@
     "تقویت همکاری‌های صنعتی ایران‑افغانستان",
     "پرتاب ۳ ماهواره تا شب عید",
     "استیضاح وزیر تعاون به تعویق افتاد",
-    "دیدار کمیسیون حمایت از تولید با افغانستان"
+    "دیدار کمیسیون حمایت از تولید با افغانستان",
+    "پرتاب ۳ ماهواره تا شب عید",
+    "استیضاح عراقچی در سامانه ثبت شد"
   ],
   "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ لغو استیضاح وزیر تعاون پس از کناره‌گیری",
-      "source_link": "https://www.qudsonline.ir/news/1169181/%D9%85%DB%8C%D8%AF%D8%B1%DB%8C-%D9%86%D8%B1%D9%81%D8%AA%D9%87-%D8%A8%D8%B1%DA%AF%D8%B4%D8%AA-%D8%A7%D8%B3%D8%AA%DB%8C%D8%B6%D8%A7%D8%AD-%D8%B9%D8%B1%D8%A7%D9%82%DA%86%DB%8C-%DA%A9%D9%84%DB%8C%D8%AF-%D8%AE%D9%88%D8%B1%D8%AF-%D8%A7%D8%AF%D8%A7%D9%85%D9%87-%DB%8C%D9%82%D9%87-%DA%AF%DB%8C%D8%B1%DB%8C-%D9%87%D8%A7%DB%8C",
-      "timestamp": 1791338793329
-    },
-    {
-      "title": "✴️ تقویت همکاری‌های صنعتی ایران‑افغانستان",
-      "source_link": "https://icana.ir/news/425670/%D8%AA%D8%A3%DA%A9%DB%8C%D8%AF-%D8%A8%D8%B1-%DA%AF%D8%B3%D8%AA%D8%B1%D8%B4-%D9%87%D9%85%DA%A9%D8%A7%D8%B1%DB%8C-%D9%87%D8%A7%DB%8C-%D8%B5%D9%86%D8%B9%D8%AA%DB%8C-%D9%88-%D9%85%D8%B9%D8%AF%D9%86%DB%8C-%D8%AF%D9%88-%DA%A9%D8%B4%D9%88%D8%B1",
-      "timestamp": 1791338795667
-    },
-    {
-      "title": "✴️ پرتاب ۳ ماهواره تا شب عید",
-      "source_link": "https://www.khabaronline.ir/news/2284581/%D9%88%D8%B2%DB%8C%D8%B1-%D8%A7%D8%B1%D8%AA%D8%A8%D8%A7%D8%B7%D8%A7%D8%AA-%D8%AA%D8%A7-%D8%B4%D8%A8-%D8%B9%DB%8C%D8%AF-%DB%B3-%D9%85%D8%A7%D9%87%D9%88%D8%A7%D8%B1%D9%87-%D8%A7%D8%B2-%D9%85%D9%86%D8%B8%D9%88%D9%85%D9%87-%D8%B4%D9%87%DB%8C%D8%AF-%D8%B3%D9%84%DB%8C%D9%85%D8%A7%D9%86%DB%8C-%D8%B1%D8%A7",
-      "timestamp": 1791339538587
-    },
     {
       "title": "✴️ استیضاح وزیر تعاون به تعویق افتاد",
       "source_link": "https://www.qudsonline.ir/news/1169181/",
@@ -2273,6 +2258,16 @@
       "title": "✴️ دیدار کمیسیون حمایت از تولید با افغانستان",
       "source_link": "https://icana.ir/news/425670/",
       "timestamp": 1791340607541
+    },
+    {
+      "title": "✴️ پرتاب ۳ ماهواره تا شب عید",
+      "source_link": "https://www.khabaronline.ir/news/2284581/%D9%88%D8%B2%DB%8C%D8%B1-%D8%A7%D8%B1%D8%AA%D8%A8%D8%A7%D8%B7%D8%A7%D8%AA-%D8%AA%D8%A7-%D8%B4%D8%A8-%D8%B9%DB%8C%D8%AF-%DB%B3-%D9%85%D8%A7%D9%87%D9%88%D8%A7%D8%B1%D9%87-%D8%A7%D8%B2-%D9%85%D9%86%D8%B8%D9%88%D9%85%D9%87-%D8%B4%D9%87%DB%8C%D8%AF-%D8%B3%D9%84%DB%8C%D9%85%D8%A7%D9%86%DB%8C-%D8%B1%D8%A7",
+      "timestamp": 1791342255915
+    },
+    {
+      "title": "✴️ استیضاح عراقچی در سامانه ثبت شد",
+      "source_link": "https://www.qudsonline.ir/news/1169181/%D9%85%DB%8C%D8%AF%D8%B1%DB%8C-%D9%86%D8%B1%D9%81%D8%AA%D9%87-%D8%A8%D8%B1%DA%AF%D8%B4%D8%AA-%D8%A7%D8%B3%D8%AA%DB%8C%D8%B6%D8%A7%D8%AD-%D8%B9%D8%B1%D8%A7%D9%82%DA%86%DB%8C-%DA%A9%D9%84%DB%8C%D8%AF-%D8%AE%D9%88%D8%B1%D8%AF-%D8%A7%D8%AF%D8%A7%D9%85%D9%87-%DB%8C%D9%82%D9%87-%DA%AF%DB%8C%D8%B1%DB%8C-%D9%87%D8%A7%DB%8C",
+      "timestamp": 1791342391694
     }
   ],
   "LAST_PROCESSED_SNIPPET": "«میدری» نرفته برگشت، استیضاح «عراقچی» کلید خورد/ ا",
