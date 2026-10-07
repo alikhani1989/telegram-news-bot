@@ -2279,12 +2279,12 @@
   "LAST_REPORT_TIME": 1791334132561,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791331330124,
+  "APIFY_LAST_FETCH": 1791335812157,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 21
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-07T00:02:10.124Z",
+    "at": "2026-10-07T01:16:52.157Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
