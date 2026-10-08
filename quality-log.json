@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-07T00:33:36.526Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ عشایر ظرفیت تولید قدرت ملی‌اند",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-07T00:48:42.654Z",
     "model": "NaraRouter",
     "items": [
@@ -1018,5 +1006,24 @@
       }
     ],
     "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-08T00:48:39.171Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ تکذیب محکومیت نماینده پیشین مجلس",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تکذیب کذب خبر محکومیت در مجلس یازدهم",
+        "score": 95,
+        "issues": [
+          "حوزه انتخابیه آورده شده"
+        ]
+      }
+    ],
+    "avgScore": 98
   }
 ]
