@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-07T10:33:29.781Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ دیدار رئیس مجلس با فرمانده انتظامی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-07T10:48:56.547Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1069,5 +1057,24 @@
       }
     ],
     "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-08T16:47:58.581Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ خارگ جزیره‌ای زنده در دل محاصره",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تعهد دولت به پرداخت فوقالعاده خاص کارکنان قانون است",
+        "score": 90,
+        "issues": [
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 95
   }
 ]
