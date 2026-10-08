@@ -2251,11 +2251,6 @@
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ دیدار کمیسیون امنیت ملی با امام جمعه",
-      "source_link": "https://snn.ir/fa/news/1467339/%D8%AF%DB%8C%D8%AF%D8%A7%D8%B1-%D8%A7%D8%B9%D8%B6%D8%A7%DB%8C-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D9%85%D9%84%DB%8C-%D9%85%D8%AC%D9%84%D8%B3-%D8%A8%D8%A7-%D8%A7%D9%85%D8%A7%D9%85-%D8%AC%D9%85%D8%B9%D9%87-%D8%A7%D9%87%D9%88%D8%A7%D8%B2",
-      "timestamp": 1791462792645
-    },
-    {
       "title": "✴️ حضور رئیس مجلس در مراسم ترحیم والده",
       "source_link": "https://www.mashreghnews.ir/news/1844425/%D8%AD%D8%B6%D9%88%D8%B1-%D9%82%D8%A7%D9%84%DB%8C%D8%A8%D8%A7%D9%81-%D8%AF%D8%B1-%D9%85%D8%B1%D8%A7%D8%B3%D9%85-%D8%AA%D8%B1%D8%AD%DB%8C%D9%85-%D9%88%D8%A7%D9%84%D8%AF%D9%87-%D8%B1%D8%A6%DB%8C%D8%B3-%D8%B3%D8%A7%D8%B2%D9%85%D8%A7%D9%86-%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-%D9%88-%D8%A8%D9%88%D8%AF%D8%AC%D9%87",
       "timestamp": 1791462929168
@@ -2275,13 +2270,13 @@
   "LAST_REPORT_TIME": 1791459202208,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791460952126,
+  "APIFY_LAST_FETCH": 1791464614550,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 27,
     "تیتر کلی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-08T12:02:32.125Z",
+    "at": "2026-10-08T13:03:34.550Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
