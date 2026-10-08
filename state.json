@@ -2277,13 +2277,13 @@
   "LAST_REPORT_TIME": 1791425022473,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791423139037,
+  "APIFY_LAST_FETCH": 1791427611508,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 25,
     "تیتر کلی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-08T01:32:19.037Z",
+    "at": "2026-10-08T02:46:51.508Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
@@ -2292,6 +2292,6 @@
     "error": "Apify: Monthly usage hard limit exceeded"
   },
   "TWEET_ALERT_ACTIVE": true,
-  "TWEET_ALERT_AT": 1791402522085,
+  "TWEET_ALERT_AT": 1791427611508,
   "TWEET_STATUS_DAY": "2026-10-08"
 }
