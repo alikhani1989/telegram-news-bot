@@ -2267,13 +2267,13 @@
   "LAST_REPORT_TIME": 1791420525740,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791419529096,
+  "APIFY_LAST_FETCH": 1791423139037,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 24,
     "تیتر کلی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-08T00:32:09.096Z",
+    "at": "2026-10-08T01:32:19.037Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
