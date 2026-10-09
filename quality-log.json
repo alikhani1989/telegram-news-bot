@@ -1,24 +1,5 @@
 [
   {
-    "timestamp": "2026-10-08T00:48:39.171Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ تکذیب محکومیت نماینده پیشین مجلس",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ تکذیب کذب خبر محکومیت در مجلس یازدهم",
-        "score": 95,
-        "issues": [
-          "حوزه انتخابیه آورده شده"
-        ]
-      }
-    ],
-    "avgScore": 98
-  },
-  {
     "timestamp": "2026-10-08T01:18:05.664Z",
     "model": "NaraRouter",
     "items": [
@@ -1042,5 +1023,17 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-09T15:17:47.933Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ حمایت کشاورزان در کمیسیون اجتماعی مجلس",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
