@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-08T00:03:38.486Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ ادعای هدیه‌شدن تراکتور به زنوزی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-08T00:48:39.171Z",
     "model": "NaraRouter",
     "items": [
@@ -1035,5 +1023,24 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-10-09T13:18:05.577Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تحویل لایحه بودجه ۱۴۰۶ تا اول دی",
+        "score": 85,
+        "issues": [
+          "نام و سمّت شخص در خط اول متن پیدا نشد"
+        ]
+      },
+      {
+        "title": "✴️ افزایش حقوق کارمندان به صورت پلکانی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 93
   }
 ]
