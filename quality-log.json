@@ -1,27 +1,5 @@
 [
   {
-    "timestamp": "2026-10-07T17:57:56.412Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ فروش نفت به تراستی‌ها ادامه دارد",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ ایمان و توکل، راز شکست‌ناپذیری ایران",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ نوباوه وطن تکذیب اتهام نشر اکاذیب",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-07T18:19:20.148Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1060,5 +1038,17 @@
       }
     ],
     "avgScore": 85
+  },
+  {
+    "timestamp": "2026-10-09T01:47:43.954Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ تهدید با درخواست ترک فعل از دولت",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
