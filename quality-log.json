@@ -1,29 +1,5 @@
 [
   {
-    "timestamp": "2026-10-07T23:03:35.210Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ نظارت دقیق بر اقتصاد اولویت مجلس",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ شب‌های اقتدار و دفاع میهن در سنندج",
-        "score": 95,
-        "issues": [
-          "حوزه انتخابیه آورده شده"
-        ]
-      },
-      {
-        "title": "✴️ رد اتهام نشر اکاذیب توسط نماینده",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 98
-  },
-  {
     "timestamp": "2026-10-07T23:48:09.233Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1049,5 +1025,17 @@
       }
     ],
     "avgScore": 92
+  },
+  {
+    "timestamp": "2026-10-09T11:17:42.456Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تخصیص ۱۰ هکتار چابهار بدون واگذاری",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
