@@ -2305,13 +2305,13 @@
   "LAST_REPORT_TIME": 1791602321285,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791600406576,
+  "APIFY_LAST_FETCH": 1791604036440,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 28,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-10T02:46:46.576Z",
+    "at": "2026-10-10T03:47:16.440Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
