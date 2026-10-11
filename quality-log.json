@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-09T01:47:43.954Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ تهدید با درخواست ترک فعل از دولت",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-09T02:03:30.139Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1132,5 +1120,22 @@
       }
     ],
     "avgScore": 85
+  },
+  {
+    "timestamp": "2026-10-11T02:18:22.367Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ نماینده کنگره آمریکا: برجام تنها پایان جنگ است",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ نقد دموکرات‌های آمریکا به افزایش قیمت بنزین",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
