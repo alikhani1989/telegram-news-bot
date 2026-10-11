@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-09T01:18:03.366Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ خسارات حمله ایران در ریاض گسترده است",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-09T01:32:34.483Z",
     "model": "NaraRouter",
     "items": [
@@ -1127,5 +1115,22 @@
       }
     ],
     "avgScore": 85
+  },
+  {
+    "timestamp": "2026-10-11T01:10:11.922Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ نماینده آمریکایی: برجام تنها پایان منطقی جنگ است",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ منتقدین دموکرات ترامپ بر افزایش قیمت بنزین",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
