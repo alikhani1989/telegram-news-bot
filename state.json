@@ -2297,14 +2297,14 @@
   "LAST_PROCESSED_SNIPPET": "«نوستراداموس» آمریکا از شکست و استیضاح ترامپ در سن",
   "LAST_REPORT_TIME": 1791828220339,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 250,
-  "APIFY_LAST_FETCH": 1791828149078,
+  "APIFY_ITEMS": 260,
+  "APIFY_LAST_FETCH": 1791832636185,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 34,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T18:02:29.078Z",
+    "at": "2026-10-12T19:17:16.185Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
