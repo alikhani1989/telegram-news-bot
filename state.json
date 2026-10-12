@@ -2312,22 +2312,62 @@
   "LAST_PROCESSED_SNIPPET": "عزیزی: پیوند مردم، عشایر و نیروهای مسلح ضامن امنیت",
   "LAST_REPORT_TIME": 1791753476167,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791763341691,
+  "APIFY_ITEMS": 110,
+  "APIFY_LAST_FETCH": 1791767814066,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 32,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T00:02:21.691Z",
-    "fetched": 0,
+    "at": "2026-10-12T01:16:54.067Z",
+    "fetched": 10,
     "fresh": 0,
-    "demo": false,
-    "rawSample": null,
-    "rejects": {},
-    "error": "Apify: Maximum cost per run must be greater than zero"
+    "rejects": {
+      "بدون متن": 10
+    },
+    "newest": [
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      }
+    ],
+    "rawSample": {
+      "keys": [
+        "noResults"
+      ],
+      "first": "{\"noResults\":true}"
+    },
+    "allBlank": true,
+    "maxItemsRequested": 12,
+    "useCard": true
   },
-  "TWEET_ALERT_ACTIVE": true,
-  "TWEET_ALERT_AT": 1791748011369,
+  "TWEET_ALERT_ACTIVE": false,
+  "TWEET_ALERT_AT": 0,
   "TWEET_STATUS_DAY": "2026-10-12"
 }
