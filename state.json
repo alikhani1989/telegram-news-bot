@@ -2304,14 +2304,14 @@
   "LAST_PROCESSED_SNIPPET": "عزیزی: کشورهای حامی گروهک‌ها منتظر برخورد ایران با",
   "LAST_REPORT_TIME": 1791805822871,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 210,
-  "APIFY_LAST_FETCH": 1791810164565,
+  "APIFY_ITEMS": 220,
+  "APIFY_LAST_FETCH": 1791814645005,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 33,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T13:02:44.566Z",
+    "at": "2026-10-12T14:17:25.005Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
