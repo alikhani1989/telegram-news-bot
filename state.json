@@ -2304,14 +2304,14 @@
   "LAST_PROCESSED_SNIPPET": "نماینده مردم مشهد در مجلس: اعتماد به مردم آنها را ",
   "LAST_REPORT_TIME": 1791805822871,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 200,
-  "APIFY_LAST_FETCH": 1791806547417,
+  "APIFY_ITEMS": 210,
+  "APIFY_LAST_FETCH": 1791810164565,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 33,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T12:02:27.418Z",
+    "at": "2026-10-12T13:02:44.566Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
