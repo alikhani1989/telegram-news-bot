@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-11",
+  "TWEET_LAST_DAY": "2026-10-12",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2313,21 +2313,21 @@
   "LAST_REPORT_TIME": 1791753476167,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 100,
-  "APIFY_LAST_FETCH": 1791759724269,
+  "APIFY_LAST_FETCH": 1791763341691,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 32,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-11T23:02:04.269Z",
+    "at": "2026-10-12T00:02:21.691Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
     "rawSample": null,
     "rejects": {},
-    "error": "Apify: Monthly usage hard limit exceeded"
+    "error": "Apify: Maximum cost per run must be greater than zero"
   },
   "TWEET_ALERT_ACTIVE": true,
   "TWEET_ALERT_AT": 1791748011369,
-  "TWEET_STATUS_DAY": "2026-10-11"
+  "TWEET_STATUS_DAY": "2026-10-12"
 }
