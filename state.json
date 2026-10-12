@@ -2297,14 +2297,14 @@
   "LAST_PROCESSED_SNIPPET": "آیت‌الله زین‌العابدین قربانی لاهیجی درگذشت \n #بسیج",
   "LAST_REPORT_TIME": 1791784073829,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 150,
-  "APIFY_LAST_FETCH": 1791784950763,
+  "APIFY_ITEMS": 160,
+  "APIFY_LAST_FETCH": 1791789429363,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 33,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T06:02:30.764Z",
+    "at": "2026-10-12T07:17:09.363Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
