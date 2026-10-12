@@ -2297,14 +2297,14 @@
   "LAST_PROCESSED_SNIPPET": "۵۹ درصد کاربران کشور، سرعت اینترنت را نامطلوب می‌د",
   "LAST_REPORT_TIME": 1791795823217,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 180,
-  "APIFY_LAST_FETCH": 1791798415625,
+  "APIFY_ITEMS": 190,
+  "APIFY_LAST_FETCH": 1791802932937,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 33,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T09:46:55.625Z",
+    "at": "2026-10-12T11:02:12.937Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
