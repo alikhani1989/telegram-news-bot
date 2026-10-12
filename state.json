@@ -2292,14 +2292,14 @@
   "LAST_PROCESSED_SNIPPET": "اعلام زمان رای اعتماد به وزیر پیشنهادی دفاع / بررس",
   "LAST_REPORT_TIME": 1791769716928,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 130,
-  "APIFY_LAST_FETCH": 1791776853121,
+  "APIFY_ITEMS": 140,
+  "APIFY_LAST_FETCH": 1791781334010,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 33,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T03:47:33.121Z",
+    "at": "2026-10-12T05:02:14.010Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
