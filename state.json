@@ -2304,14 +2304,14 @@
   "LAST_PROCESSED_SNIPPET": "پیش بینی نماینده مجلس درباره جنگ ایران و آمریکا/ ب",
   "LAST_REPORT_TIME": 1791805822871,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 190,
-  "APIFY_LAST_FETCH": 1791802932937,
+  "APIFY_ITEMS": 200,
+  "APIFY_LAST_FETCH": 1791806547417,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 33,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T11:02:12.937Z",
+    "at": "2026-10-12T12:02:27.418Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
