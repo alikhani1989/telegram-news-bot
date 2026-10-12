@@ -2299,14 +2299,14 @@
   "LAST_PROCESSED_SNIPPET": "طاهری: دشمن دنبال ایجاد فاصله بین مردم و ارزش‌های ",
   "LAST_REPORT_TIME": 1791795823217,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 170,
-  "APIFY_LAST_FETCH": 1791793931522,
+  "APIFY_ITEMS": 180,
+  "APIFY_LAST_FETCH": 1791798415625,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 33,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T08:32:11.522Z",
+    "at": "2026-10-12T09:46:55.625Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
