@@ -2307,14 +2307,14 @@
   "LAST_PROCESSED_SNIPPET": "ابهام در مسیر فروش خودروهای خارجی \n #روزنامه_دنیای",
   "LAST_REPORT_TIME": 1791841705397,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 280,
-  "APIFY_LAST_FETCH": 1791841643742,
+  "APIFY_ITEMS": 290,
+  "APIFY_LAST_FETCH": 1791846156107,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 35,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T21:47:23.743Z",
+    "at": "2026-10-12T23:02:36.108Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
