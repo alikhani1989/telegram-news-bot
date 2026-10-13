@@ -2313,14 +2313,14 @@
   "LAST_PROCESSED_SNIPPET": "نگاهداری: نباید ترور اعتبار شخصیت‌ها را کم اهمیت‌ت",
   "LAST_REPORT_TIME": 1791895655864,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 410,
-  "APIFY_LAST_FETCH": 1791897425864,
+  "APIFY_ITEMS": 420,
+  "APIFY_LAST_FETCH": 1791901934160,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 38,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T13:17:05.864Z",
+    "at": "2026-10-13T14:32:14.161Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
