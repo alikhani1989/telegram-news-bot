@@ -2306,14 +2306,14 @@
   "LAST_PROCESSED_SNIPPET": "تأمین سوخت زمستانی در شمال کشور با پیش‌بینی سناریو",
   "LAST_REPORT_TIME": 1791886693278,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 380,
-  "APIFY_LAST_FETCH": 1791884837545,
+  "APIFY_ITEMS": 390,
+  "APIFY_LAST_FETCH": 1791889349856,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 38,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T09:47:17.545Z",
+    "at": "2026-10-13T11:02:29.856Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
