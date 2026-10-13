@@ -2331,14 +2331,14 @@
   "LAST_PROCESSED_SNIPPET": "وقتی مشکل ارز داریم واردات گوشی‌های لوکس چه توجیهی",
   "LAST_REPORT_TIME": 1791848921420,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 290,
-  "APIFY_LAST_FETCH": 1791846156107,
+  "APIFY_ITEMS": 300,
+  "APIFY_LAST_FETCH": 1791850608109,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 35,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-12T23:02:36.108Z",
+    "at": "2026-10-13T00:16:48.109Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2388,5 +2388,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-12"
+  "TWEET_STATUS_DAY": "2026-10-13"
 }
