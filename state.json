@@ -2301,14 +2301,14 @@
   "LAST_PROCESSED_SNIPPET": "تصاویر/ درس اخلاق مدرسه علمیه الغدیر نراق \n #حوزه_",
   "LAST_REPORT_TIME": 1791886693278,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 390,
-  "APIFY_LAST_FETCH": 1791889349856,
+  "APIFY_ITEMS": 400,
+  "APIFY_LAST_FETCH": 1791892953496,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 38,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T11:02:29.856Z",
+    "at": "2026-10-13T12:02:33.497Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
