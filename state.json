@@ -2319,14 +2319,14 @@
   "LAST_PROCESSED_SNIPPET": "تصاویر/ حضور امام جمعه کاشان در تجمعات شبانه مردمی",
   "LAST_REPORT_TIME": 1791863268217,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 340,
-  "APIFY_LAST_FETCH": 1791866841727,
+  "APIFY_ITEMS": 350,
+  "APIFY_LAST_FETCH": 1791871347643,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 36,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T04:47:21.727Z",
+    "at": "2026-10-13T06:02:27.644Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
