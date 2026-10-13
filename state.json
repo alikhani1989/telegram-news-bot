@@ -2306,14 +2306,14 @@
   "LAST_PROCESSED_SNIPPET": "پژمانفر: دهک‌های یک تا سه برای تأمین مسکن، با اختص",
   "LAST_REPORT_TIME": 1791917407819,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 460,
-  "APIFY_LAST_FETCH": 1791919030890,
+  "APIFY_ITEMS": 470,
+  "APIFY_LAST_FETCH": 1791922641177,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 38,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T19:17:10.890Z",
+    "at": "2026-10-13T20:17:21.178Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
