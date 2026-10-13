@@ -2296,14 +2296,14 @@
   "LAST_PROCESSED_SNIPPET": "گزارش عملکرد سال دوم قانون برنامه هفتم به مجلس رفت",
   "LAST_REPORT_TIME": 1791875909683,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 370,
-  "APIFY_LAST_FETCH": 1791880340964,
+  "APIFY_ITEMS": 380,
+  "APIFY_LAST_FETCH": 1791884837545,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 37,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T08:32:20.964Z",
+    "at": "2026-10-13T09:47:17.545Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
