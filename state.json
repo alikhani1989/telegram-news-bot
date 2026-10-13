@@ -2306,14 +2306,14 @@
   "LAST_PROCESSED_SNIPPET": "تأکید نایب‌رئیس مجلس بر نقش استانداردسازی در رشد ا",
   "LAST_REPORT_TIME": 1791875909683,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 360,
-  "APIFY_LAST_FETCH": 1791875838321,
+  "APIFY_ITEMS": 370,
+  "APIFY_LAST_FETCH": 1791880340964,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 36,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T07:17:18.321Z",
+    "at": "2026-10-13T08:32:20.964Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
