@@ -2315,14 +2315,14 @@
   "LAST_PROCESSED_SNIPPET": "معیشت مردم باید آخرین نقطه آسیب‌پذیر در جنگ اقتصاد",
   "LAST_REPORT_TIME": 1791903884570,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 420,
-  "APIFY_LAST_FETCH": 1791901934160,
+  "APIFY_ITEMS": 430,
+  "APIFY_LAST_FETCH": 1791906422698,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 38,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T14:32:14.161Z",
+    "at": "2026-10-13T15:47:02.699Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
