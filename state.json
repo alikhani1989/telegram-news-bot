@@ -2298,14 +2298,14 @@
   "LAST_PROCESSED_SNIPPET": "رئیس سازمان زندان‌ها: تمسک به آموزه‌های قرآنی، زیر",
   "LAST_REPORT_TIME": 1791927960793,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 480,
-  "APIFY_LAST_FETCH": 1791927130916,
+  "APIFY_ITEMS": 490,
+  "APIFY_LAST_FETCH": 1791931623149,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 39,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T21:32:10.916Z",
+    "at": "2026-10-13T22:47:03.150Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
