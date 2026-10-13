@@ -2318,14 +2318,14 @@
   "LAST_PROCESSED_SNIPPET": "سناریوی شش ماهه قالیباف برای اقتصاد \n #افکارنیوز",
   "LAST_REPORT_TIME": 1791895655864,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 400,
-  "APIFY_LAST_FETCH": 1791892953496,
+  "APIFY_ITEMS": 410,
+  "APIFY_LAST_FETCH": 1791897425864,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 38,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-13T12:02:33.497Z",
+    "at": "2026-10-13T13:17:05.864Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
