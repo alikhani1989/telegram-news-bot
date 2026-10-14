@@ -2307,15 +2307,15 @@
   "LAST_PROCESSED_SNIPPET": "از سخنرانی مظفرالدین‌شاه تا دیدار رضاشاه و آتاتورک",
   "LAST_REPORT_TIME": 1791966795122,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 580,
-  "APIFY_LAST_FETCH": 1791970316562,
+  "APIFY_ITEMS": 590,
+  "APIFY_LAST_FETCH": 1791974838036,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 40,
     "تیتر کلی": 3,
     "متن غیرفارسی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T09:31:56.562Z",
+    "at": "2026-10-14T10:47:18.036Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
