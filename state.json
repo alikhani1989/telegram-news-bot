@@ -2295,15 +2295,15 @@
   "LAST_PROCESSED_SNIPPET": "ورود مجلس به پرونده منابع صندوق بیماران خاص \n #مهر",
   "LAST_REPORT_TIME": 1791947923040,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 540,
-  "APIFY_LAST_FETCH": 1791953204322,
+  "APIFY_ITEMS": 550,
+  "APIFY_LAST_FETCH": 1791956820410,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 39,
     "تیتر کلی": 3,
     "متن غیرفارسی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T04:46:44.323Z",
+    "at": "2026-10-14T05:47:00.410Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
