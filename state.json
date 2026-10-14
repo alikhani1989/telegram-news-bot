@@ -2319,14 +2319,14 @@
   "LAST_PROCESSED_SNIPPET": "نبرد سخت ترامپ برای حفظ سنا \n #افکارنیوز",
   "LAST_REPORT_TIME": 1791936274363,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 500,
-  "APIFY_LAST_FETCH": 1791936150477,
+  "APIFY_ITEMS": 510,
+  "APIFY_LAST_FETCH": 1791940617416,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 39,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T00:02:30.477Z",
+    "at": "2026-10-14T01:16:57.416Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
