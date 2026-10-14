@@ -2305,14 +2305,14 @@
   "LAST_PROCESSED_SNIPPET": "تأمین ۲۲۰۰ میلیارد ریال اعتبار برای دانشگاه علوم پ",
   "LAST_REPORT_TIME": 1791947923040,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 530,
-  "APIFY_LAST_FETCH": 1791948730630,
+  "APIFY_ITEMS": 540,
+  "APIFY_LAST_FETCH": 1791953204322,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 39,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T03:32:10.631Z",
+    "at": "2026-10-14T04:46:44.323Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
