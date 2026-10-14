@@ -2312,15 +2312,15 @@
   "LAST_PROCESSED_SNIPPET": "محبی نجم‌آبادی: وزارت دفاع مرکز ثقل دفاع از حقیقت ",
   "LAST_REPORT_TIME": 1791980269721,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 610,
-  "APIFY_LAST_FETCH": 1791983830257,
+  "APIFY_ITEMS": 620,
+  "APIFY_LAST_FETCH": 1791988330286,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 40,
     "تیتر کلی": 3,
     "متن غیرفارسی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T13:17:10.257Z",
+    "at": "2026-10-14T14:32:10.287Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
