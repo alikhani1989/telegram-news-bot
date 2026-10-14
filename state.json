@@ -2297,15 +2297,15 @@
   "LAST_PROCESSED_SNIPPET": "سناتور مکزیکی: ایران در میدان جنگ در حال پیروزی اس",
   "LAST_REPORT_TIME": 1792011790213,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 670,
-  "APIFY_LAST_FETCH": 1792009925702,
+  "APIFY_ITEMS": 680,
+  "APIFY_LAST_FETCH": 1792013535358,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 42,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T20:32:05.702Z",
+    "at": "2026-10-14T21:32:15.358Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
