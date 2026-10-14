@@ -2306,15 +2306,15 @@
   "LAST_PROCESSED_SNIPPET": "پیشنهاد مجلس برای بیشتر شدن مدت زمان اعتبار کالابر",
   "LAST_REPORT_TIME": 1791959561878,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 550,
-  "APIFY_LAST_FETCH": 1791956820410,
+  "APIFY_ITEMS": 560,
+  "APIFY_LAST_FETCH": 1791961350316,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 39,
     "تیتر کلی": 3,
     "متن غیرفارسی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T05:47:00.410Z",
+    "at": "2026-10-14T07:02:30.316Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
