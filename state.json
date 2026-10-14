@@ -2306,14 +2306,14 @@
   "LAST_PROCESSED_SNIPPET": "رئیس کمیسیون اصل ۹۰ مجلس: دهک‌های یک تا سه برای تأ",
   "LAST_REPORT_TIME": 1791943423863,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 510,
-  "APIFY_LAST_FETCH": 1791940617416,
+  "APIFY_ITEMS": 520,
+  "APIFY_LAST_FETCH": 1791944229590,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 39,
     "تیتر کلی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T01:16:57.416Z",
+    "at": "2026-10-14T02:17:09.590Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
