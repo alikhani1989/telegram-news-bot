@@ -2304,15 +2304,15 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف حکم داد/ چه کسی به عنوان رئیس مرکز حراست م",
   "LAST_REPORT_TIME": 1791966795122,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 570,
-  "APIFY_LAST_FETCH": 1791965826158,
+  "APIFY_ITEMS": 580,
+  "APIFY_LAST_FETCH": 1791970316562,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 40,
     "تیتر کلی": 3,
     "متن غیرفارسی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T08:17:06.158Z",
+    "at": "2026-10-14T09:31:56.562Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
