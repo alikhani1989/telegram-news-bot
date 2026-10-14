@@ -2297,15 +2297,15 @@
   "LAST_PROCESSED_SNIPPET": "جزئیات ۱۵۰دقیقه جلسه با عراقچی \n #افکارنیوز",
   "LAST_REPORT_TIME": 1791989298976,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 620,
-  "APIFY_LAST_FETCH": 1791988330286,
+  "APIFY_ITEMS": 630,
+  "APIFY_LAST_FETCH": 1791991951107,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 40,
     "تیتر کلی": 3,
     "متن غیرفارسی": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-14T14:32:10.287Z",
+    "at": "2026-10-14T15:32:31.108Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
