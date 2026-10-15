@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-14T06:32:37.349Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ نقدینگی متمرکز در کمیسیون اقتصادی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-14T06:47:45.439Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1130,6 +1118,23 @@
     "items": [
       {
         "title": "✴️ رد اتهام‌زنی انگلیس به سپاه",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-15T20:33:18.490Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ جلوگیری از مانع‌تراشی در استیضاح عراقچی",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ دفاع از عملکرد قالیباف در مجلس",
         "score": 100,
         "issues": []
       }
