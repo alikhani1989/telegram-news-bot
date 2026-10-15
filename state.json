@@ -2272,15 +2272,15 @@
   "LAST_PROCESSED_SNIPPET": "پیشنهاد بنزینی یک نماینده/ به هر ایرانی روزانه یک ",
   "LAST_REPORT_TIME": 1792068469991,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 810,
-  "APIFY_LAST_FETCH": 1792069331651,
+  "APIFY_ITEMS": 820,
+  "APIFY_LAST_FETCH": 1792072939064,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 42,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-15T13:02:11.651Z",
+    "at": "2026-10-15T14:02:19.065Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
