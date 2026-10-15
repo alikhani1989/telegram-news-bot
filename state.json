@@ -17,30 +17,6 @@
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
-      "id": "1791805817205_18wvu",
-      "timestamp": "2026-10-12T11:50:17.205Z",
-      "title": "✴️ معرفی نامزد وزارت دفاع",
-      "body": "🔸 مهرداد اخلاقی نامزد وزارت دفاع و پشتیبانی نیروهای مسلح گفت در صورت تأیید نمایندگان مجلس مسئولیت را بر عهده می‌گیرد و تمام توان خود را برای انجام مأموریت به کار خواهد گرفت.\n\n🔸 او همچنین گفت برنامه پیشنهادی شامل ۱۶ مورد است که بازسازی زیرساخت‌های دفاعی، ارتقای فناوری‌های نوین و بهبود معیشت نیروهای مسلح را در بر می‌گیرد.",
-      "source_link": "https://defapress.ir/fa/news/869477/%D8%A7%D8%AE%D9%84%D8%A7%D9%82%DB%8C-%D8%AA%D8%AD%D8%B1%DB%8C%D9%85-%D9%87%D8%A7-%D9%85%D8%A7%D9%86%D8%B9-%D8%AA%D9%88%D9%84%DB%8C%D8%AF-%D9%88-%D9%BE%D8%B4%D8%AA%DB%8C%D8%A8%D8%A7%D9%86%DB%8C-%D8%AF%D9%81%D8%A7%D8%B9%DB%8C-%D9%86%D8%B4%D8%AF%D9%87-%D8%A7%D8%B3%D8%AA",
-      "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 90,
-      "qualityIssues": [
-        "⚠️ نام و سمّت شخص در خط اول متن پیدا نشد"
-      ],
-      "reviewed": true
-    },
-    {
-      "id": "1791805819307_61qtm",
-      "timestamp": "2026-10-12T11:50:19.307Z",
-      "title": "✴️ جنگ پیش رو برای مجلس",
-      "body": "🔸 احمد نادری عضو هیاترییسه مجلس گفت جنگ پیش روی ماست و ما به سمت آن حرکت می‌کنیم و نبرد به زودی به پایان خواهد رسید.\n\n🔸 او همچنین گفت ما طرف مقابل را رها نخواهیم کرد و آن‌ها نیز به زودی رها نخواهند شد.",
-      "source_link": "https://www.khabaronline.ir/news/2287386/%D9%BE%DB%8C%D8%B4-%D8%A8%DB%8C%D9%86%DB%8C-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D9%85%D8%AC%D9%84%D8%B3-%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D8%AC%D9%86%DA%AF-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D9%88-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A8%D9%87-%D8%B3%D9%85%D8%AA-%D8%AC%D9%86%DA%AF-%D8%AD%D8%B1%DA%A9%D8%AA",
-      "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 100,
-      "qualityIssues": [],
-      "reviewed": true
-    },
-    {
       "id": "1791805821364_s6cj3",
       "timestamp": "2026-10-12T11:50:21.364Z",
       "title": "✴️ کمیسیون امنیت ملی بر ایستادگی",
@@ -2116,9 +2092,9 @@
       "body": "🔸 محمدباقر قالیباف رئیس مجلس گفت تمام ضربالاجلهایی که آمریکا برای فروپاشی اقتصادی ایران تعیین کرده بود گذشت و خبری نشد.",
       "source_link": "https://icana.ir/news/426081/%D8%A8%D9%87-%D9%88%D8%B2%DB%8C%D8%B1-%D8%AE%D8%B2%D8%A7%D9%86%D9%87-%D8%AF%D8%A7%D8%B1%DB%8C-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%86%D9%88%D8%A8%D9%84-%D9%81%DB%8C%D8%B2%DB%8C%DA%A9-%D8%A8%D8%AF%D9%87%DB%8C%D8%AF-%D8%A7%D9%88-%D8%A8%D8%A7-%D9%BE%DB%8C%D8%B4-%D8%A8%DB%8C%D9%86%DB%8C-%D9%87%D8%A7%DB%8C%D8%B4",
       "model": "NaraRouter",
-      "qualityScore": 0,
+      "qualityScore": 100,
       "qualityIssues": [],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "1792011786894_y822m",
@@ -2253,11 +2229,33 @@
       "qualityScore": 0,
       "qualityIssues": [],
       "reviewed": false
+    },
+    {
+      "id": "1792033458268_2qmqt",
+      "timestamp": "2026-10-15T03:04:18.268Z",
+      "title": "✴️ رد ادعای خروج مقیم ایران",
+      "body": "🔸 زینب ابوطالبی گفت ادعای خروج او از کشور نادرست است و او در ایران حضور دارد.\n\n🔸 او اعلام کرد قصد دارد از مسیر قانونی علیه شایعه‌سازی اقدام کند.",
+      "source_link": "https://www.khabaronline.ir/news/2288648/%DA%86%D8%B1%D8%A7-%D9%85%D8%AC%D8%B1%DB%8C-%D8%B3%D8%A7%D8%A8%D9%82-%D8%AA%D9%84%D9%88%DB%8C%D8%B2%DB%8C%D9%88%D9%86-%D8%A8%D8%A7-%D8%A7%D9%86%D8%AA%D8%B4%D8%A7%D8%B1-%DB%8C%DA%A9-%D9%88%DB%8C%D8%AF%D8%A6%D9%88-%D9%86%D8%A7%D8%AF%D8%B1%D8%B3%D8%AA-%D8%A8%D9%88%D8%AF%D9%86-%D8%A7%D8%B9%D8%A7%DB%8C-%D8%A8%D8%A7%D9%87%D9%86%D8%B1",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 90,
+      "qualityIssues": [
+        "⚠️ نام و سمّت شخص در خط اول متن پیدا نشد"
+      ],
+      "reviewed": true
+    },
+    {
+      "id": "1792033460450_12gun",
+      "timestamp": "2026-10-15T03:04:20.450Z",
+      "title": "✴️ گذشت ضرب‌الاجل‌های فروپاشی اقتصادی",
+      "body": "🔸 دکتر محمدباقر قالیباف رئیس مجلس گفت تمام ضرب‌الاجل‌های تعیین‌شده برای فروپاشی اقتصادی گذشت و خبری نشد.\n\n🔸 او همچنین گفت که ادعای وزیر خزانه‌داری آمریکا درباره زمان‌سنجی بی‌معنی است.",
+      "source_link": "https://icana.ir/news/426081/%D8%A8%D9%87-%D9%88%D8%B2%DB%8C%D8%B1-%D8%AE%D8%B2%D8%A7%D9%86%D9%87-%D8%AF%D8%A7%D8%B1%DB%8C-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%86%D9%88%D8%A8%D9%84-%D9%81%DB%8C%D8%B2%DB%8C%DA%A9-%D8%A8%D8%AF%D9%87%DB%8C%D8%AF-%D8%A7%D9%88-%D8%A8%D8%A7-%D9%BE%DB%8C%D8%B4-%D8%A8%DB%8C%D9%86%DB%8C-%D9%87%D8%A7%DB%8C%D8%B4",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
     }
   ],
   "RECENT_TITLES": [
-    "تنبیه آمریکا و پذیرش خواسته‌های ملت ایران ضروری است",
-    "هم میجنگیم هم مذاکره برای بازدارندگی",
     "گذشت ضربالاجل فروپاشی اقتصادی ایران",
     "هم میجنگیم و هم مذاکره میکنیم",
     "گذشت ضربالاجل فروپاشی اقتصادی ایران",
@@ -2270,52 +2268,24 @@
     "آمریکا وعده‌اش را نمی‌گذارد",
     "هفت شرط ایران برای مذاکرات",
     "ضرب‌الاجل‌های فروپاشی اقتصادی گذشت",
-    "حضور مردم معادلات دشمن را تغییر می‌دهد"
+    "حضور مردم معادلات دشمن را تغییر می‌دهد",
+    "رد ادعای خروج مقیم ایران",
+    "گذشت ضرب‌الاجل‌های فروپاشی اقتصادی"
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ قالیباف: هم میجنگیم هم مذاکره تا بازدارندگی پایدار",
-      "source_link": "https://icana.ir/news/426083/%D9%87%D9%85-%D9%85%DB%8C-%D8%AC%D9%86%DA%AF%DB%8C%D9%85-%D9%88-%D9%87%D9%85-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D9%87-%D9%85%DB%8C-%DA%A9%D9%86%DB%8C%D9%85-%D8%AA%D8%A7-%D8%A8%D8%A7%D8%B2%D8%AF%D8%A7%D8%B1%D9%86%D8%AF%DA%AF%DB%8C-%D9%BE%D8%A7%DB%8C%D8%AF%D8%A7%D8%B1-%D8%B1%D8%A7-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF",
-      "timestamp": 1792021683217
+      "title": "✴️ رد ادعای خروج مقیم ایران",
+      "source_link": "https://www.khabaronline.ir/news/2288648/%DA%86%D8%B1%D8%A7-%D9%85%D8%AC%D8%B1%DB%8C-%D8%B3%D8%A7%D8%A8%D9%82-%D8%AA%D9%84%D9%88%DB%8C%D8%B2%DB%8C%D9%88%D9%86-%D8%A8%D8%A7-%D8%A7%D9%86%D8%AA%D8%B4%D8%A7%D8%B1-%DB%8C%DA%A9-%D9%88%DB%8C%D8%AF%D8%A6%D9%88-%D9%86%D8%A7%D8%AF%D8%B1%D8%B3%D8%AA-%D8%A8%D9%88%D8%AF%D9%86-%D8%A7%D8%B9%D8%A7%DB%8C-%D8%A8%D8%A7%D9%87%D9%86%D8%B1",
+      "timestamp": 1792033458267
     },
     {
-      "title": "✴️ ثبت سفارش ۹۶ میلیون دلار تلفن خارج از ضوابط",
-      "source_link": "https://www.rokna.net/fa/tiny/news-1258123",
-      "timestamp": 1792021685872
-    },
-    {
-      "title": "✴️ پیشنهاد همکاری حوزه و دولت برای حکمرانی اسلامی",
-      "source_link": "https://www.mehrnews.com/news/6978436/%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D8%AF-%D8%A2%DB%8C%D8%AA-%D8%A7%D9%84%D9%84%D9%87-%D8%B1%D8%AF%D8%A7%DB%8C%DB%8C-%D8%A7%D8%B2-%D8%B3%D9%BE%D8%B1%D8%AF%D9%86-%D9%85%D8%B3%D8%A6%D9%88%D9%84%DB%8C%D8%AA-%D9%87%D8%A7-%D8%A8%D9%87-%D8%A7%D9%81%D8%B1%D8%A7%D8%AF-%D8%BA%DB%8C%D8%B1%D9%85%D8%AA%D8%AE%D8%B5%D8%B5",
-      "timestamp": 1792021688491
-    },
-    {
-      "title": "✴️ نوبت‌بندی ثبت‌نام طرح افزایش کالابرگ",
-      "source_link": "https://www.entekhab.ir/fa/news/943572/%D8%AA%D8%B5%D8%A7%D9%88%DB%8C%D8%B1-%D8%AA%D8%B4%DB%8C%DB%8C%D8%B9-%D9%BE%DB%8C%DA%A9%D8%B1-%D8%A7%D9%85%D8%A7%D9%85-%D8%AC%D9%85%D8%B9%D9%87-%D9%81%D9%82%DB%8C%D8%AF-%D8%B1%D8%B4%D8%AA",
-      "timestamp": 1792022649653
-    },
-    {
-      "title": "✴️ آمریکا وعده‌اش را نمی‌گذارد",
-      "source_link": "https://www.mehrnews.com/news/6978451/%D8%AD%D9%81%D8%B8-%D9%88%D8%AD%D8%AF%D8%AA-%D9%88-%D8%AA%D9%88%D8%AC%D9%87-%D8%A8%D9%87-%D9%85%D8%B7%D8%A7%D9%84%D8%A8%D8%A7%D8%AA-%D9%85%D8%B1%D8%AF%D9%85-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%AF%D8%B1-%D8%AF%D8%B3%D8%AA%D9%88%D8%B1-%DA%A9%D8%A7%D8%B1-%D9%82%D8%B1%D8%A7%D8%B1-%DA%AF%DB%8C%D8%B1%D8%AF",
-      "timestamp": 1792022651135
-    },
-    {
-      "title": "✴️ هفت شرط ایران برای مذاکرات",
-      "source_link": "https://www.mehrnews.com/news/6978451/%D8%AD%D9%81%D8%B8-%D9%88%D8%AD%D8%AF%D8%AA-%D9%88-%D8%AA%D9%88%D8%AC%D9%87-%D8%A8%D9%87-%D9%85%D8%B7%D8%A7%D9%84%D8%A8%D8%A7%D8%AA-%D9%85%D8%B1%D8%AF%D9%85-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%AF%D8%B1-%D8%AF%D8%B3%D8%AA%D9%88%D8%B1-%DA%A9%D8%A7%D8%B1-%D9%82%D8%B1%D8%A7%D8%B1-%DA%AF%DB%8C%D8%B1%D8%AF",
-      "timestamp": 1792022651711
-    },
-    {
-      "title": "✴️ ضرب‌الاجل‌های فروپاشی اقتصادی گذشت",
+      "title": "✴️ گذشت ضرب‌الاجل‌های فروپاشی اقتصادی",
       "source_link": "https://icana.ir/news/426081/%D8%A8%D9%87-%D9%88%D8%B2%DB%8C%D8%B1-%D8%AE%D8%B2%D8%A7%D9%86%D9%87-%D8%AF%D8%A7%D8%B1%DB%8C-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%86%D9%88%D8%A8%D9%84-%D9%81%DB%8C%D8%B2%DB%8C%DA%A9-%D8%A8%D8%AF%D9%87%DB%8C%D8%AF-%D8%A7%D9%88-%D8%A8%D8%A7-%D9%BE%DB%8C%D8%B4-%D8%A8%DB%8C%D9%86%DB%8C-%D9%87%D8%A7%DB%8C%D8%B4",
-      "timestamp": 1792022653156
-    },
-    {
-      "title": "✴️ حضور مردم معادلات دشمن را تغییر می‌دهد",
-      "source_link": "https://www.mehrnews.com/news/6978466/%DA%AF%D9%88%D8%AF%D8%B1%D8%B2%DB%8C-%D8%AD%D8%B6%D9%88%D8%B1-%D9%BE%D8%B1%D8%B4%D9%88%D8%B1-%D9%85%D8%B1%D8%AF%D9%85-%D9%85%D8%B9%D8%A7%D8%AF%D9%84%D8%A7%D8%AA-%D9%BE%DB%8C%DA%86%DB%8C%D8%AF%D9%87-%D8%AF%D8%B4%D9%85%D9%86-%D8%B1%D8%A7-%D8%AF%D8%B1-%D9%87%D9%85-%D8%B4%DA%A9%D8%B3%D8%AA",
-      "timestamp": 1792023477681
+      "timestamp": 1792033460450
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "آمریکا تلفن همراه ایلهان عمر را ضبط کرد \n #مهر",
-  "LAST_REPORT_TIME": 1792021690080,
+  "LAST_PROCESSED_SNIPPET": "بیانیه شورای امنیت درب��ره دریای سرخ جانبدارانه و ",
+  "LAST_REPORT_TIME": 1792033462389,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 720,
   "APIFY_LAST_FETCH": 1792030607481,
