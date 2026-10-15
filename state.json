@@ -2281,15 +2281,15 @@
   "LAST_PROCESSED_SNIPPET": "نماینده مجلس: انگلیس به دلیل مشارکت در اقدامات ضدا",
   "LAST_REPORT_TIME": 1792083800256,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 860,
-  "APIFY_LAST_FETCH": 1792088243737,
+  "APIFY_ITEMS": 870,
+  "APIFY_LAST_FETCH": 1792092736246,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 42,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-15T18:17:23.737Z",
+    "at": "2026-10-15T19:32:16.246Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
