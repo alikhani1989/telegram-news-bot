@@ -2264,21 +2264,6 @@
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ رئیس مجلس به فیلمساز برنده",
-      "source_link": "https://www.qudsonline.ir/news/1170652/%D9%82%D8%A7%D9%84%DB%8C%D8%A8%D8%A7%D9%81-%D9%87%D9%86%D8%B1%D9%85%D9%86%D8%AF-%D8%A7%D8%B5%DB%8C%D9%84-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C-%D8%B2%D8%A8%D8%A7%D9%86-%DA%AF%D9%88%DB%8C%D8%A7%DB%8C-%D8%A2%D8%B1%D9%85%D8%A7%D9%86-%D9%87%D8%A7%DB%8C-%D9%85%D9%84%D8%AA-%D8%AE%D9%88%DB%8C%D8%B4-%D8%A7%D8%B3%D8%AA",
-      "timestamp": 1792132430681
-    },
-    {
-      "title": "✴️ نائب عمران دولت را به مخالفت قیر سرزنش",
-      "source_link": "https://icana.ir/news/426124/%D8%B1%D9%81%D8%B9-%D8%A7%D8%A8%D9%87%D8%A7%D9%85-%D9%81%D8%B1%D8%A2%DB%8C%D9%86%D8%AF-%D8%AA%D9%87%D8%A7%D8%AA%D8%B1-%D9%86%D9%81%D8%AA-%D9%88-%D8%AA%D8%AE%D8%B5%DB%8C%D8%B5-%D9%82%DB%8C%D8%B1-%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86-%D8%A8%D9%87-%D8%B9%D9%86%D9%88%D8%A7%D9%86-%D9%85%D9%88%D8%AA%D9%88%D8%B1",
-      "timestamp": 1792132432963
-    },
-    {
-      "title": "✴️ نماینده ادوار مجلس بر ثبات اقتصادی تأکید کرد",
-      "source_link": "https://icana.ir/news/426000/%D8%AA%D8%AB%D8%A8%DB%8C%D8%AA-%D9%82%DB%8C%D9%85%D8%AA-%D9%87%D8%A7-%D9%88-%D8%AA%D8%A7%D9%85%DB%8C%D9%86-%D8%A7%D9%85%D9%86%DB%8C%D8%AA-%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF%DB%8C-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%AF%D8%B1-%D8%A7%D9%88%D9%84%D9%88%DB%8C%D8%AA-%D9%85%D8%B3%D8%A6%D9%88%D9%84%D8%A7%D9%86-%D8%A8%D8%A7%D8%B4%D8%AF",
-      "timestamp": 1792132433762
-    },
-    {
       "title": "✴️ هشدار جهانی درباره بحران گازوئیل تا ۲۰۲۷",
       "source_link": "https://icana.ir/news/426091/%D9%87%D8%B4%D8%AF%D8%A7%D8%B1-%D8%A2%DA%98%D8%A7%D9%86%D8%B3-%D8%A8%DB%8C%D9%86-%D8%A7%D9%84%D9%85%D9%84%D9%84%DB%8C-%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D8%AA%D8%AF%D8%A7%D9%88%D9%85-%D8%A8%D8%AD%D8%B1%D8%A7%D9%86-%DA%AF%D8%A7%D8%B2%D9%88%D8%A6%DB%8C%D9%84-%D8%AA%D8%A7-%D8%B3%D8%A7%D9%84-%DB%B2%DB%B0%DB%B2%DB%B7",
       "timestamp": 1792134246180
@@ -2295,7 +2280,7 @@
   "APIFY_ITEMS": 970,
   "APIFY_LAST_FETCH": 1792134154039,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 43,
+    "جعل محتوا/مصاحبه": 45,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
