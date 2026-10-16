@@ -2294,15 +2294,15 @@
   "LAST_PROCESSED_SNIPPET": "از اطلاعات محرمانه تا کارگزار بیگانه؛ جزئیات طرح م",
   "LAST_REPORT_TIME": 1792142325397,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1000,
-  "APIFY_LAST_FETCH": 1792145821124,
+  "APIFY_ITEMS": 1010,
+  "APIFY_LAST_FETCH": 1792150333192,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 45,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-16T10:17:01.124Z",
+    "at": "2026-10-16T11:32:13.193Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
