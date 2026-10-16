@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-14T19:02:44.184Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ ضرورت تنبیه و تغییر رفتار آمریکا",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-14T19:17:26.159Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -997,6 +985,28 @@
       },
       {
         "title": "✴️ اهمیت به اشتغال جامعه نابینایان",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-16T07:34:02.303Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ رئیس مجلس پیام تبریک به برنده بوسان",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ کاهش ساعات قطعی برق صنایع به یک روز",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ دولت باید به معیشت نابینایان توجه کند",
         "score": 100,
         "issues": []
       }
