@@ -2282,15 +2282,15 @@
   "LAST_PROCESSED_SNIPPET": "هدیه مردم بولیوی به شهید علی لاریجانی چه بود؟ \n #ب",
   "LAST_REPORT_TIME": 1792120391913,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 930,
-  "APIFY_LAST_FETCH": 1792117942342,
+  "APIFY_ITEMS": 940,
+  "APIFY_LAST_FETCH": 1792122418058,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 43,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-16T02:32:22.342Z",
+    "at": "2026-10-16T03:46:58.058Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
