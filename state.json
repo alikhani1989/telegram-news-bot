@@ -2279,15 +2279,15 @@
   "LAST_PROCESSED_SNIPPET": "نایب‌رئیس کمیسیون امنیت ملی درباره استفاده آمریکا ",
   "LAST_REPORT_TIME": 1792169347378,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1060,
-  "APIFY_LAST_FETCH": 1792171927458,
+  "APIFY_ITEMS": 1070,
+  "APIFY_LAST_FETCH": 1792175604827,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 45,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-16T17:32:07.459Z",
+    "at": "2026-10-16T18:33:24.827Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
