@@ -2314,15 +2314,15 @@
   "LAST_PROCESSED_SNIPPET": "جزئیاتی از افزایش دوباره حقوق کارمندان دولت برای س",
   "LAST_REPORT_TIME": 1792178345837,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1080,
-  "APIFY_LAST_FETCH": 1792180024980,
+  "APIFY_ITEMS": 1090,
+  "APIFY_LAST_FETCH": 1792184537410,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 45,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-16T19:47:04.981Z",
+    "at": "2026-10-16T21:02:17.410Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
