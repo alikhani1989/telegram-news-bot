@@ -2277,15 +2277,15 @@
   "LAST_PROCESSED_SNIPPET": "واکنش عضو کمیسیون امنیت ملی به اظهارات وزیر امور خ",
   "LAST_REPORT_TIME": 1792205263820,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1140,
-  "APIFY_LAST_FETCH": 1792206142348,
+  "APIFY_ITEMS": 1150,
+  "APIFY_LAST_FETCH": 1792210617977,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T03:02:22.348Z",
+    "at": "2026-10-17T04:16:57.977Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
