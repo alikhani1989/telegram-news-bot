@@ -2278,15 +2278,15 @@
   "LAST_PROCESSED_SNIPPET": "مجلس خبرگان: همگی موظفیم کاستی‌ها را اصلاح کنیم و ",
   "LAST_REPORT_TIME": 1792224170780,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1180,
-  "APIFY_LAST_FETCH": 1792223205513,
+  "APIFY_ITEMS": 1190,
+  "APIFY_LAST_FETCH": 1792227736236,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 4,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T07:46:45.514Z",
+    "at": "2026-10-17T09:02:16.236Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
