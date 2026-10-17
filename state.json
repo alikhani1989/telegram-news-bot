@@ -2298,15 +2298,15 @@
   "LAST_PROCESSED_SNIPPET": "تاج اجازه ندهد حقی از باشگاه‌های ایرانی ضایع شود \n",
   "LAST_REPORT_TIME": 1792233172253,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1200,
-  "APIFY_LAST_FETCH": 1792231347538,
+  "APIFY_ITEMS": 1210,
+  "APIFY_LAST_FETCH": 1792235869416,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 4,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T10:02:27.538Z",
+    "at": "2026-10-17T11:17:49.416Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
