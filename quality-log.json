@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-15T17:47:36.719Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ رد اتهام‌زنی انگلیس به سپاه",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-15T20:33:18.490Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1091,5 +1079,27 @@
       }
     ],
     "avgScore": 97
+  },
+  {
+    "timestamp": "2026-10-17T10:47:51.804Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ لغو میزبانی مسابقات فوتبال به بهانه ناامنی",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ ایجاد ناحیه صنعتی بیزه برای فرآوری فلفل",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ انتقاد از محدودیت ثبت‌نام در سامانه مسکن",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
