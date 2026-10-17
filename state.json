@@ -2280,15 +2280,15 @@
   "LAST_PROCESSED_SNIPPET": "دموکرات‌ها پیروز میشوند یا جمهوری‌خواهان؟ \n #همشهر",
   "LAST_REPORT_TIME": 1792248499267,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1250,
-  "APIFY_LAST_FETCH": 1792253806551,
+  "APIFY_ITEMS": 1260,
+  "APIFY_LAST_FETCH": 1792257423840,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 4,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T16:16:46.551Z",
+    "at": "2026-10-17T17:17:03.841Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
