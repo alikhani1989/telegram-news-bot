@@ -2290,15 +2290,15 @@
   "LAST_PROCESSED_SNIPPET": "دانش‌آموزان باید بدانند آمریکا چگونه حقوق بشر را ز",
   "LAST_REPORT_TIME": 1792260186919,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1260,
-  "APIFY_LAST_FETCH": 1792257423840,
+  "APIFY_ITEMS": 1270,
+  "APIFY_LAST_FETCH": 1792261939961,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 4,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T17:17:03.841Z",
+    "at": "2026-10-17T18:32:19.961Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
