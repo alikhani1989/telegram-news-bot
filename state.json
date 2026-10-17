@@ -2287,15 +2287,15 @@
   "LAST_PROCESSED_SNIPPET": "ترامپ مادر بمب‌ها را به ایران بزند ما هم از پدر مو",
   "LAST_REPORT_TIME": 1792199914893,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1120,
-  "APIFY_LAST_FETCH": 1792197143043,
+  "APIFY_ITEMS": 1130,
+  "APIFY_LAST_FETCH": 1792201622759,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 45,
     "تیتر کلی": 3,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T00:32:23.043Z",
+    "at": "2026-10-17T01:47:02.759Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
