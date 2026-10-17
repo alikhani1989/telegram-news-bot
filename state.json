@@ -2290,15 +2290,15 @@
   "LAST_PROCESSED_SNIPPET": "رشد ۱۰ برابری بودجه تعرفه خدمات پرستاری تا سقف ۲۲ ",
   "LAST_REPORT_TIME": 1792265584548,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1300,
-  "APIFY_LAST_FETCH": 1792274544834,
+  "APIFY_ITEMS": 1310,
+  "APIFY_LAST_FETCH": 1792279017643,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 4,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T22:02:24.834Z",
+    "at": "2026-10-17T23:16:57.643Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
