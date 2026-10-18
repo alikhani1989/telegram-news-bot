@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-16T07:18:27.016Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ کاهش ساعات قطعی برق صنایع",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ اهمیت به اشتغال جامعه نابینایان",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-16T07:34:02.303Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1221,5 +1204,17 @@
       }
     ],
     "avgScore": 97
+  },
+  {
+    "timestamp": "2026-10-18T06:33:49.809Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ حفظ ظرفیت‌های تولید دارو در ایران",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
