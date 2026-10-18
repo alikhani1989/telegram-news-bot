@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-17",
+  "TWEET_LAST_DAY": "2026-10-18",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2290,15 +2290,15 @@
   "LAST_PROCESSED_SNIPPET": "رشد ۱۰ برابری بودجه تعرفه خدمات پرستاری تا سقف ۲۲ ",
   "LAST_REPORT_TIME": 1792265584548,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1310,
-  "APIFY_LAST_FETCH": 1792279017643,
+  "APIFY_ITEMS": 1320,
+  "APIFY_LAST_FETCH": 1792283519874,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 4,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-17T23:16:57.643Z",
+    "at": "2026-10-18T00:31:59.875Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2348,5 +2348,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-17"
+  "TWEET_STATUS_DAY": "2026-10-18"
 }
