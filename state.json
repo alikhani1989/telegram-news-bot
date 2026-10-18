@@ -2327,15 +2327,15 @@
   "LAST_PROCESSED_SNIPPET": "سخنگوی کمیسیون عمران مجلس: بسته شدن سامانه ثبت‌نام",
   "LAST_REPORT_TIME": 1792288996715,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1330,
-  "APIFY_LAST_FETCH": 1792288033730,
+  "APIFY_ITEMS": 1340,
+  "APIFY_LAST_FETCH": 1792292539904,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 46,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-18T01:47:13.731Z",
+    "at": "2026-10-18T03:02:19.904Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
