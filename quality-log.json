@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-17T00:47:22.738Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ هر کشتی متخلف در تنگه هرمز برخورد می‌شود",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-17T01:18:14.691Z",
     "model": "NaraRouter",
     "items": [
@@ -1137,6 +1125,18 @@
     "items": [
       {
         "title": "✴️ رئیس مجلس هشدار به هوش مصنوعی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-18T18:47:59.587Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ طرح جامع مراقبتهای پرستاری به مجلس ارائه شد",
         "score": 100,
         "issues": []
       }
