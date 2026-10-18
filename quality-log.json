@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-16T03:13:05.927Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ رد توافق انرژی آمریکا‑روسیه",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-16T03:18:16.079Z",
     "model": "NaraRouter",
     "items": [
@@ -1192,5 +1180,17 @@
       }
     ],
     "avgScore": 90
+  },
+  {
+    "timestamp": "2026-10-18T04:17:33.374Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ دکترین نظامی ایران به حالت تهاجمی تغییر می‌کند",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
