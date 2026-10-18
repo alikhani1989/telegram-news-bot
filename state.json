@@ -2286,15 +2286,15 @@
   "LAST_PROCESSED_SNIPPET": "حجتی: فرسودگی خوابگاه‌های دانشجویی؛ چالشی جدی در د",
   "LAST_REPORT_TIME": 1792330381409,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1430,
-  "APIFY_LAST_FETCH": 1792331218130,
+  "APIFY_ITEMS": 1440,
+  "APIFY_LAST_FETCH": 1792334827615,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 49,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-18T13:46:58.130Z",
+    "at": "2026-10-18T14:47:07.615Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
