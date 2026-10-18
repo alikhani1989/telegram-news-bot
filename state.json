@@ -17,28 +17,6 @@
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
-      "id": "1792069378595_kwqwn",
-      "timestamp": "2026-10-15T13:02:58.595Z",
-      "title": "✴️ معرفی نظریه جهاد تمدنی",
-      "body": "🔸 آیت‌الله عباس کعبی عضو مجلس خبرگان رهبری گفت نظریه جهاد تمدنی چارچوبی برای تولید مستمر قدرت ملی، تهدیدزدایی پایدار و استقرار امنیت بر پایه توحید، عدالت و کرامت انسانی است.\n\n🔸 او همچنین گفت هدف این نظریه پایان جنگ و تضمین امنیت پایدار برای ملت است.",
-      "source_link": "https://rasanews.ir/fa/news/829732/%D9%87%D8%AF%D9%81-%D9%85%D8%B0%D8%A7%DA%A9%D8%B1%D8%A7%D8%AA-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%AA%D8%B6%D9%85%DB%8C%D9%86-%D9%BE%D8%A7%DB%8C%D8%A7%D9%86-%D8%AC%D9%86%DA%AF-%D9%88-%D8%AC%D9%84%D9%88%DA%AF%DB%8C%D8%B1%DB%8C-%D8%A7%D8%B2-%D8%AA%DA%A9%D8%B1%D8%A7%D8%B1-%D8%AA%D8%AC%D8%A7%D9%88%D8%B2-%D8%A8%D8%A7%D8%B4%D8%AF",
-      "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 0,
-      "qualityIssues": [],
-      "reviewed": false
-    },
-    {
-      "id": "1792072088154_u4cjy",
-      "timestamp": "2026-10-15T13:48:08.154Z",
-      "title": "✴️ افزایش حقوق پرستاران در مجلس پیگیری می‌شود",
-      "body": "🔸 سید کریم معصومی نمانده مردم فومن و شفت گفت حقوق پرستاران باید متناسب با تورم افزایش یابد.\n\n🔸 او همچنین گفت این موضوع در جلسات آینده مجلس با جدیت پیگیری خواهد شد.",
-      "source_link": "https://snn.ir/fa/news/1471115/%D8%B1%D9%88%D8%B2-%D9%BE%D8%B1%D8%B3%D8%AA%D8%A7%D8%B1-%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D9%81%D9%88%D9%85%D9%86-%D9%88-%D8%B4%D9%81%D8%AA-%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%D8%AD%D9%82%D9%88%D9%82-%D9%BE%D8%B1%D8%B3%D8%AA%D8%A7%D8%B1%D8%A7%D9%86-%D9%85%D8%AA%D9%86%D8%A7%D8%B3%D8%A8-%D8%A8%D8%A7-%D8%AA%D9%88%D8%B1%D9%85-%D8%B1%D8%A7-%D9%BE%DB%8C%DA%AF%DB%8C%D8%B1%DB%8C-%D9%85%DB%8C-%DA%A9%D9%86%DB%8C%D9%85",
-      "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 0,
-      "qualityIssues": [],
-      "reviewed": false
-    },
-    {
       "id": "1792072091532_4g9qy",
       "timestamp": "2026-10-15T13:48:11.532Z",
       "title": "✴️ تخصیص روزانه بنزین به مردم پیشنهاد شد",
@@ -2257,11 +2235,31 @@
       "qualityScore": 100,
       "qualityIssues": [],
       "reviewed": true
+    },
+    {
+      "id": "1792342057173_alhot",
+      "timestamp": "2026-10-18T16:47:37.173Z",
+      "title": "✴️ رای قاطع مجلس برای وزیر دفاع",
+      "body": "🔸 رئیس‌جمهور کشورمان گفت رای قاطع امروز نمایندگان مجلس به مهرداد اخلاقی کتابچی به عنوان وزیر دفاع اعلام شد.\n\n🔸 این پیام وحدت و حمایت قاطع از نیروهای مسلح را به همگان مخابره کرد.",
+      "source_link": "https://www.mizanonline.ir/fa/news/4924491/%D9%BE%D8%B2%D8%B4%DA%A9%DB%8C%D8%A7%D9%86-%D8%B1%D8%A7%DB%8C-%D9%82%D8%A7%D8%B7%D8%B9-%D9%85%D8%AC%D9%84%D8%B3-%D8%A8%D9%87-%D9%88%D8%B2%DB%8C%D8%B1-%D8%AF%D9%81%D8%A7%D8%B9-%D9%BE%DB%8C%D8%A7%D9%85-%D8%A8%D9%84%D9%86%D8%AF%DB%8C-%D8%A8%D9%87-%D8%AF%D9%86%DB%8C%D8%A7-%D8%AF%D8%A7%D8%B4%D8%AA",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
+    },
+    {
+      "id": "1792342059589_5jwno",
+      "timestamp": "2026-10-18T16:47:39.589Z",
+      "title": "✴️ تصویب گزارش تفریغ بودجه ۱۴۰۴",
+      "body": "🔸 دستغیب رئیس کل دیوان محاسبات کشور گفت تعداد احکام مورد بررسی در گزارش تفریغ بودجه ۱۴۰۴ با رشد ۲۲ درصدی به ۲۵۲ رسید.\n\n🔸 وی تأکید کرد اصلاح ساختار بودجه برای بهبود سیاست‌گذاری اقتصادی ضروری است.",
+      "source_link": "https://icana.ir/news/426286/%D8%AA%D8%B5%D9%88%DB%8C%D8%A8-%DA%A9%D9%84%DB%8C%D8%A7%D8%AA-%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4-%D8%AA%D9%81%D8%B1%DB%8C%D8%BA-%D8%A8%D9%88%D8%AF%D8%AC%D9%87-%DB%B1%DB%B4%DB%B0%DB%B4-%D8%AF%D8%B1-%D9%87%DB%8C%D8%A3%D8%AA-%D8%B9%D9%85%D9%88%D9%85%DB%8C-%D8%AF%DB%8C%D9%88%D8%A7%D9%86-%D9%85%D8%AD%D8%A7%D8%B3%D8%A8%D8%A7%D8%AA",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
     }
   ],
   "RECENT_TITLES": [
-    "نماینده مجلس مخالف برنامه کتابچی",
-    "کتابچی نامزد وزیر دفاع شد",
     "کتابچی با ۲۳۷ رأی وزیر شد",
     "جلسه مجلس خبرگان رهبری برگزار شد",
     "گرامی‌داشت شهدای وزارت دفاع",
@@ -2274,27 +2272,29 @@
     "تصویب تحقیق‌وتفحص مهندسی در کمیسیون عمران",
     "اعلام پیگیری قضایی اظهارات نادرست نماینده سابق",
     "تصویب رأی اعتماد وزیر دفاع",
-    "تجدید نظر در فتوا درباره سلاح هسته‌ای"
+    "تجدید نظر در فتوا درباره سلاح هسته‌ای",
+    "رای قاطع مجلس برای وزیر دفاع",
+    "تصویب گزارش تفریغ بودجه ۱۴۰۴"
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ تصویب رأی اعتماد وزیر دفاع",
-      "source_link": "https://www.mashreghnews.ir/news/1846419/%D9%81%DB%8C%D9%84%D9%85-%D8%AF%D8%B1-%D8%AC%D9%84%D8%B3%D9%87-%D8%B1%D8%A7%DB%8C-%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF-%D9%85%D8%AC%D9%84%D8%B3-%D8%A8%D9%87-%D9%88%D8%B2%DB%8C%D8%B1-%D9%BE%DB%8C%D8%B4%D9%86%D9%87%D8%A7%D8%AF%DB%8C-%D8%AF%D9%81%D8%A7%D8%B9-%DA%86%D9%87-%DA%AF%D8%B0%D8%B4%D8%AA",
-      "timestamp": 1792338600142
+      "title": "✴️ رای قاطع مجلس برای وزیر دفاع",
+      "source_link": "https://www.mizanonline.ir/fa/news/4924491/%D9%BE%D8%B2%D8%B4%DA%A9%DB%8C%D8%A7%D9%86-%D8%B1%D8%A7%DB%8C-%D9%82%D8%A7%D8%B7%D8%B9-%D9%85%D8%AC%D9%84%D8%B3-%D8%A8%D9%87-%D9%88%D8%B2%DB%8C%D8%B1-%D8%AF%D9%81%D8%A7%D8%B9-%D9%BE%DB%8C%D8%A7%D9%85-%D8%A8%D9%84%D9%86%D8%AF%DB%8C-%D8%A8%D9%87-%D8%AF%D9%86%DB%8C%D8%A7-%D8%AF%D8%A7%D8%B4%D8%AA",
+      "timestamp": 1792342057173
     },
     {
-      "title": "✴️ تجدید نظر در فتوا درباره سلاح هسته‌ای",
-      "source_link": "https://www.afkarnews.com/fa/tiny/news-1411616",
-      "timestamp": 1792338601717
+      "title": "✴️ تصویب گزارش تفریغ بودجه ۱۴۰۴",
+      "source_link": "https://icana.ir/news/426286/%D8%AA%D8%B5%D9%88%DB%8C%D8%A8-%DA%A9%D9%84%DB%8C%D8%A7%D8%AA-%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4-%D8%AA%D9%81%D8%B1%DB%8C%D8%BA-%D8%A8%D9%88%D8%AF%D8%AC%D9%87-%DB%B1%DB%B4%DB%B0%DB%B4-%D8%AF%D8%B1-%D9%87%DB%8C%D8%A3%D8%AA-%D8%B9%D9%85%D9%88%D9%85%DB%8C-%D8%AF%DB%8C%D9%88%D8%A7%D9%86-%D9%85%D8%AD%D8%A7%D8%B3%D8%A8%D8%A7%D8%AA",
+      "timestamp": 1792342059589
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "اخلاقی: تمام تجربه خود را برای انجام شایسته این مس",
+  "LAST_PROCESSED_SNIPPET": "حاجی‌بابایی: اگر آمریکا «بمب‌های مادر» را بیاورد، ",
   "LAST_REPORT_TIME": 1792338603072,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 1450,
   "APIFY_LAST_FETCH": 1792339322768,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 49,
+    "جعل محتوا/مصاحبه": 50,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
