@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-16T02:47:59.572Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ هدیه مجسمه باستانی بولیوی به لاریجانی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-16T03:13:05.927Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1190,5 +1178,19 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-18T03:47:37.090Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ هشدار جدی یمن به مصر",
+        "score": 90,
+        "issues": [
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 90
   }
 ]
