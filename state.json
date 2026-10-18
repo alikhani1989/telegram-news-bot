@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "اخلاقی: تمام تجربه خود را برای انجام شایسته این مس",
   "LAST_REPORT_TIME": 1792338603072,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1440,
-  "APIFY_LAST_FETCH": 1792334827615,
+  "APIFY_ITEMS": 1450,
+  "APIFY_LAST_FETCH": 1792339322768,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 49,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-18T14:47:07.615Z",
+    "at": "2026-10-18T16:02:02.768Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
