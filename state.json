@@ -2299,15 +2299,15 @@
   "LAST_PROCESSED_SNIPPET": "پیام فرمانده کل سپاه به وزیر دفاع جدید؛ اعتماد قاط",
   "LAST_REPORT_TIME": 1792353784264,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1480,
-  "APIFY_LAST_FETCH": 1792351925400,
+  "APIFY_ITEMS": 1490,
+  "APIFY_LAST_FETCH": 1792356467601,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 51,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-18T19:32:05.401Z",
+    "at": "2026-10-18T20:47:47.601Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
