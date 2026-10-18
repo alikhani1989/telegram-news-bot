@@ -2292,15 +2292,15 @@
   "LAST_PROCESSED_SNIPPET": "متکی: در فر��نسه ترامپ بدنبال روی کار آوردن جناح ن",
   "LAST_REPORT_TIME": 1792348382705,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1470,
-  "APIFY_LAST_FETCH": 1792347421338,
+  "APIFY_ITEMS": 1480,
+  "APIFY_LAST_FETCH": 1792351925400,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 51,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-18T18:17:01.338Z",
+    "at": "2026-10-18T19:32:05.401Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
