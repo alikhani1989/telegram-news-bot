@@ -2285,15 +2285,15 @@
   "LAST_PROCESSED_SNIPPET": "امامی‌راد: فداکاری شهدا و ایستادگی ملت؛ رمز پایدار",
   "LAST_REPORT_TIME": 1792391577095,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1570,
-  "APIFY_LAST_FETCH": 1792390612685,
+  "APIFY_ITEMS": 1580,
+  "APIFY_LAST_FETCH": 1792394223163,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 52,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-19T06:16:52.686Z",
+    "at": "2026-10-19T07:17:03.163Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
