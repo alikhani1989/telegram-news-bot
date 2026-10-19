@@ -2283,15 +2283,15 @@
   "LAST_PROCESSED_SNIPPET": "چرا مقامات ارشد کاخ سفید یکی‌یکی فرار می‌کنند؟ \n #",
   "LAST_REPORT_TIME": 1792430481590,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1660,
-  "APIFY_LAST_FETCH": 1792426838265,
+  "APIFY_ITEMS": 1670,
+  "APIFY_LAST_FETCH": 1792431152552,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 52,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-19T16:20:38.265Z",
+    "at": "2026-10-19T17:32:32.552Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
