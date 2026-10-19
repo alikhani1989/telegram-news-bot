@@ -1,27 +1,5 @@
 [
   {
-    "timestamp": "2026-10-17T18:02:54.542Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ انتخاب رهبر خبرگان تفرقه‌افکنان را ناکام کرد",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ تقویت امنیت مرزی خراسان جنوبی",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ پیگیری مطالبات پزشکان جوان در مسجد",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-17T18:17:48.573Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1169,5 +1147,22 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-19T17:18:53.117Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ ۳۹۱ تن قیر رایگان به ۵ شهرداری",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ ۳۲ سؤال کمیسیون بهداشت و درمان به وزیر",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
