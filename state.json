@@ -2283,15 +2283,15 @@
   "LAST_PROCESSED_SNIPPET": "دستگاه‌های متولی هر چه سریع‌تر سند تسهیم درآمد تول",
   "LAST_REPORT_TIME": 1792440215831,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1690,
-  "APIFY_LAST_FETCH": 1792439365274,
+  "APIFY_ITEMS": 1700,
+  "APIFY_LAST_FETCH": 1792443844122,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 52,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-19T19:49:25.274Z",
+    "at": "2026-10-19T21:04:04.123Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
