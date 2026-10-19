@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-10-17T07:03:40.958Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ مدیریت تنگه هرمز در اختیار ایران است",
-        "score": 90,
-        "issues": [
-          "عبارات خشک خبری استفاده شده"
-        ]
-      }
-    ],
-    "avgScore": 90
-  },
-  {
     "timestamp": "2026-10-17T07:32:44.285Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1113,5 +1099,22 @@
       }
     ],
     "avgScore": 99
+  },
+  {
+    "timestamp": "2026-10-19T04:17:41.506Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تأکید بر نقش واقعی زنان در دفاع مقدس",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ هشدار رئیس مجلس به شرکت‌های هوش مصنوعی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
