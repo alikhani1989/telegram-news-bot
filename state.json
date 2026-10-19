@@ -2283,15 +2283,15 @@
   "LAST_PROCESSED_SNIPPET": "رحیمی: با نسبت استاندارد بین استاد و دانشجو در دان",
   "LAST_REPORT_TIME": 1792430481590,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1670,
-  "APIFY_LAST_FETCH": 1792431152552,
+  "APIFY_ITEMS": 1680,
+  "APIFY_LAST_FETCH": 1792435631478,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 52,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-19T17:32:32.552Z",
+    "at": "2026-10-19T18:47:11.478Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
