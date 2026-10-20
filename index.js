@@ -3012,13 +3012,23 @@ async function runOnce() {
   console.log('⏰ اجرای بعدی: ' + INTERVAL_MINUTES + ' دقیقه دیگر');
 }
 
-runOnce().then(() => {
-  // اگر روی GitHub Actions هستیم، فقط یک بار اجرا بشه و تموم بشه
-  if (process.env.GITHUB_ACTIONS) {
-    console.log('✅ اجرا روی GitHub Actions تموم شد.');
-    process.exit(0);
-  } else {
-    // حالت محلی: هر ۱۵ دقیقه اجرا بشه
-    setInterval(() => { runOnce(); }, INTERVAL_MINUTES * 60 * 1000);
-  }
-});
+// فقط وقتی مستقیم اجرا شود (node index.js)؛ import شدن توسط تست A/B نباید ربات را روشن کند
+if (require.main === module) {
+  runOnce().then(() => {
+    // اگر روی GitHub Actions هستیم، فقط یک بار اجرا بشه و تموم بشه
+    if (process.env.GITHUB_ACTIONS) {
+      console.log('✅ اجرا روی GitHub Actions تموم شد.');
+      process.exit(0);
+    } else {
+      // حالت محلی: هر ۱۵ دقیقه اجرا بشه
+      setInterval(() => { runOnce(); }, INTERVAL_MINUTES * 60 * 1000);
+    }
+  });
+}
+
+// صرفاً برای تست A/B؛ هیچ تأثیری روی خط تولید ندارد
+module.exports = {
+  buildPrompt, validateNewsItem, verifyAgainstOriginal,
+  fetchRSSNews, fetchArticleText, safeParseJson,
+  callNaraRouter, callGemini, PARLIAMENT_KEYWORDS
+};

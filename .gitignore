@@ -7,3 +7,6 @@ check_*.js
 test_*.js
 *.log
 start.bat
+
+# گزارش محلی تست A/B — داده‌ی تولیدی نیست، commit نمی‌شود
+ab-report.json

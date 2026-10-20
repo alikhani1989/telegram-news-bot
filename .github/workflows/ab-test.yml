@@ -1,0 +1,61 @@
+name: تست A/B مدل‌های خبر
+
+# فقط دستی اجرا می‌شود — نه زمان‌بندی‌شده، نه به‌صورت خودکار.
+# هیچ تأثیری روی خط تولید ندارد: چیزی commit نمی‌شود، به تلگرام پیام نمی‌رود،
+# state.json دست نمی‌خورد. فقط مقایسه می‌کند و گزارش را به‌صورت artifact می‌گذارد.
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'تعداد خبر در بسته‌ی آزمایشی'
+        required: false
+        default: '8'
+      use_schema:
+        description: 'responseSchema برای Gemini روشن شود (true/false)'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: read
+
+jobs:
+  ab-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: دریافت کد
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: نصب Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # اول تست خودِ هارنس: بدون کلید و بدون شبکه.
+      # اگر نگاشت لینک یا شمارش جعل خراب شده باشد، همین‌جا متوقف می‌شویم
+      # و گزارشِ غلط نمی‌گیریم.
+      - name: تست خودکار هارنس
+        run: node ab-test.js --selftest
+
+      - name: اجرای مقایسه‌ی A/B
+        run: |
+          EXTRA=""
+          if [ "${{ github.event.inputs.use_schema }}" = "true" ]; then
+            EXTRA="--schema"
+          fi
+          node ab-test.js --count "${{ github.event.inputs.count }}" $EXTRA
+        env:
+          # env بر config.json مقدم است؛ روی runner اصلاً config.json وجود ندارد
+          NARA_ROUTER_API_KEY: ${{ secrets.NARA_ROUTER_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: ذخیره‌ی گزارش
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ab-report
+          path: ab-report.json
+          if-no-files-found: warn
+          retention-days: 14
