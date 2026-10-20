@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "وحدت ملی، پشتوانه اقتدار ایران است \n #باشگاه_خبرنگ",
   "LAST_REPORT_TIME": 1792528399965,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1890,
-  "APIFY_LAST_FETCH": 1792525625628,
+  "APIFY_ITEMS": 1900,
+  "APIFY_LAST_FETCH": 1792529263117,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 55,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T19:47:05.629Z",
+    "at": "2026-10-20T20:47:43.117Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
