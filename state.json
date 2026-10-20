@@ -2294,15 +2294,15 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف: حرف جدیدی نداریم؛ آمریکا باید شروط هفتگان",
   "LAST_REPORT_TIME": 1792518491144,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1870,
-  "APIFY_LAST_FETCH": 1792516625253,
+  "APIFY_ITEMS": 1880,
+  "APIFY_LAST_FETCH": 1792521122645,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 55,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T17:17:05.253Z",
+    "at": "2026-10-20T18:32:02.645Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
