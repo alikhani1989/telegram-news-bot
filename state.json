@@ -2311,15 +2311,15 @@
   "LAST_PROCESSED_SNIPPET": "جلسه کمیسیون امنیت ملی با فرمانده نیروی هوایی ارتش",
   "LAST_REPORT_TIME": 1792499611689,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1830,
-  "APIFY_LAST_FETCH": 1792499550747,
+  "APIFY_ITEMS": 1840,
+  "APIFY_LAST_FETCH": 1792504021534,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 54,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T12:32:30.747Z",
+    "at": "2026-10-20T13:47:01.535Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
