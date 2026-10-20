@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-18T18:32:55.495Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ رئیس مجلس هشدار به هوش مصنوعی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-18T18:47:59.587Z",
     "model": "NaraRouter",
     "items": [
@@ -1168,6 +1156,23 @@
       },
       {
         "title": "✴️ ارتقای توانمندی نیروی هوایی در کمیسیون امنیت ملی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-20T17:02:58.427Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تقدیر ایران از حمایت پاکستان",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ هفت شرط ایران برای بازگشایی تنگه هرمز",
         "score": 100,
         "issues": []
       }
