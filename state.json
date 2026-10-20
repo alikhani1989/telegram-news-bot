@@ -2309,15 +2309,15 @@
   "LAST_PROCESSED_SNIPPET": "لایحه اصلاح برنامه هفتم طی یکی دو هفته آینده به مج",
   "LAST_REPORT_TIME": 1792472649857,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1770,
-  "APIFY_LAST_FETCH": 1792472554323,
+  "APIFY_ITEMS": 1780,
+  "APIFY_LAST_FETCH": 1792477029497,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 54,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T05:02:34.324Z",
+    "at": "2026-10-20T06:17:09.497Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
