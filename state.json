@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "سخنگوی قوه قضائیه: طرح اصلاح قانون مهریه رد نشده، ",
   "LAST_REPORT_TIME": 1792489695208,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1800,
-  "APIFY_LAST_FETCH": 1792486025534,
+  "APIFY_ITEMS": 1810,
+  "APIFY_LAST_FETCH": 1792490542263,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 54,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T08:47:05.534Z",
+    "at": "2026-10-20T10:02:22.263Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
