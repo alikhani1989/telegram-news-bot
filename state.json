@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "اعضای هیأت رئیسه هیأت نظارت بر رفتار نمایندگان مشخ",
   "LAST_REPORT_TIME": 1792480680344,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1790,
-  "APIFY_LAST_FETCH": 1792481547210,
+  "APIFY_ITEMS": 1800,
+  "APIFY_LAST_FETCH": 1792486025534,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 54,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T07:32:27.210Z",
+    "at": "2026-10-20T08:47:05.534Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
