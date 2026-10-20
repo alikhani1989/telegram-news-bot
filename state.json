@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "مشاور قالی‌باف همسو با آمریکا و صهیونیست‌ها مذاکره",
   "LAST_REPORT_TIME": 1792499611689,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1840,
-  "APIFY_LAST_FETCH": 1792504021534,
+  "APIFY_ITEMS": 1850,
+  "APIFY_LAST_FETCH": 1792507624492,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 54,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T13:47:01.535Z",
+    "at": "2026-10-20T14:47:04.492Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
