@@ -2294,15 +2294,15 @@
   "LAST_PROCESSED_SNIPPET": "رحیمی: با نسبت استاندارد استاد و دانشجو در دانشگاه",
   "LAST_REPORT_TIME": 1792460939330,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1740,
-  "APIFY_LAST_FETCH": 1792460845926,
+  "APIFY_ITEMS": 1750,
+  "APIFY_LAST_FETCH": 1792464463318,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 53,
     "تیتر کلی": 5,
     "متن غیرفارسی": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T01:47:25.927Z",
+    "at": "2026-10-20T02:47:43.318Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
