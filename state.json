@@ -2286,15 +2286,15 @@
   "LAST_PROCESSED_SNIPPET": "قشقاوی: اگر جنگی رخ دهد، درد در برابر درد خواهد بو",
   "LAST_REPORT_TIME": 1792512206139,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1860,
-  "APIFY_LAST_FETCH": 1792512142894,
+  "APIFY_ITEMS": 1870,
+  "APIFY_LAST_FETCH": 1792516625253,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 55,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T16:02:22.895Z",
+    "at": "2026-10-20T17:17:05.253Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
