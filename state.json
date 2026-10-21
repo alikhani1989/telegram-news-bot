@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-20",
+  "TWEET_LAST_DAY": "2026-10-21",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2305,15 +2305,15 @@
   "LAST_PROCESSED_SNIPPET": "آذربایجان در مسیر سیاست‌های غرب حرکت می‌کند \n #افک",
   "LAST_REPORT_TIME": 1792538282120,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1920,
-  "APIFY_LAST_FETCH": 1792538218360,
+  "APIFY_ITEMS": 1930,
+  "APIFY_LAST_FETCH": 1792541822697,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 55,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-20T23:16:58.360Z",
+    "at": "2026-10-21T00:17:02.697Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2363,5 +2363,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-20"
+  "TWEET_STATUS_DAY": "2026-10-21"
 }
