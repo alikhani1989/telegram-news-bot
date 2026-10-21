@@ -2278,15 +2278,15 @@
   "LAST_PROCESSED_SNIPPET": "مجلس تعطیل است؟ \n #همشهری_آنلاین",
   "LAST_REPORT_TIME": 1792609438025,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2090,
-  "APIFY_LAST_FETCH": 1792608448146,
+  "APIFY_ITEMS": 2100,
+  "APIFY_LAST_FETCH": 1792612957276,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 60,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T18:47:28.146Z",
+    "at": "2026-10-21T20:02:37.276Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
