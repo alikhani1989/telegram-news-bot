@@ -2310,15 +2310,15 @@
   "LAST_PROCESSED_SNIPPET": "محور ملاقات قالیباف با رهبر معظم انقلاب چه بود؟ \n ",
   "LAST_REPORT_TIME": 1792624678139,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2120,
-  "APIFY_LAST_FETCH": 1792621917377,
+  "APIFY_ITEMS": 2130,
+  "APIFY_LAST_FETCH": 1792625529638,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 60,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T22:31:57.377Z",
+    "at": "2026-10-21T23:32:09.639Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
