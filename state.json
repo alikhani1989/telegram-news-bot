@@ -2302,15 +2302,15 @@
   "LAST_PROCESSED_SNIPPET": "عضو خبرگان: وصیتنامه رهبر شهید در دسترس نیست / نسخ",
   "LAST_REPORT_TIME": 1792580598770,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2020,
-  "APIFY_LAST_FETCH": 1792579621308,
+  "APIFY_ITEMS": 2030,
+  "APIFY_LAST_FETCH": 1792583227100,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 56,
     "تیتر کلی": 5,
     "متن غیرفارسی": 4
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T10:47:01.309Z",
+    "at": "2026-10-21T11:47:07.101Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
