@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "سعیدی: آمریکا باید بابت محاصره دریایی ایران پاسخگو",
   "LAST_REPORT_TIME": 1792572470452,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2010,
-  "APIFY_LAST_FETCH": 1792576016722,
+  "APIFY_ITEMS": 2020,
+  "APIFY_LAST_FETCH": 1792579621308,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 56,
     "تیتر کلی": 5,
     "متن غیرفارسی": 4
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T09:46:56.723Z",
+    "at": "2026-10-21T10:47:01.309Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
