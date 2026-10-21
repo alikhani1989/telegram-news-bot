@@ -2321,15 +2321,15 @@
   "LAST_PROCESSED_SNIPPET": "صیانت سوم در راه مجلس؟ / تقویت اختیارات مرکز ملی ف",
   "LAST_REPORT_TIME": 1792560797813,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1990,
-  "APIFY_LAST_FETCH": 1792567043019,
+  "APIFY_ITEMS": 2000,
+  "APIFY_LAST_FETCH": 1792571612938,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 56,
     "تیتر کلی": 5,
     "متن غیرفارسی": 4
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T07:17:23.019Z",
+    "at": "2026-10-21T08:33:32.938Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
