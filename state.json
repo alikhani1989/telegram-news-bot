@@ -2299,15 +2299,15 @@
   "LAST_PROCESSED_SNIPPET": "نماینده اهواز خواستار اصلاح سهمیه سوخت ماشین‌آلات ",
   "LAST_REPORT_TIME": 1792552698571,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1960,
-  "APIFY_LAST_FETCH": 1792555330093,
+  "APIFY_ITEMS": 1970,
+  "APIFY_LAST_FETCH": 1792559809067,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 56,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T04:02:10.093Z",
+    "at": "2026-10-21T05:16:49.067Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
