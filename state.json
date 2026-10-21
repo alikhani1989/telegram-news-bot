@@ -2297,15 +2297,15 @@
   "LAST_PROCESSED_SNIPPET": "دیدار رئیس مجلس شورای اسلامی با رهبر معظم انقلاب \n",
   "LAST_REPORT_TIME": 1792597654201,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2060,
-  "APIFY_LAST_FETCH": 1792596754768,
+  "APIFY_ITEMS": 2070,
+  "APIFY_LAST_FETCH": 1792600368737,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 57,
+    "جعل محتوا/مصاحبه": 58,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T15:32:34.768Z",
+    "at": "2026-10-21T16:32:48.737Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
