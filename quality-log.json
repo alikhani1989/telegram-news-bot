@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-19T03:18:20.888Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ نقش واقعی زنان در دفاع مقدس",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ توهین به رئیس‌جمهور آمریکا در توییت",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-19T03:47:32.275Z",
     "model": "NaraRouter",
     "items": [
@@ -1221,5 +1204,22 @@
       }
     ],
     "avgScore": 91
+  },
+  {
+    "timestamp": "2026-10-21T02:48:16.294Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ هشدار روزنامه جمهوری اسلامی به اعضای تندرو",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ بار آلودگی معادن بر دوش مردم کرمان است",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
