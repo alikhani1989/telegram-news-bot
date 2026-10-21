@@ -2286,15 +2286,15 @@
   "LAST_PROCESSED_SNIPPET": "۱۰ نماینده دیگر به استیضاح کنندگان عراقچی اضافه شد",
   "LAST_REPORT_TIME": 1792615677321,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2110,
-  "APIFY_LAST_FETCH": 1792617421681,
+  "APIFY_ITEMS": 2120,
+  "APIFY_LAST_FETCH": 1792621917377,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 60,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T21:17:01.681Z",
+    "at": "2026-10-21T22:31:57.377Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
