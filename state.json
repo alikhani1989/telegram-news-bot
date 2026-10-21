@@ -2296,15 +2296,15 @@
   "LAST_PROCESSED_SNIPPET": "خبر نماینده مجلس درباره حمله قطعی به کوه کلنگ و تد",
   "LAST_REPORT_TIME": 1792552698571,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 1950,
-  "APIFY_LAST_FETCH": 1792550817089,
+  "APIFY_ITEMS": 1960,
+  "APIFY_LAST_FETCH": 1792555330093,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 56,
     "تیتر کلی": 5,
     "متن غیرفارسی": 3
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T02:46:57.090Z",
+    "at": "2026-10-21T04:02:10.093Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
