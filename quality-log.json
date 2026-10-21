@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-19T17:18:53.117Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ ۳۹۱ تن قیر رایگان به ۵ شهرداری",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ ۳۲ سؤال کمیسیون بهداشت و درمان به وزیر",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-19T18:17:50.547Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1296,5 +1279,17 @@
       }
     ],
     "avgScore": 80
+  },
+  {
+    "timestamp": "2026-10-21T11:18:00.175Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ دسترسی به وصیتنامه آیتالله خامنهای میسر نشده است",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
