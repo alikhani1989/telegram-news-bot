@@ -2294,15 +2294,15 @@
   "LAST_PROCESSED_SNIPPET": "هوش مصنوعی باید در خدمت حکمت، پیشرفت کشور و ارتقای",
   "LAST_REPORT_TIME": 1792587886857,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2050,
-  "APIFY_LAST_FETCH": 1792592236188,
+  "APIFY_ITEMS": 2060,
+  "APIFY_LAST_FETCH": 1792596754768,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 57,
     "تیتر کلی": 5,
     "متن غیرفارسی": 4
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T14:17:16.188Z",
+    "at": "2026-10-21T15:32:34.768Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
