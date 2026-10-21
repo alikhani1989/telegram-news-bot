@@ -2292,15 +2292,15 @@
   "LAST_PROCESSED_SNIPPET": "دیدار رئیس مجلس شورای اسلامی با رهبر انقلاب \n #برن",
   "LAST_REPORT_TIME": 1792605798199,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2080,
-  "APIFY_LAST_FETCH": 1792604814955,
+  "APIFY_ITEMS": 2090,
+  "APIFY_LAST_FETCH": 1792608448146,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 59,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T17:46:54.955Z",
+    "at": "2026-10-21T18:47:28.146Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
