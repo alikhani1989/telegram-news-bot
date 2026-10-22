@@ -2305,15 +2305,15 @@
   "LAST_PROCESSED_SNIPPET": "اعزام جنگنده‌های انگلیس به عربستان در جنگ با یمن \n",
   "LAST_REPORT_TIME": 1792680516624,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2260,
-  "APIFY_LAST_FETCH": 1792680433502,
+  "APIFY_ITEMS": 2270,
+  "APIFY_LAST_FETCH": 1792684974967,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 62,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T14:47:13.502Z",
+    "at": "2026-10-22T16:02:54.967Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
