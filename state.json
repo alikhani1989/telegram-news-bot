@@ -2315,15 +2315,15 @@
   "LAST_PROCESSED_SNIPPET": "نادری : مهلت هشت روزه ترامپ را جدی می‌گیریم/ اگر د",
   "LAST_REPORT_TIME": 1792664279821,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2230,
-  "APIFY_LAST_FETCH": 1792667830003,
+  "APIFY_ITEMS": 2240,
+  "APIFY_LAST_FETCH": 1792671442008,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 62,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T11:17:10.003Z",
+    "at": "2026-10-22T12:17:22.009Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
