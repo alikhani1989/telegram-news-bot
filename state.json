@@ -2300,15 +2300,15 @@
   "LAST_PROCESSED_SNIPPET": "هشدار قالیباف به مقامات آمریکایی \n #آفتاب",
   "LAST_REPORT_TIME": 1792699406490,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2300,
-  "APIFY_LAST_FETCH": 1792697537109,
+  "APIFY_ITEMS": 2310,
+  "APIFY_LAST_FETCH": 1792702017927,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 62,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T19:32:17.109Z",
+    "at": "2026-10-22T20:46:57.927Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
