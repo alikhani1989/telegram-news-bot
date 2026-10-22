@@ -2323,15 +2323,15 @@
   "LAST_PROCESSED_SNIPPET": "عضو هیات رئیسه مجلس: مهلت هشت روزه ترامپ را جدی می",
   "LAST_REPORT_TIME": 1792646271298,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2170,
-  "APIFY_LAST_FETCH": 1792642619584,
+  "APIFY_ITEMS": 2180,
+  "APIFY_LAST_FETCH": 1792647120426,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 61,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T04:16:59.585Z",
+    "at": "2026-10-22T05:32:00.426Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
