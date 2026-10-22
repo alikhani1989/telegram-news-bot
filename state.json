@@ -2304,15 +2304,15 @@
   "LAST_PROCESSED_SNIPPET": "ایجاد موزه تاریخ و باستان‌ ضرورتی برای نمایش هویت ",
   "LAST_REPORT_TIME": 1792638253222,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2160,
-  "APIFY_LAST_FETCH": 1792638153723,
+  "APIFY_ITEMS": 2170,
+  "APIFY_LAST_FETCH": 1792642619584,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 61,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T03:02:33.723Z",
+    "at": "2026-10-22T04:16:59.585Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
