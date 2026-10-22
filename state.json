@@ -2300,15 +2300,15 @@
   "LAST_PROCESSED_SNIPPET": "در تیم ملی او را به اسم صدا نمی‌کنند؛/ دخالت عجیب ",
   "LAST_REPORT_TIME": 1792624678139,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2130,
-  "APIFY_LAST_FETCH": 1792625529638,
+  "APIFY_ITEMS": 2140,
+  "APIFY_LAST_FETCH": 1792630014223,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 60,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-21T23:32:09.639Z",
+    "at": "2026-10-22T00:46:54.223Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2358,5 +2358,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-21"
+  "TWEET_STATUS_DAY": "2026-10-22"
 }
