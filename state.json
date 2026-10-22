@@ -2309,15 +2309,15 @@
   "LAST_PROCESSED_SNIPPET": "عزیزی: هر خطایی از سوی دشمن، پاسخی پشیمان‌کننده‌تر",
   "LAST_REPORT_TIME": 1792655276870,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2200,
-  "APIFY_LAST_FETCH": 1792655222977,
+  "APIFY_ITEMS": 2210,
+  "APIFY_LAST_FETCH": 1792659065049,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 62,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T07:47:02.977Z",
+    "at": "2026-10-22T08:51:05.049Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
