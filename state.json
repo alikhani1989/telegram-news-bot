@@ -2315,15 +2315,15 @@
   "LAST_PROCESSED_SNIPPET": "مهرداد لاهوتی، نماینده مردم لنگرود :طرح‌های هادی ر",
   "LAST_REPORT_TIME": 1792664279821,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2220,
-  "APIFY_LAST_FETCH": 1792663341289,
+  "APIFY_ITEMS": 2230,
+  "APIFY_LAST_FETCH": 1792667830003,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 62,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T10:02:21.289Z",
+    "at": "2026-10-22T11:17:10.003Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
