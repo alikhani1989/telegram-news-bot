@@ -2305,15 +2305,15 @@
   "LAST_PROCESSED_SNIPPET": "تجلیل استاندار لرستان از غزل فتحی \n #خبرآنلاین",
   "LAST_REPORT_TIME": 1792686801441,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2270,
-  "APIFY_LAST_FETCH": 1792684974967,
+  "APIFY_ITEMS": 2280,
+  "APIFY_LAST_FETCH": 1792689436524,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 62,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T16:02:54.967Z",
+    "at": "2026-10-22T17:17:16.524Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
