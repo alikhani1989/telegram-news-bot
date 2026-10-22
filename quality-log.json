@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-20T17:02:58.427Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ تقدیر ایران از حمایت پاکستان",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ هفت شرط ایران برای بازگشایی تنگه هرمز",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-20T17:47:55.089Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1240,5 +1223,27 @@
       }
     ],
     "avgScore": 85
+  },
+  {
+    "timestamp": "2026-10-22T06:48:14.283Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ کاهش ۹۰٪ سود صبا فولاد در شش ماه",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ روابط ایران-آمریکا در مرحله تازه",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ سامانه ثبت پرستاران اتباع راه‌اندازی می‌شود",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
