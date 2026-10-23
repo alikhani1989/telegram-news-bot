@@ -2302,15 +2302,15 @@
   "LAST_PROCESSED_SNIPPET": "داروی سرطان؛ ماهی ۳۰۰ میلیون تومان&#33; \n #آفتاب",
   "LAST_REPORT_TIME": 1792780397711,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2510,
-  "APIFY_LAST_FETCH": 1792783925815,
+  "APIFY_ITEMS": 2520,
+  "APIFY_LAST_FETCH": 1792787535360,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 65,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-23T19:32:05.816Z",
+    "at": "2026-10-23T20:32:15.360Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
