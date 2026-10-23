@@ -2297,15 +2297,15 @@
   "LAST_PROCESSED_SNIPPET": "هشدار قالیباف خطاب به سران اروپا در آستانه موج جدی",
   "LAST_REPORT_TIME": 1792773221004,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2490,
-  "APIFY_LAST_FETCH": 1792774958730,
+  "APIFY_ITEMS": 2500,
+  "APIFY_LAST_FETCH": 1792779426176,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 65,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-23T17:02:38.730Z",
+    "at": "2026-10-23T18:17:06.176Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
