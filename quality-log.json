@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-21T16:18:37.611Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ رئیس مجلس با رهبر بر قدرت تأکید",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-21T16:33:43.062Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1168,5 +1156,27 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-23T08:47:45.622Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ هشدار به تهدیدهای ترامپ از سوی آمریکا",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ روابط همسایگان تحت فشار آمریکا",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ هشدار به خلیج فارس از همراهی با آمریکا",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
