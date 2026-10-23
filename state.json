@@ -2320,15 +2320,15 @@
   "LAST_PROCESSED_SNIPPET": "چرا برخی به‌دنبال کسب سود بیشتر به قیمت جان مردم ه",
   "LAST_REPORT_TIME": 1792724608585,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2370,
-  "APIFY_LAST_FETCH": 1792726349231,
+  "APIFY_ITEMS": 2380,
+  "APIFY_LAST_FETCH": 1792730815657,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 63,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-23T03:32:29.231Z",
+    "at": "2026-10-23T04:46:55.657Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
