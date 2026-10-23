@@ -2308,15 +2308,15 @@
   "LAST_PROCESSED_SNIPPET": "ترک فعل بانک‌ها در اعطای وام ازدواج و فرزندآوری، آ",
   "LAST_REPORT_TIME": 1792745277195,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2430,
-  "APIFY_LAST_FETCH": 1792751536150,
+  "APIFY_ITEMS": 2440,
+  "APIFY_LAST_FETCH": 1792755144148,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 63,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-23T10:32:16.150Z",
+    "at": "2026-10-23T11:32:24.148Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
