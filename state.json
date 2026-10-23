@@ -2320,15 +2320,15 @@
   "LAST_PROCESSED_SNIPPET": "فیلم | دوران طلایی سربازان امام زمان(عج) \n #ایکنا",
   "LAST_REPORT_TIME": 1792732669924,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2380,
-  "APIFY_LAST_FETCH": 1792730815657,
+  "APIFY_ITEMS": 2390,
+  "APIFY_LAST_FETCH": 1792734439708,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 63,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-23T04:46:55.657Z",
+    "at": "2026-10-23T05:47:19.708Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
