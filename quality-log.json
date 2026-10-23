@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-21T06:47:55.372Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ جذب سالانه ۲۵ هزار پرستار در برنامه مجلس",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ لزوم فراهم‌سازی زیرساخت‌های زندگی مستقل نابینایان",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-21T07:18:14.333Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1199,5 +1182,17 @@
       }
     ],
     "avgScore": 85
+  },
+  {
+    "timestamp": "2026-10-23T01:18:31.282Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ پاسخ به حمله آمریکا سخت‌تر از جنگ رمضان خواهد بود",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
