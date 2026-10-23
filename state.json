@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-22",
+  "TWEET_LAST_DAY": "2026-10-23",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2295,15 +2295,15 @@
   "LAST_PROCESSED_SNIPPET": "هراس از ایجاد اختلال در انتخابات/ارتش رژیم صهیونیس",
   "LAST_REPORT_TIME": 1792706604136,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2330,
-  "APIFY_LAST_FETCH": 1792710125705,
+  "APIFY_ITEMS": 2340,
+  "APIFY_LAST_FETCH": 1792713741924,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 63,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-22T23:02:05.705Z",
+    "at": "2026-10-23T00:02:21.924Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2353,5 +2353,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-22"
+  "TWEET_STATUS_DAY": "2026-10-23"
 }
