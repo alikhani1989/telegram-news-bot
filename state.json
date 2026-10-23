@@ -2297,15 +2297,15 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف: اجازه ندهید حاکمان جنگ‌افروز با ساختن دوگ",
   "LAST_REPORT_TIME": 1792773221004,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2480,
-  "APIFY_LAST_FETCH": 1792770640658,
+  "APIFY_ITEMS": 2490,
+  "APIFY_LAST_FETCH": 1792774958730,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 65,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-23T15:50:40.658Z",
+    "at": "2026-10-23T17:02:38.730Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
