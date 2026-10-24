@@ -2295,15 +2295,15 @@
   "LAST_PROCESSED_SNIPPET": "رئیس مرکز پژوهش های مجلس: دولت پیمانکار ساخت مسکن ",
   "LAST_REPORT_TIME": 1792839802802,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2660,
-  "APIFY_LAST_FETCH": 1792845141949,
+  "APIFY_ITEMS": 2670,
+  "APIFY_LAST_FETCH": 1792849612733,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T12:32:21.950Z",
+    "at": "2026-10-24T13:46:52.733Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
