@@ -2300,15 +2300,15 @@
   "LAST_PROCESSED_SNIPPET": "آمریکایی‌ها به دنبال استیضاح سروان تلویزیونی هستند",
   "LAST_REPORT_TIME": 1792802907864,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2550,
-  "APIFY_LAST_FETCH": 1792800134767,
+  "APIFY_ITEMS": 2560,
+  "APIFY_LAST_FETCH": 1792804630257,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 65,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T00:02:14.767Z",
+    "at": "2026-10-24T01:17:10.257Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
