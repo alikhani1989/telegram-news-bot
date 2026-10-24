@@ -2280,15 +2280,15 @@
   "LAST_PROCESSED_SNIPPET": "رئیس سازمان برنامه و بودجه: لایحه بودجه ظرف یک ماه",
   "LAST_REPORT_TIME": 1792872204864,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2720,
-  "APIFY_LAST_FETCH": 1792871216722,
+  "APIFY_ITEMS": 2730,
+  "APIFY_LAST_FETCH": 1792875735372,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T19:46:56.723Z",
+    "at": "2026-10-24T21:02:15.372Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
