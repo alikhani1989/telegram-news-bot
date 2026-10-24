@@ -2290,15 +2290,15 @@
   "LAST_PROCESSED_SNIPPET": "جلسه علنی یکشنبه به صورت ترکیبی برگزار می‌شود \n #ا",
   "LAST_REPORT_TIME": 1792839802802,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2650,
-  "APIFY_LAST_FETCH": 1792840633294,
+  "APIFY_ITEMS": 2660,
+  "APIFY_LAST_FETCH": 1792845141949,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T11:17:13.294Z",
+    "at": "2026-10-24T12:32:21.950Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
