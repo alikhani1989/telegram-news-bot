@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "نامه یمن به اروپایی‌ها: جنایات عربستان را نادیده م",
   "LAST_REPORT_TIME": 1792858676345,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2690,
-  "APIFY_LAST_FETCH": 1792857738083,
+  "APIFY_ITEMS": 2700,
+  "APIFY_LAST_FETCH": 1792862229494,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T16:02:18.083Z",
+    "at": "2026-10-24T17:17:09.494Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
