@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "تلاش معترضان در جمهوری چک برای ورود به مجلس \n #تاب",
   "LAST_REPORT_TIME": 1792850596200,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2680,
-  "APIFY_LAST_FETCH": 1792854128846,
+  "APIFY_ITEMS": 2690,
+  "APIFY_LAST_FETCH": 1792857738083,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T15:02:08.846Z",
+    "at": "2026-10-24T16:02:18.083Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
