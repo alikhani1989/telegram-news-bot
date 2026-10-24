@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-23",
+  "TWEET_LAST_DAY": "2026-10-24",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2302,15 +2302,15 @@
   "LAST_PROCESSED_SNIPPET": "داروی سرطان؛ ماهی ۳۰۰ میلیون تومان&#33; \n #آفتاب",
   "LAST_REPORT_TIME": 1792780397711,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2540,
-  "APIFY_LAST_FETCH": 1792795643123,
+  "APIFY_ITEMS": 2550,
+  "APIFY_LAST_FETCH": 1792800134767,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 65,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-23T22:47:23.123Z",
+    "at": "2026-10-24T00:02:14.767Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2360,5 +2360,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-23"
+  "TWEET_STATUS_DAY": "2026-10-24"
 }
