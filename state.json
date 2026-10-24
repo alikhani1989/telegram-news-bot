@@ -2290,15 +2290,15 @@
   "LAST_PROCESSED_SNIPPET": "بررسی اقتصادی و وضعیت معیشتی مردم بندرهندیجان در ن",
   "LAST_REPORT_TIME": 1792828979273,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2610,
-  "APIFY_LAST_FETCH": 1792825344616,
+  "APIFY_ITEMS": 2620,
+  "APIFY_LAST_FETCH": 1792829804897,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T07:02:24.617Z",
+    "at": "2026-10-24T08:16:44.898Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
