@@ -2307,15 +2307,15 @@
   "LAST_PROCESSED_SNIPPET": "لاهوتی: آمریکا در دستیابی به اهداف خود درباره تنگه",
   "LAST_REPORT_TIME": 1792819983440,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2590,
-  "APIFY_LAST_FETCH": 1792817230858,
+  "APIFY_ITEMS": 2600,
+  "APIFY_LAST_FETCH": 1792821730639,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T04:47:10.858Z",
+    "at": "2026-10-24T06:02:10.639Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
