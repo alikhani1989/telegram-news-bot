@@ -2297,15 +2297,15 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف:نقش زبان فارسی در پاسداری از تمامیت ارضی ا",
   "LAST_REPORT_TIME": 1792828979273,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2620,
-  "APIFY_LAST_FETCH": 1792829804897,
+  "APIFY_ITEMS": 2630,
+  "APIFY_LAST_FETCH": 1792833420022,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T08:16:44.898Z",
+    "at": "2026-10-24T09:17:00.022Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
