@@ -2115,9 +2115,9 @@
       "body": "🔸 حجت‌الاسلام سیدجواد حسینی‌کیا عضو کمیسیون صنایع و معادن مجلس گفت بسیاری از نمایندگان مجلس در گفت‌وگوهای شفاهی و از طریق ارسال نامه، از دولت خواسته‌اند لایحه‌ای برای رفع مشکل حقوق بازنشستگان ارائه دهد اما دولت تعلل می‌کند.\n\n🔸 او همچنین گفت دولت باید بر اساس قانون، حقوق بازنشستگان را متناسب با نرخ تورم افزایش دهد و لایحه اصلاح بودجه را به‌سرعت به مجلس ارائه کند.",
       "source_link": "https://icana.ir/news/426480/%D8%AF%D9%88%D9%84%D8%AA-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A7%D8%B5%D9%84%D8%A7%D8%AD-%D8%AD%D9%82%D9%88%D9%82-%DA%A9%D8%A7%D8%B1%DA%A9%D9%86%D8%A7%D9%86-%D8%A8%D8%A7-%D9%82%DB%8C%D8%AF-%D9%81%D9%88%D8%B1%DB%8C%D8%AA-%D9%84%D8%A7%DB%8C%D8%AD%D9%87-%D8%A7%D8%B1%D8%A7%D8%A6%D9%87-%D8%AF%D9%87%D8%AF",
       "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 0,
+      "qualityScore": 100,
       "qualityIssues": [],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "1792802903534_9fvuo",
@@ -2282,21 +2282,6 @@
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ هشدار نبویان به دولت عراق درباره جنگنده‌ها",
-      "source_link": "https://www.afkarnews.com/fa/tiny/news-1412487",
-      "timestamp": 1792808312998
-    },
-    {
-      "title": "✴️ پیشنهاد اختصاص خط اعتباری ۴۰۰ تا ۵۰۰ میلیاردی به معادن تربت",
-      "source_link": "https://www.qudsonline.ir/news/1171886/%D8%A8%D8%B1%D9%88%DA%A9%D8%B1%D8%A7%D8%B3%DB%8C-%D8%A7%D8%AF%D8%A7%D8%B1%DB%8C-%D9%85%D8%A7%D9%86%D8%B9-%D8%AA%D9%88%D8%B3%D8%B9%D9%87-%D9%85%D8%B9%D8%A7%D8%AF%D9%86-%D8%AA%D8%B1%D8%A8%D8%AA-%D8%AD%DB%8C%D8%AF%D8%B1%DB%8C%D9%87-%D8%A7%D8%B3%D8%AA",
-      "timestamp": 1792808315067
-    },
-    {
-      "title": "✴️ تأکید عضو کمیسیون صنایع بر ارائه فوری لایحه حقوق کارکنان",
-      "source_link": "https://icana.ir/news/426480/%D8%AF%D9%88%D9%84%D8%AA-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A7%D8%B5%D9%84%D8%A7%D8%AD-%D8%AD%D9%82%D9%88%D9%82-%DA%A9%D8%A7%D8%B1%DA%A9%D9%86%D8%A7%D9%86-%D8%A8%D8%A7-%D9%82%DB%8C%D8%AF-%D9%81%D9%88%D8%B1%DB%8C%D8%AA-%D9%84%D8%A7%DB%8C%D8%AD%D9%87-%D8%A7%D8%B1%D8%A7%D8%A6%D9%87-%D8%AF%D9%87%D8%AF",
-      "timestamp": 1792808316633
-    },
-    {
       "title": "✴️ سناریوی حاکمان در واکنش به اعتراضات",
       "source_link": "https://icana.ir/news/426483/%D8%A7%D8%AC%D8%A7%D8%B2%D9%87-%D9%86%D8%AF%D9%87%DB%8C%D8%AF-%D8%AD%D8%A7%DA%A9%D9%85%D8%A7%D9%86-%D8%AC%D9%86%DA%AF-%D8%A7%D9%81%D8%B1%D9%88%D8%B2-%D8%A8%D8%A7-%D8%B3%D8%A7%D8%AE%D8%AA%D9%86-%D8%AF%D9%88%DA%AF%D8%A7%D9%86%D9%87-%D8%AC%D8%B9%D9%84%DB%8C-%D8%A7%D8%B9%D8%AA%D8%B1%D8%A7%D8%B6%D8%A7%D8%AA-%D8%B4%D9%85%D8%A7",
       "timestamp": 1792809226470
@@ -2307,13 +2292,13 @@
       "timestamp": 1792810099430
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "اخذ دستور وزیر ورزش برای تکمیل زیرساخت‌ها و طرح‌ها",
-  "LAST_REPORT_TIME": 1792806545132,
+  "LAST_PROCESSED_SNIPPET": "گلرو: تقویت بنیه دفاعی کشور با تکیه بر فناوری‌های ",
+  "LAST_REPORT_TIME": 1792811020507,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 2570,
   "APIFY_LAST_FETCH": 1792809127785,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 65,
+    "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
