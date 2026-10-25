@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-24T02:33:42.533Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ سناریوی حاکمان در واکنش به اعتراضات",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-24T02:48:14.384Z",
     "model": "NaraRouter",
     "items": [
@@ -1145,5 +1133,27 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-25T21:03:16.678Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تهدیدات نظامی به ایران پاسخ فراتر",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ بنیاد مسکن ۲۰۰ هزار واحد روستایی",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ بهره‌برداری جاده گیداری ۲۵۰ میلیارد",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
