@@ -2274,15 +2274,15 @@
   "LAST_PROCESSED_SNIPPET": "صحن علنی برگزار شد؛ حاشیه‌ها هم دوباره شروع شدند \n",
   "LAST_REPORT_TIME": 1792923493493,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2850,
-  "APIFY_LAST_FETCH": 1792923431515,
+  "APIFY_ITEMS": 2860,
+  "APIFY_LAST_FETCH": 1792927954147,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T10:17:11.516Z",
+    "at": "2026-10-25T11:32:34.148Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
