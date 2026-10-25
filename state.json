@@ -2281,15 +2281,15 @@
   "LAST_PROCESSED_SNIPPET": "واکنش سخنگوی هیات رئیسه مجلس به تهدیدات ترامپ \n #د",
   "LAST_REPORT_TIME": 1792951392350,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2920,
-  "APIFY_LAST_FETCH": 1792954013124,
+  "APIFY_ITEMS": 2930,
+  "APIFY_LAST_FETCH": 1792957621222,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T18:46:53.125Z",
+    "at": "2026-10-25T19:47:01.222Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
