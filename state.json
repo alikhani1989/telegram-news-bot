@@ -2278,15 +2278,15 @@
   "LAST_PROCESSED_SNIPPET": "برگزاری همایش روز جهانی استاندارد ۱۴۰۵ با حضور رئی",
   "LAST_REPORT_TIME": 1792944228712,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2900,
-  "APIFY_LAST_FETCH": 1792945059203,
+  "APIFY_ITEMS": 2910,
+  "APIFY_LAST_FETCH": 1792949528977,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T16:17:39.204Z",
+    "at": "2026-10-25T17:32:08.977Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
