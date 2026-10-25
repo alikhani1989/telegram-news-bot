@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-23T13:47:41.539Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ عدم تطابق حقوق با تورم در کمیسیون بهداشت",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ ارزیابی وزیر نفت در کمیسیون انرژی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-23T14:32:19.674Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1129,5 +1112,22 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-25T09:33:05.702Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ انتقاد کمیسیون اصل نودم قانون اساسی از مجوز",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ شهرداری تهران عرضه کالا با قیمت صفر",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
