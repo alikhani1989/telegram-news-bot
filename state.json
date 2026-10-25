@@ -2278,15 +2278,15 @@
   "LAST_PROCESSED_SNIPPET": "زیرمیزی پزشکان به مجلس رسید/ عضو کمیسیون بهداشت: ت",
   "LAST_REPORT_TIME": 1792886645058,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2750,
-  "APIFY_LAST_FETCH": 1792883808904,
+  "APIFY_ITEMS": 2760,
+  "APIFY_LAST_FETCH": 1792887416455,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 67,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-24T23:16:48.905Z",
+    "at": "2026-10-25T00:16:56.455Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2336,5 +2336,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-24"
+  "TWEET_STATUS_DAY": "2026-10-25"
 }
