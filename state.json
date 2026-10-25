@@ -2273,15 +2273,15 @@
   "LAST_PROCESSED_SNIPPET": "مخالفت مجلس با حذف سه دهک از کالابرگ؛ اعتبار همه د",
   "LAST_REPORT_TIME": 1792960413840,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2930,
-  "APIFY_LAST_FETCH": 1792957621222,
+  "APIFY_ITEMS": 2940,
+  "APIFY_LAST_FETCH": 1792961237466,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T19:47:01.222Z",
+    "at": "2026-10-25T20:47:17.466Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
