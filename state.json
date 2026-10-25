@@ -2274,15 +2274,15 @@
   "LAST_PROCESSED_SNIPPET": "تنگ‌نظری‌های مدیریتی، مانع توسعه کرمانشاه شده است ",
   "LAST_REPORT_TIME": 1792923493493,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2860,
-  "APIFY_LAST_FETCH": 1792927954147,
+  "APIFY_ITEMS": 2870,
+  "APIFY_LAST_FETCH": 1792932462046,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T11:32:34.148Z",
+    "at": "2026-10-25T12:47:42.047Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
