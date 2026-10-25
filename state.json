@@ -2284,15 +2284,15 @@
   "LAST_PROCESSED_SNIPPET": "لایحه بودجه ۱۴۰۶ تا یک ماه دیگر به مجلس می‌رود \n #",
   "LAST_REPORT_TIME": 1792892933838,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2770,
-  "APIFY_LAST_FETCH": 1792891022100,
+  "APIFY_ITEMS": 2780,
+  "APIFY_LAST_FETCH": 1792895516722,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 68,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T01:17:02.100Z",
+    "at": "2026-10-25T02:31:56.722Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
