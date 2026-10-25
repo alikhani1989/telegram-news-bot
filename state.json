@@ -2271,15 +2271,15 @@
   "LAST_PROCESSED_SNIPPET": "واکنش قالیباف به اعلام نامزدی دیپلمات اماراتی برای",
   "LAST_REPORT_TIME": 1792936087194,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2880,
-  "APIFY_LAST_FETCH": 1792936945677,
+  "APIFY_ITEMS": 2890,
+  "APIFY_LAST_FETCH": 1792941436130,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T14:02:25.677Z",
+    "at": "2026-10-25T15:17:16.130Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
