@@ -2276,15 +2276,15 @@
   "LAST_PROCESSED_SNIPPET": "مخالفت مجلس با بورسی‌شدن شرکت ارتباطات زیرساخت \n #",
   "LAST_REPORT_TIME": 1792913623147,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2820,
-  "APIFY_LAST_FETCH": 1792910824929,
+  "APIFY_ITEMS": 2830,
+  "APIFY_LAST_FETCH": 1792915332396,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 69,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T06:47:04.930Z",
+    "at": "2026-10-25T08:02:12.396Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
