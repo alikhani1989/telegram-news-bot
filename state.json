@@ -2266,15 +2266,15 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف: در مقابل هرگونه جسارت به تمامیت ارضی ایرا",
   "LAST_REPORT_TIME": 1792913623147,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2830,
-  "APIFY_LAST_FETCH": 1792915332396,
+  "APIFY_ITEMS": 2840,
+  "APIFY_LAST_FETCH": 1792919826846,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T08:02:12.396Z",
+    "at": "2026-10-25T09:17:06.846Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
