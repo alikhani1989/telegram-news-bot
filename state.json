@@ -2283,15 +2283,15 @@
   "LAST_PROCESSED_SNIPPET": "ساخت مسکن روستایی نیازمند حمایت تسهیلاتی دولت است ",
   "LAST_REPORT_TIME": 1792944228712,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2890,
-  "APIFY_LAST_FETCH": 1792941436130,
+  "APIFY_ITEMS": 2900,
+  "APIFY_LAST_FETCH": 1792945059203,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T15:17:16.130Z",
+    "at": "2026-10-25T16:17:39.204Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
