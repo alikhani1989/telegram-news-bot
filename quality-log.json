@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-23T18:33:11.648Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ هشدار به تغییر هدف اعتراضات توسط مجلس",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-23T19:32:40.619Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1142,5 +1130,27 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-25T14:17:58.832Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تقویت بازدارندگی نظامی در کمیسیون امنیت ملی",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ رد ادعای تصاحب مقام سازمان ملل",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ بررسی تناقض‌های مالیاتی در کمیسیون بهداشت و درمان",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
