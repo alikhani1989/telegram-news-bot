@@ -2281,15 +2281,15 @@
   "LAST_PROCESSED_SNIPPET": "مدیریت منابع آب در گرو اجرای قاطع قوانین است \n #ای",
   "LAST_REPORT_TIME": 1792901877897,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2810,
-  "APIFY_LAST_FETCH": 1792906945123,
+  "APIFY_ITEMS": 2820,
+  "APIFY_LAST_FETCH": 1792910824929,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 69,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T05:42:25.123Z",
+    "at": "2026-10-25T06:47:04.930Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
