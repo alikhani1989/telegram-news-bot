@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-10-24T06:32:35.460Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ رسوب ۷۰ درصد منابع پیشرفت و عدالت",
-        "score": 85,
-        "issues": [
-          "نام و سمّت شخص در خط اول متن پیدا نشد"
-        ]
-      }
-    ],
-    "avgScore": 85
-  },
-  {
     "timestamp": "2026-10-24T06:47:58.396Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1067,5 +1053,19 @@
       }
     ],
     "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-26T04:18:23.088Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ افتتاح جاده اصلی گیداری با ۲۵۰ میلیارد ریال",
+        "score": 95,
+        "issues": [
+          "حوزه انتخابیه آورده شده"
+        ]
+      }
+    ],
+    "avgScore": 95
   }
 ]
