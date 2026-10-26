@@ -2272,15 +2272,15 @@
   "LAST_PROCESSED_SNIPPET": "نظرسنجی سی‌بی‌اس: دموکرات‌ها در مسیر کسب اکثریت مج",
   "LAST_REPORT_TIME": 1792985612761,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2990,
-  "APIFY_LAST_FETCH": 1792981942385,
+  "APIFY_ITEMS": 3000,
+  "APIFY_LAST_FETCH": 1792986411804,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 71,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T02:32:22.386Z",
+    "at": "2026-10-26T03:46:51.805Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
