@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-25",
+  "TWEET_LAST_DAY": "2026-10-26",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2283,15 +2283,15 @@
   "LAST_PROCESSED_SNIPPET": "لزوم الحاق اراضی جدید به بافت روستا‌ها برای ساخت م",
   "LAST_REPORT_TIME": 1792960413840,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 2960,
-  "APIFY_LAST_FETCH": 1792969349191,
+  "APIFY_ITEMS": 2970,
+  "APIFY_LAST_FETCH": 1792972954816,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 70,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-25T23:02:29.191Z",
+    "at": "2026-10-26T00:02:34.816Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2341,5 +2341,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-25"
+  "TWEET_STATUS_DAY": "2026-10-26"
 }
