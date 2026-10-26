@@ -2284,15 +2284,15 @@
   "LAST_PROCESSED_SNIPPET": "پیام تسلیت قالیباف در پی درگذشت خواهر محمد امیر نم",
   "LAST_REPORT_TIME": 1792994598782,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3020,
-  "APIFY_LAST_FETCH": 1792994540942,
+  "APIFY_ITEMS": 3030,
+  "APIFY_LAST_FETCH": 1792998202438,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 71,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T06:02:20.943Z",
+    "at": "2026-10-26T07:03:22.438Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
