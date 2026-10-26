@@ -2286,15 +2286,15 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف: اعتماد به جوانان میراثی ارزشمند در مسیر ا",
   "LAST_REPORT_TIME": 1793040473860,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3130,
-  "APIFY_LAST_FETCH": 1793039523732,
+  "APIFY_ITEMS": 3140,
+  "APIFY_LAST_FETCH": 1793043970351,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 71,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T18:32:03.732Z",
+    "at": "2026-10-26T19:46:10.351Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
