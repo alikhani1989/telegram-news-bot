@@ -2284,15 +2284,15 @@
   "LAST_PROCESSED_SNIPPET": "پوردهقان: طرح‌های زیادی در مجلس برای بسته شدن اینت",
   "LAST_REPORT_TIME": 1793046780006,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3140,
-  "APIFY_LAST_FETCH": 1793043970351,
+  "APIFY_ITEMS": 3150,
+  "APIFY_LAST_FETCH": 1793047631132,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 71,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T19:46:10.351Z",
+    "at": "2026-10-26T20:47:11.133Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
