@@ -1,27 +1,5 @@
 [
   {
-    "timestamp": "2026-10-24T11:03:08.404Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ ضرورت تدوین راهبردهای تجاری مشترک",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ برگزاری جلسه ترکیبی علنی در مجلس",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ پیگیری قانون جهش تولید مسکن در شیراز",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-24T12:47:46.695Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1062,5 +1040,17 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-26T06:17:47.360Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تخصیص ۱۵۰۰ میلیارد ریال به آب‌رسانی فجر پنج",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
