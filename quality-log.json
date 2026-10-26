@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-24T03:03:32.854Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ تأیید وزیر دفاع با ۲۳۷ رأی در مجلس",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ افزایش حقوق کارکنان با قید فوریت درخواست شد",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-24T03:18:35.741Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1157,5 +1140,17 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-10-26T01:18:29.374Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ ایران آماده پاسخ خارج از تصور به تهدید نظامی است",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
