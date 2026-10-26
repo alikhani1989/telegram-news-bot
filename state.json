@@ -2287,15 +2287,15 @@
   "LAST_PROCESSED_SNIPPET": "صفحه نخست روزنامه‌ها – دوشنبه ۴ آبان \n #باشگاه_خبر",
   "LAST_REPORT_TIME": 1792985612761,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3000,
-  "APIFY_LAST_FETCH": 1792986411804,
+  "APIFY_ITEMS": 3010,
+  "APIFY_LAST_FETCH": 1792990028658,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 71,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T03:46:51.805Z",
+    "at": "2026-10-26T04:47:08.659Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
