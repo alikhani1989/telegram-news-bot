@@ -2284,15 +2284,15 @@
   "LAST_PROCESSED_SNIPPET": "حاشیه امن سیاسی نتانیاهو در حال فروپاشی است/ لابی‌",
   "LAST_REPORT_TIME": 1793046780006,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3150,
-  "APIFY_LAST_FETCH": 1793047631132,
+  "APIFY_ITEMS": 3160,
+  "APIFY_LAST_FETCH": 1793052128745,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 71,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T20:47:11.133Z",
+    "at": "2026-10-26T22:02:08.746Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
