@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف: درآمد حاصل از صرفه‌جویی گاز مستقیماً به خ",
   "LAST_REPORT_TIME": 1793027009837,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3110,
-  "APIFY_LAST_FETCH": 1793031410909,
+  "APIFY_ITEMS": 3120,
+  "APIFY_LAST_FETCH": 1793035050040,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 71,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T16:16:50.909Z",
+    "at": "2026-10-26T17:17:30.041Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
