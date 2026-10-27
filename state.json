@@ -2295,15 +2295,15 @@
   "LAST_PROCESSED_SNIPPET": "راستینه: این طرح در آسیا، ایران را سطح اول می‌رسان",
   "LAST_REPORT_TIME": 1793126032017,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3330,
-  "APIFY_LAST_FETCH": 1793124150831,
+  "APIFY_ITEMS": 3340,
+  "APIFY_LAST_FETCH": 1793128624384,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-27T18:02:30.831Z",
+    "at": "2026-10-27T19:17:04.384Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
