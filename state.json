@@ -2281,15 +2281,15 @@
   "LAST_PROCESSED_SNIPPET": "آبان ۴۳ و جرقه استکبارستیزی در حوزه علمیه قم/ هنر ",
   "LAST_REPORT_TIME": 1793073798438,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3210,
-  "APIFY_LAST_FETCH": 1793071930003,
+  "APIFY_ITEMS": 3220,
+  "APIFY_LAST_FETCH": 1793076421434,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 73,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-27T03:32:10.003Z",
+    "at": "2026-10-27T04:47:01.434Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
