@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-26T01:18:29.374Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ ایران آماده پاسخ خارج از تصور به تهدید نظامی است",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-26T01:32:19.928Z",
     "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
     "items": [
@@ -1045,5 +1033,22 @@
       }
     ],
     "avgScore": 98
+  },
+  {
+    "timestamp": "2026-10-27T18:47:34.420Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ جلوگیری از مصرف غیرمجاز ماینرها در شبکه برق",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ قطع سهمیه سوخت برای خودروهای بدون بیمه",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
