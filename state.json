@@ -2299,15 +2299,15 @@
   "LAST_PROCESSED_SNIPPET": "قوه قضائیه باید به بحران کشف‌رود ورود کند \n #بسیج_",
   "LAST_REPORT_TIME": 1793130470083,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3340,
-  "APIFY_LAST_FETCH": 1793128624384,
+  "APIFY_ITEMS": 3350,
+  "APIFY_LAST_FETCH": 1793132240656,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-27T19:17:04.384Z",
+    "at": "2026-10-27T20:17:20.656Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
