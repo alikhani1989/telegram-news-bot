@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-26",
+  "TWEET_LAST_DAY": "2026-10-27",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2264,35 +2264,19 @@
     "تحلیل انتخابات اسرائیل بر معادلات امنیتی",
     "عدم اجرای حکم مالیات بیمه در سال سوم"
   ],
-  "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ هم‌اندیشی مجلس با رؤسای مجامع استان‌ها",
-      "source_link": "https://www.hawzahnews.com/photo/1438840/%D8%AA%D8%B5%D8%A7%D9%88%DB%8C%D8%B1-%D9%86%D8%B4%D8%B3%D8%AA-%D9%87%D9%85-%D8%A7%D9%86%D8%AF%DB%8C%D8%B4%DB%8C-%D9%82%D8%A7%D9%84%DB%8C%D8%A8%D8%A7%D9%81-%D8%A8%D8%A7-%D8%B1%D8%A4%D8%B3%D8%A7%DB%8C-%D9%85%D8%AC%D8%A7%D9%85%D8%B9-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D9%87%D8%A7",
-      "timestamp": 1793056673453
-    },
-    {
-      "title": "✴️ تحلیل انتخابات اسرائیل بر معادلات امنیتی",
-      "source_link": "https://ana.ir/fa/news/1092576/%D8%AD%D8%A7%D8%B4%DB%8C%D9%87-%D8%A7%D9%85%D9%86-%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C-%D9%86%D8%AA%D8%A7%D9%86%DB%8C%D8%A7%D9%87%D9%88-%D8%AF%D8%B1-%D8%AD%D8%A7%D9%84-%D9%81%D8%B1%D9%88%D9%BE%D8%A7%D8%B4%DB%8C-%D8%A7%D8%B3%D8%AA-%D9%84%D8%A7%D8%A8%DB%8C-%D9%87%D8%A7-%D8%AF%DB%8C%DA%AF%D8%B1-%D9%85%D8%A7%D9%86%D8%B9-%D8%B3%D9%82%D9%88%D8%B7-%D9%86%D9%85%DB%8C-%D8%B4%D9%88%D9%86%D8%AF",
-      "timestamp": 1793056674831
-    },
-    {
-      "title": "✴️ عدم اجرای حکم مالیات بیمه در سال سوم",
-      "source_link": "https://icana.ir/news/426665/%D9%88%D8%B5%D9%88%D9%84-%D8%AD%D9%82-%D8%A8%DB%8C%D9%85%D9%87-%D8%A7%D8%B2-%D8%B7%D8%B1%DB%8C%D9%82-%D8%B3%D8%A7%D8%B2%D9%85%D8%A7%D9%86-%D8%A7%D9%85%D9%88%D8%B1-%D9%85%D8%A7%D9%84%DB%8C%D8%A7%D8%AA%DB%8C-%D9%87%D9%86%D9%88%D8%B2-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C%DB%8C-%D9%86%D8%B4%D8%AF%D9%87-%D8%A7%D8%B3%D8%AA",
-      "timestamp": 1793056676339
-    }
-  ],
-  "LAST_PROCESSED_SNIPPET": "حاشیه امن سیاسی نتانیاهو در حال فروپاشی است/ لابی‌",
+  "PUBLISHED_NEWS": [],
+  "LAST_PROCESSED_SNIPPET": "نگاهداری: تا رقم خوردن فصلی ماندگار از تاریخ ایران",
   "LAST_REPORT_TIME": 1793056677554,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3170,
-  "APIFY_LAST_FETCH": 1793055739299,
+  "APIFY_ITEMS": 3180,
+  "APIFY_LAST_FETCH": 1793059347681,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 71,
+    "جعل محتوا/مصاحبه": 72,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-26T23:02:19.299Z",
+    "at": "2026-10-27T00:02:27.681Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2342,5 +2326,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-26"
+  "TWEET_STATUS_DAY": "2026-10-27"
 }
