@@ -2295,15 +2295,15 @@
   "LAST_PROCESSED_SNIPPET": "جلسه علنی مجلس آغاز شد/ سوال از وزیر اقتصاد در دست",
   "LAST_REPORT_TIME": 1793082798634,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3240,
-  "APIFY_LAST_FETCH": 1793085408929,
+  "APIFY_ITEMS": 3250,
+  "APIFY_LAST_FETCH": 1793089024721,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 74,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-27T07:16:48.929Z",
+    "at": "2026-10-27T08:17:04.722Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
