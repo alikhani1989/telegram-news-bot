@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-25T03:17:59.364Z",
-    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
-    "items": [
-      {
-        "title": "✴️ تقدیم لایحه بودجه ۱۴۰۶ به مجلس در آذر",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-25T03:33:25.082Z",
     "model": "NaraRouter",
     "items": [
@@ -1040,5 +1028,17 @@
       }
     ],
     "avgScore": 90
+  },
+  {
+    "timestamp": "2026-10-27T01:18:03.836Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ احتمال درگیری بیش از ۷۰ درصد در صورت عدم توافق",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
