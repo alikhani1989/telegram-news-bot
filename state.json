@@ -2285,15 +2285,15 @@
   "LAST_PROCESSED_SNIPPET": "انتخابات ناظران مجلس در مجامع و شوراها \n #روزنامه_",
   "LAST_REPORT_TIME": 1793082798634,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3250,
-  "APIFY_LAST_FETCH": 1793089024721,
+  "APIFY_ITEMS": 3260,
+  "APIFY_LAST_FETCH": 1793093526989,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 74,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-27T08:17:04.722Z",
+    "at": "2026-10-27T09:32:06.990Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
