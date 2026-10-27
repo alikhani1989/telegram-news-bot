@@ -2291,15 +2291,15 @@
   "LAST_PROCESSED_SNIPPET": "معلمان در برخورد با دانش‌آموزان متخلف خویشتن‌داری ",
   "LAST_REPORT_TIME": 1793069283609,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3200,
-  "APIFY_LAST_FETCH": 1793067416548,
+  "APIFY_ITEMS": 3210,
+  "APIFY_LAST_FETCH": 1793071930003,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 73,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-27T02:16:56.548Z",
+    "at": "2026-10-27T03:32:10.003Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
