@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "نماینده مردم تهران: ورود متروباس‌ها به تهران/ گامی",
   "LAST_REPORT_TIME": 1793188980553,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3490,
-  "APIFY_LAST_FETCH": 1793191626998,
+  "APIFY_ITEMS": 3500,
+  "APIFY_LAST_FETCH": 1793195273541,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T12:47:06.999Z",
+    "at": "2026-10-28T13:47:53.542Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
