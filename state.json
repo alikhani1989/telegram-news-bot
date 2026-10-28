@@ -2304,8 +2304,8 @@
   "LAST_PROCESSED_SNIPPET": "فیلم| روایت کوثری از حضور ناشناس رهبر انقلاب در می",
   "LAST_REPORT_TIME": 1793173635908,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3450,
-  "APIFY_LAST_FETCH": 1793174527889,
+  "APIFY_ITEMS": 3460,
+  "APIFY_LAST_FETCH": 1793179019210,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2313,7 +2313,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T08:02:07.890Z",
+    "at": "2026-10-28T09:16:59.210Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
