@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "بازدید تخصصی وزیر ورزش و مجلسی‌ها از فدراسیون کشتی",
   "LAST_REPORT_TIME": 1793173635908,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3440,
-  "APIFY_LAST_FETCH": 1793170023137,
+  "APIFY_ITEMS": 3450,
+  "APIFY_LAST_FETCH": 1793174527889,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T06:47:03.137Z",
+    "at": "2026-10-28T08:02:07.890Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
