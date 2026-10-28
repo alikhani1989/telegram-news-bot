@@ -2297,8 +2297,8 @@
   "LAST_PROCESSED_SNIPPET": "منادی: از سال آینده آموزش و تحصیل کودکان از ۵ سالگ",
   "LAST_REPORT_TIME": 1793181768506,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3470,
-  "APIFY_LAST_FETCH": 1793182627687,
+  "APIFY_ITEMS": 3480,
+  "APIFY_LAST_FETCH": 1793187117504,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2306,7 +2306,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T10:17:07.688Z",
+    "at": "2026-10-28T11:31:57.504Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
