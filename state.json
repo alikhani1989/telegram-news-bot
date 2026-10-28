@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-27",
+  "TWEET_LAST_DAY": "2026-10-28",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2299,15 +2299,15 @@
   "LAST_PROCESSED_SNIPPET": "قوه قضائیه باید به بحران کشف‌رود ورود کند \n #بسیج_",
   "LAST_REPORT_TIME": 1793130470083,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3380,
-  "APIFY_LAST_FETCH": 1793144820419,
+  "APIFY_ITEMS": 3390,
+  "APIFY_LAST_FETCH": 1793149327229,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-27T23:47:00.420Z",
+    "at": "2026-10-28T01:02:07.229Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2357,5 +2357,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-27"
+  "TWEET_STATUS_DAY": "2026-10-28"
 }
