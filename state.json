@@ -2293,8 +2293,8 @@
   "LAST_PROCESSED_SNIPPET": "واکنش تند نماینده مشهور مجلس به رای ملوان-تراکتور:",
   "LAST_REPORT_TIME": 1793220498109,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3560,
-  "APIFY_LAST_FETCH": 1793220410459,
+  "APIFY_ITEMS": 3570,
+  "APIFY_LAST_FETCH": 1793224931559,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2302,7 +2302,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T20:46:50.459Z",
+    "at": "2026-10-28T22:02:11.560Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
