@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-26T03:33:26.928Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ بهره‌برداری جاده گیداری ۲۵۰ میلیارد ریال",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-26T04:02:42.249Z",
     "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
     "items": [
@@ -1124,5 +1112,17 @@
       }
     ],
     "avgScore": 96
+  },
+  {
+    "timestamp": "2026-10-28T07:47:10.425Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ زیرساخت‌های اساسی خراسان شمالی در کمیسیون امنیت ملی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]

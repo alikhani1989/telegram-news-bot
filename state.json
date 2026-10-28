@@ -17,17 +17,6 @@
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
-      "id": "1792858675132_wwc5b",
-      "timestamp": "2026-10-24T16:17:55.132Z",
-      "title": "✴️ ضرورت سرعت کارهای اداری و مبارزه با فساد",
-      "body": "🔸 فضل‌الله رنجبر نماینده مردم کرمانشاه گفت نشست نظارتی کمیسیون اجتماعی با بازرسی کل کشور بر ضرورت سرعت بخشیدن به کارهای اداری و برخورد جدی با فساد تأکید کرد.\n\n🔸 او همچنین گفت حمایت از سازمان بازرسی و تسهیل سرمایه‌گذاری در مناطق محروم برای حل مشکلات اقتصادی ضروری است.",
-      "source_link": "https://icana.ir/news/426516/%D8%A7%D8%B2-%D8%A8%D8%B1%D8%AE%D9%88%D8%B1%D8%AF-%D8%A8%D8%A7-%D8%AA%D8%B1%DA%A9-%D9%81%D8%B9%D9%84-%D9%87%D8%A7-%D8%AF%D8%B1-%D8%AF%D8%B3%D8%AA%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C%DB%8C-%D8%AA%D8%A7-%D8%AD%D9%85%D8%A7%DB%8C%D8%AA-%D8%A7%D8%B2-%D8%B7%D8%B1%D8%AD",
-      "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 100,
-      "qualityIssues": [],
-      "reviewed": true
-    },
-    {
       "id": "1792872197383_5y9qe",
       "timestamp": "2026-10-24T20:03:17.383Z",
       "title": "✴️ مقابله با زیرمیزی در بهداشت",
@@ -2219,9 +2208,9 @@
       "body": "🔸 محمدمهدی شهریاری نماینده مجلس گفت که بدون زیرساخت‌های اساسی مانند راه، آب و بهداشت، تکمیل زنجیره ارزش در روستاها ناممکن است.\n\n🔸 او همچنین گفت که کمبود سرانه کتابخانه‌ها و سایر زیرساخت‌های فرهنگی نیز مانع توسعه روستاهای خراسان شمالی می‌شود.",
       "source_link": "https://icana.ir/news/426617/%DA%A9%D9%85%D8%A8%D9%88%D8%AF-%D8%B3%D8%B1%D8%A7%D9%86%D9%87-%DA%A9%D8%AA%D8%A7%D8%A8%D8%AE%D8%A7%D9%86%D9%87-%D9%87%D8%A7-%D8%AA%D8%A7-%D8%B6%D8%B1%D9%88%D8%B1%D8%AA-%D8%AA%D9%88%D8%B3%D8%B9%D9%87-%D8%B2%DB%8C%D8%B1%D8%B3%D8%A7%D8%AE%D8%AA-%D9%87%D8%A7%DB%8C-%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C%DB%8C-%D8%AE%D8%B1%D8%A7%D8%B3%D8%A7%D9%86",
       "model": "Groq openai/gpt-oss-20b",
-      "qualityScore": 0,
+      "qualityScore": 100,
       "qualityIssues": [],
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "1793171290261_bkk98",
@@ -2255,10 +2244,20 @@
       "qualityScore": 0,
       "qualityIssues": [],
       "reviewed": false
+    },
+    {
+      "id": "1793173634798_93gcu",
+      "timestamp": "2026-10-28T07:47:14.798Z",
+      "title": "✴️ زیرساخت‌های اساسی خراسان شمالی در کمیسیون امنیت ملی",
+      "body": "🔸 محمدمهدی شهریاری نماینده مردم بجنورد، مانه، سملقان، جاجرم، گرمه، راز و جرگلان در مجلس و عضو کمیسیون امنیت ملی و سیاست خارجی مجلس گفت زیرساخت‌های اساسی نظیر راه، آب و بهداشت در روستاهای خراسان شمالی فراهم نیستند و تکمیل زنجیره ارزش را ناممکن می‌سازند.\n\n🔸 او همچنین گفت ۵۰ درصد جوانان به دلیل این کمبودها به شهرهای بزرگ مهاجرت می‌کنند و حمایت از کشاورزان بخصوص انگور درجه یک ضروری است.",
+      "source_link": "https://icana.ir/news/426617/%DA%A9%D9%85%D8%A8%D9%88%D8%AF-%D8%B3%D8%B1%D8%A7%D9%86%D9%87-%DA%A9%D8%AA%D8%A7%D8%A8%D8%AE%D8%A7%D9%86%D9%87-%D9%87%D8%A7-%D8%AA%D8%A7-%D8%B6%D8%B1%D9%88%D8%B1%D8%AA-%D8%AA%D9%88%D8%B3%D8%B9%D9%87-%D8%B2%DB%8C%D8%B1%D8%B3%D8%A7%D8%AE%D8%AA-%D9%87%D8%A7%DB%8C-%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C%DB%8C-%D8%AE%D8%B1%D8%A7%D8%B3%D8%A7%D9%86",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 0,
+      "qualityIssues": [],
+      "reviewed": false
     }
   ],
   "RECENT_TITLES": [
-    "تاخیر پرداخت بیمه‌داران داروها را مختل کرد",
     "اخلاق سیاسی در مرز نقد و تخریب",
     "کمیسیون ویژه حمایت از تولید به ماکو رفت",
     "قانون ثبت رسمی اموال با شناسه یکتا",
@@ -2272,54 +2271,10 @@
     "مشکلات زیرساخت روستاهای خراسان شمالی",
     "تناقض‌های ترامپ درباره ایران",
     "۱۷ میلیون دانش‌آموز تحت پوشش یک میلیون معلم",
-    "۳۰ هزار میلیارد برای آبخیزداری ضروری"
+    "۳۰ هزار میلیارد برای آبخیزداری ضروری",
+    "زیرساخت‌های اساسی خراسان شمالی در کمیسیون امنیت ملی"
   ],
   "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ درخواست نظارت بر سرپرست هلدینگ غدیر",
-      "source_link": "https://snn.ir/fa/news/1478704/%D9%86%D8%A7%D9%85%D9%87-%D8%AE%D8%B6%D8%B1%DB%8C%D8%A7%D9%86-%D8%A8%D9%87-%D9%88%D8%B2%DB%8C%D8%B1-%D8%A7%D9%82%D8%AA%D8%B5%D8%A7%D8%AF-%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D8%B3%D8%B1%D9%BE%D8%B1%D8%B3%D8%AA-%D9%87%D9%84%D8%AF%DB%8C%D9%86%DA%AF-%D8%BA%D8%AF%DB%8C%D8%B1",
-      "timestamp": 1793170054382
-    },
-    {
-      "title": "✴️ انتخاب دو نماینده ناظر بورس",
-      "source_link": "https://www.boursenews.ir/fa/news/308947/%D8%AF%D9%88%D9%86%D8%A7%D8%B8%D8%B1-%D9%85%D8%AC%D9%84%D8%B3-%D8%AF%D8%B1-%D8%B4%D9%88%D8%B1%D8%A7%DB%8C-%D8%B9%D8%A7%D9%84%DB%8C-%D8%A8%D9%88%D8%B1%D8%B3-%D8%AA%D8%B9%DB%8C%DB%8C%D9%86-%D8%B4%D8%AF%D9%86%D8%AF",
-      "timestamp": 1793170055718
-    },
-    {
-      "title": "✴️ ضرورت تحول در نهادهای سرمایه‌گذاری",
-      "source_link": "https://borna.news/fa/news/2407735/%D9%86%D9%87%D8%A7%D8%AF%D9%87%D8%A7%DB%8C-%D8%B3%D8%B1%D9%85%D8%A7%DB%8C%D9%87-%DA%AF%D8%B0%D8%A7%D8%B1%DB%8C-%D8%A8%D8%A7-%D8%AA%D8%AD%D9%88%D9%84-%D8%B3%D8%A7%D8%AE%D8%AA%D8%A7%D8%B1%DB%8C-%D8%B2%D9%85%DB%8C%D9%86%D9%87-%D8%AC%D8%B0%D8%A8-%D8%B3%D8%B1%D9%85%D8%A7%DB%8C%D9%87-%D9%87%D8%A7%DB%8C-%D8%AF%D8%A7%D8%AE%D9%84%DB%8C-%D9%88-%D8%AE%D8%A7%D8%B1%D8%AC%DB%8C-%D8%B1%D8%A7-%D9%81%D8%B1%D8%A7%D9%87%D9%85-%D9%85%DB%8C-%DA%A9%D9%86%D9%86%D8%AF",
-      "timestamp": 1793170056774
-    },
-    {
-      "title": "✴️ تهدید آمریکا تقویت وحدت ملی می‌کند",
-      "source_link": "https://www.jamaran.news/fa/tiny/news-1733640",
-      "timestamp": 1793171284462
-    },
-    {
-      "title": "✴️ کارت‌های آزاد سوخت در هرمزگان با شرایط هماهنگ",
-      "source_link": "https://www.yjc.ir/fa/news/9143098/%DA%A9%D8%A7%D8%B1%D8%AA-%D8%A2%D8%B2%D8%A7%D8%AF-%D8%A8%D9%87-%D8%B4%D9%85%D8%A7%D8%B1%DB%8C-%D8%A7%D8%B2-%D8%AC%D8%A7%DB%8C%DA%AF%D8%A7%D9%87-%D9%87%D8%A7%DB%8C-%D9%87%D8%B1%D9%85%D8%B2%DA%AF%D8%A7%D9%86-%D8%A8%D8%A7%D8%B2-%D9%85%DB%8C-%DA%AF%D8%B1%D8%AF%D8%AF",
-      "timestamp": 1793171285511
-    },
-    {
-      "title": "✴️ سرانه تخت‌های بیمارستانی قزوین پایین‌تر از کشور",
-      "source_link": "https://snn.ir/fa/news/1478708/%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D9%82%D8%B2%D9%88%DB%8C%D9%86-%D8%AF%D8%B1-%D9%85%D8%AC%D9%84%D8%B3-%D8%A8%DB%8C%D9%85%D8%A7%D8%B1%D8%B3%D8%AA%D8%A7%D9%86-700-%D8%AA%D8%AE%D8%AA-%D8%AE%D9%88%D8%A7%D8%A8%DB%8C-%D8%B4%D9%87%DB%8C%D8%AF-%D8%B1%D8%A6%DB%8C%D8%B3%DB%8C-%D8%A8%D9%87-%D9%BE%DB%8C%D8%B4%D8%B1%D9%81%D8%AA-40-%D8%AF%D8%B1%D8%B5%D8%AF%DB%8C-%D8%B1%D8%B3%DB%8C%D8%AF",
-      "timestamp": 1793171286946
-    },
-    {
-      "title": "✴️ دکتر موسوی بر همکاری با ایثارگران تأکید کرد",
-      "source_link": "https://snn.ir/fa/news/1478724/%D8%AA%D8%A7%DA%A9%DB%8C%D8%AF-%D8%A8%D8%B1-%D8%A8%D9%87%D8%B1%D9%87-%DA%AF%DB%8C%D8%B1%DB%8C-%D8%A7%D8%B2-%D8%B8%D8%B1%D9%81%DB%8C%D8%AA-%D9%86%D8%AE%D8%A8%DA%AF%D8%A7%D9%86-%D8%A7%DB%8C%D8%AB%D8%A7%D8%B1%DA%AF%D8%B1%DB%8C-%D8%AF%D8%B1-%D8%B9%D8%B1%D8%B5%D9%87-%D9%87%D8%A7%DB%8C-%D9%85%D8%AE%D8%AA%D9%84%D9%81",
-      "timestamp": 1793171287748
-    },
-    {
-      "title": "✴️ مشکلات زیرساخت روستاهای خراسان شمالی",
-      "source_link": "https://icana.ir/news/426617/%DA%A9%D9%85%D8%A8%D9%88%D8%AF-%D8%B3%D8%B1%D8%A7%D9%86%D9%87-%DA%A9%D8%AA%D8%A7%D8%A8%D8%AE%D8%A7%D9%86%D9%87-%D9%87%D8%A7-%D8%AA%D8%A7-%D8%B6%D8%B1%D9%88%D8%B1%D8%AA-%D8%AA%D9%88%D8%B3%D8%B9%D9%87-%D8%B2%DB%8C%D8%B1%D8%B3%D8%A7%D8%AE%D8%AA-%D9%87%D8%A7%DB%8C-%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C%DB%8C-%D8%AE%D8%B1%D8%A7%D8%B3%D8%A7%D9%86",
-      "timestamp": 1793171289494
-    },
-    {
-      "title": "✴️ تناقض‌های ترامپ درباره ایران",
-      "source_link": "https://icana.ir/news/426744/%D8%AA%D9%86%D8%A7%D9%82%D8%B6-%DA%AF%D9%88%DB%8C%DB%8C-%D9%87%D8%A7%DB%8C-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%DA%AF%D8%B1%DB%8C%D8%A8%D8%A7%D9%86-%D9%85%D8%B1%D8%AF%D9%85-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%B1%D8%A7-%DA%AF%D8%B1%D9%81%D8%AA%D9%87-%D8%A7%D8%B3%D8%AA",
-      "timestamp": 1793171290261
-    },
     {
       "title": "✴️ ۱۷ میلیون دانش‌آموز تحت پوشش یک میلیون معلم",
       "source_link": "https://www.asriran.com/fa/news/1202073/%D8%A7%D8%B2-%D8%B3%D8%A7%D9%84-%D8%A2%DB%8C%D9%86%D8%AF%D9%87-%D8%A2%D9%85%D9%88%D8%B2%D8%B4-%D9%88-%D8%AA%D8%AD%D8%B5%DB%8C%D9%84-%DA%A9%D9%88%D8%AF%DA%A9%D8%A7%D9%86-%D8%A7%D8%B2-5-%D8%B3%D8%A7%D9%84%DA%AF%DB%8C-%D8%A2%D8%BA%D8%A7%D8%B2-%D9%85%DB%8C-%D8%B4%D9%88%D8%AF",
@@ -2329,10 +2284,15 @@
       "title": "✴️ ۳۰ هزار میلیارد برای آبخیزداری ضروری",
       "source_link": "https://www.iana.ir/fa/tiny/news-138875",
       "timestamp": 1793171837964
+    },
+    {
+      "title": "✴️ زیرساخت‌های اساسی خراسان شمالی در کمیسیون امنیت ملی",
+      "source_link": "https://icana.ir/news/426617/%DA%A9%D9%85%D8%A8%D9%88%D8%AF-%D8%B3%D8%B1%D8%A7%D9%86%D9%87-%DA%A9%D8%AA%D8%A7%D8%A8%D8%AE%D8%A7%D9%86%D9%87-%D9%87%D8%A7-%D8%AA%D8%A7-%D8%B6%D8%B1%D9%88%D8%B1%D8%AA-%D8%AA%D9%88%D8%B3%D8%B9%D9%87-%D8%B2%DB%8C%D8%B1%D8%B3%D8%A7%D8%AE%D8%AA-%D9%87%D8%A7%DB%8C-%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C%DB%8C-%D8%AE%D8%B1%D8%A7%D8%B3%D8%A7%D9%86",
+      "timestamp": 1793173634798
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "هدف‌گذاری آبخیزداری در ۲۰ میلیون هکتار/برای آبخیزد",
-  "LAST_REPORT_TIME": 1793165594810,
+  "LAST_PROCESSED_SNIPPET": "بازدید تخصصی وزیر ورزش و مجلسی‌ها از فدراسیون کشتی",
+  "LAST_REPORT_TIME": 1793173635908,
   "APIFY_MONTH": "2026-10",
   "APIFY_ITEMS": 3440,
   "APIFY_LAST_FETCH": 1793170023137,
