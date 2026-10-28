@@ -2296,8 +2296,8 @@
   "LAST_PROCESSED_SNIPPET": "تعیین تکلیف وضعیت تراستی‌ها در کمیسون انرژی مجلس/ ",
   "LAST_REPORT_TIME": 1793196207062,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3510,
-  "APIFY_LAST_FETCH": 1793199757744,
+  "APIFY_ITEMS": 3520,
+  "APIFY_LAST_FETCH": 1793203399473,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2305,7 +2305,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T15:02:37.744Z",
+    "at": "2026-10-28T16:03:19.474Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
