@@ -2293,8 +2293,8 @@
   "LAST_PROCESSED_SNIPPET": "افزایش تعداد نمایندگان مجلس در دستور پیگیری؛ طرح ب",
   "LAST_REPORT_TIME": 1793206060250,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3520,
-  "APIFY_LAST_FETCH": 1793203399473,
+  "APIFY_ITEMS": 3530,
+  "APIFY_LAST_FETCH": 1793207841167,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2302,7 +2302,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T16:03:19.474Z",
+    "at": "2026-10-28T17:17:21.167Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
