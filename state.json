@@ -2293,8 +2293,8 @@
   "LAST_PROCESSED_SNIPPET": "انتخابات شوراها هرچه سریع‌تر برگزار شود / زیرساخت‌",
   "LAST_REPORT_TIME": 1793246580202,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3630,
-  "APIFY_LAST_FETCH": 1793250126893,
+  "APIFY_ITEMS": 3640,
+  "APIFY_LAST_FETCH": 1793253737884,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2302,7 +2302,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T05:02:06.894Z",
+    "at": "2026-10-29T06:02:17.885Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
