@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-28",
+  "TWEET_LAST_DAY": "2026-10-29",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2293,8 +2293,8 @@
   "LAST_PROCESSED_SNIPPET": "واکنش تند نماینده مشهور مجلس به رای ملوان-تراکتور:",
   "LAST_REPORT_TIME": 1793220498109,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3580,
-  "APIFY_LAST_FETCH": 1793229406062,
+  "APIFY_ITEMS": 3590,
+  "APIFY_LAST_FETCH": 1793233012516,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2302,7 +2302,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-28T23:16:46.063Z",
+    "at": "2026-10-29T00:16:52.516Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2352,5 +2352,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-28"
+  "TWEET_STATUS_DAY": "2026-10-29"
 }
