@@ -2290,8 +2290,8 @@
   "LAST_PROCESSED_SNIPPET": "کارکنان وزارت نیرو در جریان جنگ اخیر پای کار خدمت‌",
   "LAST_REPORT_TIME": 1793290645523,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3720,
-  "APIFY_LAST_FETCH": 1793287926838,
+  "APIFY_ITEMS": 3730,
+  "APIFY_LAST_FETCH": 1793292420780,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2299,7 +2299,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T15:32:06.838Z",
+    "at": "2026-10-29T16:47:00.781Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
