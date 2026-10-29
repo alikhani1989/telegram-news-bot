@@ -2303,8 +2303,8 @@
   "LAST_PROCESSED_SNIPPET": "اعضای کمیسیون امنیت ملی مجلس در یک قاب/ رئیس سازما",
   "LAST_REPORT_TIME": 1793306874663,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3760,
-  "APIFY_LAST_FETCH": 1793304145754,
+  "APIFY_ITEMS": 3770,
+  "APIFY_LAST_FETCH": 1793308618276,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2312,7 +2312,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T20:02:25.755Z",
+    "at": "2026-10-29T21:16:58.277Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
