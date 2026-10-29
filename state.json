@@ -2286,8 +2286,8 @@
   "LAST_PROCESSED_SNIPPET": "زمان برگزاری جلسات علنی مجلس در هفته آتی اعلام شد ",
   "LAST_REPORT_TIME": 1793261851903,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3670,
-  "APIFY_LAST_FETCH": 1793266333793,
+  "APIFY_ITEMS": 3680,
+  "APIFY_LAST_FETCH": 1793270822781,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2295,7 +2295,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T09:32:13.794Z",
+    "at": "2026-10-29T10:47:02.782Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
