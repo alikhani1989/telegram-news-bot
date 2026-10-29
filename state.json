@@ -2308,8 +2308,8 @@
   "LAST_PROCESSED_SNIPPET": "ضرورت استفاده از ظرفیت علمی  در کنار رفع مشکلات اق",
   "LAST_REPORT_TIME": 1793261851903,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3660,
-  "APIFY_LAST_FETCH": 1793261820667,
+  "APIFY_ITEMS": 3670,
+  "APIFY_LAST_FETCH": 1793266333793,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2317,7 +2317,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T08:17:00.667Z",
+    "at": "2026-10-29T09:32:13.794Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
