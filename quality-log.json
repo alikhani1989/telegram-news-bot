@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-10-27T00:03:41.056Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ وصول حق بیمه از طریق مالیات در سال سوم اجرا نشد",
-        "score": 90,
-        "issues": [
-          "عبارات خشک خبری استفاده شده"
-        ]
-      }
-    ],
-    "avgScore": 90
-  },
-  {
     "timestamp": "2026-10-27T00:18:51.082Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1178,6 +1164,18 @@
       },
       {
         "title": "✴️ تأکید بر مقاومت در برابر استکبار",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-10-29T10:02:39.586Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ دولت باید وزرای نفت و اطلاعات را معرفی",
         "score": 100,
         "issues": []
       }
