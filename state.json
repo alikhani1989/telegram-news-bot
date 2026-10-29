@@ -2303,8 +2303,8 @@
   "LAST_PROCESSED_SNIPPET": "انتقادات جوکار در حضور عارف: یزد هزینه‌های مهاجرپذ",
   "LAST_REPORT_TIME": 1793275434943,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3690,
-  "APIFY_LAST_FETCH": 1793275341870,
+  "APIFY_ITEMS": 3700,
+  "APIFY_LAST_FETCH": 1793279828876,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2312,7 +2312,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T12:02:21.870Z",
+    "at": "2026-10-29T13:17:08.877Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
