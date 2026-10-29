@@ -2303,8 +2303,8 @@
   "LAST_PROCESSED_SNIPPET": "نماینده مجلس: افزایش تعرفه واردات خودرو برخلاف احک",
   "LAST_REPORT_TIME": 1793254641802,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3640,
-  "APIFY_LAST_FETCH": 1793253737884,
+  "APIFY_ITEMS": 3650,
+  "APIFY_LAST_FETCH": 1793258210230,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2312,7 +2312,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T06:02:17.885Z",
+    "at": "2026-10-29T07:16:50.230Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
