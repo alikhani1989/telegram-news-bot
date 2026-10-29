@@ -2298,8 +2298,8 @@
   "LAST_PROCESSED_SNIPPET": "میرزایی: حمایت از قشر‌های کم‌درآمد باید تقویت شود ",
   "LAST_REPORT_TIME": 1793275434943,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3710,
-  "APIFY_LAST_FETCH": 1793284320386,
+  "APIFY_ITEMS": 3720,
+  "APIFY_LAST_FETCH": 1793287926838,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2307,7 +2307,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T14:32:00.386Z",
+    "at": "2026-10-29T15:32:06.838Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
