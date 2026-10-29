@@ -2293,8 +2293,8 @@
   "LAST_PROCESSED_SNIPPET": "آیت الله کعبی: شیوخ عراق پیشنهاد دادند با بسیج عشا",
   "LAST_REPORT_TIME": 1793313134558,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3780,
-  "APIFY_LAST_FETCH": 1793313115907,
+  "APIFY_ITEMS": 3790,
+  "APIFY_LAST_FETCH": 1793316735949,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2302,7 +2302,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-29T22:31:55.907Z",
+    "at": "2026-10-29T23:32:15.949Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
