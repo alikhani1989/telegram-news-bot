@@ -2299,8 +2299,8 @@
   "LAST_PROCESSED_SNIPPET": "نبویان، نماینده مجلس: در قم درخواست مجوز ساخت بمب ",
   "LAST_REPORT_TIME": 1793359323523,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3890,
-  "APIFY_LAST_FETCH": 1793359915357,
+  "APIFY_ITEMS": 3900,
+  "APIFY_LAST_FETCH": 1793363523427,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2308,7 +2308,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T11:31:55.357Z",
+    "at": "2026-10-30T12:32:03.427Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
