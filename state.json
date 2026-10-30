@@ -2306,8 +2306,8 @@
   "LAST_PROCESSED_SNIPPET": "نماینده مجلس: کلیپ‌های آموزشی مواجهه با رادیواکتیو",
   "LAST_REPORT_TIME": 1793342004644,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3850,
-  "APIFY_LAST_FETCH": 1793341934492,
+  "APIFY_ITEMS": 3860,
+  "APIFY_LAST_FETCH": 1793346419100,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2315,7 +2315,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T06:32:14.492Z",
+    "at": "2026-10-30T07:46:59.100Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
