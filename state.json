@@ -2296,8 +2296,8 @@
   "LAST_PROCESSED_SNIPPET": "دموکرات‌ها در یک‌قدمی تسخیر سنا / سقوط پایگاه‌های ",
   "LAST_REPORT_TIME": 1793325814706,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3810,
-  "APIFY_LAST_FETCH": 1793325738820,
+  "APIFY_ITEMS": 3820,
+  "APIFY_LAST_FETCH": 1793330217306,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2305,7 +2305,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T02:02:18.821Z",
+    "at": "2026-10-30T03:16:57.306Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
