@@ -2291,8 +2291,8 @@
   "LAST_PROCESSED_SNIPPET": "حفظ انسجام ملی و هوشیاری مردم، مهم‌ترین عامل در خن",
   "LAST_REPORT_TIME": 1793332071605,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3830,
-  "APIFY_LAST_FETCH": 1793334720623,
+  "APIFY_ITEMS": 3840,
+  "APIFY_LAST_FETCH": 1793338324749,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2300,7 +2300,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T04:32:00.623Z",
+    "at": "2026-10-30T05:32:04.749Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
