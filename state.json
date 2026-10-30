@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "مراسم تعزیه‌خوانی ایام فاطمیه در حسینیه اعظم زنجان",
   "LAST_REPORT_TIME": 1793359323523,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3900,
-  "APIFY_LAST_FETCH": 1793363523427,
+  "APIFY_ITEMS": 3910,
+  "APIFY_LAST_FETCH": 1793367131238,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T12:32:03.427Z",
+    "at": "2026-10-30T13:32:11.239Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
