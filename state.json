@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "ضرورت پیگیری مطالبات و رفع مشکلات مناطق حاشیه شهر ",
   "LAST_REPORT_TIME": 1793368051090,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3950,
-  "APIFY_LAST_FETCH": 1793383658674,
+  "APIFY_ITEMS": 3960,
+  "APIFY_LAST_FETCH": 1793387819755,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T18:07:38.675Z",
+    "at": "2026-10-30T19:16:59.755Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
