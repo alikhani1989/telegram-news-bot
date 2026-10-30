@@ -2292,8 +2292,8 @@
   "LAST_PROCESSED_SNIPPET": "رضایی، نماینده مجلس: ۱۰ طرح برای خروج از NPT در مج",
   "LAST_REPORT_TIME": 1793395947630,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3980,
-  "APIFY_LAST_FETCH": 1793396808300,
+  "APIFY_ITEMS": 3990,
+  "APIFY_LAST_FETCH": 1793400414707,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2301,7 +2301,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T21:46:48.300Z",
+    "at": "2026-10-30T22:46:54.708Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
