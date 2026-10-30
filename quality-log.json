@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-28T07:47:10.425Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ زیرساخت‌های اساسی خراسان شمالی در کمیسیون امنیت ملی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-28T08:32:47.504Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1170,5 +1158,22 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-10-30T20:32:35.524Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ الزام ۱۵٪ صنعتی‌سازی در ساخت‌وساز",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تأکید بر اهمیت پاسخ رهبر به دانشجویان",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
