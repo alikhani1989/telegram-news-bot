@@ -2279,8 +2279,8 @@
   "LAST_PROCESSED_SNIPPET": "لحظه خروج محمدحسن میرزا، آخرین ولیعهد قاجاریه از ا",
   "LAST_REPORT_TIME": 1793452634345,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4140,
-  "APIFY_LAST_FETCH": 1793463412442,
+  "APIFY_ITEMS": 4150,
+  "APIFY_LAST_FETCH": 1793467930498,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2288,7 +2288,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T16:16:52.443Z",
+    "at": "2026-10-31T17:32:10.498Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
