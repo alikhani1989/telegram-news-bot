@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "افزایش حقوق کارمندان در هاله ابهام؛ ۷۵ درصد کارکنا",
   "LAST_REPORT_TIME": 1793438388146,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4080,
-  "APIFY_LAST_FETCH": 1793438213207,
+  "APIFY_ITEMS": 4090,
+  "APIFY_LAST_FETCH": 1793442716775,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T09:16:53.208Z",
+    "at": "2026-10-31T10:31:56.775Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
