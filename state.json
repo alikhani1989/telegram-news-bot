@@ -2276,8 +2276,8 @@
   "LAST_PROCESSED_SNIPPET": "پیش‌بینی سی‌ان‌ان از نتایج انتخابات میان‌دوره‌ای ک",
   "LAST_REPORT_TIME": 1793474247668,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4180,
-  "APIFY_LAST_FETCH": 1793480865822,
+  "APIFY_ITEMS": 4190,
+  "APIFY_LAST_FETCH": 1793485272111,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 77,
     "تیتر کلی": 5,
@@ -2285,7 +2285,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T21:07:45.822Z",
+    "at": "2026-10-31T22:21:12.111Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
