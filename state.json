@@ -2283,8 +2283,8 @@
   "LAST_PROCESSED_SNIPPET": "نماینده مجلس: اول بمب هسته‌ای بسازیم، بعد از «ان پ",
   "LAST_REPORT_TIME": 1793426550882,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4050,
-  "APIFY_LAST_FETCH": 1793426521639,
+  "APIFY_ITEMS": 4060,
+  "APIFY_LAST_FETCH": 1793430125037,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2292,7 +2292,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T06:02:01.639Z",
+    "at": "2026-10-31T07:02:05.037Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
