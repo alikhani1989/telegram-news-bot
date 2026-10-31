@@ -13,7 +13,7 @@
     "2106831599564108142",
     "2106827114750074983"
   ],
-  "TWEET_LAST_DAY": "2026-10-30",
+  "TWEET_LAST_DAY": "2026-10-31",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2292,8 +2292,8 @@
   "LAST_PROCESSED_SNIPPET": "اعتراف اوباما بر کنترل ایران در تنگه هرمز؛ پایان س",
   "LAST_REPORT_TIME": 1793402372772,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 3990,
-  "APIFY_LAST_FETCH": 1793400414707,
+  "APIFY_ITEMS": 4000,
+  "APIFY_LAST_FETCH": 1793404937041,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2301,7 +2301,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-30T22:46:54.708Z",
+    "at": "2026-10-31T00:02:17.041Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2351,5 +2351,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-30"
+  "TWEET_STATUS_DAY": "2026-10-31"
 }
