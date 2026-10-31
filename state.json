@@ -2286,8 +2286,8 @@
   "LAST_PROCESSED_SNIPPET": "خروج از NPT به مطالبه عمومی در اجتماعات شبانه تبدی",
   "LAST_REPORT_TIME": 1793474247668,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4160,
-  "APIFY_LAST_FETCH": 1793472425526,
+  "APIFY_ITEMS": 4170,
+  "APIFY_LAST_FETCH": 1793476946876,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2295,7 +2295,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T18:47:05.526Z",
+    "at": "2026-10-31T20:02:26.876Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
