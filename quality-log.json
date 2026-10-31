@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-28T20:48:09.354Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ مشکلات مرز بازرگان در کمیسیون ویژه حمایت",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ صف‌های کامیون در مرز بازرگان کمیسیون ویژه حمایت",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-29T04:02:45.598Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1138,5 +1121,17 @@
       }
     ],
     "avgScore": 90
+  },
+  {
+    "timestamp": "2026-10-31T13:17:09.395Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تقویت زیرساخت‌های بهداشتی ایوانکی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
