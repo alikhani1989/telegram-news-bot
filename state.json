@@ -2289,8 +2289,8 @@
   "LAST_PROCESSED_SNIPPET": "تجلیل شهردار کومله از مهری فلاحی، بانوی مدال‌آور ن",
   "LAST_REPORT_TIME": 1793438388146,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4090,
-  "APIFY_LAST_FETCH": 1793442716775,
+  "APIFY_ITEMS": 4100,
+  "APIFY_LAST_FETCH": 1793447211219,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2298,7 +2298,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T10:31:56.775Z",
+    "at": "2026-10-31T11:46:51.220Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
