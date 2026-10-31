@@ -2283,8 +2283,8 @@
   "LAST_PROCESSED_SNIPPET": "هیأت؛ از مجلس‌داری تا جامعه‌سازی \n #جام_جم_آنلاین",
   "LAST_REPORT_TIME": 1793426550882,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4060,
-  "APIFY_LAST_FETCH": 1793430125037,
+  "APIFY_ITEMS": 4070,
+  "APIFY_LAST_FETCH": 1793433731285,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2292,7 +2292,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T07:02:05.037Z",
+    "at": "2026-10-31T08:02:11.286Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
