@@ -2295,8 +2295,8 @@
   "LAST_PROCESSED_SNIPPET": "اعتراف اوباما بر کنترل ایران در تنگه هرمز؛ پایان س",
   "LAST_REPORT_TIME": 1793407844713,
   "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4010,
-  "APIFY_LAST_FETCH": 1793409406385,
+  "APIFY_ITEMS": 4020,
+  "APIFY_LAST_FETCH": 1793413019530,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 76,
     "تیتر کلی": 5,
@@ -2304,7 +2304,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T01:16:46.385Z",
+    "at": "2026-10-31T02:16:59.530Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
