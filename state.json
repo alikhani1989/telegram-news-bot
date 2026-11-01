@@ -2297,8 +2297,8 @@
   "LAST_PROCESSED_SNIPPET": "جمهوری‌خواهان در انتظار افول نفوذ ترامپ؛ کنترل رئی",
   "LAST_REPORT_TIME": 1793520151705,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 70,
-  "APIFY_LAST_FETCH": 1793521010014,
+  "APIFY_ITEMS": 80,
+  "APIFY_LAST_FETCH": 1793524619161,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 78,
     "تیتر کلی": 5,
@@ -2306,7 +2306,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T08:16:50.015Z",
+    "at": "2026-11-01T09:16:59.161Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
