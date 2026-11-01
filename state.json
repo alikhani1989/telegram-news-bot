@@ -2297,8 +2297,8 @@
   "LAST_PROCESSED_SNIPPET": "منصور حقیقت‌پور: تصمیم ساخت بمب اتم در کف خیابان ی",
   "LAST_REPORT_TIME": 1793565149163,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 170,
-  "APIFY_LAST_FETCH": 1793563890543,
+  "APIFY_ITEMS": 180,
+  "APIFY_LAST_FETCH": 1793567817883,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 79,
     "تیتر کلی": 5,
@@ -2306,7 +2306,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T20:11:30.543Z",
+    "at": "2026-11-01T21:16:57.883Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
