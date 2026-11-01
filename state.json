@@ -2296,8 +2296,8 @@
   "LAST_PROCESSED_SNIPPET": "حذف ارز بیش از ۴۵۰۰ قلم کالا و هشدار درباره افزایش",
   "LAST_REPORT_TIME": 1793575282690,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 190,
-  "APIFY_LAST_FETCH": 1793572318116,
+  "APIFY_ITEMS": 200,
+  "APIFY_LAST_FETCH": 1793576803844,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 79,
     "تیتر کلی": 5,
@@ -2305,7 +2305,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T22:31:58.116Z",
+    "at": "2026-11-01T23:46:43.845Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
