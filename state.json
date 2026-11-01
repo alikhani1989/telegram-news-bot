@@ -25,28 +25,6 @@
   "TWEET_COUNT_TODAY": 8,
   "NEWS_DATABASE": [
     {
-      "id": "1793126030539_u5n9g",
-      "timestamp": "2026-10-27T18:33:50.539Z",
-      "title": "✴️ پیشرفت بازسازی ورزشی آزادی در کمیسیون فرهنگی",
-      "body": "🔸 احمد راستینه نماینده مردم شهرکرد و سخنگوی کمیسیون فرهنگی مجلس گفت برنامه امروز کمیسیون شامل بازدید و گزارش مسابقات آسیایی بود.\n\n🔸 احمد راستینه گفت تا امروز هزینه بازسازی استادیوم آزادی دو هزار میلیارد تومان تأمین اعتبار شده است.",
-      "source_link": "https://icana.ir/news/426761/%D8%AF%D8%B3%D8%AA%D9%88%D8%B1-%D9%88%D8%B2%DB%8C%D8%B1-%D9%88%D8%B1%D8%B2%D8%B4-%D9%88-%D8%AA%D8%B9%D9%87%D8%AF-%D9%BE%DB%8C%D9%85%D8%A7%D9%86%DA%A9%D8%A7%D8%B1-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A8%D9%87%D8%B1%D9%87-%D8%A8%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C-%D8%A7%D8%B2-%D8%A7%D8%B3%D8%AA%D8%A7%D8%AF%DB%8C%D9%88%D9%85",
-      "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 100,
-      "qualityIssues": [],
-      "reviewed": true
-    },
-    {
-      "id": "1793126861243_9vman",
-      "timestamp": "2026-10-27T18:47:41.243Z",
-      "title": "✴️ جلوگیری از مصرف غیرمجاز ماینرها در شبکه برق",
-      "body": "🔸 رمضانعلی سنگدوینی عضو کمیسیون انرژی مجلس گفت هزینه پایین برق باعث جذب افراد به استخراج رمزارزهای غیرمجاز می‌شود و برخی از کارخانه‌های صنعتی راکد برای نصب ماینرها استفاده می‌گردد.\n\n🔸 او همچنین گفت تا کنون بیش از ۶۳۰۰ مگاوات به ظرفیت تجدیدپذیر اضافه شده و پیش‌بینی می‌شود تا سال آینده این مقدار به ۱۲ هزار مگاوات برسد؛ همچنین وزارت نیرو به‌طور جدی به پیگیری ماینرهای غیرمجاز پرداخته است.",
-      "source_link": "https://www.afkarnews.com/fa/tiny/news-1413342",
-      "model": "Groq openai/gpt-oss-120b",
-      "qualityScore": 0,
-      "qualityIssues": [],
-      "reviewed": false
-    },
-    {
       "id": "1793130462126_5wpqz",
       "timestamp": "2026-10-27T19:47:42.126Z",
       "title": "✴️ قطع برق ۴۵ مزرعه استخراج رمزارز در تهران",
@@ -2255,11 +2233,33 @@
       "qualityScore": 0,
       "qualityIssues": [],
       "reviewed": false
+    },
+    {
+      "id": "1793512175904_a54kn",
+      "timestamp": "2026-11-01T05:49:35.904Z",
+      "title": "✴️ اصلاح قانون آیین دادرسی کیفری در کمیسیون قضایی",
+      "body": "🔸 کمیسیون قضایی و حوقی مجلس گفت طرح اصلاح موادی از قانون آیین دادرسی کیفری در دستور کار است.\n\n🔸 این کمیسیون همچنین به بررسی اصلاح قانون نحوه اجرای محکومیت‌های مالی و احکام مهریه که توسط شورای نگهبان اعاده شده، پرداخته است.",
+      "source_link": "https://www.imna.ir/news/1016688/%D8%A8%D8%B1%D8%B1%D8%B3%DB%8C-%D8%B7%D8%B1%D8%AD-%D8%A7%D8%B5%D9%84%D8%A7%D8%AD-%D9%82%D8%A7%D9%86%D9%88%D9%86-%D9%85%D9%87%D8%B1%DB%8C%D9%87-%D8%AC%D9%87%D8%AA-%D8%AA%D8%A3%D9%85%DB%8C%D9%86-%D9%86%D8%B8%D8%B1-%D8%B4%D9%88%D8%B1%D8%A7%DB%8C-%D9%86%DA%AF%D9%87%D8%A8%D8%A7%D9%86-%D8%AF%D8%B1-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 90,
+      "qualityIssues": [
+        "⚠️ نام و سمّت شخص در خط اول متن پیدا نشد"
+      ],
+      "reviewed": true
+    },
+    {
+      "id": "1793512178712_y1lqn",
+      "timestamp": "2026-11-01T05:49:38.712Z",
+      "title": "✴️ ضرورت بازنگری مدیریت پایانه‌های مرزی",
+      "body": "🔸 جعفر قادری نماینده مردم در ملس گفت مشکلات مرزی ناشی از عدم مدیریت یکپارچه و تداخل دستگاه‌هاست.\n\n🔸 او همچنین گفت بازنگری جدی در شیوه اداره پایانه‌های مرزی، به‌ویژه در مناطق آزاد، برای تسهیل تجارت و جلوگیری از تخلفات ضروری است.",
+      "source_link": "https://icana.ir/news/426765/%D9%BE%D8%A7%DB%8C%D8%A7%D9%86%D9%87-%D9%87%D8%A7%DB%8C-%D9%85%D8%B1%D8%B2%DB%8C-%DA%A9%D8%B4%D9%88%D8%B1-%D8%A8%D9%87-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D9%88%D8%A7%D8%AD%D8%AF-%D9%86%DB%8C%D8%A7%D8%B2-%D8%AF%D8%A7%D8%B1%D9%86%D8%AF",
+      "model": "Groq openai/gpt-oss-120b",
+      "qualityScore": 100,
+      "qualityIssues": [],
+      "reviewed": true
     }
   ],
   "RECENT_TITLES": [
-    "افزایش معدل هرمزگان ۱٫۴۳ نمره",
-    "ایجاد نمایندگی اتاق بازرگانی در سبزوار",
     "تسریع راه‌اندازی درمانگاه تأمین اجتماعی",
     "پیشرفت اجرای قانون ثبت اموال",
     "انتقاد کمیسیون اصل ۹۰ از تراستی‌های نفتی",
@@ -2272,20 +2272,27 @@
     "خروج از پیمان NPT باید عمومی شود",
     "توافق اولیه برای ۳۰۰ قطعه زمین مسکن ملی",
     "تخصیص ۵۰۰ میلیارد ریال برای راه‌روستایی و پل‌ها",
-    "تبادل اراضی برای مسکن ملی در ملایر"
+    "تبادل اراضی برای مسکن ملی در ملایر",
+    "اصلاح قانون آیین دادرسی کیفری در کمیسیون قضایی",
+    "ضرورت بازنگری مدیریت پایانه‌های مرزی"
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ تبادل اراضی برای مسکن ملی در ملایر",
-      "source_link": "https://icana.ir/news/426843/%D9%85%D9%88%D8%A7%D9%81%D9%82%D8%AA-%D8%A7%D9%88%D9%84%DB%8C%D9%87-%D8%A7%D9%88%D9%82%D8%A7%D9%81-%D8%A8%D8%A7-%D8%AA%D9%87%D8%A7%D8%AA%D8%B1-%D8%B2%D9%85%DB%8C%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%85%D8%B3%DA%A9%D9%86-%D9%85%D9%84%DB%8C-%D9%85%D9%84%D8%A7%DB%8C%D8%B1-%D8%B2%D9%85%DB%8C%D9%86-%D8%A8%D8%B1%D8%A7%DB%8C",
-      "timestamp": 1793477840591
+      "title": "✴️ اصلاح قانون آیین دادرسی کیفری در کمیسیون قضایی",
+      "source_link": "https://www.imna.ir/news/1016688/%D8%A8%D8%B1%D8%B1%D8%B3%DB%8C-%D8%B7%D8%B1%D8%AD-%D8%A7%D8%B5%D9%84%D8%A7%D8%AD-%D9%82%D8%A7%D9%86%D9%88%D9%86-%D9%85%D9%87%D8%B1%DB%8C%D9%87-%D8%AC%D9%87%D8%AA-%D8%AA%D8%A3%D9%85%DB%8C%D9%86-%D9%86%D8%B8%D8%B1-%D8%B4%D9%88%D8%B1%D8%A7%DB%8C-%D9%86%DA%AF%D9%87%D8%A8%D8%A7%D9%86-%D8%AF%D8%B1-%DA%A9%D9%85%DB%8C%D8%B3%DB%8C%D9%88%D9%86",
+      "timestamp": 1793512175904
+    },
+    {
+      "title": "✴️ ضرورت بازنگری مدیریت پایانه‌های مرزی",
+      "source_link": "https://icana.ir/news/426765/%D9%BE%D8%A7%DB%8C%D8%A7%D9%86%D9%87-%D9%87%D8%A7%DB%8C-%D9%85%D8%B1%D8%B2%DB%8C-%DA%A9%D8%B4%D9%88%D8%B1-%D8%A8%D9%87-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D9%88%D8%A7%D8%AD%D8%AF-%D9%86%DB%8C%D8%A7%D8%B2-%D8%AF%D8%A7%D8%B1%D9%86%D8%AF",
+      "timestamp": 1793512178712
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "پیش‌بینی سی‌ان‌ان از نتایج انتخابات میان‌دوره‌ای ک",
-  "LAST_REPORT_TIME": 1793474247668,
+  "LAST_PROCESSED_SNIPPET": "بررسی طرح اصلاح قانون مهریه جهت تأمین نظر شورای نگ",
+  "LAST_REPORT_TIME": 1793512180208,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 40,
-  "APIFY_LAST_FETCH": 1793507526900,
+  "APIFY_ITEMS": 50,
+  "APIFY_LAST_FETCH": 1793512019526,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 77,
     "تیتر کلی": 5,
@@ -2293,80 +2300,51 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T04:32:06.901Z",
+    "at": "2026-11-01T05:46:59.527Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
-      "قبلاً منتشر شده": 8,
-      "ری‌تویت": 2
+      "بدون متن": 10
     },
     "newest": [
       {
-        "id": "2116630372276445324",
-        "handle": "MeisamZohurian",
-        "createdAt": "Sat Oct 31 20:36:20 +0000 2026",
-        "len": 279
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
       },
       {
-        "id": "2116617544656118212",
-        "handle": "MojtabaZarei50",
-        "createdAt": "Sat Oct 31 19:45:22 +0000 2026",
-        "len": 278
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
       },
       {
-        "id": "2116608616967155873",
-        "handle": "sangdovini_ir",
-        "createdAt": "Sat Oct 31 19:09:53 +0000 2026",
-        "len": 139
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
       },
       {
-        "id": "2116590134963707940",
-        "handle": "ali_khezrian",
-        "createdAt": "Sat Oct 31 17:56:27 +0000 2026",
-        "len": 255
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
       },
       {
-        "id": "2116575669492793667",
-        "handle": "Ahmadnaderi_ir",
-        "createdAt": "Sat Oct 31 16:58:58 +0000 2026",
-        "len": 272
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
       }
     ],
     "rawSample": {
       "keys": [
-        "type",
-        "id",
-        "url",
-        "twitterUrl",
-        "text",
-        "fullText",
-        "source",
-        "retweetCount",
-        "replyCount",
-        "likeCount",
-        "quoteCount",
-        "viewCount",
-        "createdAt",
-        "lang",
-        "bookmarkCount",
-        "isReply",
-        "conversationId",
-        "possiblySensitive",
-        "isPinned",
-        "author",
-        "extendedEntities",
-        "card",
-        "place",
-        "entities",
-        "isRetweet",
-        "isQuote",
-        "media",
-        "videos",
-        "isConversationControlled"
+        "noResults"
       ],
-      "first": "{\"type\":\"tweet\",\"id\":\"2116630372276445324\",\"url\":\"https://x.com/MeisamZohurian/status/2116630372276445324\",\"twitterUrl\":\"https://twitter.com/MeisamZohurian/status/2116630372276445324\",\"text\":\"قهرمانی جهان مبارک، احمد جوان عزیز.\\n\\nخراسان و مشهد روزگاری از قطب‌های کشتی ایران بودند؛ با قهرمانانی چون محمد خادم و فرزندانش امیر و رسول، مجید خدایی، امیر توکلیان، احمد وفادار و ... سال‌ها منتظر درخشش دوباره مشهد در قله کشتی جهان بودیم و امروز احمد جوان این افتخار را تکرار کرد.\\n\\nامیدوارم این قهرمانی، آغاز نسل تازه‌ای از پهلوانان خراسان باشد. 💐\",\"fullText\":\"قهرمانی جهان مبارک، احمد جوان عزیز.\\n\\nخراس"
+      "first": "{\"noResults\":true}"
     },
-    "allBlank": false,
+    "allBlank": true,
     "maxItemsRequested": 12,
     "useCard": true
   },
