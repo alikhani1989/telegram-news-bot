@@ -2284,8 +2284,8 @@
   "LAST_PROCESSED_SNIPPET": "متکی: اگر آمریکا شروط ایران را بپذیرد، دست مذاکره‌",
   "LAST_REPORT_TIME": 1793569635824,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 180,
-  "APIFY_LAST_FETCH": 1793567817883,
+  "APIFY_ITEMS": 190,
+  "APIFY_LAST_FETCH": 1793572318116,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 79,
     "تیتر کلی": 5,
@@ -2293,7 +2293,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T21:16:57.883Z",
+    "at": "2026-11-01T22:31:58.116Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
