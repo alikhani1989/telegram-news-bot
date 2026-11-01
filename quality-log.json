@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-30T03:47:43.782Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ ترافیک مرز بازرگان تا دو ماه معطل",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ کمیسیون فرهنگی به چالش‌های همدان پرداخته",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-30T04:33:04.556Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1145,5 +1128,19 @@
       }
     ],
     "avgScore": 88
+  },
+  {
+    "timestamp": "2026-11-01T23:33:50.393Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ ۱۲۸ پروژه گردشگری در هفته افتتاح شد",
+        "score": 85,
+        "issues": [
+          "نام و سمّت شخص در خط اول متن پیدا نشد"
+        ]
+      }
+    ],
+    "avgScore": 85
   }
 ]
