@@ -2274,21 +2274,6 @@
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ تسریع فاز دوم طرح آبرسانی ورزقان",
-      "source_link": "https://borna.news/fa/news/2409268/%D8%AA%D8%A3%D9%85%DB%8C%D9%86-%D9%85%D9%86%D8%A7%D8%A8%D8%B9-%D9%85%D8%A7%D9%84%DB%8C-%D9%81%D8%A7%D8%B2-%D8%AF%D9%88%D9%85-%D8%B7%D8%B1%D8%AD-%D8%A2%D8%A8%D8%B1%D8%B3%D8%A7%D9%86%DB%8C-%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%D9%87%D8%A7%DB%8C-%D8%B4%D9%87%D8%B1%D8%B3%D8%AA%D8%A7%D9%86-%D9%88%D8%B1%D8%B2%D9%82%D8%A7%D9%86-%D8%AF%D8%B1-%D8%AF%D8%B3%D8%AA%D9%88%D8%B1-%DA%A9%D8%A7%D8%B1-%D9%82%D8%B1%D8%A7%D8%B1-%DA%AF%D8%B1%D9%81%D8%AA",
-      "timestamp": 1793518351837
-    },
-    {
-      "title": "✴️ فولاد مبارکه به ظرفیت چند برابر رسید",
-      "source_link": "https://icana.ir/news/426944/%D8%AE%D9%88%D8%AF%D8%AA%D8%A3%D9%85%DB%8C%D9%86%DB%8C-%D8%B1%D8%A7%D9%87%DA%A9%D8%A7%D8%B1-%DA%A9%D8%A7%D9%87%D8%B4-%D9%85%D8%AD%D8%AF%D9%88%D8%AF%DB%8C%D8%AA-%D8%A7%D9%86%D8%B1%DA%98%DB%8C-%D8%B5%D9%86%D8%A7%DB%8C%D8%B9",
-      "timestamp": 1793518353763
-    },
-    {
-      "title": "✴️ بازدارندگی نامحدود در برابر تهدیدات",
-      "source_link": "https://icana.ir/news/426935/%DA%A9%D8%B4%D9%88%D8%B1%D9%87%D8%A7%DB%8C-%D9%87%D9%85%D8%AF%D8%B3%D8%AA-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D8%A7%D8%B2-%D9%BE%D8%A7%D8%B3%D8%AE-%D9%86%DB%8C%D8%B1%D9%88%D9%87%D8%A7%DB%8C-%D9%85%D8%B3%D9%84%D8%AD-%D9%85%D8%B5%D9%88%D9%86-%D9%86%D8%AE%D9%88%D8%A7%D9%86%D8%AF-%D8%A8%D9%88%D8%AF",
-      "timestamp": 1793518354824
-    },
-    {
       "title": "✴️ دکترین امنیتی دو پایه‌ای شد",
       "source_link": "https://rasanews.ir/fa/news/831214/%D9%88%D8%B1%D9%88%D8%AF-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%A8%D9%87-%D9%81%D8%A7%D8%B2-%D8%AC%D8%AF%DB%8C%D8%AF-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%A8%D8%A7-%D8%AD%D8%B0%D9%81-%D9%85%D8%AD%D8%AF%D9%88%D8%AF%DB%8C%D8%AA-%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%DB%8C%D8%A7%DB%8C%DB%8C-%D8%AF%D8%B1-%D8%B1%D8%A7%D9%87%D8%A8%D8%B1%D8%AF-%D8%AF%D9%81%D8%A7%D8%B9%DB%8C",
       "timestamp": 1793520144826
@@ -2309,11 +2294,11 @@
       "timestamp": 1793520147696
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "به‌روزرسانی بانک اهداف، دشمن را در تیررس نیروهای م",
+  "LAST_PROCESSED_SNIPPET": "صمصامی: دولت جلوی افزایش قیمت‌ها را بگیرد \n #مهر",
   "LAST_REPORT_TIME": 1793520151705,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 60,
-  "APIFY_LAST_FETCH": 1793516533586,
+  "APIFY_ITEMS": 70,
+  "APIFY_LAST_FETCH": 1793521010014,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 78,
     "تیتر کلی": 5,
@@ -2321,7 +2306,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T07:02:13.587Z",
+    "at": "2026-11-01T08:16:50.015Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
