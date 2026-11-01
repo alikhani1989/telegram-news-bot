@@ -11,10 +11,18 @@
     "2106776051825156317",
     "2106853256639270927",
     "2106831599564108142",
-    "2106827114750074983"
+    "2106827114750074983",
+    "2116630372276445324",
+    "2116617544656118212",
+    "2116590134963707940",
+    "2116575669492793667",
+    "2116501576198000996",
+    "2116498149342642481",
+    "2116497790993887402",
+    "2116489873062350907"
   ],
-  "TWEET_LAST_DAY": "2026-10-31",
-  "TWEET_COUNT_TODAY": 0,
+  "TWEET_LAST_DAY": "2026-11-01",
+  "TWEET_COUNT_TODAY": 8,
   "NEWS_DATABASE": [
     {
       "id": "1793126030539_u5n9g",
@@ -2275,9 +2283,9 @@
   ],
   "LAST_PROCESSED_SNIPPET": "پیش‌بینی سی‌ان‌ان از نتایج انتخابات میان‌دوره‌ای ک",
   "LAST_REPORT_TIME": 1793474247668,
-  "APIFY_MONTH": "2026-10",
-  "APIFY_ITEMS": 4200,
-  "APIFY_LAST_FETCH": 1793489797360,
+  "APIFY_MONTH": "2026-11",
+  "APIFY_ITEMS": 10,
+  "APIFY_LAST_FETCH": 1793495190948,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 77,
     "تیتر کلی": 5,
@@ -2285,55 +2293,83 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-10-31T23:36:37.360Z",
+    "at": "2026-11-01T01:06:30.949Z",
     "fetched": 10,
-    "fresh": 0,
+    "fresh": 8,
     "rejects": {
-      "بدون متن": 10
+      "ری‌تویت": 2
     },
     "newest": [
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2116630372276445324",
+        "handle": "MeisamZohurian",
+        "createdAt": "Sat Oct 31 20:36:20 +0000 2026",
+        "len": 279
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2116617544656118212",
+        "handle": "MojtabaZarei50",
+        "createdAt": "Sat Oct 31 19:45:22 +0000 2026",
+        "len": 278
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2116608616967155873",
+        "handle": "sangdovini_ir",
+        "createdAt": "Sat Oct 31 19:09:53 +0000 2026",
+        "len": 139
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2116590134963707940",
+        "handle": "ali_khezrian",
+        "createdAt": "Sat Oct 31 17:56:27 +0000 2026",
+        "len": 255
       },
       {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
+        "id": "2116575669492793667",
+        "handle": "Ahmadnaderi_ir",
+        "createdAt": "Sat Oct 31 16:58:58 +0000 2026",
+        "len": 272
       }
     ],
     "rawSample": {
       "keys": [
-        "noResults"
+        "type",
+        "id",
+        "url",
+        "twitterUrl",
+        "text",
+        "fullText",
+        "source",
+        "retweetCount",
+        "replyCount",
+        "likeCount",
+        "quoteCount",
+        "viewCount",
+        "createdAt",
+        "lang",
+        "bookmarkCount",
+        "isReply",
+        "conversationId",
+        "possiblySensitive",
+        "isPinned",
+        "author",
+        "extendedEntities",
+        "card",
+        "place",
+        "entities",
+        "isRetweet",
+        "isQuote",
+        "media",
+        "videos",
+        "isConversationControlled"
       ],
-      "first": "{\"noResults\":true}"
+      "first": "{\"type\":\"tweet\",\"id\":\"2116630372276445324\",\"url\":\"https://x.com/MeisamZohurian/status/2116630372276445324\",\"twitterUrl\":\"https://twitter.com/MeisamZohurian/status/2116630372276445324\",\"text\":\"قهرمانی جهان مبارک، احمد جوان عزیز.\\n\\nخراسان و مشهد روزگاری از قطب‌های کشتی ایران بودند؛ با قهرمانانی چون محمد خادم و فرزندانش امیر و رسول، مجید خدایی، امیر توکلیان، احمد وفادار و ... سال‌ها منتظر درخشش دوباره مشهد در قله کشتی جهان بودیم و امروز احمد جوان این افتخار را تکرار کرد.\\n\\nامیدوارم این قهرمانی، آغاز نسل تازه‌ای از پهلوانان خراسان باشد. 💐\",\"fullText\":\"قهرمانی جهان مبارک، احمد جوان عزیز.\\n\\nخراس"
     },
-    "allBlank": true,
+    "allBlank": false,
     "maxItemsRequested": 12,
     "useCard": true
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-10-31"
+  "TWEET_STATUS_DAY": "2026-11-01"
 }
