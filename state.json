@@ -2287,8 +2287,8 @@
   "LAST_PROCESSED_SNIPPET": "شرکت در همایش و دوره‌های آموزشی با هدایت بیگانگان ",
   "LAST_REPORT_TIME": 1793520151705,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 80,
-  "APIFY_LAST_FETCH": 1793524619161,
+  "APIFY_ITEMS": 90,
+  "APIFY_LAST_FETCH": 1793528225371,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 78,
     "تیتر کلی": 5,
@@ -2296,7 +2296,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T09:16:59.161Z",
+    "at": "2026-11-01T10:17:05.372Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
