@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "متکی: تسلط رهبر انقلاب بر ادبیات نظامی مایه غرور و",
   "LAST_REPORT_TIME": 1793560636226,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 160,
-  "APIFY_LAST_FETCH": 1793559875500,
+  "APIFY_ITEMS": 170,
+  "APIFY_LAST_FETCH": 1793563890543,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 78,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T19:04:35.500Z",
+    "at": "2026-11-01T20:11:30.543Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
