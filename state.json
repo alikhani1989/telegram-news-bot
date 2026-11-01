@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "قانون جدید مجلس / برگزاری همایش و دوره های آموزشی ",
   "LAST_REPORT_TIME": 1793530040140,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 90,
-  "APIFY_LAST_FETCH": 1793528225371,
+  "APIFY_ITEMS": 100,
+  "APIFY_LAST_FETCH": 1793532726927,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 78,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-01T10:17:05.372Z",
+    "at": "2026-11-01T11:32:06.927Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
