@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-30T00:10:05.048Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ مرز بازرگان در کمیسیون ویژه حمایت از تولید",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-30T01:02:37.847Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1138,5 +1126,20 @@
       }
     ],
     "avgScore": 100
+  },
+  {
+    "timestamp": "2026-11-01T20:32:24.675Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ وزیر میراث هدف جذب ۱۵ میلیون گردشگر",
+        "score": 75,
+        "issues": [
+          "نام و سمّت شخص در خط اول متن پیدا نشد",
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 75
   }
 ]

@@ -2274,30 +2274,14 @@
     "کمیسیون اصل نود راهکار صرفه‌جویی گاز",
     "کمیسیون ویژه حمایت از تولید طرح‌های بازسازی میراث"
   ],
-  "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ تسلط بیانی رهبر بر روحیه فرماندهان",
-      "source_link": "https://snn.ir/fa/news/1481440/%D9%85%D8%AA%DA%A9%DB%8C-%D8%AA%D8%B3%D9%84%D8%B7-%D8%B1%D9%87%D8%A8%D8%B1-%D8%A7%D9%86%D9%82%D9%84%D8%A7%D8%A8-%D8%A8%D8%B1-%D8%A7%D8%AF%D8%A8%DB%8C%D8%A7%D8%AA-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D9%85%D8%A7%DB%8C%D9%87-%D8%BA%D8%B1%D9%88%D8%B1-%D9%88-%D8%A7%D9%81%D8%AA%D8%AE%D8%A7%D8%B1-%D9%86%DB%8C%D8%B1%D9%88%D9%87%D8%A7%DB%8C-%D9%85%D8%B3%D9%84%D8%AD-%D8%A7%D8%B3%D8%AA-%D9%81%DB%8C%D9%84%D9%85",
-      "timestamp": 1793560632361
-    },
-    {
-      "title": "✴️ کمیسیون اصل نود راهکار صرفه‌جویی گاز",
-      "source_link": "https://icana.ir/news/427021/%D8%B3%D8%A7%D9%85%D8%A7%D9%86%D9%87-%D8%A7%D9%86%D8%AF%D8%A7%D8%B2%D9%87-%DA%AF%DB%8C%D8%B1%DB%8C-%D9%88-%D8%B5%D8%AD%D9%87-%D8%B3%D9%86%D8%AC%DB%8C-%D8%B5%D8%B1%D9%81%D9%87-%D8%AC%D9%88%DB%8C%DB%8C-%DA%AF%D8%A7%D8%B2-%D8%A8%D8%A7%DB%8C%D8%AF-%D8%B8%D8%B1%D9%81-%DB%B1%DB%B0-%D8%B1%D9%88%D8%B2-%D8%AF%D8%B1",
-      "timestamp": 1793560634526
-    },
-    {
-      "title": "✴️ کمیسیون ویژه حمایت از تولید طرح‌های بازسازی میراث",
-      "source_link": "https://icana.ir/news/427020/%D9%BE%DB%8C%DA%AF%DB%8C%D8%B1%DB%8C-%D8%B1%D9%81%D8%B9-%D9%85%D9%88%D8%A7%D9%86%D8%B9-%D8%AA%D9%88%D9%84%DB%8C%D8%AF-%D9%88-%D8%B3%D8%B1%D9%85%D8%A7%DB%8C%D9%87-%DA%AF%D8%B0%D8%A7%D8%B1%DB%8C-%D8%AF%D8%B1-%D8%AD%D9%88%D8%B2%D9%87-%DA%AF%D8%B1%D8%AF%D8%B4%DA%AF%D8%B1%DB%8C-%D9%85%DB%8C%D8%B1%D8%A7%D8%AB",
-      "timestamp": 1793560634950
-    }
-  ],
-  "LAST_PROCESSED_SNIPPET": "متکی: تسلط رهبر انقلاب بر ادبیات نظامی مایه غرور و",
-  "LAST_REPORT_TIME": 1793560636226,
+  "PUBLISHED_NEWS": [],
+  "LAST_PROCESSED_SNIPPET": "بازدید مدیرعامل شرکت ملی مس از پروژه‌های بیمارستان",
+  "LAST_REPORT_TIME": 1793565149163,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 170,
   "APIFY_LAST_FETCH": 1793563890543,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 78,
+    "جعل محتوا/مصاحبه": 79,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5,
     "سمت اشتباه": 1
