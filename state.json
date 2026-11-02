@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "تأکید نمایندگان بر رونق گردشگری داخلی و درآمدزایی ",
   "LAST_REPORT_TIME": 1793602963574,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 260,
-  "APIFY_LAST_FETCH": 1793602023216,
+  "APIFY_ITEMS": 270,
+  "APIFY_LAST_FETCH": 1793606544019,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-02T06:47:03.216Z",
+    "at": "2026-11-02T08:02:24.019Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
