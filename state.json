@@ -2297,8 +2297,8 @@
   "LAST_PROCESSED_SNIPPET": "برنامه هفتم توسعه اصلاح می‌شود \n #روزنامه_دنیای_اق",
   "LAST_REPORT_TIME": 1793654257155,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 380,
-  "APIFY_LAST_FETCH": 1793654223496,
+  "APIFY_ITEMS": 390,
+  "APIFY_LAST_FETCH": 1793658723433,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2306,7 +2306,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-02T21:17:03.496Z",
+    "at": "2026-11-02T22:32:03.433Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
