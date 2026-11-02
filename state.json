@@ -2306,8 +2306,8 @@
   "LAST_PROCESSED_SNIPPET": "نایب‌رئیس کمیسیون اجتماعی: پرداخت کالابرگ به ۸۰ می",
   "LAST_REPORT_TIME": 1793619181232,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 310,
-  "APIFY_LAST_FETCH": 1793623622456,
+  "APIFY_ITEMS": 320,
+  "APIFY_LAST_FETCH": 1793628144906,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2315,7 +2315,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-02T12:47:02.457Z",
+    "at": "2026-11-02T14:02:24.906Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
