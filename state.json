@@ -2298,8 +2298,8 @@
   "LAST_PROCESSED_SNIPPET": "متکی، نماینده مجلس: دامنه جنگ جدید علیه ایران، به ",
   "LAST_REPORT_TIME": 1793579750862,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 220,
-  "APIFY_LAST_FETCH": 1793584024612,
+  "APIFY_ITEMS": 230,
+  "APIFY_LAST_FETCH": 1793588542472,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2307,7 +2307,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-02T01:47:04.612Z",
+    "at": "2026-11-02T03:02:22.472Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
