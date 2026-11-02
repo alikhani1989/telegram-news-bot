@@ -2296,8 +2296,8 @@
   "LAST_PROCESSED_SNIPPET": "ضرورت افزایش دارایی زنان خانه‌دار و طبقه متوسط \n #",
   "LAST_REPORT_TIME": 1793631906818,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 320,
-  "APIFY_LAST_FETCH": 1793628144906,
+  "APIFY_ITEMS": 330,
+  "APIFY_LAST_FETCH": 1793632626045,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2305,7 +2305,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-02T14:02:24.906Z",
+    "at": "2026-11-02T15:17:06.045Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
