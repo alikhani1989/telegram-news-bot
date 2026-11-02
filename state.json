@@ -2298,8 +2298,8 @@
   "LAST_PROCESSED_SNIPPET": "فروردین: نام ماندگار از علیدوستی باقی ماند \n #ورزش",
   "LAST_REPORT_TIME": 1793637337849,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 350,
-  "APIFY_LAST_FETCH": 1793640744432,
+  "APIFY_ITEMS": 360,
+  "APIFY_LAST_FETCH": 1793645230234,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2307,7 +2307,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-02T17:32:24.432Z",
+    "at": "2026-11-02T18:47:10.235Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
