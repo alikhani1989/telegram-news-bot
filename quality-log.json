@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-10-31T14:47:02.695Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ بررسی طرح نفوذ بیگانگان در کمیسیون امنیت ملی",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ رفع موانع مرز دوغارون در کمیسیون ویژه",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-31T19:17:15.204Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1130,5 +1113,22 @@
       }
     ],
     "avgScore": 97
+  },
+  {
+    "timestamp": "2026-11-03T06:47:19.374Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ دولت ملزم به اجرای قانون فوق‌العاده خاص",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ رئیس مجلس به استکبار جهانی هشدار داد",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
