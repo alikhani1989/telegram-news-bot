@@ -2305,8 +2305,8 @@
   "LAST_PROCESSED_SNIPPET": "پرده برداری سی‌ان‌ان از انتخابات آمریکا/ ترامپ برا",
   "LAST_REPORT_TIME": 1793742440754,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 580,
-  "APIFY_LAST_FETCH": 1793738814450,
+  "APIFY_ITEMS": 590,
+  "APIFY_LAST_FETCH": 1793743333896,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 83,
     "تیتر کلی": 5,
@@ -2314,7 +2314,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T20:46:54.450Z",
+    "at": "2026-11-03T22:02:13.896Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
