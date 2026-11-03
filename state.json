@@ -2303,8 +2303,8 @@
   "LAST_PROCESSED_SNIPPET": "برگزاری انتخابات شوراها دو ماه پس از پایان جنگ/ شه",
   "LAST_REPORT_TIME": 1793678683427,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 430,
-  "APIFY_LAST_FETCH": 1793674942828,
+  "APIFY_ITEMS": 440,
+  "APIFY_LAST_FETCH": 1793679430431,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2312,7 +2312,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T03:02:22.828Z",
+    "at": "2026-11-03T04:17:10.432Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
