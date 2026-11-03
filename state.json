@@ -2316,8 +2316,8 @@
   "LAST_PROCESSED_SNIPPET": "مهلت دوماهه مجلس به دستگاه‌های مسئول برای رفع مشکل",
   "LAST_REPORT_TIME": 1793697434839,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 490,
-  "APIFY_LAST_FETCH": 1793701012076,
+  "APIFY_ITEMS": 500,
+  "APIFY_LAST_FETCH": 1793704623754,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 81,
     "تیتر کلی": 5,
@@ -2325,7 +2325,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T10:16:52.076Z",
+    "at": "2026-11-03T11:17:03.755Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
