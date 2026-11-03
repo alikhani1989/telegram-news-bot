@@ -2303,8 +2303,8 @@
   "LAST_PROCESSED_SNIPPET": "چاک شومر: انتظار دارم دموکرات‌ها اکثریت مجلس نماین",
   "LAST_REPORT_TIME": 1793718196360,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 530,
-  "APIFY_LAST_FETCH": 1793716461701,
+  "APIFY_ITEMS": 540,
+  "APIFY_LAST_FETCH": 1793720826540,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 83,
     "تیتر کلی": 5,
@@ -2312,7 +2312,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T14:34:21.701Z",
+    "at": "2026-11-03T15:47:06.540Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
