@@ -2301,8 +2301,8 @@
   "LAST_PROCESSED_SNIPPET": "تسهیلات مالیاتی اصناف با سقف ۷۲ میلیارد تومانی؛ گا",
   "LAST_REPORT_TIME": 1793688587667,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 470,
-  "APIFY_LAST_FETCH": 1793692940302,
+  "APIFY_ITEMS": 480,
+  "APIFY_LAST_FETCH": 1793696544741,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2310,7 +2310,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T08:02:20.302Z",
+    "at": "2026-11-03T09:02:24.742Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
