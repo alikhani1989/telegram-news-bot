@@ -2306,8 +2306,8 @@
   "LAST_PROCESSED_SNIPPET": "جزئیات حضور عراقچی در جلسه کمیسیون امنیت ملی مجلس ",
   "LAST_REPORT_TIME": 1793664215579,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 410,
-  "APIFY_LAST_FETCH": 1793666807426,
+  "APIFY_ITEMS": 420,
+  "APIFY_LAST_FETCH": 1793670432350,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 80,
     "تیتر کلی": 5,
@@ -2315,7 +2315,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T00:46:47.426Z",
+    "at": "2026-11-03T01:47:12.350Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
