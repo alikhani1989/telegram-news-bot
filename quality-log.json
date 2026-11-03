@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-10-31T13:17:09.395Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ تقویت زیرساخت‌های بهداشتی ایوانکی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-10-31T14:02:41.495Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1118,5 +1106,24 @@
       }
     ],
     "avgScore": 100
+  },
+  {
+    "timestamp": "2026-11-03T04:02:22.310Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ شایعات تغییر انتخاب شهرداران رد شد",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ کاهش مصرف گاز در زمستان ۲۵ میلیون مترمکعب",
+        "score": 90,
+        "issues": [
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 95
   }
 ]
