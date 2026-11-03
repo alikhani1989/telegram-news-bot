@@ -2301,8 +2301,8 @@
   "LAST_PROCESSED_SNIPPET": "حقوق کارکنان دولت باید تا پایان سال افزایش یابد \n ",
   "LAST_REPORT_TIME": 1793697434839,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 480,
-  "APIFY_LAST_FETCH": 1793696544741,
+  "APIFY_ITEMS": 490,
+  "APIFY_LAST_FETCH": 1793701012076,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 81,
     "تیتر کلی": 5,
@@ -2310,7 +2310,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T09:02:24.742Z",
+    "at": "2026-11-03T10:16:52.076Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
