@@ -2305,8 +2305,8 @@
   "LAST_PROCESSED_SNIPPET": "بدری : حذف ۲ هزار متقاضی نهضت ملی مسکن اردبیل خلاف",
   "LAST_REPORT_TIME": 1793737966984,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 570,
-  "APIFY_LAST_FETCH": 1793734334321,
+  "APIFY_ITEMS": 580,
+  "APIFY_LAST_FETCH": 1793738814450,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 83,
     "تیتر کلی": 5,
@@ -2314,7 +2314,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T19:32:14.321Z",
+    "at": "2026-11-03T20:46:54.450Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
