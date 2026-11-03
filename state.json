@@ -2286,25 +2286,14 @@
     "دولت بدهکار ۷ تا ۲۰ میلیون تومان",
     "تبصره ۱۰۰ مالیات به کسب‌وکارهای خرد"
   ],
-  "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ دولت بدهکار ۷ تا ۲۰ میلیون تومان",
-      "source_link": "https://borna.news/fa/news/2410245/%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-7-%D8%AA%D8%A7-20-%D9%85%DB%8C%D9%84%DB%8C%D9%88%D9%86%DB%8C-%D8%AD%D9%82%D9%88%D9%82-%DA%A9%D8%A7%D8%B1%DA%A9%D9%86%D8%A7%D9%86-%D8%AF%D9%88%D9%84%D8%AA-%D8%B1%D9%88%DB%8C-%D9%85%DB%8C%D8%B2",
-      "timestamp": 1793694751204
-    },
-    {
-      "title": "✴️ تبصره ۱۰۰ مالیات به کسب‌وکارهای خرد",
-      "source_link": "https://www.qudsonline.ir/news/1173770/%D8%AA%D8%B3%D9%87%DB%8C%D9%84%D8%A7%D8%AA-%D9%85%D8%A7%D9%84%DB%8C%D8%A7%D8%AA%DB%8C-%D8%A7%D8%B5%D9%86%D8%A7%D9%81-%D8%A8%D8%A7-%D8%B3%D9%82%D9%81-%DB%B7%DB%B2-%D9%85%DB%8C%D9%84%DB%8C%D8%A7%D8%B1%D8%AF-%D8%AA%D9%88%D9%85%D8%A7%D9%86%DB%8C-%DA%AF%D8%A7%D9%85%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%AD%D9%85%D8%A7%DB%8C%D8%AA",
-      "timestamp": 1793694887245
-    }
-  ],
-  "LAST_PROCESSED_SNIPPET": "تسهیلات مالیاتی اصناف با سقف ۷۲ میلیارد تومانی؛ گا",
-  "LAST_REPORT_TIME": 1793688587667,
+  "PUBLISHED_NEWS": [],
+  "LAST_PROCESSED_SNIPPET": "کارت زرد مجلس به وزیر آموزش‌ و پرورش \n #خبرنامه_دا",
+  "LAST_REPORT_TIME": 1793697434839,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 480,
   "APIFY_LAST_FETCH": 1793696544741,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 80,
+    "جعل محتوا/مصاحبه": 81,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5,
     "سمت اشتباه": 1
