@@ -2316,8 +2316,8 @@
   "LAST_PROCESSED_SNIPPET": "کارت زرد مجلس به وزیر آموزش‌وپرورش /  از حاشیه‌های",
   "LAST_REPORT_TIME": 1793707508158,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 510,
-  "APIFY_LAST_FETCH": 1793708283743,
+  "APIFY_ITEMS": 520,
+  "APIFY_LAST_FETCH": 1793712738577,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 81,
     "تیتر کلی": 5,
@@ -2325,7 +2325,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T12:18:03.743Z",
+    "at": "2026-11-03T13:32:18.577Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
