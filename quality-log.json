@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-11-01T13:47:28.197Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ پایان جنگ در گرو پذیرش شروط ایران",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ کمیسیون بهداشت و درمان شفافیت مالی سازمان غذا",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-01T14:47:20.516Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1109,5 +1092,22 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-11-03T20:32:38.028Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ کمیسیون آموزش، تحقیقات و فناوری بررسی دانشجویان خارج",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ کمیسیون فرهنگی تحقیق و تفحص شرکت ورزشی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
