@@ -2300,8 +2300,8 @@
   "LAST_PROCESSED_SNIPPET": "سخنرانی فرزانه صادق در صحن علنی مجلس شورای اسلامی ",
   "LAST_REPORT_TIME": 1793748753953,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 600,
-  "APIFY_LAST_FETCH": 1793748722538,
+  "APIFY_ITEMS": 610,
+  "APIFY_LAST_FETCH": 1793752325826,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2309,7 +2309,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-03T23:32:02.539Z",
+    "at": "2026-11-04T00:32:05.826Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2359,5 +2359,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-11-03"
+  "TWEET_STATUS_DAY": "2026-11-04"
 }
