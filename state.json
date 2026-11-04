@@ -2300,8 +2300,8 @@
   "LAST_PROCESSED_SNIPPET": "جلسه علنی مجلس آغاز شد \n #آفتاب",
   "LAST_REPORT_TIME": 1793765845076,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 650,
-  "APIFY_LAST_FETCH": 1793769438533,
+  "APIFY_ITEMS": 660,
+  "APIFY_LAST_FETCH": 1793773917601,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2309,7 +2309,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T05:17:18.534Z",
+    "at": "2026-11-04T06:31:57.601Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
