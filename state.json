@@ -2309,8 +2309,8 @@
   "LAST_PROCESSED_SNIPPET": "شکست سنگین ترامپ در انتخابات آمریکا؛ آیا سیاست‌های",
   "LAST_REPORT_TIME": 1793786564600,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 690,
-  "APIFY_LAST_FETCH": 1793786539707,
+  "APIFY_ITEMS": 700,
+  "APIFY_LAST_FETCH": 1793791935297,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2318,7 +2318,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T10:02:19.707Z",
+    "at": "2026-11-04T11:32:15.297Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
