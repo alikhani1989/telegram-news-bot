@@ -2315,8 +2315,8 @@
   "LAST_PROCESSED_SNIPPET": "عضو جبهه پایداری: آقای عراقچی در حالی که دشمن جان ",
   "LAST_REPORT_TIME": 1793812655929,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 770,
-  "APIFY_LAST_FETCH": 1793821622177,
+  "APIFY_ITEMS": 780,
+  "APIFY_LAST_FETCH": 1793826145987,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2324,7 +2324,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T19:47:02.177Z",
+    "at": "2026-11-04T21:02:25.988Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
