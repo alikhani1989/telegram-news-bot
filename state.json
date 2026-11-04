@@ -2313,8 +2313,8 @@
   "LAST_PROCESSED_SNIPPET": "ایلهان عمر عضو مسلمان و منتقد ترامپ، بار دیگر به ک",
   "LAST_REPORT_TIME": 1793793784107,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 710,
-  "APIFY_LAST_FETCH": 1793796469658,
+  "APIFY_ITEMS": 720,
+  "APIFY_LAST_FETCH": 1793800934474,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2322,7 +2322,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T12:47:49.659Z",
+    "at": "2026-11-04T14:02:14.475Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
