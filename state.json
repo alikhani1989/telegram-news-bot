@@ -2305,8 +2305,8 @@
   "LAST_PROCESSED_SNIPPET": "نماینده کنگره به دلیل حمایت از یک نامزد انتخاباتی ",
   "LAST_REPORT_TIME": 1793754198812,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 620,
-  "APIFY_LAST_FETCH": 1793756824342,
+  "APIFY_ITEMS": 630,
+  "APIFY_LAST_FETCH": 1793761351279,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2314,7 +2314,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T01:47:04.342Z",
+    "at": "2026-11-04T03:02:31.279Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
