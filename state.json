@@ -2308,8 +2308,8 @@
   "LAST_PROCESSED_SNIPPET": "مقتدایی: احتمال جنگ کاهش یافته اما آمادگی دفاعی کن",
   "LAST_REPORT_TIME": 1793802748563,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 730,
-  "APIFY_LAST_FETCH": 1793804543764,
+  "APIFY_ITEMS": 740,
+  "APIFY_LAST_FETCH": 1793809014368,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2317,7 +2317,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T15:02:23.764Z",
+    "at": "2026-11-04T16:16:54.368Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
