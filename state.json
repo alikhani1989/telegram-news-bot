@@ -2313,8 +2313,8 @@
   "LAST_PROCESSED_SNIPPET": "سهم ۵۰ درصدی دو حزب در پیروزی‌ها / گل تساوی دموکرا",
   "LAST_REPORT_TIME": 1793802748563,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 720,
-  "APIFY_LAST_FETCH": 1793800934474,
+  "APIFY_ITEMS": 730,
+  "APIFY_LAST_FETCH": 1793804543764,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2322,7 +2322,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T14:02:14.475Z",
+    "at": "2026-11-04T15:02:23.764Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
