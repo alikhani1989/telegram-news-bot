@@ -2312,8 +2312,8 @@
   "LAST_PROCESSED_SNIPPET": "نیکزاد: آمریکا باید با خفت و خواری منطقه غرب آسیا ",
   "LAST_REPORT_TIME": 1793775765314,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 660,
-  "APIFY_LAST_FETCH": 1793773917601,
+  "APIFY_ITEMS": 670,
+  "APIFY_LAST_FETCH": 1793777526857,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 85,
     "تیتر کلی": 5,
@@ -2321,7 +2321,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T06:31:57.601Z",
+    "at": "2026-11-04T07:32:06.857Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
