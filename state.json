@@ -2318,8 +2318,8 @@
   "LAST_PROCESSED_SNIPPET": "دموکرات‌ها در کنگره چه ابزار‌هایی در اختیار دارند؟",
   "LAST_REPORT_TIME": 1793827062069,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 780,
-  "APIFY_LAST_FETCH": 1793826145987,
+  "APIFY_ITEMS": 790,
+  "APIFY_LAST_FETCH": 1793830757877,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2327,7 +2327,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-04T21:02:25.988Z",
+    "at": "2026-11-04T22:19:17.878Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
