@@ -2315,8 +2315,8 @@
   "LAST_PROCESSED_SNIPPET": "آیت الله سیدجعفر عاملی تاریخ اسلام را با رویکرد حق",
   "LAST_REPORT_TIME": 1793907514106,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 970,
-  "APIFY_LAST_FETCH": 1793911209732,
+  "APIFY_ITEMS": 980,
+  "APIFY_LAST_FETCH": 1793915227314,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2324,7 +2324,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T20:40:09.732Z",
+    "at": "2026-11-05T21:47:07.314Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
