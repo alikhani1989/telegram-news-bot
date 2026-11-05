@@ -2320,8 +2320,8 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف خطاب به ونس: چرا این حرف‌ها را به رئیست نم",
   "LAST_REPORT_TIME": 1793866938704,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 880,
-  "APIFY_LAST_FETCH": 1793865765468,
+  "APIFY_ITEMS": 890,
+  "APIFY_LAST_FETCH": 1793870258136,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2329,7 +2329,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T08:02:45.468Z",
+    "at": "2026-11-05T09:17:38.136Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
