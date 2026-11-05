@@ -2308,8 +2308,8 @@
   "LAST_PROCESSED_SNIPPET": "سندرز: دموکرات‌ها با قطع بودجه، جنگ علیه ایران را ",
   "LAST_REPORT_TIME": 1793878602601,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 930,
-  "APIFY_LAST_FETCH": 1793887642031,
+  "APIFY_ITEMS": 940,
+  "APIFY_LAST_FETCH": 1793891542851,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2317,7 +2317,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T14:07:22.032Z",
+    "at": "2026-11-05T15:12:22.851Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
