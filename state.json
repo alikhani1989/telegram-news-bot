@@ -2320,8 +2320,8 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف خطاب به ونس: آمریکا قماربازی است که مدام م",
   "LAST_REPORT_TIME": 1793866938704,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 890,
-  "APIFY_LAST_FETCH": 1793870258136,
+  "APIFY_ITEMS": 900,
+  "APIFY_LAST_FETCH": 1793874822640,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2329,7 +2329,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T09:17:38.136Z",
+    "at": "2026-11-05T10:33:42.641Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
