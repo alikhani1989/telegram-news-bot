@@ -2320,8 +2320,8 @@
   "LAST_PROCESSED_SNIPPET": "آمریکایی‌ها با ملت ایران دشمنی دارند؛ نباید به آنا",
   "LAST_REPORT_TIME": 1793856816035,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 850,
-  "APIFY_LAST_FETCH": 1793854932004,
+  "APIFY_ITEMS": 860,
+  "APIFY_LAST_FETCH": 1793858536688,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2329,7 +2329,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T05:02:12.004Z",
+    "at": "2026-11-05T06:02:16.689Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
