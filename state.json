@@ -2325,8 +2325,8 @@
   "LAST_PROCESSED_SNIPPET": "فیلم | سخنرانی مدیر حوزه‌های علمیه در همایش «یاس ن",
   "LAST_REPORT_TIME": 1793894014979,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 940,
-  "APIFY_LAST_FETCH": 1793891542851,
+  "APIFY_ITEMS": 950,
+  "APIFY_LAST_FETCH": 1793896674104,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2334,7 +2334,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T15:12:22.851Z",
+    "at": "2026-11-05T16:37:54.104Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
