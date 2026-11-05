@@ -2313,8 +2313,8 @@
   "LAST_PROCESSED_SNIPPET": "قدس در گفت و گو با کارشناسان، تبعات شکست سنگین ترا",
   "LAST_REPORT_TIME": 1793832431808,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 840,
-  "APIFY_LAST_FETCH": 1793850420900,
+  "APIFY_ITEMS": 850,
+  "APIFY_LAST_FETCH": 1793854932004,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2322,7 +2322,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T03:47:00.900Z",
+    "at": "2026-11-05T05:02:12.004Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
