@@ -2315,8 +2315,8 @@
   "LAST_PROCESSED_SNIPPET": "آیت‌الله طاهری: بیداری ضداستکباری از جهان اسلام فر",
   "LAST_REPORT_TIME": 1793856816035,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 860,
-  "APIFY_LAST_FETCH": 1793858536688,
+  "APIFY_ITEMS": 870,
+  "APIFY_LAST_FETCH": 1793862143603,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2324,7 +2324,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-05T06:02:16.689Z",
+    "at": "2026-11-05T07:02:23.603Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
