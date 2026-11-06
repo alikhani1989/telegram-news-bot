@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-11-03T06:47:19.374Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ دولت ملزم به اجرای قانون فوق‌العاده خاص",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ رئیس مجلس به استکبار جهانی هشدار داد",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-03T07:32:39.875Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1086,5 +1069,27 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-11-06T10:49:33.653Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ سیاست ایران بر پایه رفتار آمریکا",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تقویت پول ملی برای کاهش تورم",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ یادآوری حمله موشکی به مسجدسلیمان",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
