@@ -2327,8 +2327,8 @@
   "LAST_PROCESSED_SNIPPET": "ابراهیم عزیزی: برای ایران دموکرات‌ها و جمهوری‌خواه",
   "LAST_REPORT_TIME": 1793960309402,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1100,
-  "APIFY_LAST_FETCH": 1793965623057,
+  "APIFY_ITEMS": 1110,
+  "APIFY_LAST_FETCH": 1793970146023,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2336,7 +2336,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-06T11:47:03.057Z",
+    "at": "2026-11-06T13:02:26.024Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
