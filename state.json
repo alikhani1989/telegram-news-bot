@@ -2322,8 +2322,8 @@
   "LAST_PROCESSED_SNIPPET": "واکنش یاسمین انصاری به ادعای ترامپ: او بار دیگر ته",
   "LAST_REPORT_TIME": 1793973855328,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1120,
-  "APIFY_LAST_FETCH": 1793973816433,
+  "APIFY_ITEMS": 1130,
+  "APIFY_LAST_FETCH": 1793982745731,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2331,7 +2331,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-06T14:03:36.433Z",
+    "at": "2026-11-06T16:32:25.732Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
