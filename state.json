@@ -2328,8 +2328,8 @@
   "LAST_PROCESSED_SNIPPET": "خیز دموکرات‌ها برای قطع بودجه جنگ ترامپ علیه ایران",
   "LAST_REPORT_TIME": 1793990862363,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1150,
-  "APIFY_LAST_FETCH": 1793991747844,
+  "APIFY_ITEMS": 1160,
+  "APIFY_LAST_FETCH": 1793995478378,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2337,7 +2337,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-06T19:02:27.844Z",
+    "at": "2026-11-06T20:04:38.379Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
