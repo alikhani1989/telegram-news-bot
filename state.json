@@ -2315,8 +2315,8 @@
   "LAST_PROCESSED_SNIPPET": "انتقاد نماینده ایرانی‌تبار کنگره آمریکا از سیاست‌ه",
   "LAST_REPORT_TIME": 1793943174177,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1070,
-  "APIFY_LAST_FETCH": 1793953027370,
+  "APIFY_ITEMS": 1080,
+  "APIFY_LAST_FETCH": 1793956637950,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2324,7 +2324,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-06T08:17:07.370Z",
+    "at": "2026-11-06T09:17:17.950Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
