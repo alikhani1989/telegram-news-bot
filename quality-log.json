@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-11-03T08:32:27.071Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ دولت بدهکار ۷ تا ۲۰ میلیون تومان",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ تبصره ۱۰۰ مالیات به کسب‌وکارهای خرد",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-03T09:17:12.112Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1098,5 +1081,22 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-11-06T16:47:12.517Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ قیمت پیشنهادی گندم پایین‌تر از وزارت",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ مشکلات پایانه‌های مرزی هزینه تجارت",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
