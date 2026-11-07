@@ -21,7 +21,7 @@
     "2116497790993887402",
     "2116489873062350907"
   ],
-  "TWEET_LAST_DAY": "2026-11-06",
+  "TWEET_LAST_DAY": "2026-11-07",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2323,8 +2323,8 @@
   "LAST_PROCESSED_SNIPPET": "مجلس ترحیم زنده‌یاد «حمید علیدوستی» \n #میزان",
   "LAST_REPORT_TIME": 1793998962085,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1190,
-  "APIFY_LAST_FETCH": 1794007031973,
+  "APIFY_ITEMS": 1200,
+  "APIFY_LAST_FETCH": 1794011522844,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2332,7 +2332,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-06T23:17:11.973Z",
+    "at": "2026-11-07T00:32:02.844Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2382,5 +2382,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-11-06"
+  "TWEET_STATUS_DAY": "2026-11-07"
 }
