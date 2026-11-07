@@ -2296,16 +2296,6 @@
   ],
   "PUBLISHED_NEWS": [
     {
-      "title": "✴️ نتیجه انتخابات آمریکا در کمیسیون امنیت ملی",
-      "source_link": "https://www.khabaronline.ir/news/2298703/%D9%86%D9%85%D8%A7%DB%8C%D9%86%D8%AF%D9%87-%D9%85%D8%AC%D9%84%D8%B3-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D9%88%D8%AD%D8%B4%DB%8C-%D9%88-%D9%87%D8%A7%D8%B1-%D8%B4%D8%AF%D9%87-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D9%85%D8%AB%D9%84-%DB%8C%DA%A9-%DA%AF%D8%A7%D9%88-%D8%AF%DB%8C%D9%88%D8%A7%D9%86%D9%87-%D9%88",
-      "timestamp": 1794046827643
-    },
-    {
-      "title": "✴️ تبیین تقاص حاکمیتی در فقه سیاسی",
-      "source_link": "https://rasanews.ir/fa/news/831706/%D8%B6%D8%B1%D9%88%D8%B1%D8%AA-%D8%A8%D8%B1%D8%B1%D8%B3%DB%8C-%D8%A7%D8%A8%D8%B9%D8%A7%D8%AF-%D9%81%D9%82%D9%87%DB%8C-%D9%82%D8%B5%D8%A7%D8%B5-%D8%AF%D8%B1-%D8%AC%D9%86%DA%AF-%D9%87%D8%A7%DB%8C-%D9%86%D8%A7%D9%85%D8%AA%D9%82%D8%A7%D8%B1%D9%86-%D9%81%D9%86%D8%A7%D9%88%D8%B1%D8%A7%D9%86%D9%87",
-      "timestamp": 1794046829283
-    },
-    {
       "title": "✴️ خواستار رفع فشارها و استیضاح وزرای اقتصاد",
       "source_link": "https://www.mehrnews.com/news/7002828/%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D8%AF-%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C-%D8%A7%D8%B2-%D8%A8%D9%84%D8%A7%D8%AA%DA%A9%D9%84%DB%8C%D9%81%DB%8C-%D9%87%D8%B4%D8%AA-%D9%85%D8%A7%D9%87%D9%87-%D9%88%D8%B2%D8%A7%D8%B1%D8%AA%D8%AE%D8%A7%D9%86%D9%87-%D9%87%D8%A7%DB%8C-%D8%AF%D9%81%D8%A7%D8%B9-%D8%A7%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA",
       "timestamp": 1794048464748
@@ -2321,13 +2311,13 @@
       "timestamp": 1794048467516
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "انتقاد عباسی از بلاتکلیفی هشت‌ماهه وزارتخانه‌های د",
+  "LAST_PROCESSED_SNIPPET": "اجازه فرار ترامپ از منطقه را نمی‌دهیم \n #تهران_پرس",
   "LAST_REPORT_TIME": 1794044844214,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 1290,
   "APIFY_LAST_FETCH": 1794049345290,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 89,
+    "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5,
     "سمت اشتباه": 1
