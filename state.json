@@ -2323,8 +2323,8 @@
   "LAST_PROCESSED_SNIPPET": "مجلس ترحیم زنده‌یاد «حمید علیدوستی» \n #میزان",
   "LAST_REPORT_TIME": 1793998962085,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1210,
-  "APIFY_LAST_FETCH": 1794016015628,
+  "APIFY_ITEMS": 1220,
+  "APIFY_LAST_FETCH": 1794019626473,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 86,
     "تیتر کلی": 5,
@@ -2332,7 +2332,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T01:46:55.628Z",
+    "at": "2026-11-07T02:47:06.473Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
