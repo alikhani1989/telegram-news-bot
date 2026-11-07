@@ -2314,8 +2314,8 @@
   "LAST_PROCESSED_SNIPPET": "اجازه فرار ترامپ از منطقه را نمی‌دهیم \n #تهران_پرس",
   "LAST_REPORT_TIME": 1794044844214,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1290,
-  "APIFY_LAST_FETCH": 1794049345290,
+  "APIFY_ITEMS": 1300,
+  "APIFY_LAST_FETCH": 1794053815054,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2323,7 +2323,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T11:02:25.290Z",
+    "at": "2026-11-07T12:16:55.054Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
