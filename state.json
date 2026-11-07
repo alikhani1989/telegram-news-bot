@@ -2305,8 +2305,8 @@
   "LAST_PROCESSED_SNIPPET": "واکنش به اخبار حذف شرط اجتهاد از وزیر اطلاعات \n #ا",
   "LAST_REPORT_TIME": 1794083821841,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1380,
-  "APIFY_LAST_FETCH": 1794086483191,
+  "APIFY_ITEMS": 1390,
+  "APIFY_LAST_FETCH": 1794091004416,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2314,7 +2314,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T21:21:23.191Z",
+    "at": "2026-11-07T22:36:44.416Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
