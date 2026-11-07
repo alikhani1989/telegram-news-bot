@@ -2308,8 +2308,8 @@
   "LAST_PROCESSED_SNIPPET": "بین‌المللی‌شدن قم بدون تمرکز نظام‌مند بر دانش امکا",
   "LAST_REPORT_TIME": 1794035856763,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1260,
-  "APIFY_LAST_FETCH": 1794035828452,
+  "APIFY_ITEMS": 1270,
+  "APIFY_LAST_FETCH": 1794040340447,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 88,
     "تیتر کلی": 5,
@@ -2317,7 +2317,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T07:17:08.453Z",
+    "at": "2026-11-07T08:32:20.448Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
