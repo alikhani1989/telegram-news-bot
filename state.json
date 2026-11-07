@@ -2331,8 +2331,8 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف در پیامی درگذشت علی اصغر فانی را تسلیت گفت",
   "LAST_REPORT_TIME": 1794064796902,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1340,
-  "APIFY_LAST_FETCH": 1794070035637,
+  "APIFY_ITEMS": 1350,
+  "APIFY_LAST_FETCH": 1794073890377,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2340,7 +2340,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T16:47:15.637Z",
+    "at": "2026-11-07T17:51:30.378Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
