@@ -2304,8 +2304,8 @@
   "LAST_PROCESSED_SNIPPET": "خاتمه جنگ علیه ایران؛ اولویت دموکرات‌های مجلس نمای",
   "LAST_REPORT_TIME": 1794074823110,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1360,
-  "APIFY_LAST_FETCH": 1794078403809,
+  "APIFY_ITEMS": 1370,
+  "APIFY_LAST_FETCH": 1794082875010,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2313,7 +2313,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T19:06:43.809Z",
+    "at": "2026-11-07T20:21:15.010Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
