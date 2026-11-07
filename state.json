@@ -2318,8 +2318,8 @@
   "LAST_PROCESSED_SNIPPET": "وضعیت جمهوری‌خواهان در کنگره آمریکا / دموکرات‌های ",
   "LAST_REPORT_TIME": 1794026828575,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1240,
-  "APIFY_LAST_FETCH": 1794027743025,
+  "APIFY_ITEMS": 1250,
+  "APIFY_LAST_FETCH": 1794032214190,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 87,
     "تیتر کلی": 5,
@@ -2327,7 +2327,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T05:02:23.025Z",
+    "at": "2026-11-07T06:16:54.190Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
