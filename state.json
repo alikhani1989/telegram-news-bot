@@ -2324,8 +2324,8 @@
   "LAST_PROCESSED_SNIPPET": "انتقاد عباسی از بلاتکلیفی هشت‌ماهه وزارتخانه‌های د",
   "LAST_REPORT_TIME": 1794044844214,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1280,
-  "APIFY_LAST_FETCH": 1794044809039,
+  "APIFY_ITEMS": 1290,
+  "APIFY_LAST_FETCH": 1794049345290,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 89,
     "تیتر کلی": 5,
@@ -2333,7 +2333,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-07T09:46:49.039Z",
+    "at": "2026-11-07T11:02:25.290Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
