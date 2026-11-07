@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-11-04T04:47:08.382Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ کمیسیون اجتماعی حذف کالابرگ را رد کرد",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ کمیسیون بهداشت تأکید بر پدافند غیرعامل",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-04T05:17:33.656Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1089,5 +1072,27 @@
       }
     ],
     "avgScore": 90
+  },
+  {
+    "timestamp": "2026-11-07T15:17:28.071Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ معرفی مفهوم تقاص حاکمیتی در فقه",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تسلیت رئیس مجلس به وزیر اسبق آموزش",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ گزارش مشاور رئیس مجلس از بودجه نهادهای فرهنگی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
