@@ -2298,8 +2298,8 @@
   "LAST_PROCESSED_SNIPPET": "عضو هیات رئیسه مجلس: امتیازدهی نمی‌تواند تضمین‌کنن",
   "LAST_REPORT_TIME": 1794144780581,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1520,
-  "APIFY_LAST_FETCH": 1794145616273,
+  "APIFY_ITEMS": 1530,
+  "APIFY_LAST_FETCH": 1794149223130,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2307,7 +2307,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-08T13:46:56.274Z",
+    "at": "2026-11-08T14:47:03.130Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
