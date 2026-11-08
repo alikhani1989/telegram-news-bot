@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-04T15:32:51.843Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ کاهش احتمال جنگ توسط کمیسیون امنیت ملی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-04T17:17:26.091Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1074,6 +1062,18 @@
       },
       {
         "title": "✴️ کمیسیون صنایع و معادن به ساماندهی رودخانه‌ها پرداخته",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-11-08T02:07:49.707Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ ترامپ احتمال برکناری کابینه را گفت",
         "score": 100,
         "issues": []
       }
