@@ -2300,8 +2300,8 @@
   "LAST_PROCESSED_SNIPPET": "متکی: درصورت تجاوز، پایگاه‌های اروپایی آمریکا از ح",
   "LAST_REPORT_TIME": 1794164569501,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1570,
-  "APIFY_LAST_FETCH": 1794165409986,
+  "APIFY_ITEMS": 1580,
+  "APIFY_LAST_FETCH": 1794169019090,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 91,
     "تیتر کلی": 5,
@@ -2309,7 +2309,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-08T19:16:49.986Z",
+    "at": "2026-11-08T20:16:59.091Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
