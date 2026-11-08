@@ -2308,8 +2308,8 @@
   "LAST_PROCESSED_SNIPPET": "رییس کمیسیون اجتماعی مجلس: تا ۵۰ میلیون نفر در ایر",
   "LAST_REPORT_TIME": 1794144780581,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1510,
-  "APIFY_LAST_FETCH": 1794142011636,
+  "APIFY_ITEMS": 1520,
+  "APIFY_LAST_FETCH": 1794145616273,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2317,7 +2317,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-08T12:46:51.636Z",
+    "at": "2026-11-08T13:46:56.274Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
