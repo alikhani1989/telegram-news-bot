@@ -2299,8 +2299,8 @@
   "LAST_PROCESSED_SNIPPET": "جنگ آینده متفاوت است؛ حملات ایران دیگر محدود به پا",
   "LAST_REPORT_TIME": 1794110839683,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1450,
-  "APIFY_LAST_FETCH": 1794117077208,
+  "APIFY_ITEMS": 1460,
+  "APIFY_LAST_FETCH": 1794120681429,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2308,7 +2308,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-08T05:51:17.209Z",
+    "at": "2026-11-08T06:51:21.429Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
