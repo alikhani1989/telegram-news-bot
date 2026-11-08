@@ -2291,8 +2291,8 @@
   "LAST_PROCESSED_SNIPPET": "فاطمی: افزایش حقوق کارمندان باید سالی دو بار انجام",
   "LAST_REPORT_TIME": 1794128906076,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1480,
-  "APIFY_LAST_FETCH": 1794128872238,
+  "APIFY_ITEMS": 1490,
+  "APIFY_LAST_FETCH": 1794133213965,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2300,7 +2300,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-08T09:07:52.238Z",
+    "at": "2026-11-08T10:20:13.965Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
