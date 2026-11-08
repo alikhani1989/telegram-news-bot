@@ -2303,8 +2303,8 @@
   "LAST_PROCESSED_SNIPPET": "ایران از کشتی‌های عبوری از تنگه هرمزعوارض می‌گیرد ",
   "LAST_REPORT_TIME": 1794155560798,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1550,
-  "APIFY_LAST_FETCH": 1794157332939,
+  "APIFY_ITEMS": 1560,
+  "APIFY_LAST_FETCH": 1794160986871,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2312,7 +2312,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-08T17:02:12.939Z",
+    "at": "2026-11-08T18:03:06.871Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
