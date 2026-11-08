@@ -2294,8 +2294,8 @@
   "LAST_PROCESSED_SNIPPET": "حمایت نمایندگان مجلس از فعالیت‌های فرهنگی زمینه‌سا",
   "LAST_REPORT_TIME": 1794121648227,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1460,
-  "APIFY_LAST_FETCH": 1794120681429,
+  "APIFY_ITEMS": 1470,
+  "APIFY_LAST_FETCH": 1794125196910,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 90,
     "تیتر کلی": 5,
@@ -2303,7 +2303,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-08T06:51:21.429Z",
+    "at": "2026-11-08T08:06:36.910Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
