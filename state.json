@@ -2308,8 +2308,8 @@
   "LAST_PROCESSED_SNIPPET": "استیضاح هگست با ۸ اتهام \n #دانشجو",
   "LAST_REPORT_TIME": 1794260896722,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1800,
-  "APIFY_LAST_FETCH": 1794259926800,
+  "APIFY_ITEMS": 1810,
+  "APIFY_LAST_FETCH": 1794263535327,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 97,
     "تیتر کلی": 5,
@@ -2317,7 +2317,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T21:32:06.800Z",
+    "at": "2026-11-09T22:32:15.327Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
