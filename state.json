@@ -2313,8 +2313,8 @@
   "LAST_PROCESSED_SNIPPET": "ادعای میدل ایست نیوز: دیدار سه ساعت و نیمه نخست‌وز",
   "LAST_REPORT_TIME": 1794232971926,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1740,
-  "APIFY_LAST_FETCH": 1794235635141,
+  "APIFY_ITEMS": 1750,
+  "APIFY_LAST_FETCH": 1794239295633,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 96,
     "تیتر کلی": 5,
@@ -2322,7 +2322,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T14:47:15.141Z",
+    "at": "2026-11-09T15:48:15.633Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
