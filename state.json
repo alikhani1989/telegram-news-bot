@@ -2334,8 +2334,8 @@
   "LAST_PROCESSED_SNIPPET": "نماینده منتخب کنگره آمریکا: پایان دادن به جنگ علیه",
   "LAST_REPORT_TIME": 1794192493419,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1640,
-  "APIFY_LAST_FETCH": 1794194213165,
+  "APIFY_ITEMS": 1650,
+  "APIFY_LAST_FETCH": 1794197826532,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 91,
     "تیتر کلی": 5,
@@ -2343,7 +2343,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T03:16:53.165Z",
+    "at": "2026-11-09T04:17:06.532Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
