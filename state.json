@@ -2312,8 +2312,8 @@
   "LAST_PROCESSED_SNIPPET": "اظهارنظر عضو کمیسیون تلفیق مجلس درباره افزایش ۳۵ د",
   "LAST_REPORT_TIME": 1794200576042,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1660,
-  "APIFY_LAST_FETCH": 1794201448175,
+  "APIFY_ITEMS": 1670,
+  "APIFY_LAST_FETCH": 1794205945107,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 94,
     "تیتر کلی": 5,
@@ -2321,7 +2321,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T05:17:28.175Z",
+    "at": "2026-11-09T06:32:25.108Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
