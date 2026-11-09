@@ -1,27 +1,5 @@
 [
   {
-    "timestamp": "2026-11-07T15:17:28.071Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ معرفی مفهوم تقاص حاکمیتی در فقه",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ تسلیت رئیس مجلس به وزیر اسبق آموزش",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ گزارش مشاور رئیس مجلس از بودجه نهادهای فرهنگی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-07T15:32:21.387Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1237,5 +1215,17 @@
       }
     ],
     "avgScore": 98
+  },
+  {
+    "timestamp": "2026-11-09T21:48:09.502Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ هشدار افزایش ۳۵٪ حقوق در کمیسیون تلفیق بودجه",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
