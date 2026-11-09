@@ -2318,8 +2318,8 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف: اسرائیل به دنبال کشاندن آمریکا به جنگی بی",
   "LAST_REPORT_TIME": 1794242932184,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1760,
-  "APIFY_LAST_FETCH": 1794242899564,
+  "APIFY_ITEMS": 1770,
+  "APIFY_LAST_FETCH": 1794247348415,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 97,
     "تیتر کلی": 5,
@@ -2327,7 +2327,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T16:48:19.564Z",
+    "at": "2026-11-09T18:02:28.415Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
