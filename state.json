@@ -2320,8 +2320,8 @@
   "LAST_PROCESSED_SNIPPET": "امامی‌راد: امنیت منطقه بدون حضور ایران قابل تصور ن",
   "LAST_REPORT_TIME": 1794210445190,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1680,
-  "APIFY_LAST_FETCH": 1794210424119,
+  "APIFY_ITEMS": 1690,
+  "APIFY_LAST_FETCH": 1794214941067,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 94,
     "تیتر کلی": 5,
@@ -2329,7 +2329,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T07:47:04.119Z",
+    "at": "2026-11-09T09:02:21.068Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
