@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-07T08:47:04.658Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ کمیسیون اصل نودم افشاگری املاک صندوق",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-07T09:47:07.474Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1223,5 +1211,22 @@
       }
     ],
     "avgScore": 98
+  },
+  {
+    "timestamp": "2026-11-09T07:47:18.171Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تغییر نگاه به کارآفرینی در بحران",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ اقتصاد اجتماعی پسا جنگ با بازدارندگی کامل",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
