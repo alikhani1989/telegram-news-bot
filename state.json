@@ -2333,8 +2333,8 @@
   "LAST_PROCESSED_SNIPPET": "رهبر دموکرات‌های مجلس نمایندگان آمریکا: وزیر جنگ ب",
   "LAST_REPORT_TIME": 1794192493419,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1630,
-  "APIFY_LAST_FETCH": 1794189748570,
+  "APIFY_ITEMS": 1640,
+  "APIFY_LAST_FETCH": 1794194213165,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 91,
     "تیتر کلی": 5,
@@ -2342,7 +2342,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T02:02:28.571Z",
+    "at": "2026-11-09T03:16:53.165Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
