@@ -2315,8 +2315,8 @@
   "LAST_PROCESSED_SNIPPET": "طرح مجلس برای آغاز آموزش رسمی از پنج‌سالگی \n #خبرن",
   "LAST_REPORT_TIME": 1794224904699,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1710,
-  "APIFY_LAST_FETCH": 1794222281566,
+  "APIFY_ITEMS": 1720,
+  "APIFY_LAST_FETCH": 1794226675645,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 95,
     "تیتر کلی": 5,
@@ -2324,7 +2324,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T11:04:41.566Z",
+    "at": "2026-11-09T12:17:55.646Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
