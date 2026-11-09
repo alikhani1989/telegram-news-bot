@@ -2318,8 +2318,8 @@
   "LAST_PROCESSED_SNIPPET": "کاهش ظرفیت پزشکی پاک کردن صورت مسئله است \n #الف",
   "LAST_REPORT_TIME": 1794210445190,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1690,
-  "APIFY_LAST_FETCH": 1794214941067,
+  "APIFY_ITEMS": 1700,
+  "APIFY_LAST_FETCH": 1794218597843,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 95,
     "تیتر کلی": 5,
@@ -2327,7 +2327,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T09:02:21.068Z",
+    "at": "2026-11-09T10:03:17.843Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
