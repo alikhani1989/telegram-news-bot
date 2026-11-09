@@ -2328,8 +2328,8 @@
   "LAST_PROCESSED_SNIPPET": "قاضی‌زاده هاشمی: جمهوری‌خواهان پس از شکست تاریخی د",
   "LAST_REPORT_TIME": 1794252800279,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1780,
-  "APIFY_LAST_FETCH": 1794251077240,
+  "APIFY_ITEMS": 1790,
+  "APIFY_LAST_FETCH": 1794255487647,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 97,
     "تیتر کلی": 5,
@@ -2337,7 +2337,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T19:04:37.240Z",
+    "at": "2026-11-09T20:18:07.648Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
