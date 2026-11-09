@@ -2317,8 +2317,8 @@
   "LAST_PROCESSED_SNIPPET": "حکیم جفریز: جنگ علیه ایران آمریکا را ناامن‌تر کرده",
   "LAST_REPORT_TIME": 1794200576042,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1650,
-  "APIFY_LAST_FETCH": 1794197826532,
+  "APIFY_ITEMS": 1660,
+  "APIFY_LAST_FETCH": 1794201448175,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 92,
     "تیتر کلی": 5,
@@ -2326,7 +2326,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T04:17:06.532Z",
+    "at": "2026-11-09T05:17:28.175Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
