@@ -2336,8 +2336,8 @@
   "LAST_PROCESSED_SNIPPET": "قالیباف در تله ضدبرندینگ مخالفان؛ کالبدشکافی یک نب",
   "LAST_REPORT_TIME": 1794289648737,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1870,
-  "APIFY_LAST_FETCH": 1794293735523,
+  "APIFY_ITEMS": 1880,
+  "APIFY_LAST_FETCH": 1794297739682,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 98,
     "تیتر کلی": 5,
@@ -2345,7 +2345,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-10T06:55:35.523Z",
+    "at": "2026-11-10T08:02:19.683Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
