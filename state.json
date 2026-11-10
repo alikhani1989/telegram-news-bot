@@ -2313,8 +2313,8 @@
   "LAST_PROCESSED_SNIPPET": "نقش همسایگان ایران در شکست دروازه آهنین آمریکا \n #",
   "LAST_REPORT_TIME": 1794268052436,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1840,
-  "APIFY_LAST_FETCH": 1794276273065,
+  "APIFY_ITEMS": 1850,
+  "APIFY_LAST_FETCH": 1794280050652,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 97,
     "تیتر کلی": 5,
@@ -2322,7 +2322,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-10T02:04:33.065Z",
+    "at": "2026-11-10T03:07:30.652Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
