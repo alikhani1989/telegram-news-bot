@@ -2307,8 +2307,8 @@
   "LAST_PROCESSED_SNIPPET": "نماینده مجلس: ایران در صورت جنگ، قلب اروپا را هدف ",
   "LAST_REPORT_TIME": 1794333228280,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1930,
-  "APIFY_LAST_FETCH": 1794330501982,
+  "APIFY_ITEMS": 1940,
+  "APIFY_LAST_FETCH": 1794334232090,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 98,
     "تیتر کلی": 5,
@@ -2316,7 +2316,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-10T17:08:21.982Z",
+    "at": "2026-11-10T18:10:32.090Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
