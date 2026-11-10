@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-07T18:06:55.756Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ حذف شرط اجتهاد برای وزیر اطلاعات تصویب شد",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-07T18:21:37.856Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1196,6 +1184,28 @@
       },
       {
         "title": "✴️ توسعه روستاها و نقش مجلس",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
+  },
+  {
+    "timestamp": "2026-11-10T06:05:28.417Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ ساختار نظارت مجلس با مشکلات جدی مواجه",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ دولت متولی اصلی گرانی‌ها شد",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ توسعه تجارت مرزی در اولویت",
         "score": 100,
         "issues": []
       }
