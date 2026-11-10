@@ -2307,8 +2307,8 @@
   "LAST_PROCESSED_SNIPPET": "وزارت نیرو: هر ماینر برق ۱۰ خانه را می‌بلعد/ طرح ج",
   "LAST_REPORT_TIME": 1794299007202,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1890,
-  "APIFY_LAST_FETCH": 1794302735133,
+  "APIFY_ITEMS": 1900,
+  "APIFY_LAST_FETCH": 1794306858937,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 98,
     "تیتر کلی": 5,
@@ -2316,7 +2316,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-10T09:25:35.133Z",
+    "at": "2026-11-10T10:34:18.937Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
