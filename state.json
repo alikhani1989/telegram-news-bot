@@ -2300,8 +2300,8 @@
   "LAST_PROCESSED_SNIPPET": "برگزاری آیین سوگواری شهادت حضرت زهرا(س) به میزبانی",
   "LAST_REPORT_TIME": 1794326792937,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1920,
-  "APIFY_LAST_FETCH": 1794326747923,
+  "APIFY_ITEMS": 1930,
+  "APIFY_LAST_FETCH": 1794330501982,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 98,
     "تیتر کلی": 5,
@@ -2309,7 +2309,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-10T16:05:47.923Z",
+    "at": "2026-11-10T17:08:21.982Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
