@@ -21,7 +21,7 @@
     "2116497790993887402",
     "2116489873062350907"
   ],
-  "TWEET_LAST_DAY": "2026-11-09",
+  "TWEET_LAST_DAY": "2026-11-10",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2313,8 +2313,8 @@
   "LAST_PROCESSED_SNIPPET": "نقش همسایگان ایران در شکست دروازه آهنین آمریکا \n #",
   "LAST_REPORT_TIME": 1794268052436,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 1820,
-  "APIFY_LAST_FETCH": 1794268019207,
+  "APIFY_ITEMS": 1830,
+  "APIFY_LAST_FETCH": 1794272534806,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 97,
     "تیتر کلی": 5,
@@ -2322,7 +2322,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-09T23:46:59.207Z",
+    "at": "2026-11-10T01:02:14.806Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2372,5 +2372,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-11-09"
+  "TWEET_STATUS_DAY": "2026-11-10"
 }
