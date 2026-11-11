@@ -1017,7 +1017,95 @@ const RSS_FEEDS = [
   { name: 'Hamshahri', url: 'https://www.hamshahrionline.ir/rss' },
 ];
 
-const PARLIAMENT_KEYWORDS = ['مجلس', 'نماینده', 'کمیسیون', 'شورای نگهبان', 'طرح', 'قانون', 'بودجه', 'فراکسیون', 'استیضاح'];
+// منابعی که فید RSS معتبر ندارند و فهرست خبرشان از HTML خوانده می‌شود.
+// rc.majlis.ir هیچ فیدی ندارد و فید اعلام‌شده‌ی dmk.ir (/fa/backend.php) خالی برمی‌گردد.
+const HTML_SOURCES = [
+  { name: 'MajlisRC', url: 'https://rc.majlis.ir/fa/news', source: 'مرکز پژوهش‌های مجلس', parser: 'majlisrc' },
+  { name: 'DMK', url: 'https://dmk.ir/fa', source: 'دیوان محاسبات کشور', parser: 'dmk' },
+];
+
+const PARLIAMENT_KEYWORDS = ['مجلس', 'نماینده', 'کمیسیون', 'شورای نگهبان', 'طرح', 'قانون', 'بودجه', 'فراکسیون', 'استیضاح', 'دیوان محاسبات'];
+
+// پاک‌سازی متن HTML: حذف تگ‌ها و تبدیل موجودیت‌ها
+function stripHtmlToText(s) {
+  return String(s || '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&zwnj;/g, '\u200c')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// مرکز پژوهش‌های مجلس: کارت‌های صفحه /fa/news
+function parseMajlisRCNews(html) {
+  const items = [];
+  const chunks = String(html || '').split('news-card').slice(1);
+  for (const chunk of chunks) {
+    const link = (chunk.match(/href="(https:\/\/rc\.majlis\.ir\/fa\/news\/show\/\d+)"/) || [])[1];
+    const title = (chunk.match(/<h2[^>]*class="[^"]*title[^"]*"[^>]*>([\s\S]*?)<\/h2>/) || [])[1];
+    const desc = (chunk.match(/<p[^>]*class="[^"]*description[^"]*"[^>]*>([\s\S]*?)<\/p>/) || [])[1];
+    const cleanTitle = stripHtmlToText(title);
+    if (!link || !cleanTitle) continue;
+    items.push({
+      title: cleanTitle,
+      description: stripHtmlToText(desc) || cleanTitle,
+      link,
+      source: 'مرکز پژوهش‌های مجلس',
+    });
+  }
+  return items;
+}
+
+// دیوان محاسبات کشور: عنوان‌های sis-title در صفحه اصلی
+function parseDMKNews(html) {
+  const items = [];
+  const re = /<h4[^>]*class="[^"]*sis-title[^"]*"[^>]*>\s*<a\s+([^>]*)>([\s\S]*?)<\/a>/g;
+  let m;
+  while ((m = re.exec(String(html || ''))) !== null) {
+    const attrs = m[1];
+    const href = (attrs.match(/href="([^"]+)"/) || [])[1];
+    const titleAttr = (attrs.match(/title="([^"]*)"/) || [])[1];
+    const title = stripHtmlToText(titleAttr || m[2]);
+    if (!href || !title) continue;
+    // فقط خبر؛ کلاس sis-title برای صفحات ثابت (وب‌لینک) هم استفاده می‌شود
+    if (!/\/fa\/news\/\d+/.test(href)) continue;
+    items.push({ title, description: title, link: href, source: 'دیوان محاسبات کشور' });
+  }
+  return items;
+}
+
+// بعضی سایت‌ها اتصال HTTP/1.1 یا دست‌دادن TLS نود را رد می‌کنند (rc.majlis.ir فقط HTTP/2 می‌دهد و
+// dmk.ir به نود صفحه‌ی «دسترسی مجاز نیست» برمی‌گرداند). همان الگوی fetchArticleText: اول نود، بعد curl.
+function fetchHtmlWithCurlBrowser(url) {
+  try {
+    const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
+    const noRevoke = process.platform === 'win32' ? ' --ssl-no-revoke' : '';
+    const result = execSync('curl -s -L --compressed' + noRevoke + ' --max-time 20 -A "' + ua + '" "' + url.replace(/"/g, '\\"') + '"', {
+      encoding: 'utf8',
+      maxBuffer: 8 * 1024 * 1024,
+      timeout: 25000,
+    });
+    return result;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function fetchHtmlPage(url) {
+  try {
+    const html = await httpGet(url);
+    if (html && html.length > 1000) return html;
+  } catch (e) {}
+  const curlHtml = fetchHtmlWithCurlBrowser(url);
+  return (curlHtml && curlHtml.length > 1000) ? curlHtml : null;
+}
 
 async function fetchRSSNews() {
   const allNews = [];
@@ -1049,6 +1137,28 @@ async function fetchRSSNews() {
       console.log('  ⚠️ خطا در خواندن RSS ' + feed.name + ': ' + e.message);
     }
   }
+
+  // ===== منابع بدون فید RSS =====
+  for (const src of HTML_SOURCES) {
+    try {
+      const html = await fetchHtmlPage(src.url);
+      if (!html) throw new Error('صفحه خوانده نشد');
+      const parsed = src.parser === 'majlisrc' ? parseMajlisRCNews(html) : parseDMKNews(html);
+      let kept = 0;
+      for (const item of parsed) {
+        const fullText = item.title + ' ' + item.description;
+        const isRelevant = PARLIAMENT_KEYWORDS.some(kw => fullText.includes(kw));
+        if (isRelevant && item.description.length > 20) {
+          allNews.push(item);
+          kept++;
+        }
+      }
+      console.log('  📡 ' + src.name + ': ' + kept + ' خبر از HTML');
+    } catch (e) {
+      console.log('  ⚠️ خطا در خواندن HTML ' + src.name + ': ' + e.message);
+    }
+  }
+
   return allNews;
 }
 
