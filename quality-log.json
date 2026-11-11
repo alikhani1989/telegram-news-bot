@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-11-09T14:47:32.492Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ کمیسیون اجتماعی: افزایش ۶۰٪ حقوق کارگران رخ نداده",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ اقتصاد اجتماعی پساجنگ: نیاز به بازدارندگی کامل",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-09T16:48:43.435Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1014,5 +997,22 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-11-11T15:12:05.698Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ خروج از NPT در دستور کار مجلس",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ بودجه دانشگاه اسدآباد در کمیسیون صنایع و معادن",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
