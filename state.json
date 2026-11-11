@@ -2312,8 +2312,8 @@
   "LAST_PROCESSED_SNIPPET": "مالکی: نیروهای مسلح با آمادگی کامل تحولات منطقه را",
   "LAST_REPORT_TIME": 1794367386444,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2010,
-  "APIFY_LAST_FETCH": 1794370912484,
+  "APIFY_ITEMS": 2020,
+  "APIFY_LAST_FETCH": 1794375268346,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 98,
     "تیتر کلی": 5,
@@ -2321,7 +2321,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-11T04:21:52.484Z",
+    "at": "2026-11-11T05:34:28.346Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
