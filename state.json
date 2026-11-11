@@ -2322,8 +2322,8 @@
   "LAST_PROCESSED_SNIPPET": "دیدار رؤسای آموزش و پرورش ملایر، جوکار و سامن با و",
   "LAST_REPORT_TIME": 1794376199938,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2020,
-  "APIFY_LAST_FETCH": 1794375268346,
+  "APIFY_ITEMS": 2030,
+  "APIFY_LAST_FETCH": 1794379742422,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 99,
     "تیتر کلی": 5,
@@ -2331,7 +2331,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-11T05:34:28.346Z",
+    "at": "2026-11-11T06:49:02.423Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
