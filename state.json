@@ -2307,8 +2307,8 @@
   "LAST_PROCESSED_SNIPPET": "طرح استیضاح هگست در مجلس نمایندگان آمریکا شکست خور",
   "LAST_REPORT_TIME": 1794386007606,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2050,
-  "APIFY_LAST_FETCH": 1794387859357,
+  "APIFY_ITEMS": 2060,
+  "APIFY_LAST_FETCH": 1794391536841,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 99,
     "تیتر کلی": 5,
@@ -2316,7 +2316,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-11T09:04:19.358Z",
+    "at": "2026-11-11T10:05:36.841Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
