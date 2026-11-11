@@ -2312,8 +2312,8 @@
   "LAST_PROCESSED_SNIPPET": "سخنگوی هیئت رئیسه مجلس: حذف شرط اجتهاد از شرایط وز",
   "LAST_REPORT_TIME": 1794376199938,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2030,
-  "APIFY_LAST_FETCH": 1794379742422,
+  "APIFY_ITEMS": 2040,
+  "APIFY_LAST_FETCH": 1794384141961,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 99,
     "تیتر کلی": 5,
@@ -2321,7 +2321,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-11T06:49:02.423Z",
+    "at": "2026-11-11T08:02:21.962Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
