@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-10T16:41:38.158Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ ایران اینبار جغرافیای جنگ را تعیین می‌کند",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-10T17:53:38.207Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -973,5 +961,17 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-11-12T04:17:48.617Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ ضرورت مدیریت مشترک در شهرداری‌ها",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
