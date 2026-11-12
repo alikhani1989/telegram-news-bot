@@ -2322,7 +2322,7 @@
   "LAST_REPORT_TIME": 1794454423227,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2150,
-  "APIFY_LAST_FETCH": 1794458817616,
+  "APIFY_LAST_FETCH": 1794463354063,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2330,51 +2330,13 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-12T04:46:57.617Z",
-    "fetched": 10,
+    "at": "2026-11-12T06:02:34.063Z",
+    "fetched": 0,
     "fresh": 0,
-    "rejects": {
-      "بدون متن": 10
-    },
-    "newest": [
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      }
-    ],
-    "rawSample": {
-      "keys": [
-        "noResults"
-      ],
-      "first": "{\"noResults\":true}"
-    },
-    "allBlank": true,
+    "rejects": {},
+    "newest": [],
+    "rawSample": null,
+    "allBlank": false,
     "maxItemsRequested": 12,
     "useCard": true
   },
