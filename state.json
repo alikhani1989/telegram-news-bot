@@ -2326,8 +2326,8 @@
   "LAST_PROCESSED_SNIPPET": "عضو کمیسیون صنایع: ریشه اسرائیل در تجارت بین‌الملل",
   "LAST_REPORT_TIME": 1794442702727,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2120,
-  "APIFY_LAST_FETCH": 1794445347742,
+  "APIFY_ITEMS": 2130,
+  "APIFY_LAST_FETCH": 1794449813057,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2335,7 +2335,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-12T01:02:27.742Z",
+    "at": "2026-11-12T02:16:53.057Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
