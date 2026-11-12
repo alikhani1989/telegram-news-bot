@@ -2311,8 +2311,8 @@
   "LAST_PROCESSED_SNIPPET": "نمایندگان پارلمان فرانسه طرحی برای ممنوعیت تجارت ب",
   "LAST_REPORT_TIME": 1794464265285,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2150,
-  "APIFY_LAST_FETCH": 1794463354063,
+  "APIFY_ITEMS": 2160,
+  "APIFY_LAST_FETCH": 1794467820727,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2320,13 +2320,51 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-12T06:02:34.063Z",
-    "fetched": 0,
+    "at": "2026-11-12T07:17:00.728Z",
+    "fetched": 10,
     "fresh": 0,
-    "rejects": {},
-    "newest": [],
-    "rawSample": null,
-    "allBlank": false,
+    "rejects": {
+      "بدون متن": 10
+    },
+    "newest": [
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      },
+      {
+        "id": "",
+        "handle": "",
+        "createdAt": null,
+        "len": 0
+      }
+    ],
+    "rawSample": {
+      "keys": [
+        "noResults"
+      ],
+      "first": "{\"noResults\":true}"
+    },
+    "allBlank": true,
     "maxItemsRequested": 12,
     "useCard": true
   },
