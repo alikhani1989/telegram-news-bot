@@ -2322,8 +2322,8 @@
   "LAST_PROCESSED_SNIPPET": "آیت‌الله علما از مواضع امام جمعه کرمانشاه درباره ا",
   "LAST_REPORT_TIME": 1794464265285,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2160,
-  "APIFY_LAST_FETCH": 1794467820727,
+  "APIFY_ITEMS": 2170,
+  "APIFY_LAST_FETCH": 1794471425994,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2331,7 +2331,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-12T07:17:00.728Z",
+    "at": "2026-11-12T08:17:05.995Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
