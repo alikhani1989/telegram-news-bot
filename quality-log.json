@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-11-11T01:38:06.589Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ روابط چین‑ایران به‌سوی همکاری عمیق‌تر",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ تخصیص ۵۰۰ میلیارد تومان به راه‌آهن سبزوار",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-11T01:52:51.764Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1013,5 +996,22 @@
       }
     ],
     "avgScore": 96
+  },
+  {
+    "timestamp": "2026-11-12T21:25:25.331Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ تأکید بر تقویت امنیت اجتماعی",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تغییر دولت آمریکا سیاست خارجی را عوض نمی‌کند",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
