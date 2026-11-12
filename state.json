@@ -2314,7 +2314,7 @@
   "LAST_REPORT_TIME": 1794473287960,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2170,
-  "APIFY_LAST_FETCH": 1794471425994,
+  "APIFY_LAST_FETCH": 1794475029080,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2322,55 +2322,15 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-12T08:17:05.995Z",
-    "fetched": 10,
+    "at": "2026-11-12T09:17:09.080Z",
+    "fetched": 0,
     "fresh": 0,
-    "rejects": {
-      "بدون متن": 10
-    },
-    "newest": [
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      },
-      {
-        "id": "",
-        "handle": "",
-        "createdAt": null,
-        "len": 0
-      }
-    ],
-    "rawSample": {
-      "keys": [
-        "noResults"
-      ],
-      "first": "{\"noResults\":true}"
-    },
-    "allBlank": true,
-    "maxItemsRequested": 12,
-    "useCard": true
+    "demo": false,
+    "rawSample": null,
+    "rejects": {},
+    "error": "Apify: User was not found or authentication token is not valid"
   },
-  "TWEET_ALERT_ACTIVE": false,
-  "TWEET_ALERT_AT": 0,
+  "TWEET_ALERT_ACTIVE": true,
+  "TWEET_ALERT_AT": 1794475029080,
   "TWEET_STATUS_DAY": "2026-11-12"
 }
