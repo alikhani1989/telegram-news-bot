@@ -21,7 +21,7 @@
     "2116497790993887402",
     "2116489873062350907"
   ],
-  "TWEET_LAST_DAY": "2026-11-11",
+  "TWEET_LAST_DAY": "2026-11-12",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2309,8 +2309,8 @@
   "LAST_PROCESSED_SNIPPET": "ما توسط اسرائیل به جنگ علیه ایران کشیده شدیم | ما ",
   "LAST_REPORT_TIME": 1794437801159,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2100,
-  "APIFY_LAST_FETCH": 1794437744989,
+  "APIFY_ITEMS": 2110,
+  "APIFY_LAST_FETCH": 1794441734502,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2318,7 +2318,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-11T22:55:44.989Z",
+    "at": "2026-11-12T00:02:14.503Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
@@ -2368,5 +2368,5 @@
   },
   "TWEET_ALERT_ACTIVE": false,
   "TWEET_ALERT_AT": 0,
-  "TWEET_STATUS_DAY": "2026-11-11"
+  "TWEET_STATUS_DAY": "2026-11-12"
 }
