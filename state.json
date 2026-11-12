@@ -2323,8 +2323,8 @@
   "LAST_PROCESSED_SNIPPET": "انتقاد تند نمایندگان ایتالیایی از همدستی رم با رژی",
   "LAST_REPORT_TIME": 1794454423227,
   "APIFY_MONTH": "2026-11",
-  "APIFY_ITEMS": 2140,
-  "APIFY_LAST_FETCH": 1794454324271,
+  "APIFY_ITEMS": 2150,
+  "APIFY_LAST_FETCH": 1794458817616,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2332,7 +2332,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-12T03:32:04.271Z",
+    "at": "2026-11-12T04:46:57.617Z",
     "fetched": 10,
     "fresh": 0,
     "rejects": {
