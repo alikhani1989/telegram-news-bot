@@ -2302,11 +2302,11 @@
       "timestamp": 1794584982822
     }
   ],
-  "LAST_PROCESSED_SNIPPET": "بازنگری محدوده بافت تاریخی آبادان در دستور کار قرا",
+  "LAST_PROCESSED_SNIPPET": "احمدشاه قاجار و جمعی از همراهانش در یک باغ / عکس \n",
   "LAST_REPORT_TIME": 1794584063343,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2170,
-  "APIFY_LAST_FETCH": 1794582205434,
+  "APIFY_LAST_FETCH": 1794585823480,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 100,
     "تیتر کلی": 5,
@@ -2314,7 +2314,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-13T15:03:25.434Z",
+    "at": "2026-11-13T16:03:43.480Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
