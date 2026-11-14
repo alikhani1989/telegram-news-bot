@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-12T04:17:48.617Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ ضرورت مدیریت مشترک در شهرداری‌ها",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-12T05:17:46.622Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1138,5 +1126,17 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-11-14T20:17:53.016Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ شرط اجتهاد با تحصیلات در حد اجتهاد برطرف می‌شود",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
