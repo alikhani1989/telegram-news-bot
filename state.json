@@ -2283,7 +2283,7 @@
   "LAST_REPORT_TIME": 1794637987712,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2170,
-  "APIFY_LAST_FETCH": 1794638815167,
+  "APIFY_LAST_FETCH": 1794643332902,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 102,
     "تیتر کلی": 5,
@@ -2291,7 +2291,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-14T06:46:55.167Z",
+    "at": "2026-11-14T08:02:12.902Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
@@ -2300,6 +2300,6 @@
     "error": "Apify: User was not found or authentication token is not valid"
   },
   "TWEET_ALERT_ACTIVE": true,
-  "TWEET_ALERT_AT": 1794619013773,
+  "TWEET_ALERT_AT": 1794643332902,
   "TWEET_STATUS_DAY": "2026-11-14"
 }
