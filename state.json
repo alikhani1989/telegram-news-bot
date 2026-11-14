@@ -2308,7 +2308,7 @@
   "LAST_REPORT_TIME": 1794614871286,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2170,
-  "APIFY_LAST_FETCH": 1794611811335,
+  "APIFY_LAST_FETCH": 1794615412883,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 101,
     "تیتر کلی": 5,
@@ -2316,7 +2316,7 @@
     "سمت اشتباه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-13T23:16:51.335Z",
+    "at": "2026-11-14T00:16:52.883Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
@@ -2326,5 +2326,5 @@
   },
   "TWEET_ALERT_ACTIVE": true,
   "TWEET_ALERT_AT": 1794594736531,
-  "TWEET_STATUS_DAY": "2026-11-13"
+  "TWEET_STATUS_DAY": "2026-11-14"
 }
