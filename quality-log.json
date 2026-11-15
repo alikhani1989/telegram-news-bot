@@ -1,22 +1,5 @@
 [
   {
-    "timestamp": "2026-11-12T21:25:25.331Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ تأکید بر تقویت امنیت اجتماعی",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ تغییر دولت آمریکا سیاست خارجی را عوض نمی‌کند",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-13T02:33:39.425Z",
     "model": "NaraRouter",
     "items": [
@@ -1128,5 +1111,17 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-11-15T11:02:53.940Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ اصلاح قانون وزارت اطلاعات توسط نمایندگان",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
