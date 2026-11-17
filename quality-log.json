@@ -1,27 +1,5 @@
 [
   {
-    "timestamp": "2026-11-14T14:32:40.535Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ بیش از هزار میلیارد تومان تجهیزات پزشکی بوشهر",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ پیگیری مشکلات صنایع مبارکه توسط نماینده",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ تسلیت نماینده مجلس از شهادت مولوی یوسف قاضی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-14T16:18:21.434Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1080,5 +1058,17 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-11-17T21:17:28.409Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ انتقاد از رسانه‌های آمریکایی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
