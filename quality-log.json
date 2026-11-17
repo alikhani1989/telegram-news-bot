@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-11-14T08:33:01.978Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ هشدار بحران پیری جمعیت در ۲۵ سال",
-        "score": 85,
-        "issues": [
-          "نام و سمّت شخص در خط اول متن پیدا نشد"
-        ]
-      }
-    ],
-    "avgScore": 85
-  },
-  {
     "timestamp": "2026-11-14T09:32:52.787Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1069,5 +1055,17 @@
       }
     ],
     "avgScore": 90
+  },
+  {
+    "timestamp": "2026-11-17T13:32:51.820Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ مدیریت یکپارچه روستاها مهار مهاجرت",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
