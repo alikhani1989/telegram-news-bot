@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-15T05:47:26.535Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ رئیس مجلس: نه جنگ نه صلح",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-15T06:17:50.220Z",
     "model": "NaraRouter",
     "items": [
@@ -1091,5 +1079,17 @@
       }
     ],
     "avgScore": 85
+  },
+  {
+    "timestamp": "2026-11-18T16:32:42.591Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ افتتاح آموزشگاه 9 کلاسه در ویرانی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
