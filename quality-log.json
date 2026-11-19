@@ -1,24 +1,5 @@
 [
   {
-    "timestamp": "2026-11-16T09:33:05.727Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ خوانده شدن نمایشنامه «مجلس قربانی سنمّار»",
-        "score": 85,
-        "issues": [
-          "نام و سمّت شخص در خط اول متن پیدا نشد"
-        ]
-      },
-      {
-        "title": "✴️ تأمین ۷۰ مگاوات برق در همدان",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 93
-  },
-  {
     "timestamp": "2026-11-16T10:33:13.567Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1110,5 +1091,22 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-11-19T12:17:21.454Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ قاچاق سوخت عمدتاً گازوئیل است",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ بازتعریف زبان دیپلماسی در جنگ نامتقارن",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
