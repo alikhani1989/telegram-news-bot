@@ -21,7 +21,7 @@
     "2116497790993887402",
     "2116489873062350907"
   ],
-  "TWEET_LAST_DAY": "2026-11-19",
+  "TWEET_LAST_DAY": "2026-11-20",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2285,30 +2285,14 @@
     "سنا قطعنامه اختیارات جنگ ایران را رد کرد",
     "برنامه هفتم توسعه کشاورزی تصویب شد"
   ],
-  "PUBLISHED_NEWS": [
-    {
-      "title": "✴️ طرح اصلاحیه‌ برای قطع بودجه جنگ ایران",
-      "source_link": "https://www.afkarnews.com/fa/tiny/news-1417438",
-      "timestamp": 1795119443080
-    },
-    {
-      "title": "✴️ سنا قطعنامه اختیارات جنگ ایران را رد کرد",
-      "source_link": "https://www.entekhab.ir/fa/news/948770/%D8%B1%D9%88%DB%8C%D8%AA%D8%B1%D8%B2-%D8%B3%D9%86%D8%A7%DB%8C-%D8%A2%D9%85%D8%B1%DB%8C%DA%A9%D8%A7-%D9%82%D8%B7%D8%B9%D9%86%D8%A7%D9%85%D9%87-%D9%85%D8%AD%D8%AF%D9%88%D8%AF-%DA%A9%D8%B1%D8%AF%D9%86-%D8%A7%D8%AE%D8%AA%DB%8C%D8%A7%D8%B1%D8%A7%D8%AA-%D9%86%D8%B8%D8%A7%D9%85%DB%8C-%D8%AA%D8%B1%D8%A7%D9%85%D9%BE-%D8%AF%D8%B1-%D9%82%D8%A8%D8%A7%D9%84-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86-%D8%B1%D8%A7-%D8%A8%D8%A7-51-%D8%B1%D8%A3%DB%8C-%D9%85%D8%AE%D8%A7%D9%84%D9%81-%D8%B1%D8%AF-%DA%A9%D8%B1%D8%AF-%D8%AA%D9%86%D9%87%D8%A7-%D8%B3%D9%87-%D8%B3%D9%86%D8%A7%D8%AA%D9%88%D8%B1-%D8%AC%D9%85%D9%87%D9%88%D8%B1%DB%8C-%D8%AE%D9%88%D8%A7%D9%87-%D8%A8%D9%87-%D8%A7%DB%8C%D9%86-%D9%82%D8%B7%D8%B9%D9%86%D8%A7%D9%85%D9%87-%D8%B1%D8%A3%DB%8C-%D9%85%D8%AB%D8%A8%D8%AA-%D8%AF%D8%A7%D8%AF%D9%86%D8%AF",
-      "timestamp": 1795119445098
-    },
-    {
-      "title": "✴️ برنامه هفتم توسعه کشاورزی تصویب شد",
-      "source_link": "https://icana.ir/news/428090/%D8%AF%D8%A7%D9%85%D8%BA%D8%A7%D9%86-%D9%BE%D8%A7%DB%8C%D9%84%D9%88%D8%AA-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C-%D8%B7%D8%B1%D8%AD-%D9%87%D8%A7%DB%8C-%D8%A2%D8%A8%D8%AE%DB%8C%D8%B2%D8%AF%D8%A7%D8%B1%DB%8C-%D9%88-%D8%A2%D8%A8%D8%AE%D9%88%D8%A7%D9%86-%D8%AF%D8%A7%D8%B1%DB%8C-%D8%B4%D8%AF-%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF",
-      "timestamp": 1795119447605
-    }
-  ],
-  "LAST_PROCESSED_SNIPPET": "رویترز: سنای آمریکا قطعنامه محدود کردن اختیارات نظ",
-  "LAST_REPORT_TIME": 1795119448911,
+  "PUBLISHED_NEWS": [],
+  "LAST_PROCESSED_SNIPPET": "لحظاتی از مجلس ترحیم و بزرگداشت مرجع عالی‌قدر، حضر",
+  "LAST_REPORT_TIME": 1795133030157,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2170,
   "APIFY_LAST_FETCH": 1795132026566,
   "MISTAKE_STATS": {
-    "جعل محتوا/مصاحبه": 115,
+    "جعل محتوا/مصاحبه": 117,
     "تیتر کلی": 5,
     "متن غیرفارسی": 5,
     "سمت اشتباه": 2
