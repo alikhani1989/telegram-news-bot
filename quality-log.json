@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-11-18T15:35:51.622Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ انتقاد از افزایش ۳۵٪ حقوق در بودجه",
-        "score": 85,
-        "issues": [
-          "نام و سمّت شخص در خط اول متن پیدا نشد"
-        ]
-      }
-    ],
-    "avgScore": 85
-  },
-  {
     "timestamp": "2026-11-18T16:32:42.591Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1096,5 +1082,17 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-11-21T19:03:03.388Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ هشدار به آمریکا در کمیسیون امنیت ملی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
