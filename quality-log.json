@@ -1,24 +1,5 @@
 [
   {
-    "timestamp": "2026-11-20T07:32:33.142Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ لایحه اصلاح ماده ۱۰۶ در کمیسیون اجتماعی",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ مسکن روستایی در کمیسیون عمران",
-        "score": 90,
-        "issues": [
-          "عبارات خشک خبری استفاده شده"
-        ]
-      }
-    ],
-    "avgScore": 95
-  },
-  {
     "timestamp": "2026-11-20T09:32:52.926Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1128,5 +1109,22 @@
       }
     ],
     "avgScore": 93
+  },
+  {
+    "timestamp": "2026-11-23T10:05:01.725Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ قهرمانی تیم پاراتکواندو بانوان ایران",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ تسلیت رئیس مجلس به خانواده نویسنده",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
