@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-21T10:32:21.437Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ تقاضای گاز در کمیسیون انرژی",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-21T13:17:18.257Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1094,5 +1082,24 @@
       }
     ],
     "avgScore": 70
+  },
+  {
+    "timestamp": "2026-11-23T21:02:49.704Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ تعیین مهلت یکماهه برای رفع نواقص تامین اجتماعی",
+        "score": 100,
+        "issues": []
+      },
+      {
+        "title": "✴️ استقلال ساختاری بیمارستانهای شاخص خواسته شد",
+        "score": 95,
+        "issues": [
+          "حوزه انتخابیه آورده شده"
+        ]
+      }
+    ],
+    "avgScore": 98
   }
 ]
