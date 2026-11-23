@@ -21,7 +21,7 @@
     "2116497790993887402",
     "2116489873062350907"
   ],
-  "TWEET_LAST_DAY": "2026-11-22",
+  "TWEET_LAST_DAY": "2026-11-23",
   "TWEET_COUNT_TODAY": 0,
   "NEWS_DATABASE": [
     {
@@ -2317,7 +2317,7 @@
   "LAST_REPORT_TIME": 1795386755991,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2170,
-  "APIFY_LAST_FETCH": 1795389418429,
+  "APIFY_LAST_FETCH": 1795393023306,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 122,
     "تیتر کلی": 5,
@@ -2325,7 +2325,7 @@
     "سمت اشتباه": 2
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-22T23:16:58.429Z",
+    "at": "2026-11-23T00:17:03.306Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
@@ -2335,5 +2335,5 @@
   },
   "TWEET_ALERT_ACTIVE": true,
   "TWEET_ALERT_AT": 1795373223092,
-  "TWEET_STATUS_DAY": "2026-11-22"
+  "TWEET_STATUS_DAY": "2026-11-23"
 }
