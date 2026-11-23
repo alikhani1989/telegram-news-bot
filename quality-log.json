@@ -1,27 +1,5 @@
 [
   {
-    "timestamp": "2026-11-21T13:17:18.257Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ تأکید بر سه ویژگی برجسته",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ عبور نفتکش‌ها از محاصره آمریکا",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ حمله به مدرسه میناب را جنایت نامید",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-21T17:02:22.256Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1101,5 +1079,19 @@
       }
     ],
     "avgScore": 98
+  },
+  {
+    "timestamp": "2026-11-23T21:17:31.002Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ رئیس مجلس: دشمن به دنبال وضعیت نه جنگ نه صلح است",
+        "score": 90,
+        "issues": [
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 90
   }
 ]
