@@ -1,17 +1,5 @@
 [
   {
-    "timestamp": "2026-11-24T06:46:29.970Z",
-    "model": "NaraRouter",
-    "items": [
-      {
-        "title": "✴️ کارت زرد مجلس به وزیر کار برای سومین بار",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-24T07:32:58.159Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1185,5 +1173,19 @@
       }
     ],
     "avgScore": 95
+  },
+  {
+    "timestamp": "2026-11-26T03:03:30.426Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ سیلی محکم به هر کمکی به آمریکا",
+        "score": 90,
+        "issues": [
+          "عبارات خشک خبری استفاده شده"
+        ]
+      }
+    ],
+    "avgScore": 90
   }
 ]
