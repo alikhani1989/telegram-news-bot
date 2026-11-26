@@ -2284,7 +2284,7 @@
   "LAST_REPORT_TIME": 1795703595331,
   "APIFY_MONTH": "2026-11",
   "APIFY_ITEMS": 2170,
-  "APIFY_LAST_FETCH": 1795707125438,
+  "APIFY_LAST_FETCH": 1795710979012,
   "MISTAKE_STATS": {
     "جعل محتوا/مصاحبه": 135,
     "تیتر کلی": 7,
@@ -2293,7 +2293,7 @@
     "متن کوتاه": 1
   },
   "TWEET_LAST_FETCH_DIAG": {
-    "at": "2026-11-26T15:32:05.438Z",
+    "at": "2026-11-26T16:36:19.012Z",
     "fetched": 0,
     "fresh": 0,
     "demo": false,
