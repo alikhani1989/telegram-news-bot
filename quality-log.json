@@ -1,27 +1,5 @@
 [
   {
-    "timestamp": "2026-11-24T20:03:15.259Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ تقویت بنیه دفاعی در لایحه بودجه",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ رئیس مجلس از عدم برگزاری جلسه انتقاد کرد",
-        "score": 100,
-        "issues": []
-      },
-      {
-        "title": "✴️ پایان بررسی طرح تخلفات حوزه صوت و تصویر",
-        "score": 100,
-        "issues": []
-      }
-    ],
-    "avgScore": 100
-  },
-  {
     "timestamp": "2026-11-24T21:03:02.924Z",
     "model": "Groq openai/gpt-oss-120b",
     "items": [
@@ -1190,5 +1168,17 @@
       }
     ],
     "avgScore": 88
+  },
+  {
+    "timestamp": "2026-11-26T12:03:58.917Z",
+    "model": "Groq openai/gpt-oss-120b",
+    "items": [
+      {
+        "title": "✴️ درخواست ورود وزارت خارجه برای رفع محموله دارویی",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
