@@ -1,19 +1,5 @@
 [
   {
-    "timestamp": "2026-11-25T04:03:03.465Z",
-    "model": "Groq openai/gpt-oss-120b",
-    "items": [
-      {
-        "title": "✴️ اصلاح صندوق ذخیره فرهنگیان در کمیسیون اصل نودم",
-        "score": 90,
-        "issues": [
-          "عبارات خشک خبری استفاده شده"
-        ]
-      }
-    ],
-    "avgScore": 90
-  },
-  {
     "timestamp": "2026-11-25T04:17:31.866Z",
     "model": "NaraRouter",
     "items": [
@@ -1181,5 +1167,17 @@
       }
     ],
     "avgScore": 91
+  },
+  {
+    "timestamp": "2026-11-27T00:33:35.014Z",
+    "model": "NaraRouter",
+    "items": [
+      {
+        "title": "✴️ کلنگ‌زنی دو کارخانه در ایذه",
+        "score": 100,
+        "issues": []
+      }
+    ],
+    "avgScore": 100
   }
 ]
